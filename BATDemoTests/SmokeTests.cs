@@ -3,8 +3,6 @@ using NUnit.Framework;
 
 namespace BATDemoTests
 {
-    //unwanted changes
-
     //[TestFixture]
     //public class SmokeTests : TestBase
     //{
