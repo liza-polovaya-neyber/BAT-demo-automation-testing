@@ -48,9 +48,5 @@ namespace BATDemoFramework.WebDriverManager
                 browser.Quit();
             }
         }
-
-       
     }
-
-
 }

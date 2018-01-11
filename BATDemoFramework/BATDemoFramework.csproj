@@ -46,6 +46,7 @@
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -64,8 +65,8 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
     <Compile Include="Generators\EmailAddressGenerator.cs" />
-    <Compile Include="Generators\User.cs" />
     <Compile Include="Pages\HomePage.cs" />
+    <Compile Include="Models\User.cs" />
     <Compile Include="Pages\OurTermsPage.cs" />
     <Compile Include="TestDataAccess\CsvDataAccess.cs" />
     <Compile Include="TestDataAccess\UserData.cs" />

@@ -1,4 +1,5 @@
-﻿using OpenQA.Selenium;
+﻿using BATDemoFramework.Utils;
+using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
 
 namespace BATDemoFramework
@@ -12,7 +13,7 @@ namespace BATDemoFramework
         [FindsBy(How = How.ClassName, Using = "already-customer-login-module__login-link___2DwCr")]
         private IWebElement loginLink;
 
-        [FindsBy(How = How.LinkText, Using = "https://app.neyber.co.uk/terms-conditions")]
+        [FindsBy(How = How.LinkText, Using = Urls.TermsAndConditions)]
         private IWebElement ourTermsLink;
 
         [FindsBy(How = How.LinkText, Using = "https://app.neyber.co.uk/privacy-policy")]
@@ -40,7 +41,7 @@ namespace BATDemoFramework
          {
                loginLink.Click();
          }
-
+        
         public void GoToOurTermsPage()
         {
             ourTermsLink.Click();
@@ -68,7 +69,7 @@ namespace BATDemoFramework
 
         public bool IsAt()
         {
-            return Browser.Title.Contains("/join");
+            return ChromeBrowser.Title.Contains("/join");
         }
     }
 }

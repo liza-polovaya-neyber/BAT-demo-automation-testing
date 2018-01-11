@@ -1,12 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BATDemoFramework.config
 {
-    class TestConfigurationManager
+    public class TestConfigurationManager
     {
         private static TestConfigurationManager instance = null;
 
@@ -20,10 +16,7 @@ namespace BATDemoFramework.config
 
         public static TestConfigurationManager GetInstance()
         {
-            if (instance == null)
-                return new TestConfigurationManager();
-
-            return instance;
+            return instance ?? new TestConfigurationManager();
         }
 
         public string GetTestBrowser()
@@ -43,7 +36,7 @@ namespace BATDemoFramework.config
 
         private string GetEnvironmentVariable(string variable, string defaultValue)
         {
-            return Environment.GetEnvironmentVariable(variable) != null ? System.Environment.GetEnvironmentVariable(variable) : defaultValue;
+            return Environment.GetEnvironmentVariable(variable) != null ? Environment.GetEnvironmentVariable(variable) : defaultValue;
         }
     }
 }

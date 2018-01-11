@@ -3,14 +3,16 @@ namespace BATDemoFramework.Generators
     public static class PasswordGenerator
     {
         //private static bool toggle = true;
-        public static void GeneratePassword(int length, int numberOfAlphaCharacters, int numberOfNumericCharacters)
+        public static string GetNewPassword()
         {
-            //var password = "";
-            //password = toggle ? "Password" : "New Password";
+            var pwd = System.Guid.NewGuid().ToString();
+            LastGeneratedPassword = pwd;
+            return pwd;
+        }
 
-            //toggle = !toggle;
-            //LastGeneratedPassword = password;
-            //return password;
+        public static string GetNewPassword(int length, int numberOfNonAlphanumericCharacters)
+        {
+            return System.Web.Security.Membership.GeneratePassword(length, numberOfNonAlphanumericCharacters);
         }
 
         public static string LastGeneratedPassword { get; set; }
