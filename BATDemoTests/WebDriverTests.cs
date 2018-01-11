@@ -11,25 +11,27 @@ using System.Threading.Tasks;
 
 namespace BATDemoTests
 {
-    class Class1
+    [TestFixture]
+    public class WebDriverTests
     {
-        [TestFixture]
-        public class UnitTest1
+        [Test]
+        public void TestMethod1()
         {
-            [Test]
-            public void TestMethod1()
+            //Arrange
+            using (var driver = GetChromeDriver())
             {
-                var driver = GetChromeDriver();
+                //Act
                 driver.Navigate().GoToUrl("https://www.google.com.ua/");
-                Assert.AreEqual("Google", driver.Title);
-                driver.Close();
-            }
 
-            private IWebDriver GetChromeDriver()
-            {
-                var outPutDirectory = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-                return new ChromeDriver(outPutDirectory);
+                //Assert
+                Assert.AreEqual("Google", driver.Title);
             }
+        }
+
+        private IWebDriver GetChromeDriver()
+        {
+            var outputDirectory = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+            return new ChromeDriver(outputDirectory);
         }
     }
 }

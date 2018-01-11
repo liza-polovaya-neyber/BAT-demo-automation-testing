@@ -41,6 +41,7 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -57,7 +58,7 @@
     <Compile Include="config\TestConfigurationManager.cs" />
     <Compile Include="Extensions.cs" />
     <Compile Include="Generators\EmailAddressGenerator.cs" />
-    <Compile Include="Generators\User.cs" />
+    <Compile Include="Models\User.cs" />
     <Compile Include="Pages\OurTermsPage.cs" />
     <Compile Include="WebDriverManager\api\ITestBrowserManager.cs" />
     <Compile Include="WebDriverManager\api\ITestBrowserFactory.cs" />

@@ -1,4 +1,5 @@
-﻿using OpenQA.Selenium;
+﻿using BATDemoFramework.Utils;
+using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
 
 namespace BATDemoFramework
@@ -40,7 +41,7 @@ namespace BATDemoFramework
          {
                loginLink.Click();
          }
-
+        
         public void GoToOurTermsPage()
         {
             ourTermsLink.Click();
@@ -68,7 +69,7 @@ namespace BATDemoFramework
 
         public bool IsAt()
         {
-            return Browser.Title.Contains("/join");
+            return ChromeBrowser.Title.Contains("/join");
         }
     }
 }

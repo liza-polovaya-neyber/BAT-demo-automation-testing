@@ -100,7 +100,7 @@ namespace BATDemoFramework
         public void RegisterNewUser()
         {
             var userGenerator = new UserGenerator();
-            var user = userGenerator.Generate();
+            var user = userGenerator.GetNewUser();
 
             SelectTitle();
             firstNameTextField.SendKeys("First Name");
