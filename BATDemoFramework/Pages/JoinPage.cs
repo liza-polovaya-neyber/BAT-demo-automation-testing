@@ -13,7 +13,7 @@ namespace BATDemoFramework
         [FindsBy(How = How.ClassName, Using = "already-customer-login-module__login-link___2DwCr")]
         private IWebElement loginLink;
 
-        [FindsBy(How = How.LinkText, Using = "https://app.neyber.co.uk/terms-conditions")]
+        [FindsBy(How = How.LinkText, Using = Urls.TermsAndConditions)]
         private IWebElement ourTermsLink;
 
         [FindsBy(How = How.LinkText, Using = "https://app.neyber.co.uk/privacy-policy")]
