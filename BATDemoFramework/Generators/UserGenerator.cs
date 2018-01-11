@@ -4,7 +4,7 @@ namespace BATDemoFramework.Generators
     {
         public static User LastGeneratedUser { get; set; }
 
-        public static User GetNewUser()
+        public User GetNewUser()
         {
             var user = new User
             {

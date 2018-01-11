@@ -69,7 +69,7 @@ namespace BATDemoFramework
 
         public bool IsAt()
         {
-            return ChromeBrowser.Title.Contains("/join");
+            return Browser.Title.Contains("/join");
         }
     }
 }

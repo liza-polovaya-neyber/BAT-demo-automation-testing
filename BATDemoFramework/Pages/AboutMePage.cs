@@ -7,7 +7,6 @@ namespace BATDemoFramework
 {
     public class AboutMePage
     {
-
         [FindsBy(How = How.Name, Using = "title")]
         private IWebElement titleDropdown;
 

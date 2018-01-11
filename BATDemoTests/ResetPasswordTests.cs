@@ -35,12 +35,7 @@ namespace BATDemoTests
         {
             Pages.ResetPassword.ClickToSendResetLinkButton("ResetPasswordLinkIsSent");
             //IWebElement resendMyResetLink = driver.FindElement(By.ClassName("button auth__button password-reset-sent-module__button___KWkni button-module__button___2VX0t")); 
-            Assert.IsTrue(Pages.ResetPassword.IsDisplayed(resendMyResetLink));
+            //Assert.IsTrue(Pages.ResetPassword.IsDisplayed(resendMyResetLink));
         }
-
-
-
-
-
     }
 }
