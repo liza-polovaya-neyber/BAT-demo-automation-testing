@@ -27,13 +27,13 @@ namespace BATDemoFramework
         private IWebElement yearOfBirthDropdown;
 
         [FindsBy(How = How.Name, Using = "email")]
-        private IWebElement emailAddressTextField;
+        private IWebElement emailAddressField;
 
         [FindsBy(How = How.Name, Using = "verify_email")]
-        private IWebElement confirmEmailAddressTextField;
+        private IWebElement confirmEmailAddressField;
 
         [FindsBy(How = How.XPath, Using = "//input[@type='password']")]
-        private IWebElement passwordTextField;
+        private IWebElement passwordField;
 
         [FindsBy(How = How.ClassName, Using = "button button-module__button___p4iTs")]
         private IWebElement submitButton;
@@ -108,9 +108,9 @@ namespace BATDemoFramework
             SelectDayOfBirth();
             SelectMonthOfBirth();
             SelectYearOfBirth();
-            emailAddressTextField.SendKeys(user.EmailAddress);
-            confirmEmailAddressTextField.SendKeys(user.EmailAddress);
-            passwordTextField.SendKeys(user.Password);
+            emailAddressField.SendKeys(user.EmailAddress);
+            confirmEmailAddressField.SendKeys(user.EmailAddress);
+            passwordField.SendKeys(user.Password);
             CheckboxTermsAcceptedChecked();
             CheckboxOptOutEmailsChecked();
 

@@ -1,5 +1,4 @@
-﻿using BATDemoFramework;
-using OpenQA.Selenium.Support.PageObjects;
+﻿using OpenQA.Selenium.Support.PageObjects;
 
 namespace BATDemoFramework
 {
@@ -27,7 +26,7 @@ namespace BATDemoFramework
             get { return GetPage<AboutMePage>(); }
         }
 
-        public static ResetPasswordPage Contact
+        public static ResetPasswordPage ResetPassword
         {
             get { return GetPage<ResetPasswordPage>(); }
         }
@@ -35,6 +34,11 @@ namespace BATDemoFramework
         public static OurTermsPage OurTerms
         {
             get { return GetPage<OurTermsPage>(); }
+        }
+
+        public static HomePage Home
+        {
+            get { return GetPage<HomePage>(); }
         }
 
 

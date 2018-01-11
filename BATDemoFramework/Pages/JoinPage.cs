@@ -61,7 +61,7 @@ namespace BATDemoFramework
             complaintsPolicyLink.Click();
         }
 
-        public void someLegalBitsMenuOpen()
+        public void SomeLegalBitsMenuOpen()
         {
             someLegalBitsMenu.Click();
         }
