@@ -13,6 +13,7 @@ namespace BATDemoTests
         public void CanGoToResetPasswordPage()
         {
             Pages.ResetPassword.GoToResetPasswordPage();
+
             Assert.IsTrue(Pages.ResetPassword.IsAt());
         }
 
@@ -20,6 +21,7 @@ namespace BATDemoTests
         public void CanGoFromResetPasswordPageToLoginPage()
         {
             Pages.ResetPassword.ReturntoLoginPage();
+
             Assert.IsTrue(Pages.Login.IsAt());
         }
 
@@ -27,6 +29,7 @@ namespace BATDemoTests
         public void CanGoFromResetPasswordPageToJoinPage()
         {
             Pages.ResetPassword.GotoJoinPage();
+
             Assert.IsTrue(Pages.Join.IsAt());
         }
 
@@ -34,7 +37,7 @@ namespace BATDemoTests
         public void ResetPasswordLinkIsSent()
         {
             Pages.ResetPassword.ClickToSendResetLinkButton("ResetPasswordLinkIsSent");
-            //IWebElement resendMyResetLink = driver.FindElement(By.ClassName("button auth__button password-reset-sent-module__button___KWkni button-module__button___2VX0t")); 
+            
             Assert.IsTrue(Pages.ResetPassword.ResendMyResetLinkButtonIsDisplayed());
         }
 
@@ -44,6 +47,7 @@ namespace BATDemoTests
             Pages.ResetPassword.GoToResetPasswordPage();
             Pages.ResetPassword.ClickToSendResetLinkButton("ResetPasswordLinkisResent");
             Pages.ResetPassword.ClickOnResendMyResetLinkButton();
+
             Assert.IsTrue(Pages.ResetPassword.ResendMyResetLinkButtonIsDisplayed());
         }
 
@@ -54,6 +58,7 @@ namespace BATDemoTests
             Pages.ResetPassword.ClickToSendResetLinkButton("ResetPasswordLinkIsSentToDifferentEmail");
             Pages.ResetPassword.ClickOnTryDifferentEmailLink();
             Pages.ResetPassword.ClickToSendResetLinkButton("ResetPasswordLinkIsSentToDifferentEmail");
+
             Assert.IsTrue(Pages.ResetPassword.ResendMyResetLinkButtonIsDisplayed());
         }
 

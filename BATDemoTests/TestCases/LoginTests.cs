@@ -12,6 +12,7 @@ namespace BATDemoTests
         public void CanGoToLoginPage()
         {
             Pages.Login.GoToLoginPage();
+
             Assert.IsTrue(Pages.Login.IsAt());
         }
 
@@ -19,6 +20,7 @@ namespace BATDemoTests
         public void CanGoFromLoginPageToResetPasswordPage()
         {
             Pages.Login.GoToResetPasswordPage();
+
             Assert.IsTrue(Pages.ResetPassword.IsAt());
         }
 
@@ -26,6 +28,7 @@ namespace BATDemoTests
         public void CanGoFromLoginPageToJoinPage()
         {
             Pages.Login.GoToJoinPage();
+
             Assert.IsTrue(Pages.Join.IsAt());
         }
 
@@ -34,6 +37,7 @@ namespace BATDemoTests
         {
             Pages.Login.GoToLoginPage();
             Pages.Login.LogIn("ValidUserLogsinSuccessfully");
+
             Assert.IsTrue(Pages.Home.IsAt(), "A valid user was not able to successfully login.");
         }
 
@@ -43,9 +47,7 @@ namespace BATDemoTests
             Pages.Login.GoToLoginPage();
             Pages.Login.LogIn("LoginWithInvalidEmailShouldNotWork");
 
-            //assert that error is displayed is better rather than user stays on the same page
-            //Assert.IsTrue(Pages.Login.IsDisplayed(errorInvalidCredentials));
-            Assert.IsTrue(Pages.Login.IsAt(), "User with invalid email is not on Login page");
+            Assert.IsTrue(Pages.Login.GetText().Contains("The email address or password you entered is incorrect. Please check and try again."));
         }
 
 
@@ -54,6 +56,7 @@ namespace BATDemoTests
         {
             Pages.Login.GoToLoginPage();
             Pages.Login.LogIn("LoginWithInvalidPasswordShouldNotWork");
+
             Assert.IsTrue(Pages.Login.IsAt(), "User with invalid password is not on Login page");
         }
 

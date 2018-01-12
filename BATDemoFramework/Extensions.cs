@@ -33,7 +33,7 @@ namespace BATDemoFramework
         }
 
 
-        //method replaces the Se method Displayed(), allows not to stop the programm running is case element is not found
+        //method replaces the method Displayed(), allows not to stop the programm running is case element is not found
 
         public static bool IsDisplayed(this IWebElement element)
         {

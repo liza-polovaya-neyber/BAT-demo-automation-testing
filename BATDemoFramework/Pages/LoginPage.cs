@@ -18,7 +18,7 @@ namespace BATDemoFramework
         [FindsBy(How = How.CssSelector, Using = "#root > div > div > div > form > button")]
         private IWebElement loginButton;
 
-        [FindsBy(How = How.ClassName, Using = "auth__reg-link")]
+        [FindsBy(How = How.LinkText, Using = "Register")]
         private IWebElement registerButton;
 
         [FindsBy(How = How.LinkText, Using = "Forgotten your password?")]
@@ -30,33 +30,38 @@ namespace BATDemoFramework
         [FindsBy(How = How.ClassName, Using = "hint hint_alert np-i login-form-module__error___3bEGA")]
         private IWebElement errorInvalidCredentials;
 
-    
+        
+        //Browser is navigated to Login Page
         public void GoToLoginPage()
         {
             Browser.GoTo("/login");
         }
 
+        //Go from Login page => Join page
         public void GoToJoinPage()
         {
             registerButton.Click();
         }
 
+        //Go from Login page => Reset Password page
         public void GoToResetPasswordPage()
         {
             forgottenYourPasswordLink.Click();
         }
 
+        //Click on the email box
         public void ClickOnEmailAddressField()
         {
             emailAddressField.Click();
         }
 
+        //Click on the password box
         public void ClickOnPasswordField()
         {
             passwordField.Click();
         }
 
-
+        //Login by using credentials stored in CSV file
         public void LogIn(string testName)
         {
             var userData = CsvDataAccess.GetTestData(testName);
@@ -67,9 +72,15 @@ namespace BATDemoFramework
             passwordField.SendKeys(userData.Password);
 
             loginButton.Click();
-
         }
 
+        //Get text property from webElement
+        public string GetText()
+        {
+            return errorInvalidCredentials.Text;
+        }
+
+        //Verify the page title (url)
         public bool IsAt()
         {
             return Browser.Title.Contains("/login");
