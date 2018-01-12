@@ -3,3 +3,5 @@ ValidUserLogsinSuccessfully;liza.polovaya0400@yopmail.com;Password1
 LoginWithInvalidEmailShouldNotWork;liza.polovaya04qq@yopmail.com;Password1
 LoginWithInvalidPasswordShouldNotWork;liza.polovaya0400@yopmail.com;Password111
 ResetPasswordLinkIsSent; liza.polovaya0701@yopmail.com;Password1
+ResetPasswordLinkIsSent; liza.polovaya0701@yopmail.com;Password1
+ResetPasswordLinkIsSentToDifferentEmail; liza.polovaya1101@yopmail.com;Password1

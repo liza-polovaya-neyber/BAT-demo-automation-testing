@@ -63,8 +63,8 @@
     <Otherwise />
   </Choose>
   <ItemGroup>
-    <Compile Include="LoginTests.cs" />
-    <Compile Include="ResetPasswordTests.cs" />
+    <Compile Include="TestCases\LoginTests.cs" />
+    <Compile Include="TestCases\ResetPasswordTests.cs" />
     <Compile Include="WebDriverTests.cs" />
     <Compile Include="SmokeTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -21,10 +21,30 @@ namespace BATDemoFramework
         private IWebElement returnToLoginLink;
 
         [FindsBy(How = How.ClassName, Using = "button auth__button password-reset-sent-module__button___KWkni button-module__button___2VX0t")]
-        private IWebElement resendMyResetLink;
+        private IWebElement resendMyResetLinkButton;
+
 
         [FindsBy(How = How.ClassName, Using = "password-reset-sent-module__different-eamil___3smZ4")]
         private IWebElement tryDifferentEmailLink;
+
+        public bool ResendMyResetLinkButtonIsDisplayed()
+        {
+            bool result;
+            result = resendMyResetLinkButton.IsDisplayed();
+            return result;
+
+        }
+
+        public void ClickOnTryDifferentEmailLink()
+        {
+            tryDifferentEmailLink.Click();
+        }
+
+        public void ClickOnResendMyResetLinkButton()
+        {
+            resendMyResetLinkButton.Click();
+        }
+
 
         public void ClickToSendResetLinkButton(string testName)
         {
