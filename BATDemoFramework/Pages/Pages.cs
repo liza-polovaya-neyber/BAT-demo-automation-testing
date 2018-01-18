@@ -41,6 +41,20 @@ namespace BATDemoFramework
             get { return GetPage<HomePage>(); }
         }
 
+        public static PrivacyPolicyPage PrivacyPolicy
+        {
+            get { return GetPage<PrivacyPolicyPage>(); }
+        }
+
+        public static CookiePolicyPage CookiePolicy
+        {
+            get { return GetPage<CookiePolicyPage>(); }
+        }
+
+        public static ComplaintsPolicyPage ComplaintsPolicy
+        {
+            get { return GetPage<ComplaintsPolicyPage>(); }
+        }
 
     }
 }

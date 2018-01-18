@@ -1,6 +1,8 @@
 ﻿using BATDemoFramework;
 using NUnit.Framework;
+using System.Configuration;
 using OpenQA.Selenium.Chrome;
+using System.Threading;
 
 namespace BATDemoTests
 {
@@ -11,40 +13,43 @@ namespace BATDemoTests
         [Test]
         public void CanGoToLoginPage()
         {
-            Pages.Login.GoToLoginPage();
 
-            Assert.IsTrue(Pages.Login.IsAt());
+            Pages.Login.GoTo();
+
+            Assert.IsTrue(Pages.Login.IsAtUrl());
         }
 
         [Test]
         public void CanGoFromLoginPageToResetPasswordPage()
         {
+            Pages.Login.GoTo();
             Pages.Login.GoToResetPasswordPage();
 
-            Assert.IsTrue(Pages.ResetPassword.IsAt());
+            Assert.IsTrue(Pages.ResetPassword.IsAtUrl());
         }
 
         [Test]
         public void CanGoFromLoginPageToJoinPage()
         {
+            Pages.Login.GoTo();
             Pages.Login.GoToJoinPage();
 
-            Assert.IsTrue(Pages.Join.IsAt());
+            Assert.IsTrue(Pages.Join.IsAtUrl());
         }
 
         [Test]
         public void ValidUserLogsinSuccessfully()
         {
-            Pages.Login.GoToLoginPage();
+            Pages.Login.GoTo();
             Pages.Login.LogIn("ValidUserLogsinSuccessfully");
 
-            Assert.IsTrue(Pages.Home.IsAt(), "A valid user was not able to successfully login.");
+            Assert.IsTrue(Pages.Home.IsAtUrl(), "A valid user was not able to successfully login.");
         }
 
         [Test]
         public void LoginWithInvalidEmailShouldNotWork()
         {
-            Pages.Login.GoToLoginPage();
+            Pages.Login.GoTo();
             Pages.Login.LogIn("LoginWithInvalidEmailShouldNotWork");
 
             Assert.IsTrue(Pages.Login.GetText().Contains("The email address or password you entered is incorrect. Please check and try again."));
@@ -54,10 +59,10 @@ namespace BATDemoTests
         [Test]
         public void LoginWithInvalidPasswordShouldNotWork()
         {
-            Pages.Login.GoToLoginPage();
+            Pages.Login.GoTo();
             Pages.Login.LogIn("LoginWithInvalidPasswordShouldNotWork");
 
-            Assert.IsTrue(Pages.Login.IsAt(), "User with invalid password is not on Login page");
+            Assert.IsTrue(Pages.Login.IsAtUrl(), "User with invalid password is not on Login page");
         }
 
 

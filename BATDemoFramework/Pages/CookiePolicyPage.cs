@@ -2,20 +2,16 @@
 
 namespace BATDemoFramework
 {
-    public class OurTermsPage
+    public class CookiePolicyPage
     {
-       
-
         public bool IsAt()
         {
-            return Browser.Title.Contains("/terms-conditions");
+            return Browser.Title.Contains("/policies#cookie");
         }
 
         public bool IsAtUrl()
         {
-            return Browser.Url.Contains("/terms-conditions");
+            return Browser.Url.Contains("/policies#cookie");
         }
-
-
     }
 }
