@@ -8,7 +8,7 @@ namespace BATDemoFramework
     {
 
         [FindsBy(How = How.ClassName, Using = "button button button_white welcome-page-module__button___1xdDp button-module__button___p4iTs")]
-        private IWebElement registerLink;
+        private IWebElement letsRegisterLink;
 
         [FindsBy(How = How.ClassName, Using = "already-customer-login-module__login-link___2DwCr")]
         private IWebElement loginLink;
@@ -25,16 +25,21 @@ namespace BATDemoFramework
         [FindsBy(How = How.LinkText, Using = "https://testenv1.neyber.co.uk/app/complaints")]
         private IWebElement complaintsPolicyLink;
 
-        [FindsBy(How = How.ClassName, Using = "np-chevron-down bottom-menu-module__bits-link___2YBLe")]
+        [FindsBy(How = How.ClassName, Using = "np-chevron-down bottom-menu-module__bits-link___C86vC")]
         private IWebElement someLegalBitsMenu;
 
-        //[FindsBy(How = How.ClassName, Using = "bottom-menu-module__bits___1kG15")]
-        //private IWebElement someLegalBitsMenuContent;
+        [FindsBy(How = How.ClassName, Using = "bottom-menu-module__bits___3WlQ1")]
+        private IWebElement someLegalBitsMenuContent;
 
 
-        public void GotoJoinPage()
+        public void GoTo()
         {
-            registerLink.Click();
+            Browser.GoTo("join");
+        }
+
+        public void GotoAboutMePage()
+        {
+            letsRegisterLink.Click();
         }
           
          public void GotoLoginPage()
@@ -62,14 +67,25 @@ namespace BATDemoFramework
             complaintsPolicyLink.Click();
         }
 
-        public void SomeLegalBitsMenuOpen()
+        public void OpenSomeLegalBitsMenu()
         {
             someLegalBitsMenu.Click();
+        }
+        public bool SomeLegalBitsMenuIsDisplayed()
+        {
+            bool result;
+            result = someLegalBitsMenuContent.IsDisplayed();
+            return result;
         }
 
         public bool IsAt()
         {
             return Browser.Title.Contains("/join");
+        }
+
+        public bool IsAtUrl()
+        {
+            return Browser.Url.Contains("/join");
         }
     }
 }

@@ -59,9 +59,9 @@ namespace BATDemoFramework
         }
 
         //Browser navigates to Reset Password page
-        public void GoToResetPasswordPage()
+        public void GoTo()
         {
-            Browser.GoTo("/reset-password");
+            Browser.GoTo("reset-password");
         }
 
         //Go from Reset Password page => Join page
@@ -80,6 +80,12 @@ namespace BATDemoFramework
         public bool IsAt()
         {
             return Browser.Title.Contains("/reset-password");
+        }
+
+        //verifis page's url
+        public bool IsAtUrl()
+        {
+            return Browser.Url.Contains("/reset-password");
         }
     }
 }

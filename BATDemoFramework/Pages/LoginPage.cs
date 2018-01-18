@@ -15,10 +15,10 @@ namespace BATDemoFramework
         [FindsBy(How = How.Name, Using = "password")]
         private IWebElement passwordField;
 
-        [FindsBy(How = How.CssSelector, Using = "#root > div > div > div > form > button")]
+        [FindsBy(How = How.ClassName, Using = "button auth__button login-form-module__button___1OboL button-module__button___2VX0t")]
         private IWebElement loginButton;
 
-        [FindsBy(How = How.LinkText, Using = "Register")]
+        [FindsBy(How = How.ClassName, Using = "auth__reg-link")]
         private IWebElement registerButton;
 
         [FindsBy(How = How.LinkText, Using = "Forgotten your password?")]
@@ -32,9 +32,9 @@ namespace BATDemoFramework
 
         
         //Browser is navigated to Login Page
-        public void GoToLoginPage()
+        public void GoTo()
         {
-            Browser.GoTo("/login");
+            Browser.GoTo("login");
         }
 
         //Go from Login page => Join page
@@ -81,11 +81,20 @@ namespace BATDemoFramework
         }
 
         //Verify the page title (url)
-        public bool IsAt()
+        //public bool IsAt()
+        //{
+        //    return Browser.Title.Contains("/login");
+        //}
+
+        public bool IsAtUrl()
         {
-            return Browser.Title.Contains("/login");
+            return Browser.Url.Contains("/login");
         }
 
+        public string GetTitle()
+        {
+            return Browser.Title;
+        }
 
         //public void LogInAsLastRegisteredUser()
         //{

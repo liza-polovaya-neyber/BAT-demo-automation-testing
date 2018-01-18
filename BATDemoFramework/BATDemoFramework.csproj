@@ -65,9 +65,12 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
     <Compile Include="Generators\EmailAddressGenerator.cs" />
+    <Compile Include="Pages\ComplaintsPolicyPage.cs" />
+    <Compile Include="Pages\CookiePolicyPage.cs" />
     <Compile Include="Pages\HomePage.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Pages\OurTermsPage.cs" />
+    <Compile Include="Pages\PrivacyPolicyPage.cs" />
     <Compile Include="TestDataAccess\CsvDataAccess.cs" />
     <Compile Include="TestDataAccess\UserData.cs" />
     <Compile Include="Utils\Urls.cs" />
@@ -93,7 +96,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="Configurations\Environment.config" />
+    <None Include="Configurations\Environment.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="packages.config" />
     <None Include="TestDataAccess\TestData.csv" />
   </ItemGroup>

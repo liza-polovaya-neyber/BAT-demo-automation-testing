@@ -29,6 +29,14 @@ namespace BATDemoFramework
             get { return webDriver.Title; }
         }
 
+        public static string Url
+        {
+            get
+            {
+                return webDriver.Url;
+            }
+        }
+
         public static ISearchContext Driver
         {
             get { return webDriver; }

@@ -12,5 +12,10 @@ namespace BATDemoFramework
         {
             return Browser.Title.Contains("https://hellotest1.neyber.co.uk/home");
         }
+
+        public bool IsAtUrl()
+        {
+            return Browser.Url.Contains("/home");
+        }
     }
 }
