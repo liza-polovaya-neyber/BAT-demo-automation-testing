@@ -1,4 +1,5 @@
-﻿namespace BATDemoFramework
+﻿namespace BATDemoFramework.Utils;
+
 {
     public class PrivacyPolicyPage
     {
@@ -11,7 +12,7 @@
 
             public bool IsAtUrl()
             {
-                return Browser.Url.Contains("/privacy-policy");
+                return Browser.Url.Contains(Urls.PrivacyPolicy);
             }
 
 

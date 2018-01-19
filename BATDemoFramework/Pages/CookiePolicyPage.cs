@@ -1,4 +1,5 @@
 ﻿using OpenQA.Selenium;
+using BATDemoFramework.Utils;
 
 namespace BATDemoFramework
 {
@@ -11,7 +12,7 @@ namespace BATDemoFramework
 
         public bool IsAtUrl()
         {
-            return Browser.Url.Contains("/policies#cookie");
+            return Browser.Url.Contains(Urls.CookiePolicy);
         }
     }
 }

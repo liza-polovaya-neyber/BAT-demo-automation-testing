@@ -1,4 +1,5 @@
 ﻿using OpenQA.Selenium;
+using BATDemoFramework.Utils;
 
 namespace BATDemoFramework
 {
@@ -13,7 +14,7 @@ namespace BATDemoFramework
 
         public bool IsAtUrl()
         {
-            return Browser.Url.Contains("/terms-conditions");
+            return Browser.Url.Contains(Urls.OurTerms);
         }
 
 

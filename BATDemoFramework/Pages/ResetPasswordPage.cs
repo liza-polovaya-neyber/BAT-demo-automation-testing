@@ -2,6 +2,7 @@
 using BATDemoFramework.TestDataAccess;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
+using BATDemoFramework.Utils;
 
 namespace BATDemoFramework
 {
@@ -85,7 +86,7 @@ namespace BATDemoFramework
         //verifis page's url
         public bool IsAtUrl()
         {
-            return Browser.Url.Contains("/reset-password");
+            return Browser.Url.Contains(Urls.ResetPasswordPage);
         }
     }
 }

@@ -13,16 +13,16 @@ namespace BATDemoFramework
         [FindsBy(How = How.ClassName, Using = "already-customer-login-module__login-link___2DwCr")]
         private IWebElement loginLink;
 
-        [FindsBy(How = How.LinkText, Using = Urls.TermsAndConditions)]
+        [FindsBy(How = How.LinkText, Using = Urls.OurTerms)]
         private IWebElement ourTermsLink;
 
-        [FindsBy(How = How.LinkText, Using = "https://app.neyber.co.uk/privacy-policy")]
+        [FindsBy(How = How.LinkText, Using = Urls.PrivacyPolicy)]
         private IWebElement privacyPolicyLink;
 
-        [FindsBy(How = How.LinkText, Using = "https://testenv1.neyber.co.uk/app/policies#cookie")]
+        [FindsBy(How = How.LinkText, Using = Urls.CookiePolicy)]
         private IWebElement cookiePolicyLink;
 
-        [FindsBy(How = How.LinkText, Using = "https://testenv1.neyber.co.uk/app/complaints")]
+        [FindsBy(How = How.LinkText, Using = Urls.ComplaintsPolicy)]
         private IWebElement complaintsPolicyLink;
 
         [FindsBy(How = How.ClassName, Using = "np-chevron-down bottom-menu-module__bits-link___C86vC")]
@@ -85,7 +85,7 @@ namespace BATDemoFramework
 
         public bool IsAtUrl()
         {
-            return Browser.Url.Contains("/join");
+            return Browser.Url.Contains(Urls.JoinPage);
         }
     }
 }

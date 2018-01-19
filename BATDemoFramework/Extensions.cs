@@ -26,7 +26,7 @@ namespace BATDemoFramework
 
 
         //method clears text field and then fills it in
-        public static void EnterText(this IWebElement element, string text)
+    public static void EnterText(this IWebElement element, string text)
         {
             element.Clear();
             element.SendKeys(text);
@@ -35,7 +35,7 @@ namespace BATDemoFramework
 
         //method replaces the method Displayed(), allows not to stop the programm running is case element is not found
 
-        public static bool IsDisplayed(this IWebElement element)
+    public static bool IsDisplayed(this IWebElement element)
         {
             bool result;
             try
@@ -49,6 +49,13 @@ namespace BATDemoFramework
             // Log the Action
             return result;
         }
+
+    public static void ClickOnIt(this IWebElement element, string elementName)
+        {
+            element.Click();
+            Console.WriteLine("Clicked on " + elementName);
+        }
+
 
         //method which allows you to wait for an element in your code
         //public static bool WaitUntilElementIsPresent(this IWebDriver driver, By by, int timeout = 10)

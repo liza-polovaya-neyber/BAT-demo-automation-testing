@@ -2,6 +2,7 @@
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
 using OpenQA.Selenium.Support.UI;
+using BATDemoFramework.Utils;
 
 namespace BATDemoFramework
 {
@@ -114,6 +115,11 @@ namespace BATDemoFramework
             CheckboxOptOutEmailsChecked();
 
             submitButton.Click();
+        }
+
+        public void IsAtUrl()
+        {
+            Browser.Url.Contains(Urls.AboutMePage);
         }
     }
 }

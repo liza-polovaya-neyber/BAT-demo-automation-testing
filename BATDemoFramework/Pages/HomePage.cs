@@ -1,5 +1,6 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
+using BATDemoFramework.Utils;
 
 namespace BATDemoFramework
 {
@@ -15,7 +16,7 @@ namespace BATDemoFramework
 
         public bool IsAtUrl()
         {
-            return Browser.Url.Contains("/home");
+            return Browser.Url.Contains(Urls.HomePage);
         }
     }
 }

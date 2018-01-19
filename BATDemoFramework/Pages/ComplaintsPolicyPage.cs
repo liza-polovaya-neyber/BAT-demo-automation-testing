@@ -1,4 +1,5 @@
-﻿namespace BATDemoFramework
+﻿namespace BATDemoFramework.Utils;
+
 {
     public class ComplaintsPolicyPage
     {
@@ -9,7 +10,7 @@
 
         public bool IsAtUrl()
         {
-            return Browser.Url.Contains("/complaints");
+            return Browser.Url.Contains(Urls.ComplaintsPolicy);
         }
     }
 }
