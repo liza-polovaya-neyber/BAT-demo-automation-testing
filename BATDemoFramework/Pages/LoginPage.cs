@@ -4,6 +4,7 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
 using BATDemoFramework.TestDataAccess;
 using System;
+using BATDemoFramework.Utils;
 
 namespace BATDemoFramework
 {
@@ -49,26 +50,15 @@ namespace BATDemoFramework
             forgottenYourPasswordLink.Click();
         }
 
-        //Click on the email box
-        public void ClickOnEmailAddressField()
-        {
-            emailAddressField.Click();
-        }
-
-        //Click on the password box
-        public void ClickOnPasswordField()
-        {
-            passwordField.Click();
-        }
 
         //Login by using credentials stored in CSV file
         public void LogIn(string testName)
         {
             var userData = CsvDataAccess.GetTestData(testName);
 
-            ClickOnEmailAddressField();
+            emailAddressField.Click();
             emailAddressField.SendKeys(userData.Email);
-            ClickOnPasswordField();
+            passwordField.Click();
             passwordField.SendKeys(userData.Password);
 
             loginButton.Click();
@@ -81,14 +71,14 @@ namespace BATDemoFramework
         }
 
         //Verify the page title (url)
-        //public bool IsAt()
-        //{
-        //    return Browser.Title.Contains("/login");
-        //}
+        public bool IsAt()
+        {
+            return Browser.Title.Contains("/login");
+        }
 
         public bool IsAtUrl()
         {
-            return Browser.Url.Contains("/login");
+            return Browser.Url.Contains(Urls.LoginPage);
         }
 
         public string GetTitle()

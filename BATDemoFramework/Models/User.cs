@@ -12,3 +12,4 @@ namespace BATDemoFramework.Generators
         public string Password { get; set; }
     }
 }
+ 
