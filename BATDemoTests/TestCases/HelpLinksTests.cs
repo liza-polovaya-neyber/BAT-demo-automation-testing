@@ -5,12 +5,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using OpenQA.Selenium;
 
 namespace BATDemoTests.TestCases
 {
     [TestFixture]
     class HelpLinksTests : TestBase
     {
+        static IWebDriver driver;
+
         [Test]
         public void CheckOurTermsLinkWorks()
         {
@@ -33,9 +36,18 @@ namespace BATDemoTests.TestCases
         public void CheckCookiePolicyLinkWorks()
         {
             Pages.Join.GoTo();
+
+            // Store the parent window of the driver
+            String parentWindowHandle = driver.CurrentWindowHandle;
+            Console.WriteLine("Parent window's handle -> " + parentWindowHandle);
+
             Pages.Join.GoToCookiePolicyPage();
+            String lastWindowHandle = driver.CurrentWindowHandle;
+            //driver.SwitchTo().Window(driver.WindowHandles.Last());
 
             Assert.IsTrue(Pages.CookiePolicy.IsAtUrl());
+
+            driver.SwitchTo().Window(parentWindowHandle);
         }
 
         [Test]

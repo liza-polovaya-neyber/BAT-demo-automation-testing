@@ -57,6 +57,7 @@ namespace BATDemoFramework
         }
 
 
+
         //method which allows you to wait for an element in your code
         //public static bool WaitUntilElementIsPresent(this IWebDriver driver, By by, int timeout = 10)
         //{

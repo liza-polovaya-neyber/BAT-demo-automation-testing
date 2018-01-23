@@ -1,4 +1,4 @@
-﻿namespace BATDemoFramework.Utils;
+﻿namespace BATDemoFramework
 
 {
     public class ComplaintsPolicyPage

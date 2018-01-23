@@ -2,7 +2,7 @@
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
 using OpenQA.Selenium.Support.UI;
-using BATDemoFramework.Utils;
+using BATDemoFramework;
 
 namespace BATDemoFramework
 {
