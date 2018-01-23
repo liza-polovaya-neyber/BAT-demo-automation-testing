@@ -1,5 +1,4 @@
 ﻿using OpenQA.Selenium;
-using BATDemoFramework.Utils;
 
 namespace BATDemoFramework
 {

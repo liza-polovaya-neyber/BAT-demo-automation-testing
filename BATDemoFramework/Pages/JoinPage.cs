@@ -1,5 +1,4 @@
-﻿using BATDemoFramework.Utils;
-using OpenQA.Selenium;
+﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
 
 namespace BATDemoFramework
@@ -13,16 +12,16 @@ namespace BATDemoFramework
         [FindsBy(How = How.ClassName, Using = "already-customer-login-module__login-link___2DwCr")]
         private IWebElement loginLink;
 
-        [FindsBy(How = How.LinkText, Using = Urls.OurTerms)]
+        [FindsBy(How = How.PartialLinkText, Using = "Terms")]
         private IWebElement ourTermsLink;
 
-        [FindsBy(How = How.LinkText, Using = Urls.PrivacyPolicy)]
+        [FindsBy(How = How.PartialLinkText, Using = "Privacy")]
         private IWebElement privacyPolicyLink;
 
-        [FindsBy(How = How.LinkText, Using = Urls.CookiePolicy)]
+        [FindsBy(How = How.PartialLinkText, Using = "Cookie")]
         private IWebElement cookiePolicyLink;
 
-        [FindsBy(How = How.LinkText, Using = Urls.ComplaintsPolicy)]
+        [FindsBy(How = How.PartialLinkText, Using = "Complaints")]
         private IWebElement complaintsPolicyLink;
 
         [FindsBy(How = How.ClassName, Using = "np-chevron-down bottom-menu-module__bits-link___C86vC")]
@@ -30,7 +29,7 @@ namespace BATDemoFramework
 
         [FindsBy(How = How.ClassName, Using = "bottom-menu-module__bits___3WlQ1")]
         private IWebElement someLegalBitsMenuContent;
-
+        private object Driver;
 
         public void GoTo()
         {
@@ -87,6 +86,7 @@ namespace BATDemoFramework
         {
             return Browser.Url.Contains(Urls.JoinPage);
         }
+
     }
 }
 

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BATDemoFramework.Utils
+namespace BATDemoFramework
 {
     public class Urls
     {
@@ -15,7 +15,7 @@ namespace BATDemoFramework.Utils
         public const string JoinPage = "https://hellotest1.neyber.co.uk/join";
         public const string LoginPage = "https://hellotest1.neyber.co.uk/login";
         public const string HomePage = "https://hellotest1.neyber.co.uk/home";
-        public const string ResetPasswordPage = "https://hellotest1.neyber.co.uk/reset-password";
+        public const string ResetPassword = "https://hellotest1.neyber.co.uk/reset-password";
         public const string AboutMePage = "https://hellotest1.neyber.co.uk/join/about-me";
 
     }

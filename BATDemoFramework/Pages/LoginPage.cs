@@ -4,7 +4,7 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
 using BATDemoFramework.TestDataAccess;
 using System;
-using BATDemoFramework.Utils;
+
 
 namespace BATDemoFramework
 {
