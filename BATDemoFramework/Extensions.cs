@@ -26,7 +26,7 @@ namespace BATDemoFramework
 
 
         //method clears text field and then fills it in
-    public static void EnterText(this IWebElement element, string text)
+        public static void EnterText(this IWebElement element, string text)
         {
             element.Clear();
             element.SendKeys(text);
@@ -35,7 +35,7 @@ namespace BATDemoFramework
 
         //method replaces the method Displayed(), allows not to stop the programm running is case element is not found
 
-    public static bool IsDisplayed(this IWebElement element)
+        public static bool IsDisplayed(this IWebElement element)
         {
             bool result;
             try
@@ -49,11 +49,29 @@ namespace BATDemoFramework
             // Log the Action
             return result;
         }
-
-    public static void ClickOnIt(this IWebElement element, string elementName)
+        //Click on the element
+        public static void ClickOnIt(this IWebElement element, string elementName)
         {
             element.Click();
             Console.WriteLine("Clicked on " + elementName);
+        }
+
+        //select the option from dropdown
+        public static void SelectDropDown(this IWebElement element, string value)
+        {
+            new SelectElement(element).SelectByText(value);
+        }
+
+        //Get text from Textbox
+        public static string GetText(IWebElement element)
+        {
+            return element.GetAttribute("value");
+        }
+
+        //Get text from  DropDownList box
+        public static string GetTextFromDDL(IWebElement element)
+        {
+            return new SelectElement(element).AllSelectedOptions.SingleOrDefault().Text;
         }
 
 

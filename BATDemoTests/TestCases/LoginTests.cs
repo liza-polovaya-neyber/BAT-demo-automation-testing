@@ -3,12 +3,16 @@ using NUnit.Framework;
 using System.Configuration;
 using OpenQA.Selenium.Chrome;
 using System.Threading;
+using System;
+using OpenQA.Selenium;
+using OpenQA.Selenium.Support.UI;
 
 namespace BATDemoTests
 {
     [TestFixture]
-    class LoginTests : TestBase
+   public class LoginTests : TestBase
     {
+        private IWebDriver driver;
 
         [Test]
         public void CanGoToLoginPage()
@@ -42,8 +46,10 @@ namespace BATDemoTests
         {
             Pages.Login.GoTo();
             Pages.Login.LogIn("ValidUserLogsinSuccessfully");
-
-            Assert.IsTrue(Pages.Home.IsAtUrl(), "A valid user was not able to successfully login.");
+            Thread.Sleep(3000);
+           
+            Assert.IsTrue(Pages.Home.UserAvatarIsDisplayed(), "User avatar is not found");
+            //Assert.IsTrue(Pages.Home.IsAtUrl(), "A valid user was not able to successfully login.");
         }
 
         [Test]

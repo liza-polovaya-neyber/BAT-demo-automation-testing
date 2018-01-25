@@ -4,44 +4,26 @@ using NUnit.Framework;
 
 namespace BATDemoFramework
 {
-    //[TestSetUp]
+    [TestFixture]
 
     public class TestBase
     {
-        //[TestInitialize]
+        //Core test base class
 
-        public static void Initialize()
+        [SetUp]
+        public void StartUpTest()// This method fire at the start of the Test
         {
             Browser.Initialize();
+            //UserGenerator.Initialize();
         }
 
-
-
-        //[TestCleanup]
-
-        public static void Cleanup()
-        {
-            Browser.Close();
-            Browser.Quit();
-        }
-
-
-
-        //[TestFixture]
-        //public class TestBase
+        //[TearDown]
+        //public void EndTest()// This method will fire at the end of the Test
         //{
-        //    [SetUp]
-        //    public static void Initialize()
-        //    {
-        //        Browser.Initialize();
-        //        UserGenerator.Initialize();
-        //    }        
+        //    Browser.Close();
+        //    Browser.Quit();
+        //}
 
-        //    [TearDown]
-        //    public static void TestFixtureTearDown()
-        //    {
-        //        Browser.Close();
-        //    }
 
         //    [TearDown]
         //    public static void TearDown()

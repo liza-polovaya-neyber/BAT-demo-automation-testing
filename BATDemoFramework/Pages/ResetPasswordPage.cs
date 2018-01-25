@@ -11,7 +11,7 @@ namespace BATDemoFramework
         [FindsBy(How = How.ClassName, Using = "control__input")]
         private IWebElement emailTextField;
 
-        [FindsBy(How = How.ClassName, Using = "button button auth__button password-reset-form-module__button___Q5_jB button-module__button___p4iTs")]
+        [FindsBy(How = How.CssSelector, Using = "button.button.button.auth__button.password-reset-form-module__button___G5XgU.button-module__button___2VX0t > span")]
         private IWebElement sendMyResetLinkButton;
 
         [FindsBy(How = How.ClassName, Using = "auth__reg-link")]
@@ -20,11 +20,11 @@ namespace BATDemoFramework
         [FindsBy(How = How.LinkText, Using = "Return to login")]
         private IWebElement returnToLoginLink;
 
-        [FindsBy(How = How.ClassName, Using = "button auth__button password-reset-sent-module__button___KWkni button-module__button___2VX0t")]
+        [FindsBy(How = How.CssSelector, Using = "button.button.auth__button.password-reset-sent-module__button___KWkni.button-module__button___2VX0t > span")]
         private IWebElement resendMyResetLinkButton;
 
 
-        [FindsBy(How = How.ClassName, Using = "password-reset-sent-module__different-eamil___3smZ4")]
+        [FindsBy(How = How.LinkText, Using = "Try different email")]
         private IWebElement tryDifferentEmailLink;
 
 

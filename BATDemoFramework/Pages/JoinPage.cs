@@ -5,6 +5,7 @@ namespace BATDemoFramework
 {
     public class JoinPage
     {
+        private IWebDriver driver;
 
         [FindsBy(How = How.ClassName, Using = "button button button_white welcome-page-module__button___1xdDp button-module__button___p4iTs")]
         private IWebElement letsRegisterLink;
@@ -24,12 +25,12 @@ namespace BATDemoFramework
         [FindsBy(How = How.PartialLinkText, Using = "Complaints")]
         private IWebElement complaintsPolicyLink;
 
-        [FindsBy(How = How.ClassName, Using = "np-chevron-down bottom-menu-module__bits-link___C86vC")]
+        [FindsBy(How = How.LinkText, Using = "Some legal bits we need to tell you")]
         private IWebElement someLegalBitsMenu;
 
-        [FindsBy(How = How.ClassName, Using = "bottom-menu-module__bits___3WlQ1")]
+        [FindsBy(How = How.CssSelector, Using = "#root > div > div > div > div > footer > div.bottom-menu-module__bits___3WlQ1")]
         private IWebElement someLegalBitsMenuContent;
-        private object Driver;
+        
 
         public void GoTo()
         {
