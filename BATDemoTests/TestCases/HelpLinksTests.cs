@@ -10,9 +10,9 @@ using OpenQA.Selenium;
 namespace BATDemoTests.TestCases
 {
     [TestFixture]
-    class HelpLinksTests : TestBase
+    public class HelpLinksTests : TestBase
     {
-        static IWebDriver driver;
+        private IWebDriver driver;
 
         [Test]
         public void CheckOurTermsLinkWorks()

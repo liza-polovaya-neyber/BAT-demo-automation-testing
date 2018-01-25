@@ -16,7 +16,7 @@ namespace BATDemoFramework
         [FindsBy(How = How.Name, Using = "password")]
         private IWebElement passwordField;
 
-        [FindsBy(How = How.ClassName, Using = "button auth__button login-form-module__button___1OboL button-module__button___2VX0t")]
+        [FindsBy(How = How.CssSelector, Using = "button.button.auth__button.login-form-module__button___1OboL.button-module__button___2VX0t")]
         private IWebElement loginButton;
 
         [FindsBy(How = How.ClassName, Using = "auth__reg-link")]
@@ -52,9 +52,9 @@ namespace BATDemoFramework
 
 
         //Login by using credentials stored in CSV file
-        public void LogIn(string testName)
+        public void LogIn(string Key)
         {
-            var userData = CsvDataAccess.GetTestData(testName);
+            var userData = CsvDataAccess.GetTestData(Key);
 
             emailAddressField.Click();
             emailAddressField.SendKeys(userData.Email);

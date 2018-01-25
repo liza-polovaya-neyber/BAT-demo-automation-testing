@@ -1,11 +1,12 @@
 ﻿using BATDemoFramework;
 using NUnit.Framework;
 using OpenQA.Selenium;
+using System.Threading;
 
 namespace BATDemoTests
 {
     [TestFixture]
-    class ResetPasswordTests : TestBase
+    public class ResetPasswordTests : TestBase
     {
         private IWebDriver driver;
 
@@ -40,16 +41,19 @@ namespace BATDemoTests
         {
             Pages.ResetPassword.GoTo();
             Pages.ResetPassword.ClickToSendResetLinkButton("ResetPasswordLinkIsSent");
+            Thread.Sleep(10000);
 
             Assert.IsTrue(Pages.ResetPassword.ResendMyResetLinkButtonIsDisplayed());
         }
 
         [Test]
         public void ResetPasswordLinkisResent()
-        {
+        {   //requires later changes - we have to check whether actual email is sent
             Pages.ResetPassword.GoTo();
             Pages.ResetPassword.ClickToSendResetLinkButton("ResetPasswordLinkisResent");
+            Thread.Sleep(8000);
             Pages.ResetPassword.ClickOnResendMyResetLinkButton();
+            Thread.Sleep(8000);
 
             Assert.IsTrue(Pages.ResetPassword.ResendMyResetLinkButtonIsDisplayed());
         }

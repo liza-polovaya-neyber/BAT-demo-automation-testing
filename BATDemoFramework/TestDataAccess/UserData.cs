@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace BATDemoFramework.TestDataAccess
 {
-    class UserData
+    public class UserData
     {
-        public string TestName { get; set; }
+        public string Key { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
     }
