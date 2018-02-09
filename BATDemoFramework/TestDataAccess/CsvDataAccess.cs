@@ -19,8 +19,18 @@ namespace BATDemoFramework.TestDataAccess
             var path = $@"{AppDomain.CurrentDomain.BaseDirectory}\Data\TestData.csv";
             using (var csv = new CsvReader(File.OpenText(path)))
             {
-                csv.Configuration.RegisterClassMap<UserDataMap>();
+                try {
+                    csv.Configuration.MissingFieldFound = null;
+                    
+                    var Data = csv.Configuration.RegisterClassMap<UserDataMap>();
+                    
+                
                 return csv.GetRecords<UserData>().ToList();
+                }
+                catch (Exception ex)
+                {
+                    return new List<UserData>();
+                }
             }
 
         }
@@ -35,7 +45,7 @@ namespace BATDemoFramework.TestDataAccess
         public static UserData GetTestData(string keyName)
         {
             var items = GetData();
-            return items.Where(i => i.Key == keyName).FirstOrDefault();
+            return items.FirstOrDefault(i => i.Key == keyName);
 
         //using (var connection = new OleDbConnection(TestDataFileConnection()))
         //{

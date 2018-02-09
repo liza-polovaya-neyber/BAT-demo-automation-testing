@@ -5,3 +5,6 @@ LoginWithInvalidPasswordShouldNotWork,liza.polovaya0400@yopmail.com,Password111
 ResetPasswordLinkIsSent,liza.polovaya0701@yopmail.com,Password1
 ResetPasswordLinkisResent,liza.polovaya0701@yopmail.com,Password1
 ResetPasswordLinkIsSentToDifferentEmail,liza.polovaya1101@yopmail.com,Password1
+ResetPasswordLinkIsSentToDifferentEmail,liza.polovaya1101@yopmail.com,Password1
+AboutMeFormIsFilledIn,nuttyone.kiucydsg@mailosaur.io,Password1,sampleFirst,sampleLast
+AboutMeFormIsSubmited,nuttyone.kiucydsg@mailosaur.io,Password1,sampleFirst,sampleLast

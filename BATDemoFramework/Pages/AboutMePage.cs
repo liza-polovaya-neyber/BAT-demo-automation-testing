@@ -36,7 +36,7 @@ namespace BATDemoFramework
         [FindsBy(How = How.XPath, Using = "//input[@type='password']")]
         private IWebElement passwordField;
 
-        [FindsBy(How = How.ClassName, Using = "button button-module__button___p4iTs")]
+        [FindsBy(How = How.CssSelector, Using = "button.button.button-module__button___2VX0t > span")]
         private IWebElement submitButton;
 
         [FindsBy(How = How.Id, Using = "terms_accepted")]
@@ -53,7 +53,7 @@ namespace BATDemoFramework
 
         public void GoTo()
         {
-            Browser.GoTo("/join/about-me");
+            Browser.GoTo("join/about-me");
         }
 
         public void GotoJoinPage()
@@ -82,7 +82,7 @@ namespace BATDemoFramework
         public void SelectMonthOfBirth()
         {
             var selectElement = new SelectElement(monthOfBirthDropdown);
-            selectElement.SelectByValue("August");
+            selectElement.SelectByValue("7");
         }
 
         public void SelectYearOfBirth()
