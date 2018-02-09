@@ -1,4 +1,4 @@
-Key,Email,Password
+Key,Email,Password,FirstName,LastName
 ValidUserLogsinSuccessfully,liza.polovaya1701@yopmail.com,Password1
 LoginWithInvalidEmailShouldNotWork,liza.polovaya04qq@yopmail.com,Password1
 LoginWithInvalidPasswordShouldNotWork,liza.polovaya0400@yopmail.com,Password111

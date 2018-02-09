@@ -63,10 +63,13 @@
     <Otherwise />
   </Choose>
   <ItemGroup>
+    <Compile Include="TestCases\AboutMeTests.cs" />
     <Compile Include="TestCases\HelpLinksTests.cs" />
     <Compile Include="TestCases\LoginTests.cs" />
     <Compile Include="TestCases\NewTabLinks.cs" />
+    <Compile Include="TestCases\ProfileRegistration.cs" />
     <Compile Include="TestCases\ResetPasswordTests.cs" />
+    <Compile Include="BaseClass\TestBaseForNewTabWindow.cs" />
     <Compile Include="WebDriverTests.cs" />
     <Compile Include="SmokeTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -81,6 +84,7 @@
     <EmbeddedResource Include="Data\TestData.csv">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
+    <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

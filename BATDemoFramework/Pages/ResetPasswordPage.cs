@@ -20,7 +20,7 @@ namespace BATDemoFramework
         [FindsBy(How = How.LinkText, Using = "Return to login")]
         private IWebElement returnToLoginLink;
 
-        [FindsBy(How = How.CssSelector, Using = "button.button.auth__button.password-reset-sent-module__button___KWkni.button-module__button___2VX0t > span")]
+        [FindsBy(How = How.XPath, Using = "//button[@type='submit']")]
         private IWebElement resendMyResetLinkButton;
 
 

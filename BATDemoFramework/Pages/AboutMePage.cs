@@ -3,6 +3,7 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
 using OpenQA.Selenium.Support.UI;
 using BATDemoFramework;
+using BATDemoFramework.TestDataAccess;
 
 namespace BATDemoFramework
 {
@@ -50,7 +51,10 @@ namespace BATDemoFramework
         [FindsBy(How = How.ClassName, Using = "already-customer-login-module__login-link___2DwCr")]
         private IWebElement loginLink;
 
-
+        public void GoTo()
+        {
+            Browser.GoTo("/join/about-me");
+        }
 
         public void GotoJoinPage()
         {
@@ -97,20 +101,26 @@ namespace BATDemoFramework
             checkboxOptOutEmail.Click();
         }
 
-        public void RegisterNewUser()
+        public bool SubmitBtnIsEnabled()
         {
-            var userGenerator = new UserGenerator();
-            var user = userGenerator.GetNewUser();
+            return submitButton.IsEnabled();
+        }
+
+        public void RegisterNewUser(string Key)
+        {
+            //var userGenerator = new UserGenerator();
+            //var user = userGenerator.GetNewUser();
+            var userData = CsvDataAccess.GetTestData(Key);
 
             SelectTitle();
-            firstNameTextField.SendKeys("First Name");
-            lastNameTextField.SendKeys("LastName");
+            firstNameTextField.SendKeys(userData.FirstName);
+            lastNameTextField.SendKeys(userData.LastName);
             SelectDayOfBirth();
             SelectMonthOfBirth();
             SelectYearOfBirth();
-            emailAddressField.SendKeys(user.EmailAddress);
-            confirmEmailAddressField.SendKeys(user.EmailAddress);
-            passwordField.SendKeys(user.Password);
+            emailAddressField.SendKeys(userData.Email);
+            confirmEmailAddressField.SendKeys(userData.Email);
+            passwordField.SendKeys(userData.Password);
             CheckboxTermsAcceptedChecked();
             CheckboxOptOutEmailsChecked();
 

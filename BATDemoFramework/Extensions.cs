@@ -49,6 +49,22 @@ namespace BATDemoFramework
             // Log the Action
             return result;
         }
+
+        public static bool IsEnabled(this IWebElement element)
+        {
+            bool result;
+            try
+            {
+                result = element.Enabled;
+            }
+            catch (Exception)
+            {
+                result = false;
+            }
+            // Log the Action
+            return result;
+        }
+
         //Click on the element
         public static void ClickOnIt(this IWebElement element, string elementName)
         {
@@ -75,13 +91,13 @@ namespace BATDemoFramework
         }
 
 
-
         //method which allows you to wait for an element in your code
-        //public static bool WaitUntilElementIsPresent(this IWebDriver driver, By by, int timeout = 10)
+        //public static IWebElement WaitUntilElementIsPresent(this IWebDriver driver, By by, int timeoutInSeconds)
         //{
-        //    var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(timeout));
-        //    return wait.Until(d => d.ElementIsPresent(by));
+        //    var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(timeoutInSeconds));
+        //    return wait.Until(ExpectedConditions.ElementIsVisible(By.XPath("")));
         //}
+
     }
 }
 

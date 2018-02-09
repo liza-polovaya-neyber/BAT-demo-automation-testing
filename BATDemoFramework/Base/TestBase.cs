@@ -10,19 +10,33 @@ namespace BATDemoFramework
     {
         //Core test base class
 
+        [OneTimeSetUp]
+        public void SetUpBeforeTestClass()// This method fire at the start of the TestFixture
+        {
+            //Browser.Initialize();
+            //UserGenerator.Initialize();
+        }
+
         [SetUp]
-        public void StartUpTest()// This method fire at the start of the Test
+        public void SetUpBeforeTestMethod()// This method fire at the start of EACH Test
         {
             Browser.Initialize();
             //UserGenerator.Initialize();
         }
 
-        //[TearDown]
-        //public void EndTest()// This method will fire at the end of the Test
-        //{
-        //    Browser.Close();
-        //    Browser.Quit();
-        //}
+        [TearDown]
+        public void TearDownAfterTestMethod()// This method will fire at the end of EACH Test
+        {
+            //Browser.Close();
+            //Browser.Quit();
+        }
+
+        [OneTimeTearDown]
+        public void TearDownAfterTestClass ()// This method will fire at the end of the TestFixture
+        {
+            Browser.Close();
+            //Browser.Quit();
+        }
 
 
         //    [TearDown]
