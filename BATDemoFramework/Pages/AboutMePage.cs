@@ -3,6 +3,7 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
 using OpenQA.Selenium.Support.UI;
 using BATDemoFramework;
+using BATDemoFramework.TestDataAccess;
 
 namespace BATDemoFramework
 {
@@ -35,7 +36,7 @@ namespace BATDemoFramework
         [FindsBy(How = How.XPath, Using = "//input[@type='password']")]
         private IWebElement passwordField;
 
-        [FindsBy(How = How.ClassName, Using = "button button-module__button___p4iTs")]
+        [FindsBy(How = How.CssSelector, Using = "button.button.button-module__button___2VX0t > span")]
         private IWebElement submitButton;
 
         [FindsBy(How = How.Id, Using = "terms_accepted")]
@@ -50,9 +51,24 @@ namespace BATDemoFramework
         [FindsBy(How = How.ClassName, Using = "already-customer-login-module__login-link___2DwCr")]
         private IWebElement loginLink;
 
+        [FindsBy(How = How.LinkText, Using = "Some legal bits we need to tell you")]
+        private IWebElement someLegalBitsMenu;
 
+        [FindsBy(How = How.CssSelector, Using = "css=div.bottom-menu-module__bits___3WlQ1")]
+        private IWebElement someLegalBitsMenuContent;
 
-        public void GotoJoinPage()
+        [FindsBy(How = How.ClassName, Using = "logo")]
+        private IWebElement logoNeyber;
+
+        [FindsBy(How = How.CssSelector, Using = "p.control__error")]
+        private IWebElement EmailsDontMatchError;
+
+        public void GoTo()
+        {
+            Browser.GoTo("join/about-me");
+        }
+
+        public void ClickOnBackLink()
         {
             backLink.Click();
         }
@@ -78,7 +94,7 @@ namespace BATDemoFramework
         public void SelectMonthOfBirth()
         {
             var selectElement = new SelectElement(monthOfBirthDropdown);
-            selectElement.SelectByValue("August");
+            selectElement.SelectByValue("7");
         }
 
         public void SelectYearOfBirth()
@@ -97,24 +113,93 @@ namespace BATDemoFramework
             checkboxOptOutEmail.Click();
         }
 
-        public void RegisterNewUser()
+        public bool SubmitBtnIsEnabled()
         {
-            var userGenerator = new UserGenerator();
-            var user = userGenerator.GetNewUser();
+            return submitButton.IsEnabled();
+        }
+
+        public bool SubmitBtnIsNotEnabled()
+        {
+            return submitButton.IsNotEnabled();
+        }
+
+        public void RegisterNewUser(string Key)
+        {
+            //var userGenerator = new UserGenerator();
+            //var user = userGenerator.GetNewUser();
+            var userData = CsvDataAccess.GetTestData(Key);
 
             SelectTitle();
-            firstNameTextField.SendKeys("First Name");
-            lastNameTextField.SendKeys("LastName");
+            firstNameTextField.SendKeys(userData.FirstName);
+            lastNameTextField.SendKeys(userData.LastName);
             SelectDayOfBirth();
             SelectMonthOfBirth();
             SelectYearOfBirth();
-            emailAddressField.SendKeys(user.EmailAddress);
-            confirmEmailAddressField.SendKeys(user.EmailAddress);
-            passwordField.SendKeys(user.Password);
+            emailAddressField.SendKeys(userData.EmailPrimary);
+            confirmEmailAddressField.SendKeys(userData.EmailPrimary);
+            passwordField.SendKeys(userData.Password);
             CheckboxTermsAcceptedChecked();
             CheckboxOptOutEmailsChecked();
 
             submitButton.Click();
+        }
+
+        public void RegisterUserButDontTickCheckboxes(string Key)
+        {
+            //var userGenerator = new UserGenerator();
+            //var user = userGenerator.GetNewUser();
+            var userData = CsvDataAccess.GetTestData(Key);
+
+            SelectTitle();
+            firstNameTextField.SendKeys(userData.FirstName);
+            lastNameTextField.SendKeys(userData.LastName);
+            SelectDayOfBirth();
+            SelectMonthOfBirth();
+            SelectYearOfBirth();
+            emailAddressField.SendKeys(userData.EmailPrimary);
+            confirmEmailAddressField.SendKeys(userData.EmailPrimary);
+            passwordField.SendKeys(userData.Password);
+
+            submitButton.Click();
+        }
+
+        public void RegisterUserWithNotMatchingEmails(string Key)
+        {
+            //var userGenerator = new UserGenerator();
+            //var user = userGenerator.GetNewUser();
+            var userData = CsvDataAccess.GetTestData(Key);
+
+            SelectTitle();
+            firstNameTextField.SendKeys(userData.FirstName);
+            lastNameTextField.SendKeys(userData.LastName);
+            SelectDayOfBirth();
+            SelectMonthOfBirth();
+            SelectYearOfBirth();
+            emailAddressField.SendKeys(userData.EmailPrimary);
+            confirmEmailAddressField.SendKeys(userData.EmailPrimaryVerify);
+            passwordField.SendKeys(userData.Password);
+
+            submitButton.Click();
+        }
+
+        public bool EmailsDontMatchErrorIsDisplayed()
+        {
+            return EmailsDontMatchError.IsDisplayed();
+        }
+
+        public void OpenSomeLegalBitsMenu()
+        {
+            someLegalBitsMenu.Click();
+        }
+
+        public bool SomeLegalBitsMenuIsDisplayed()
+        {
+            return someLegalBitsMenuContent.IsDisplayed();
+        }
+
+        public void ClickOnNeyberLogo()
+        {
+            logoNeyber.Click();
         }
 
         public void IsAtUrl()

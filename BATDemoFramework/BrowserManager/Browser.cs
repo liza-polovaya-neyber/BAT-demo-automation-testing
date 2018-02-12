@@ -2,14 +2,17 @@
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.IE;
+using OpenQA.Selenium.Support.UI;
+using System;
 using System.Configuration;
 
 namespace BATDemoFramework
 {
    public static class Browser
     {
-        private static IWebDriver webDriver = new ChromeDriver();
+        public static IWebDriver webDriver = new ChromeDriver();
         private static string baseUrl = "https://hellotest1.neyber.co.uk";
+        private static IWebDriver driver;
 
         //private static IWebDriver webDriver;
         //private static string baseUrl = ConfigurationManager.AppSettings["url"];
@@ -34,6 +37,45 @@ namespace BATDemoFramework
             GoTo(baseUrl);
         }
 
+        public static void SwitchTabs(int tabIndex)
+        {
+            var windows = webDriver.WindowHandles;
+            webDriver.SwitchTo().Window(windows[tabIndex]);
+        }
+
+        public static void SwitchBackToTab(int tabIndex)
+        {
+            var windows = webDriver.WindowHandles;
+            webDriver.Close();
+            webDriver.SwitchTo().Window(windows[tabIndex]);
+
+        }
+      
+        public static IWebElement WaitUntilElementIsPresent(IWebDriver driver, By locator, int timeoutInSeconds)
+        {
+            try
+            {
+                return new WebDriverWait(driver, TimeSpan.FromSeconds(timeoutInSeconds))
+                .Until(ExpectedConditions.ElementIsVisible((locator)));
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
+        public static IWebElement WaitUntilElementIsClickable(IWebDriver driver, IWebElement element, int timeoutInSeconds)
+        {
+            try
+            {
+                return new WebDriverWait(driver, TimeSpan.FromSeconds(timeoutInSeconds))
+                .Until(ExpectedConditions.ElementToBeClickable(element));
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
 
         public static void Close()
         {

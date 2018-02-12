@@ -10,7 +10,7 @@ using OpenQA.Selenium;
 namespace BATDemoTests.TestCases
 {
     [TestFixture]
-    public class HelpLinksTests : TestBase
+    public class HelpLinksTests : TestBaseForNewTabWindow
     {
         private IWebDriver driver;
 
@@ -24,7 +24,7 @@ namespace BATDemoTests.TestCases
         }
 
         [Test]
-        public void CheckPrivacyPolicyLinkWorks()
+        public void CheckPrivacyPolicyLinkOpens()
         {
             Pages.Join.GoTo();
             Pages.Join.GoToPrivacyPolicyPage();
@@ -33,25 +33,25 @@ namespace BATDemoTests.TestCases
         }
 
         [Test]
-        public void CheckCookiePolicyLinkWorks()
+        public void CheckCookiePolicyLinkOpens()
         {
             Pages.Join.GoTo();
 
             // Store the parent window of the driver
-            String parentWindowHandle = driver.CurrentWindowHandle;
-            Console.WriteLine("Parent window's handle -> " + parentWindowHandle);
+            //String parentWindowHandle = driver.CurrentWindowHandle;
+            //Console.WriteLine("Parent window's handle -> " + parentWindowHandle);
 
             Pages.Join.GoToCookiePolicyPage();
-            String lastWindowHandle = driver.CurrentWindowHandle;
+            //String lastWindowHandle = driver.CurrentWindowHandle;
             //driver.SwitchTo().Window(driver.WindowHandles.Last());
 
             Assert.IsTrue(Pages.CookiePolicy.IsAtUrl());
 
-            driver.SwitchTo().Window(parentWindowHandle);
+            //driver.SwitchTo().Window(parentWindowHandle);
         }
 
         [Test]
-        public void CheckComplaintsPolicyLinkWorks()
+        public void CheckComplaintsPolicyLinkOpens()
         {
             Pages.Join.GoTo();
             Pages.Join.GoToComplaintsPolicyPage();
@@ -59,14 +59,6 @@ namespace BATDemoTests.TestCases
             Assert.IsTrue(Pages.ComplaintsPolicy.IsAtUrl());
         }
 
-        [Test]
-        public void CheckSomeLegalBitsMenuIsDisplayed()
-        {
-            Pages.Join.GoTo();
-            Pages.Join.OpenSomeLegalBitsMenu();
-
-            Assert.IsTrue(Pages.Join.SomeLegalBitsMenuIsDisplayed());
-        }
 
     }
 }

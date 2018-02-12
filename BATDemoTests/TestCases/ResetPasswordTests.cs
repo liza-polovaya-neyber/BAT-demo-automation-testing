@@ -50,10 +50,11 @@ namespace BATDemoTests
         public void ResetPasswordLinkisResent()
         {   //requires later changes - we have to check whether actual email is sent
             Pages.ResetPassword.GoTo();
+            Thread.Sleep(8000);
             Pages.ResetPassword.ClickToSendResetLinkButton("ResetPasswordLinkisResent");
             Thread.Sleep(8000);
             Pages.ResetPassword.ClickOnResendMyResetLinkButton();
-            Thread.Sleep(8000);
+           
 
             Assert.IsTrue(Pages.ResetPassword.ResendMyResetLinkButtonIsDisplayed());
         }

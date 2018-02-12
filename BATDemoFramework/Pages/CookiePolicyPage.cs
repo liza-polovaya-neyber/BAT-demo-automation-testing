@@ -11,6 +11,7 @@ namespace BATDemoFramework
 
         public bool IsAtUrl()
         {
+            Browser.SwitchTabs(1);
             return Browser.Url.Contains(Urls.CookiePolicy);
         }
     }

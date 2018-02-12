@@ -12,7 +12,8 @@
 
             public bool IsAtUrl()
             {
-                return Browser.Url.Contains(Urls.PrivacyPolicy);
+                 Browser.SwitchTabs(1);
+                 return Browser.Url.Contains(Urls.PrivacyPolicy);
             }
 
 

@@ -4,7 +4,7 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
 using BATDemoFramework.TestDataAccess;
 using System;
-
+using OpenQA.Selenium.Support.UI;
 
 namespace BATDemoFramework
 {
@@ -28,10 +28,12 @@ namespace BATDemoFramework
         [FindsBy(How = How.ClassName, Using = "auth__title")]
         private IWebElement loginPageHello;
 
-        [FindsBy(How = How.ClassName, Using = "hint hint_alert np-i login-form-module__error___3bEGA")]
+        [FindsBy(How = How.XPath, Using = "//p[2]")]
         private IWebElement errorInvalidCredentials;
 
-        
+        private IWebDriver driver;
+
+
         //Browser is navigated to Login Page
         public void GoTo()
         {
@@ -57,7 +59,7 @@ namespace BATDemoFramework
             var userData = CsvDataAccess.GetTestData(Key);
 
             emailAddressField.Click();
-            emailAddressField.SendKeys(userData.Email);
+            emailAddressField.SendKeys(userData.EmailPrimary);
             passwordField.Click();
             passwordField.SendKeys(userData.Password);
 
@@ -65,9 +67,20 @@ namespace BATDemoFramework
         }
 
         //Get text property from webElement
-        public string GetText()
+        public string GetErrorText()
         {
             return errorInvalidCredentials.Text;
+        }
+
+
+        public bool ErrorBlockIsShown(IWebDriver driver)
+        {
+            bool result;
+            var errorBlock = Browser.WaitUntilElementIsPresent(driver, By.XPath("//p[2]"), 10);
+            result = errorBlock.Displayed;
+            return result;
+
+
         }
 
         //Verify the page title (url)
@@ -85,6 +98,8 @@ namespace BATDemoFramework
         {
             return Browser.Title;
         }
+
+      
 
         //public void LogInAsLastRegisteredUser()
         //{
