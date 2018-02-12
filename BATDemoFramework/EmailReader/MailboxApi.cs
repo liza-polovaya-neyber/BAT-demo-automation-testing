@@ -9,6 +9,8 @@ namespace BATDemoFramework.EmailReader
 {
     public class MailboxReader
     {
+        private object email;
+
         public MailboxReader()
         {
             var mailbox = new MailboxApi("kiucydsg", "zrFWxcy7APBDu2A");

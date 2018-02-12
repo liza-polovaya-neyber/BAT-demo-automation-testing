@@ -28,7 +28,7 @@ namespace BATDemoFramework
         [FindsBy(How = How.LinkText, Using = "Some legal bits we need to tell you")]
         private IWebElement someLegalBitsMenu;
 
-        [FindsBy(How = How.CssSelector, Using = "#root > div > div > div > div > footer > div.bottom-menu-module__bits___3WlQ1")]
+        [FindsBy(How = How.XPath, Using = "//p[5]")]
         private IWebElement someLegalBitsMenuContent;
         
 
@@ -73,9 +73,10 @@ namespace BATDemoFramework
         }
         public bool SomeLegalBitsMenuIsDisplayed()
         {
-            bool result;
-            result = someLegalBitsMenuContent.IsDisplayed();
-            return result;
+            //bool result;
+            //result = someLegalBitsMenuContent.IsDisplayed();
+            //return result;
+           return someLegalBitsMenu.IsDisplayed();
         }
 
         public bool IsAt()

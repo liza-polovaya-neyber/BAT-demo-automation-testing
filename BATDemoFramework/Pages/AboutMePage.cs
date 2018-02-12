@@ -51,12 +51,24 @@ namespace BATDemoFramework
         [FindsBy(How = How.ClassName, Using = "already-customer-login-module__login-link___2DwCr")]
         private IWebElement loginLink;
 
+        [FindsBy(How = How.LinkText, Using = "Some legal bits we need to tell you")]
+        private IWebElement someLegalBitsMenu;
+
+        [FindsBy(How = How.CssSelector, Using = "css=div.bottom-menu-module__bits___3WlQ1")]
+        private IWebElement someLegalBitsMenuContent;
+
+        [FindsBy(How = How.ClassName, Using = "logo")]
+        private IWebElement logoNeyber;
+
+        [FindsBy(How = How.CssSelector, Using = "p.control__error")]
+        private IWebElement EmailsDontMatchError;
+
         public void GoTo()
         {
             Browser.GoTo("join/about-me");
         }
 
-        public void GotoJoinPage()
+        public void ClickOnBackLink()
         {
             backLink.Click();
         }
@@ -106,6 +118,11 @@ namespace BATDemoFramework
             return submitButton.IsEnabled();
         }
 
+        public bool SubmitBtnIsNotEnabled()
+        {
+            return submitButton.IsNotEnabled();
+        }
+
         public void RegisterNewUser(string Key)
         {
             //var userGenerator = new UserGenerator();
@@ -118,13 +135,71 @@ namespace BATDemoFramework
             SelectDayOfBirth();
             SelectMonthOfBirth();
             SelectYearOfBirth();
-            emailAddressField.SendKeys(userData.Email);
-            confirmEmailAddressField.SendKeys(userData.Email);
+            emailAddressField.SendKeys(userData.EmailPrimary);
+            confirmEmailAddressField.SendKeys(userData.EmailPrimary);
             passwordField.SendKeys(userData.Password);
             CheckboxTermsAcceptedChecked();
             CheckboxOptOutEmailsChecked();
 
             submitButton.Click();
+        }
+
+        public void RegisterUserButDontTickCheckboxes(string Key)
+        {
+            //var userGenerator = new UserGenerator();
+            //var user = userGenerator.GetNewUser();
+            var userData = CsvDataAccess.GetTestData(Key);
+
+            SelectTitle();
+            firstNameTextField.SendKeys(userData.FirstName);
+            lastNameTextField.SendKeys(userData.LastName);
+            SelectDayOfBirth();
+            SelectMonthOfBirth();
+            SelectYearOfBirth();
+            emailAddressField.SendKeys(userData.EmailPrimary);
+            confirmEmailAddressField.SendKeys(userData.EmailPrimary);
+            passwordField.SendKeys(userData.Password);
+
+            submitButton.Click();
+        }
+
+        public void RegisterUserWithNotMatchingEmails(string Key)
+        {
+            //var userGenerator = new UserGenerator();
+            //var user = userGenerator.GetNewUser();
+            var userData = CsvDataAccess.GetTestData(Key);
+
+            SelectTitle();
+            firstNameTextField.SendKeys(userData.FirstName);
+            lastNameTextField.SendKeys(userData.LastName);
+            SelectDayOfBirth();
+            SelectMonthOfBirth();
+            SelectYearOfBirth();
+            emailAddressField.SendKeys(userData.EmailPrimary);
+            confirmEmailAddressField.SendKeys(userData.EmailPrimaryVerify);
+            passwordField.SendKeys(userData.Password);
+
+            submitButton.Click();
+        }
+
+        public bool EmailsDontMatchErrorIsDisplayed()
+        {
+            return EmailsDontMatchError.IsDisplayed();
+        }
+
+        public void OpenSomeLegalBitsMenu()
+        {
+            someLegalBitsMenu.Click();
+        }
+
+        public bool SomeLegalBitsMenuIsDisplayed()
+        {
+            return someLegalBitsMenuContent.IsDisplayed();
+        }
+
+        public void ClickOnNeyberLogo()
+        {
+            logoNeyber.Click();
         }
 
         public void IsAtUrl()

@@ -53,7 +53,7 @@ namespace BATDemoFramework
         {
             var userData = CsvDataAccess.GetTestData(testName);
             emailTextField.Click();
-            emailTextField.SendKeys(userData.Email);
+            emailTextField.SendKeys(userData.EmailPrimary);
 
             sendMyResetLinkButton.Click();
         }

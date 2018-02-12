@@ -59,7 +59,7 @@ namespace BATDemoFramework
             var userData = CsvDataAccess.GetTestData(Key);
 
             emailAddressField.Click();
-            emailAddressField.SendKeys(userData.Email);
+            emailAddressField.SendKeys(userData.EmailPrimary);
             passwordField.Click();
             passwordField.SendKeys(userData.Password);
 

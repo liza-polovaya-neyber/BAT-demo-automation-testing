@@ -65,6 +65,21 @@ namespace BATDemoFramework
             return result;
         }
 
+        public static bool IsNotEnabled(this IWebElement element)
+        {
+            bool result;
+            try
+            {
+                result = !element.Enabled;
+            }
+            catch (Exception)
+            {
+                result = false;
+            }
+            // Log the Action
+            return result;
+        }
+
         //Click on the element
         public static void ClickOnIt(this IWebElement element, string elementName)
         {

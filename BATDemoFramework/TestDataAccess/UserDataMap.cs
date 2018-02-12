@@ -14,7 +14,8 @@ namespace BATDemoFramework.TestDataAccess
             try
             {
                 Map(m => m.Key).Name("Key");
-                Map(m => m.Email).Name("Email");
+                Map(m => m.EmailPrimary).Name("Email1");
+                Map(m => m.EmailPrimaryVerify).Name("Email2");
                 Map(m => m.Password).Name("Password");
                 Map(m => m.FirstName).Name("FirstName");
                 Map(m => m.LastName).Name("LastName");

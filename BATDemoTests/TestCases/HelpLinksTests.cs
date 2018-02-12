@@ -59,14 +59,6 @@ namespace BATDemoTests.TestCases
             Assert.IsTrue(Pages.ComplaintsPolicy.IsAtUrl());
         }
 
-        [Test]
-        public void CheckSomeLegalBitsMenuIsDisplayed()
-        {
-            Pages.Join.GoTo();
-            Pages.Join.OpenSomeLegalBitsMenu();
-
-            Assert.IsTrue(Pages.Join.SomeLegalBitsMenuIsDisplayed());
-        }
 
     }
 }

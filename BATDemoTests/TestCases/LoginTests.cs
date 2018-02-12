@@ -74,6 +74,15 @@ namespace BATDemoTests
             Assert.IsTrue(Pages.Login.IsAtUrl(), "User with invalid password is not on Login page");
         }
 
+        [Test]
+        public void CheckSomeLegalBitsMenuIsDisplayed()
+        {
+            Pages.Join.GoTo();
+            Pages.Join.OpenSomeLegalBitsMenu();
+
+            Assert.IsTrue(Pages.Join.SomeLegalBitsMenuIsDisplayed());
+        }
+
 
     }
 
