@@ -31,9 +31,22 @@ namespace BATDemoFramework
         //Verifies if "Resend my reset link" button is displayed
         public bool ResendMyResetLinkButtonIsDisplayed()
         {
+            return resendMyResetLinkButton.IsDisplayed();
+        }
+
+        public bool WaitForResendMyResetLinkButtonIsDisplayed(IWebDriver driver)
+        {
             bool result;
-            result = resendMyResetLinkButton.IsDisplayed();
+            var resetLinkBtn = Browser.WaitUntilElementIsClickable(driver, resendMyResetLinkButton, 8);
+            result = resetLinkBtn.Displayed;
             return result;
+        }
+
+        public bool TryDifferentEmailLinkIsVisible(IWebDriver driver)
+        {
+            bool result;
+            var tryDifferentEmailElement = Browser.WaitUntilElementIsVisible(driver, By.LinkText("Try different email"), 16);
+            return tryDifferentEmailLink.IsDisplayed();
         }
 
         //Clicks on "Resend my reset link" button
@@ -49,9 +62,10 @@ namespace BATDemoFramework
         }
 
         //Fills email box with the email from CSV file and submits sending a link
-        public void ClickToSendResetLinkButton(string testName)
+        public void EnterEmailAndClickOnResetLinkButton(string testName)
         {
             var userData = CsvDataAccess.GetTestData(testName);
+
             emailTextField.Click();
             emailTextField.SendKeys(userData.EmailPrimary);
 
@@ -65,13 +79,13 @@ namespace BATDemoFramework
         }
 
         //Go from Reset Password page => Join page
-        public void GotoJoinPage()
+        public void ClickOnRegisterLink()
         {
             registerLink.Click();
         }
 
         //Go from Reset Password page => Login page
-        public void ReturntoLoginPage()
+        public void ClickOnReturntoLoginLink()
         {
             returnToLoginLink.Click();
         }

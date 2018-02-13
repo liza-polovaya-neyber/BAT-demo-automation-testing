@@ -42,7 +42,7 @@ namespace BATDemoFramework
             {
                 result = element.Displayed;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 result = false;
             }
@@ -57,7 +57,7 @@ namespace BATDemoFramework
             {
                 result = element.Enabled;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 result = false;
             }

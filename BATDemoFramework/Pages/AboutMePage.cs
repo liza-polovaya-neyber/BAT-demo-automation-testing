@@ -4,6 +4,7 @@ using OpenQA.Selenium.Support.PageObjects;
 using OpenQA.Selenium.Support.UI;
 using BATDemoFramework;
 using BATDemoFramework.TestDataAccess;
+using System;
 
 namespace BATDemoFramework
 {
@@ -64,7 +65,7 @@ namespace BATDemoFramework
         private IWebElement logoNeyber;
 
         [FindsBy(How = How.CssSelector, Using = "p.control__error")]
-        private IWebElement EmailsDontMatchError;
+        private IWebElement errorEmailsDontMatch;
 
         public void GoTo()
         {
@@ -124,7 +125,7 @@ namespace BATDemoFramework
 
         public bool SubmitBtnIsEnabled()
         {
-            return submitBtn.IsEnabled();
+            return submitBtn.IsEnabled();          
         }
 
         //public bool SubmitBtnIsNotEnabled()
@@ -193,7 +194,7 @@ namespace BATDemoFramework
 
         public bool EmailsDontMatchErrorIsDisplayed()
         {
-            return EmailsDontMatchError.IsDisplayed();
+            return errorEmailsDontMatch.IsDisplayed();
         }
 
         public void OpenSomeLegalBitsMenu()

@@ -15,7 +15,7 @@ namespace BATDemoTests.TestCases
         private IWebDriver driver;
 
         [Test]
-        public void CheckOurTermsLinkWorks()
+        public void CheckOurTermsLinkOpens()
         {
             Pages.Join.GoTo();
             Pages.Join.GoToOurTermsPage();

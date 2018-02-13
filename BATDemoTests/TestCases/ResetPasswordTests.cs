@@ -22,7 +22,7 @@ namespace BATDemoTests
         public void CanGoFromResetPasswordPageToLoginPage()
         {
             Pages.ResetPassword.GoTo();
-            Pages.ResetPassword.ReturntoLoginPage();
+            Pages.ResetPassword.ClickOnReturntoLoginLink();
 
             Assert.IsTrue(Pages.Login.IsAtUrl());
         }
@@ -31,7 +31,7 @@ namespace BATDemoTests
         public void CanGoFromResetPasswordPageToJoinPage()
         {
             Pages.ResetPassword.GoTo();
-            Pages.ResetPassword.GotoJoinPage();
+            Pages.ResetPassword.ClickOnRegisterLink();
 
             Assert.IsTrue(Pages.Join.IsAtUrl());
         }
@@ -40,32 +40,30 @@ namespace BATDemoTests
         public void ResetPasswordLinkIsSent()
         {
             Pages.ResetPassword.GoTo();
-            Pages.ResetPassword.ClickToSendResetLinkButton("ResetPasswordLinkIsSent");
-            Thread.Sleep(10000);
+            Pages.ResetPassword.EnterEmailAndClickOnResetLinkButton("ResetPasswordLinkIsSent");
 
-            Assert.IsTrue(Pages.ResetPassword.ResendMyResetLinkButtonIsDisplayed());
+            Assert.IsTrue(Pages.ResetPassword.TryDifferentEmailLinkIsVisible(Browser.webDriver));
         }
 
         [Test]
         public void ResetPasswordLinkisResent()
         {   //requires later changes - we have to check whether actual email is sent
             Pages.ResetPassword.GoTo();
-            Thread.Sleep(8000);
-            Pages.ResetPassword.ClickToSendResetLinkButton("ResetPasswordLinkisResent");
-            Thread.Sleep(8000);
+            Pages.ResetPassword.EnterEmailAndClickOnResetLinkButton("ResetPasswordLinkisResent");
+            Pages.ResetPassword.TryDifferentEmailLinkIsVisible(Browser.webDriver);
             Pages.ResetPassword.ClickOnResendMyResetLinkButton();
            
 
-            Assert.IsTrue(Pages.ResetPassword.ResendMyResetLinkButtonIsDisplayed());
+            Assert.IsTrue(Pages.ResetPassword.WaitForResendMyResetLinkButtonIsDisplayed(Browser.webDriver));
         }
 
         [Test]
         public void ResetPasswordLinkIsSentToDifferentEmail()
         {
             Pages.ResetPassword.GoTo();
-            Pages.ResetPassword.ClickToSendResetLinkButton("ResetPasswordLinkIsSentToDifferentEmail");
+            Pages.ResetPassword.EnterEmailAndClickOnResetLinkButton("ResetPasswordLinkIsSentToDifferentEmail");
             Pages.ResetPassword.ClickOnTryDifferentEmailLink();
-            Pages.ResetPassword.ClickToSendResetLinkButton("ResetPasswordLinkIsSentToDifferentEmail");
+            Pages.ResetPassword.EnterEmailAndClickOnResetLinkButton("ResetPasswordLinkIsSentToDifferentEmail");
 
             Assert.IsTrue(Pages.ResetPassword.ResendMyResetLinkButtonIsDisplayed());
         }

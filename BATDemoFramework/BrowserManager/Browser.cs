@@ -13,6 +13,7 @@ namespace BATDemoFramework
         public static IWebDriver webDriver = new ChromeDriver();
         private static string baseUrl = "https://hellotest1.neyber.co.uk";
         private static IWebDriver driver;
+        private static By locator;
 
         //private static IWebDriver webDriver;
         //private static string baseUrl = ConfigurationManager.AppSettings["url"];
@@ -70,6 +71,19 @@ namespace BATDemoFramework
             {
                 return new WebDriverWait(driver, TimeSpan.FromSeconds(timeoutInSeconds))
                 .Until(ExpectedConditions.ElementToBeClickable(element));
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
+        public static IWebElement WaitUntilElementIsVisible(IWebDriver driver, By locator, int timeoutInSeconds)
+        {
+            try
+            {
+                return new WebDriverWait(driver, TimeSpan.FromSeconds(timeoutInSeconds))
+                .Until(ExpectedConditions.ElementIsVisible(locator));
             }
             catch (Exception ex)
             {
