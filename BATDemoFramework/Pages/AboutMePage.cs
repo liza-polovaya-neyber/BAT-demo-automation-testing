@@ -171,6 +171,8 @@ namespace BATDemoFramework
             confirmEmailAddressField.SendKeys(userData.EmailPrimary);
             passwordField.SendKeys(userData.Password);
 
+            submitBtn.Click();
+
         }
 
         public void RegisterUserWithNotMatchingEmails(string Key)

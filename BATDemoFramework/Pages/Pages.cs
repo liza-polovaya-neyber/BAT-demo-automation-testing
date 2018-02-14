@@ -5,6 +5,7 @@ namespace BATDemoFramework
 {
     public static class Pages
     {
+
         private static T GetPage<T>() where T : new()
         {
             var page = new T();
@@ -32,9 +33,19 @@ namespace BATDemoFramework
             get { return GetPage<ResetPasswordPage>(); }
         }
 
-        public static OurTermsPage OurTerms
+        public static VerificationEmailPage VerificationEmail
         {
-            get { return GetPage<OurTermsPage>(); }
+            get { return GetPage<VerificationEmailPage>(); }
+        }
+
+        public static NotVerifiedEmailPage NotVerifiedEmail
+        {
+            get { return GetPage<NotVerifiedEmailPage>(); }
+        }
+
+        public static ResendEmailPage ResendEmail
+        {
+            get { return GetPage<ResendEmailPage>(); }
         }
 
         public static HomePage Home
@@ -57,5 +68,9 @@ namespace BATDemoFramework
             get { return GetPage<ComplaintsPolicyPage>(); }
         }
 
+        public static OurTermsPage OurTerms
+        {
+            get { return GetPage<OurTermsPage>(); }
+        }
     }
 }

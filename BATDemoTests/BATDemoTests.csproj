@@ -69,6 +69,7 @@
     <Compile Include="TestCases\ProfileRegistration.cs" />
     <Compile Include="TestCases\ResetPasswordTests.cs" />
     <Compile Include="BaseClass\TestBaseForNewTabWindow.cs" />
+    <Compile Include="TestCases\VeirifcationEmailTests.cs" />
     <Compile Include="WebDriverTests.cs" />
     <Compile Include="SmokeTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

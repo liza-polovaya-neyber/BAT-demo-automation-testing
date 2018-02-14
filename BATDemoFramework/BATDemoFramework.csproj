@@ -76,8 +76,11 @@
     <Compile Include="Pages\CookiePolicyPage.cs" />
     <Compile Include="Pages\HomePage.cs" />
     <Compile Include="Models\User.cs" />
+    <Compile Include="Pages\NotVerifiedEmailPage.cs" />
     <Compile Include="Pages\OurTermsPage.cs" />
     <Compile Include="Pages\PrivacyPolicyPage.cs" />
+    <Compile Include="Pages\ResendEmailPage.cs" />
+    <Compile Include="Pages\VerificationEmailPage.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="TestDataAccess\CsvDataAccess.cs" />
     <Compile Include="TestDataAccess\UserData.cs" />
