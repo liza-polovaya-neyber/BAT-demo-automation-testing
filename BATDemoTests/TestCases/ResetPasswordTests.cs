@@ -39,6 +39,7 @@ namespace BATDemoTests
         [Test]
         public void ResetPasswordLinkIsSent()
         {
+            //requires later changes - we have to check whether actual email is sent
             Pages.ResetPassword.GoTo();
             Pages.ResetPassword.EnterEmailAndClickOnResetLinkButton("ResetPasswordLinkIsSent");
 
@@ -59,13 +60,14 @@ namespace BATDemoTests
 
         [Test]
         public void ResetPasswordLinkIsSentToDifferentEmail()
-        {
+        {   //requires later changes - we have to check whether actual email is sent
             Pages.ResetPassword.GoTo();
             Pages.ResetPassword.EnterEmailAndClickOnResetLinkButton("ResetPasswordLinkIsSentToDifferentEmail");
+            Pages.ResetPassword.TryDifferentEmailLinkIsVisible(Browser.webDriver);
             Pages.ResetPassword.ClickOnTryDifferentEmailLink();
             Pages.ResetPassword.EnterEmailAndClickOnResetLinkButton("ResetPasswordLinkIsSentToDifferentEmail");
 
-            Assert.IsTrue(Pages.ResetPassword.ResendMyResetLinkButtonIsDisplayed());
+            Assert.IsTrue(Pages.ResetPassword.TryDifferentEmailLinkIsVisible(Browser.webDriver));
         }
 
 

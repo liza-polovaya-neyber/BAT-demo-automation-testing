@@ -10,7 +10,7 @@ using OpenQA.Selenium;
 namespace BATDemoTests.TestCases
 {
     [TestFixture]
-    public class HelpLinksTests : TestBaseForNewTabWindow
+    public class NewTabLinksTests : TestBaseForNewTabWindow
     {
         private IWebDriver driver;
 

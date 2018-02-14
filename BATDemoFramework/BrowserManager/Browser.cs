@@ -46,8 +46,8 @@ namespace BATDemoFramework
 
         public static void SwitchBackToTab(int tabIndex)
         {
-            var windows = webDriver.WindowHandles;
             webDriver.Close();
+            var windows = webDriver.WindowHandles;
             webDriver.SwitchTo().Window(windows[tabIndex]);
 
         }
