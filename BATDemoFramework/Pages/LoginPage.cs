@@ -79,8 +79,6 @@ namespace BATDemoFramework
             var errorBlock = Browser.WaitUntilElementIsPresent(driver, By.XPath("//p[2]"), 10);
             result = errorBlock.Displayed;
             return result;
-
-
         }
 
         //Verify the page title (url)

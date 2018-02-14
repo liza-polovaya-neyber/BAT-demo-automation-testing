@@ -27,7 +27,7 @@ namespace BATDemoFramework
         [TearDown]
         public void TearDownAfterTestMethod()// This method will fire at the end of EACH Test
         {
-            //Browser.Close();
+            //Browser.Close();s
             //Browser.Quit();
         }
 

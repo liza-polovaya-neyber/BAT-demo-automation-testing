@@ -4,13 +4,14 @@ using OpenQA.Selenium.Support.PageObjects;
 using OpenQA.Selenium.Support.UI;
 using BATDemoFramework;
 using BATDemoFramework.TestDataAccess;
+using System;
 
 namespace BATDemoFramework
 {
     public class AboutMePage
     {
         [FindsBy(How = How.Name, Using = "title")]
-        private IWebElement titleDropdown;
+        private IWebElement titleDD;
 
         [FindsBy(How = How.Name, Using = "first_name")]
         private IWebElement firstNameTextField;
@@ -19,13 +20,13 @@ namespace BATDemoFramework
         private IWebElement lastNameTextField;
 
         [FindsBy(How = How.Name, Using = "day")]
-        private IWebElement dayOfBirthDropdown;
+        private IWebElement dayOfBirthDD;
 
         [FindsBy(How = How.Name, Using = "month")]
-        private IWebElement monthOfBirthDropdown;
+        private IWebElement monthOfBirthDD;
 
         [FindsBy(How = How.Name, Using = "year")]
-        private IWebElement yearOfBirthDropdown;
+        private IWebElement yearOfBirthDD;
 
         [FindsBy(How = How.Name, Using = "email")]
         private IWebElement emailAddressField;
@@ -36,8 +37,11 @@ namespace BATDemoFramework
         [FindsBy(How = How.XPath, Using = "//input[@type='password']")]
         private IWebElement passwordField;
 
+        [FindsBy(How = How.Name, Using = "customerFeedback")]
+        private IWebElement howYouHeardAboutUsDD;
+
         [FindsBy(How = How.CssSelector, Using = "button.button.button-module__button___2VX0t > span")]
-        private IWebElement submitButton;
+        private IWebElement submitBtn;
 
         [FindsBy(How = How.Id, Using = "terms_accepted")]
         private IWebElement checkboxTermsAccepted;
@@ -48,7 +52,7 @@ namespace BATDemoFramework
         [FindsBy(How = How.ClassName, Using = "form-layout__back")]
         private IWebElement backLink;
 
-        [FindsBy(How = How.ClassName, Using = "already-customer-login-module__login-link___2DwCr")]
+        [FindsBy(How = How.LinkText, Using = "Login")]
         private IWebElement loginLink;
 
         [FindsBy(How = How.LinkText, Using = "Some legal bits we need to tell you")]
@@ -61,7 +65,7 @@ namespace BATDemoFramework
         private IWebElement logoNeyber;
 
         [FindsBy(How = How.CssSelector, Using = "p.control__error")]
-        private IWebElement EmailsDontMatchError;
+        private IWebElement errorEmailsDontMatch;
 
         public void GoTo()
         {
@@ -80,27 +84,33 @@ namespace BATDemoFramework
 
         public void SelectTitle()
         {
-            var selectElement = new SelectElement(titleDropdown);
+            var selectElement = new SelectElement(titleDD);
             selectElement.SelectByValue("Miss");
 
         } 
 
         public void SelectDayOfBirth()
         {
-            var selectElement = new SelectElement(dayOfBirthDropdown);
+            var selectElement = new SelectElement(dayOfBirthDD);
             selectElement.SelectByValue("12");
         }
 
         public void SelectMonthOfBirth()
         {
-            var selectElement = new SelectElement(monthOfBirthDropdown);
+            var selectElement = new SelectElement(monthOfBirthDD);
             selectElement.SelectByValue("7");
         }
 
         public void SelectYearOfBirth()
         {
-            var selectElement = new SelectElement(yearOfBirthDropdown);
+            var selectElement = new SelectElement(yearOfBirthDD);
             selectElement.SelectByValue("1989");
+        }
+
+        public void SelectHowYouHeardAboutUs()
+        {
+            var selectElement = new SelectElement(howYouHeardAboutUsDD);
+            selectElement.SelectByValue("Email from Neyber");
         }
 
         public void CheckboxTermsAcceptedChecked()
@@ -115,13 +125,13 @@ namespace BATDemoFramework
 
         public bool SubmitBtnIsEnabled()
         {
-            return submitButton.IsEnabled();
+            return submitBtn.IsEnabled();          
         }
 
-        public bool SubmitBtnIsNotEnabled()
-        {
-            return submitButton.IsNotEnabled();
-        }
+        //public bool SubmitBtnIsNotEnabled()
+        //{
+        //    return submitBtn.IsNotEnabled();
+        //}
 
         public void RegisterNewUser(string Key)
         {
@@ -138,10 +148,11 @@ namespace BATDemoFramework
             emailAddressField.SendKeys(userData.EmailPrimary);
             confirmEmailAddressField.SendKeys(userData.EmailPrimary);
             passwordField.SendKeys(userData.Password);
+            SelectHowYouHeardAboutUs();
             CheckboxTermsAcceptedChecked();
             CheckboxOptOutEmailsChecked();
 
-            submitButton.Click();
+            submitBtn.Click();
         }
 
         public void RegisterUserButDontTickCheckboxes(string Key)
@@ -160,7 +171,6 @@ namespace BATDemoFramework
             confirmEmailAddressField.SendKeys(userData.EmailPrimary);
             passwordField.SendKeys(userData.Password);
 
-            submitButton.Click();
         }
 
         public void RegisterUserWithNotMatchingEmails(string Key)
@@ -179,12 +189,12 @@ namespace BATDemoFramework
             confirmEmailAddressField.SendKeys(userData.EmailPrimaryVerify);
             passwordField.SendKeys(userData.Password);
 
-            submitButton.Click();
+            submitBtn.Click();
         }
 
         public bool EmailsDontMatchErrorIsDisplayed()
         {
-            return EmailsDontMatchError.IsDisplayed();
+            return errorEmailsDontMatch.IsDisplayed();
         }
 
         public void OpenSomeLegalBitsMenu()

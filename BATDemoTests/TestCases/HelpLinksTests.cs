@@ -10,12 +10,12 @@ using OpenQA.Selenium;
 namespace BATDemoTests.TestCases
 {
     [TestFixture]
-    public class HelpLinksTests : TestBaseForNewTabWindow
+    public class NewTabLinksTests : TestBaseForNewTabWindow
     {
         private IWebDriver driver;
 
         [Test]
-        public void CheckOurTermsLinkWorks()
+        public void CheckOurTermsLinkOpens()
         {
             Pages.Join.GoTo();
             Pages.Join.GoToOurTermsPage();

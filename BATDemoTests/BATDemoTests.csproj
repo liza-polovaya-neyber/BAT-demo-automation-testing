@@ -66,7 +66,6 @@
     <Compile Include="TestCases\AboutMeTests.cs" />
     <Compile Include="TestCases\HelpLinksTests.cs" />
     <Compile Include="TestCases\LoginTests.cs" />
-    <Compile Include="TestCases\NewTabLinks.cs" />
     <Compile Include="TestCases\ProfileRegistration.cs" />
     <Compile Include="TestCases\ResetPasswordTests.cs" />
     <Compile Include="BaseClass\TestBaseForNewTabWindow.cs" />
