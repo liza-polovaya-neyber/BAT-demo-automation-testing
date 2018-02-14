@@ -33,5 +33,11 @@ namespace BATDemoFramework
         {
             return Browser.Url.Contains(Urls.NotVerifiedEmail);
         }
+
+        public bool WaitTillStartAgainLinkIsVisible(IWebDriver driver)
+        {
+            var startAgainElem = Browser.WaitUntilElementIsVisible(driver, By.LinkText("start again"), 5);
+            return startAgainElem.Displayed;
+        }
     }
 }

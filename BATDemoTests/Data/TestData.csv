@@ -9,4 +9,7 @@ ResetPasswordLinkIsSentToDifferentEmail,liza.polovaya1101@yopmail.com,Password1,
 AboutMeFormIsReadyToBeSubmitted,nuttyone.kiucydsg@mailosaur.io,Password1,sampleFirst,sampleLast,
 AboutMeFormIsSubmitted,nuttyone.kiucydsg@mailosaur.io,Password1,sampleFirst,sampleLast,
 AboutMeFormCantBeSubmitted,nuttyone.kiucydsg@mailosaur.io,Password1,sampleFirst,sampleLast,
-CheckPrimaryEmailsAreCheckedToBeEqual,nuttyone.kiucydsg@mailosaur.io,Password1,sampleFirst,sampleLast,nuttyone.kiucyds666g@mailosaur.io
+CheckPrimaryEmailsAreCheckedToBeEqual,nuttyone.kiucydsg@mailosaur.io,Password1,sampleFirst,sampleLast,nuttyone.kiucyds666g@mailosaur.io,
+GoesFromAboutMePageToVerificationEmailPage,liza11.kiucydsg@mailosaur.io,Password1,sampleFirst,sampleLast,nuttyone.kiucyds666g@mailosaur.io,
+NotVerifiedUserWantsToContinue,lizap3.kiucydsg@mailosaur.io,Password1,sampleFirst,sampleLast,nuttyone.kiucyds666g@mailosaur.io,
+NotVerifiedUserRequestsNewResetLink,lizapo7.kiucydsg@mailosaur.io,Password1,sampleFirst,sampleLast,nuttyone.kiucyds666g@mailosaur.io,
