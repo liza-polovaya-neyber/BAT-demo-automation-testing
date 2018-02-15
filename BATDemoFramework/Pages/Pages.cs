@@ -48,6 +48,11 @@ namespace BATDemoFramework
             get { return GetPage<ResendEmailPage>(); }
         }
 
+        public static EmployerSearchPage EmployerSearch
+        {
+            get { return GetPage<EmployerSearchPage>(); }
+        }
+
         public static HomePage Home
         {
             get { return GetPage<HomePage>(); }

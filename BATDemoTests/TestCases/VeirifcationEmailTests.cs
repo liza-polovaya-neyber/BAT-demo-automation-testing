@@ -24,6 +24,17 @@ namespace BATDemoTests.TestCases
         }
 
         [Test]
+        public void CanLogoutFromVerificationEmailPage() //a user for this test has to be generated automatically
+        {
+            Pages.AboutMe.GoTo();
+            Pages.AboutMe.RegisterNewUser("CanLogoutFromVerificationEmailPage");
+            Pages.VerificationEmail.WaitTillContinueBtnIsVisible(Browser.webDriver);
+            Pages.VerificationEmail.ClickOnLogoutLink();
+
+            Assert.IsTrue(Pages.Login.IsAtUrl(), "User has not redirected to page");
+        }
+
+        [Test]
         public void NotVerifiedUserWantsToContinue() //a user for this test has to be generated automatically + check email is sent
         {
             Pages.AboutMe.GoTo();

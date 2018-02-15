@@ -48,5 +48,10 @@ namespace BATDemoFramework
         {
             resendEmailLink.Click();
         }
+
+        public void ClickOnLogoutLink()
+        {
+            logoutLink.Click();
+        }
     }
 }
