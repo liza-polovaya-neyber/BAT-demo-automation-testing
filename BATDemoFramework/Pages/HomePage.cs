@@ -11,21 +11,17 @@ namespace BATDemoFramework
 
         [FindsBy(How = How.CssSelector, Using = "span.login-logout-module__defaultavatar___3VRWc")]
         private IWebElement userAvatar;
+
+        [FindsBy(How = How.CssSelector, Using = "span.login-logout-module__defaultavatar___3VRWc")]
+        private IWebElement loanTile;
+
+
+
         private IWebDriver driver;
 
         public bool UserAvatarIsDisplayed()
         {
-            bool result;
-            try
-            {
-                result = userAvatar.IsDisplayed();
-            }
-            catch (Exception ex)
-            {
-                result = false;
-            }
-
-            return result;
+            return userAvatar.IsDisplayed();
         }
 
         public bool IsAt(IWebDriver driver)

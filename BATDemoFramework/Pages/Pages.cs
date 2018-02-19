@@ -53,6 +53,16 @@ namespace BATDemoFramework
             get { return GetPage<EmployerSearchPage>(); }
         }
 
+        public static AlternativeEmailPage AlternativeEmail
+        {
+            get { return GetPage<AlternativeEmailPage>(); }
+        }
+
+        public static MarketingPage Marketing
+        {
+            get { return GetPage<MarketingPage>(); }
+        }
+
         public static HomePage Home
         {
             get { return GetPage<HomePage>(); }

@@ -72,11 +72,13 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
     <Compile Include="Generators\EmailAddressGenerator.cs" />
+    <Compile Include="Pages\AlternativeEmailPage.cs" />
     <Compile Include="Pages\ComplaintsPolicyPage.cs" />
     <Compile Include="Pages\CookiePolicyPage.cs" />
     <Compile Include="Pages\EmployerSearchPage.cs" />
     <Compile Include="Pages\HomePage.cs" />
     <Compile Include="Models\User.cs" />
+    <Compile Include="Pages\MarketingPage.cs" />
     <Compile Include="Pages\NotVerifiedEmailPage.cs" />
     <Compile Include="Pages\OurTermsPage.cs" />
     <Compile Include="Pages\PrivacyPolicyPage.cs" />
