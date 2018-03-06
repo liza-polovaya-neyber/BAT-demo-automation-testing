@@ -6,14 +6,17 @@ using System.Threading;
 using System;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
+using BATDemoFramework.BrowserStackTest;
 
 namespace BATDemoTests
 {
-    [TestFixture]
-   public class LoginTests : TestBase
+   [TestFixture ("single", "chrome")]
+   public class LoginTests : BrowserStackNUnitTest
     {
         private IWebDriver driver;
         private IWebElement element;
+
+        public LoginTests(string profile, string environment) : base(profile, environment){}
 
         [Test]
         public void CanGoToLoginPage()

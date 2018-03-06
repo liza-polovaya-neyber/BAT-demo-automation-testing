@@ -89,5 +89,14 @@ namespace BATDemoTests.TestCases
             Assert.IsFalse(Pages.AboutMe.SubmitBtnIsEnabled(), "Submit button is enabled despite two of the checkboxes are not checked");
         }
 
+        [Test]
+        public void AboutMeFormCantBeSubmittedWithoutTitle()
+        {
+            Pages.AboutMe.GoTo();
+            Pages.AboutMe.RegisterUserWithBlankTitle("AboutMeFormCantBeSubmittedWithoutTitle");
+
+            Assert.IsFalse(Pages.AboutMe.SubmitBtnIsEnabled(), "Submit button is enabled despite 'Titile' DD hasn't been selected");
+        }
+
     }
 }

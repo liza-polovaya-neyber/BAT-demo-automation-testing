@@ -49,7 +49,7 @@ namespace BATDemoFramework
         [FindsBy(How = How.Id, Using = "opt_out_email")]
         private IWebElement checkboxOptOutEmail;
 
-        [FindsBy(How = How.ClassName, Using = "form-layout__back")]
+        [FindsBy(How = How.LinkText, Using = "Back")]
         private IWebElement backLink;
 
         [FindsBy(How = How.LinkText, Using = "Login")]
@@ -189,6 +189,24 @@ namespace BATDemoFramework
             SelectYearOfBirth();
             emailAddressField.SendKeys(userData.EmailPrimary);
             confirmEmailAddressField.SendKeys(userData.EmailPrimaryVerify);
+            passwordField.SendKeys(userData.Password);
+
+            submitBtn.Click();
+        }
+
+        public void RegisterUserWithBlankTitle(string Key)
+        {
+            //var userGenerator = new UserGenerator();
+            //var user = userGenerator.GetNewUser();
+            var userData = CsvDataAccess.GetTestData(Key);
+
+            firstNameTextField.SendKeys(userData.FirstName);
+            lastNameTextField.SendKeys(userData.LastName);
+            SelectDayOfBirth();
+            SelectMonthOfBirth();
+            SelectYearOfBirth();
+            emailAddressField.SendKeys(userData.EmailPrimary);
+            confirmEmailAddressField.SendKeys(userData.EmailPrimary);
             passwordField.SendKeys(userData.Password);
 
             submitBtn.Click();
