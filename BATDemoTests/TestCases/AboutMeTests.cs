@@ -65,7 +65,7 @@ namespace BATDemoTests.TestCases
         public void AboutMeFormIsReadyToBeSubmitted()
         {
             Pages.AboutMe.GoTo();
-            Pages.AboutMe.RegisterNewUser("AboutMeFormIsReadyToBeSubmitted");
+            Pages.AboutMe.RegisterUserFromCsv("AboutMeFormIsReadyToBeSubmitted");
 
             Assert.IsTrue(Pages.AboutMe.SubmitBtnIsEnabled(), "'Submit' button is not enabled");
         }

@@ -44,13 +44,13 @@ namespace BATDemoFramework.BrowserStackTest
                 capability.SetCapability(key, settings[key]);
             }
 
-            String username = Environment.GetEnvironmentVariable("BROWSERSTACK_USERNAME");
+            String username = Environment.GetEnvironmentVariable("liza62");
             if (username == null)
             {
                 username = ConfigurationManager.AppSettings.Get("user");
             }
 
-            String accesskey = Environment.GetEnvironmentVariable("BROWSERSTACK_ACCESS_KEY");
+            String accesskey = Environment.GetEnvironmentVariable("cJCAUzajaqnsDvN66gNq");
             if (accesskey == null)
             {
                 accesskey = ConfigurationManager.AppSettings.Get("key");

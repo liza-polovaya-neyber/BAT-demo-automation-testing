@@ -10,10 +10,9 @@ using BATDemoFramework.BrowserStackTest;
 
 namespace BATDemoTests
 {
-   [TestFixture ("single", "chrome")]
+   [TestFixture ("single", "ie")]
    public class LoginTests : BrowserStackNUnitTest
     {
-        private IWebDriver driver;
         private IWebElement element;
 
         public LoginTests(string profile, string environment) : base(profile, environment){}
@@ -49,7 +48,7 @@ namespace BATDemoTests
         public void ValidUserLogsinSuccessfully()
         {
             Pages.Login.GoTo();
-            Pages.Login.LogIn("ValidUserLogsinSuccessfully");
+            Pages.Login.LogInFromCsv("ValidUserLogsinSuccessfully");
 
             Assert.IsTrue(Pages.Home.IsAt(Browser.webDriver), "Valid user is not on Home page");
             //Assert.IsTrue(Pages.Home.UserAvatarIsDisplayed(), "User avatar is not found");
@@ -60,7 +59,7 @@ namespace BATDemoTests
         public void LoginWithInvalidEmailShouldNotWork()
         {
             Pages.Login.GoTo();  
-            Pages.Login.LogIn("LoginWithInvalidEmailShouldNotWork");
+            Pages.Login.LogInFromCsv("LoginWithInvalidEmailShouldNotWork");
 
             //Assert.IsTrue(Pages.Login.GetErrorText().Contains("The email address or password you entered is incorrect. Please check and try again."));
             Assert.IsTrue(Pages.Login.ErrorBlockIsShown(Browser.webDriver), "Error block is not shown");
@@ -71,7 +70,7 @@ namespace BATDemoTests
         public void LoginWithInvalidPasswordShouldNotWork()
         {
             Pages.Login.GoTo();
-            Pages.Login.LogIn("LoginWithInvalidPasswordShouldNotWork");
+            Pages.Login.LogInFromCsv("LoginWithInvalidPasswordShouldNotWork");
 
             Assert.IsTrue(Pages.Login.ErrorBlockIsShown(Browser.webDriver), "Error block is not shown");
             Assert.IsTrue(Pages.Login.IsAtUrl(), "User with invalid password is not on Login page");

@@ -1,4 +1,5 @@
 ﻿using BATDemoFramework;
+using BATDemoFramework.Generators;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
@@ -17,7 +18,7 @@ namespace BATDemoTests.TestCases
         public void GoesFromAboutMePageToVerificationEmailPage() //a user for this test has to be generated automatically + check email is sent
         {
             Pages.AboutMe.GoTo();
-            Pages.AboutMe.RegisterNewUser("GoesFromAboutMePageToVerificationEmailPage");
+            Pages.AboutMe.RegisterUserFromCsv("GoesFromAboutMePageToVerificationEmailPage");
             Pages.VerificationEmail.WaitTillContinueBtnIsVisible(Browser.webDriver);
 
             Assert.IsTrue(Pages.VerificationEmail.IsAtUrl(), "User is not on Verification email page");
@@ -27,7 +28,7 @@ namespace BATDemoTests.TestCases
         public void CanLogoutFromVerificationEmailPage() //a user for this test has to be generated automatically
         {
             Pages.AboutMe.GoTo();
-            Pages.AboutMe.RegisterNewUser("CanLogoutFromVerificationEmailPage");
+            Pages.AboutMe.RegisterUserFromCsv("CanLogoutFromVerificationEmailPage");
             Pages.VerificationEmail.WaitTillContinueBtnIsVisible(Browser.webDriver);
             Pages.VerificationEmail.ClickOnLogoutLink();
 
@@ -37,11 +38,13 @@ namespace BATDemoTests.TestCases
         [Test]
         public void CanLogoutAndLogBackInToVerificationEmailPage() //a user for this test has to be generated automatically 
         {
+            var user = new UserGenerator().GetNewUser();
+
             Pages.AboutMe.GoTo();
-            Pages.AboutMe.RegisterNewUser("CanLogoutAndLogBackInToVerificationEmailPage");
+            Pages.AboutMe.RegisterNewUser(user);
             Pages.VerificationEmail.WaitTillContinueBtnIsVisible(Browser.webDriver);
             Pages.VerificationEmail.ClickOnLogoutLink();
-            Pages.Login.LogIn("CanLogoutAndLogBackInToVerificationEmailPage");
+            Pages.Login.LogIn(user);
 
             Assert.IsTrue(Pages.VerificationEmail.IsAtUrl(), "User is not on the verification email page");
         }
@@ -50,7 +53,7 @@ namespace BATDemoTests.TestCases
         public void NotVerifiedUserWantsToContinue() //a user for this test has to be generated automatically + check email is sent
         {
             Pages.AboutMe.GoTo();
-            Pages.AboutMe.RegisterNewUser("NotVerifiedUserWantsToContinue");
+            Pages.AboutMe.RegisterUserFromCsv("NotVerifiedUserWantsToContinue");
             Pages.VerificationEmail.WaitTillContinueBtnIsVisible(Browser.webDriver);
             Pages.VerificationEmail.ClickOnContinueBtn();
             Pages.NotVerifiedEmail.WaitTillStartAgainLinkIsVisible(Browser.webDriver);
@@ -62,7 +65,7 @@ namespace BATDemoTests.TestCases
         public void NotVerifiedUserRequestsNewResetLink() //a user for this test has to be generated automatically + check email is sent
         {
             Pages.AboutMe.GoTo();
-            Pages.AboutMe.RegisterNewUser("NotVerifiedUserRequestsNewResetLink");
+            Pages.AboutMe.RegisterUserFromCsv("NotVerifiedUserRequestsNewResetLink");
             Pages.VerificationEmail.WaitTillContinueBtnIsVisible(Browser.webDriver);
             Thread.Sleep(3000);
             Pages.VerificationEmail.ClickOnResendEmailLink();

@@ -133,7 +133,7 @@ namespace BATDemoFramework
         //    return submitBtn.IsNotEnabled();
         //}
 
-        public void RegisterNewUser(string Key)
+        public void RegisterUserFromCsv(string Key)
         {
             //var userGenerator = new UserGenerator();
             //var user = userGenerator.GetNewUser();
@@ -148,6 +148,46 @@ namespace BATDemoFramework
             emailAddressField.SendKeys(userData.EmailPrimary);
             confirmEmailAddressField.SendKeys(userData.EmailPrimary);
             passwordField.SendKeys(userData.Password);
+            SelectHowYouHeardAboutUs();
+            CheckboxTermsAcceptedChecked();
+            CheckboxOptOutEmailsChecked();
+
+            submitBtn.Click();
+        }
+
+        public void RegisterNewRandomUser()
+        {
+            var userGenerator = new UserGenerator();
+            var user = userGenerator.GetNewUser();
+
+            SelectTitle();
+            firstNameTextField.SendKeys(user.FirstName);
+            lastNameTextField.SendKeys(user.LastName);
+            SelectDayOfBirth();
+            SelectMonthOfBirth();
+            SelectYearOfBirth();
+            emailAddressField.SendKeys(EmailAddressGenerator.GenerateEmailAddress());
+            confirmEmailAddressField.SendKeys(EmailAddressGenerator.LastGeneratedEmail);
+            passwordField.SendKeys(PasswordGenerator.GetNewPassword());
+            SelectHowYouHeardAboutUs();
+            CheckboxTermsAcceptedChecked();
+            CheckboxOptOutEmailsChecked();
+
+            submitBtn.Click();
+        }
+
+        public void RegisterNewUser(User user)
+        {
+
+            SelectTitle();
+            firstNameTextField.SendKeys(user.FirstName);
+            lastNameTextField.SendKeys(user.LastName);
+            SelectDayOfBirth();
+            SelectMonthOfBirth();
+            SelectYearOfBirth();
+            emailAddressField.SendKeys(EmailAddressGenerator.GenerateEmailAddress());
+            confirmEmailAddressField.SendKeys(EmailAddressGenerator.LastGeneratedEmail);
+            passwordField.SendKeys(PasswordGenerator.GetNewPassword());
             SelectHowYouHeardAboutUs();
             CheckboxTermsAcceptedChecked();
             CheckboxOptOutEmailsChecked();

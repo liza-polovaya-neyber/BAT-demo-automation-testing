@@ -35,7 +35,7 @@ namespace BATDemoFramework
 
         public bool WaitTillContinueBtnIsVisible(IWebDriver driver)
         {
-            var continueButton = Browser.WaitUntilElementIsVisible(driver, By.CssSelector("button.button.button_white.mail-message-module__button___NhurA.button-module__button___2VX0t"), 15);
+            var continueButton = Browser.WaitUntilElementIsVisible(driver, By.ClassName("button button_white mail-message-module__button___NhurA button-module__button___2VX0t"), 15);
             return continueButton.Displayed;
         }
 
