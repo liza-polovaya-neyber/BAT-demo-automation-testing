@@ -10,6 +10,8 @@ namespace BATDemoFramework.Generators
     {
         public string EmailAddress { get; set; }
         public string Password { get; set; }
+        public string LastName { get; internal set; }
+        public string FirstName { get; internal set; }
     }
 }
  

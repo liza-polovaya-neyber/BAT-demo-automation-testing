@@ -38,6 +38,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="BrowserStack, Version=2.0.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\BrowserStack.2.0.1\lib\net35\BrowserStack.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
@@ -64,12 +67,13 @@
   </Choose>
   <ItemGroup>
     <Compile Include="TestCases\AboutMeTests.cs" />
+    <Compile Include="TestCases\EmployerSearchTests.cs" />
     <Compile Include="TestCases\HelpLinksTests.cs" />
     <Compile Include="TestCases\LoginTests.cs" />
     <Compile Include="TestCases\ProfileRegistration.cs" />
     <Compile Include="TestCases\ResetPasswordTests.cs" />
     <Compile Include="BaseClass\TestBaseForNewTabWindow.cs" />
-    <Compile Include="WebDriverTests.cs" />
+    <Compile Include="TestCases\VeirifcationEmailTests.cs" />
     <Compile Include="SmokeTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -49,7 +49,7 @@ namespace BATDemoFramework
         [FindsBy(How = How.Id, Using = "opt_out_email")]
         private IWebElement checkboxOptOutEmail;
 
-        [FindsBy(How = How.ClassName, Using = "form-layout__back")]
+        [FindsBy(How = How.LinkText, Using = "Back")]
         private IWebElement backLink;
 
         [FindsBy(How = How.LinkText, Using = "Login")]
@@ -133,7 +133,7 @@ namespace BATDemoFramework
         //    return submitBtn.IsNotEnabled();
         //}
 
-        public void RegisterNewUser(string Key)
+        public void RegisterUserFromCsv(string Key)
         {
             //var userGenerator = new UserGenerator();
             //var user = userGenerator.GetNewUser();
@@ -148,6 +148,46 @@ namespace BATDemoFramework
             emailAddressField.SendKeys(userData.EmailPrimary);
             confirmEmailAddressField.SendKeys(userData.EmailPrimary);
             passwordField.SendKeys(userData.Password);
+            SelectHowYouHeardAboutUs();
+            CheckboxTermsAcceptedChecked();
+            CheckboxOptOutEmailsChecked();
+
+            submitBtn.Click();
+        }
+
+        public void RegisterNewRandomUser()
+        {
+            var userGenerator = new UserGenerator();
+            var user = userGenerator.GetNewUser();
+
+            SelectTitle();
+            firstNameTextField.SendKeys(user.FirstName);
+            lastNameTextField.SendKeys(user.LastName);
+            SelectDayOfBirth();
+            SelectMonthOfBirth();
+            SelectYearOfBirth();
+            emailAddressField.SendKeys(EmailAddressGenerator.GenerateEmailAddress());
+            confirmEmailAddressField.SendKeys(EmailAddressGenerator.LastGeneratedEmail);
+            passwordField.SendKeys(PasswordGenerator.GetNewPassword());
+            SelectHowYouHeardAboutUs();
+            CheckboxTermsAcceptedChecked();
+            CheckboxOptOutEmailsChecked();
+
+            submitBtn.Click();
+        }
+
+        public void RegisterNewUser(User user)
+        {
+
+            SelectTitle();
+            firstNameTextField.SendKeys(user.FirstName);
+            lastNameTextField.SendKeys(user.LastName);
+            SelectDayOfBirth();
+            SelectMonthOfBirth();
+            SelectYearOfBirth();
+            emailAddressField.SendKeys(EmailAddressGenerator.GenerateEmailAddress());
+            confirmEmailAddressField.SendKeys(EmailAddressGenerator.LastGeneratedEmail);
+            passwordField.SendKeys(PasswordGenerator.GetNewPassword());
             SelectHowYouHeardAboutUs();
             CheckboxTermsAcceptedChecked();
             CheckboxOptOutEmailsChecked();
@@ -171,6 +211,8 @@ namespace BATDemoFramework
             confirmEmailAddressField.SendKeys(userData.EmailPrimary);
             passwordField.SendKeys(userData.Password);
 
+            submitBtn.Click();
+
         }
 
         public void RegisterUserWithNotMatchingEmails(string Key)
@@ -187,6 +229,24 @@ namespace BATDemoFramework
             SelectYearOfBirth();
             emailAddressField.SendKeys(userData.EmailPrimary);
             confirmEmailAddressField.SendKeys(userData.EmailPrimaryVerify);
+            passwordField.SendKeys(userData.Password);
+
+            submitBtn.Click();
+        }
+
+        public void RegisterUserWithBlankTitle(string Key)
+        {
+            //var userGenerator = new UserGenerator();
+            //var user = userGenerator.GetNewUser();
+            var userData = CsvDataAccess.GetTestData(Key);
+
+            firstNameTextField.SendKeys(userData.FirstName);
+            lastNameTextField.SendKeys(userData.LastName);
+            SelectDayOfBirth();
+            SelectMonthOfBirth();
+            SelectYearOfBirth();
+            emailAddressField.SendKeys(userData.EmailPrimary);
+            confirmEmailAddressField.SendKeys(userData.EmailPrimary);
             passwordField.SendKeys(userData.Password);
 
             submitBtn.Click();

@@ -65,7 +65,7 @@ namespace BATDemoTests.TestCases
         public void AboutMeFormIsReadyToBeSubmitted()
         {
             Pages.AboutMe.GoTo();
-            Pages.AboutMe.RegisterNewUser("AboutMeFormIsReadyToBeSubmitted");
+            Pages.AboutMe.RegisterUserFromCsv("AboutMeFormIsReadyToBeSubmitted");
 
             Assert.IsTrue(Pages.AboutMe.SubmitBtnIsEnabled(), "'Submit' button is not enabled");
         }
@@ -87,6 +87,15 @@ namespace BATDemoTests.TestCases
             Pages.AboutMe.RegisterUserButDontTickCheckboxes("AboutMeFormCantBeSubmitted");
 
             Assert.IsFalse(Pages.AboutMe.SubmitBtnIsEnabled(), "Submit button is enabled despite two of the checkboxes are not checked");
+        }
+
+        [Test]
+        public void AboutMeFormCantBeSubmittedWithoutTitle()
+        {
+            Pages.AboutMe.GoTo();
+            Pages.AboutMe.RegisterUserWithBlankTitle("AboutMeFormCantBeSubmittedWithoutTitle");
+
+            Assert.IsFalse(Pages.AboutMe.SubmitBtnIsEnabled(), "Submit button is enabled despite 'Titile' DD hasn't been selected");
         }
 
     }

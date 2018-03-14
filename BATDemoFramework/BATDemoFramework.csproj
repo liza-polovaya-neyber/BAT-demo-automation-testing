@@ -33,6 +33,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="BrowserStackLocal, Version=1.3.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\BrowserStackLocal.1.3.0.0\lib\net20\BrowserStackLocal.dll</HintPath>
+    </Reference>
     <Reference Include="CsvHelper, Version=6.0.0.0, Culture=neutral, PublicKeyToken=8c4959082be5c823, processorArchitecture=MSIL">
       <HintPath>..\packages\CsvHelper.6.1.1\lib\net45\CsvHelper.dll</HintPath>
     </Reference>
@@ -66,18 +69,25 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BrowserStackTest\BrowserStackNUnitTest.cs" />
     <Compile Include="Configurations\TestConfigurationManager.cs" />
     <Compile Include="EmailReader\MailboxApi.cs" />
     <Compile Include="Extensions.cs">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
     <Compile Include="Generators\EmailAddressGenerator.cs" />
+    <Compile Include="Pages\AlternativeEmailPage.cs" />
     <Compile Include="Pages\ComplaintsPolicyPage.cs" />
     <Compile Include="Pages\CookiePolicyPage.cs" />
+    <Compile Include="Pages\EmployerSearchPage.cs" />
     <Compile Include="Pages\HomePage.cs" />
     <Compile Include="Models\User.cs" />
+    <Compile Include="Pages\MarketingPage.cs" />
+    <Compile Include="Pages\NotVerifiedEmailPage.cs" />
     <Compile Include="Pages\OurTermsPage.cs" />
     <Compile Include="Pages\PrivacyPolicyPage.cs" />
+    <Compile Include="Pages\ResendEmailPage.cs" />
+    <Compile Include="Pages\VerificationEmailPage.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="TestDataAccess\CsvDataAccess.cs" />
     <Compile Include="TestDataAccess\UserData.cs" />
@@ -104,7 +114,9 @@
     <Compile Include="Base\TestBase.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup />

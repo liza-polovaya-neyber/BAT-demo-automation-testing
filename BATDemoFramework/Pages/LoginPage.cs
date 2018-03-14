@@ -54,7 +54,7 @@ namespace BATDemoFramework
 
 
         //Login by using credentials stored in CSV file
-        public void LogIn(string Key)
+        public void LogInFromCsv(string Key)
         {
             var userData = CsvDataAccess.GetTestData(Key);
 
@@ -62,6 +62,17 @@ namespace BATDemoFramework
             emailAddressField.SendKeys(userData.EmailPrimary);
             passwordField.Click();
             passwordField.SendKeys(userData.Password);
+
+            loginButton.Click();
+        }
+
+        //Login by the new user that was just created
+        public void LogIn(User user)
+        { 
+            emailAddressField.Click();
+            emailAddressField.SendKeys(user.EmailAddress);
+            passwordField.Click();
+            passwordField.SendKeys(user.Password);
 
             loginButton.Click();
         }
