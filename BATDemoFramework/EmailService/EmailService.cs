@@ -13,12 +13,13 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Web;
+using BATDemoFramework.GmailService;
 using BATDemoFramework.Helpers;
 using Google.Apis.Util;
 
 namespace BATDemoFramework.EmailService
 {
-    public class EmailService
+    public class EmailService : IEmailService
     {
         // If modifying these scopes, delete your previously saved credentials
         // at ~/.credentials/gmail-dotnet-quickstart.json
