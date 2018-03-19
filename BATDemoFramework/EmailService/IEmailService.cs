@@ -8,5 +8,6 @@ namespace BATDemoFramework.GmailService
     {
         string GetTokenFromEmail(Message message);
         Task<List<Message>> GetMessagesByQuery(string query);
+        void DeleteMessage(string messageId);
     }
 }

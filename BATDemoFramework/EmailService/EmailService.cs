@@ -89,6 +89,15 @@ namespace BATDemoFramework.EmailService
             return await GetMessagesById(ids);
         }
 
+        /// <summary>
+        /// Delete a Message.
+        /// </summary>
+        /// <param name="messageId">ID of the Message to delete.</param>
+        public void DeleteMessage(string messageId)
+        {
+            service.Users.Messages.Delete("me", messageId).Execute();
+        }
+
 
         private List<string> GetMessageIdsByQuery(string query)
         {
@@ -106,7 +115,7 @@ namespace BATDemoFramework.EmailService
                 }
                 catch (Exception e)
                 {
-                    Debug.WriteLine("An error occurred: " + e.Message);
+                    Console.WriteLine("An error occurred: " + e.Message);
                 }
             } while (!string.IsNullOrEmpty(request.PageToken));
 
@@ -114,12 +123,12 @@ namespace BATDemoFramework.EmailService
         }
 
 
-        private async Task<List<Message>> GetMessagesById(List<string> ids)
+        private async Task<List<Message>> GetMessagesById(List<string> messageIds)
         {
             List<Message> messages = new List<Message>();
             try
             {
-                foreach (var id in ids)
+                foreach (var id in messageIds)
                 {
                     var message = await service.Users.Messages.Get("me", id).ExecuteAsync();
                     messages.Add(message);
@@ -127,7 +136,7 @@ namespace BATDemoFramework.EmailService
             }
             catch (Exception e)
             {
-                Debug.WriteLine("An error occurred: " + e.Message);
+                Console.WriteLine("An error occurred: " + e.Message);
             }
 
             return messages;
