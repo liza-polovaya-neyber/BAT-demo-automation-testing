@@ -91,12 +91,14 @@
     <Compile Include="BrowserStackTest\BrowserStackNUnitTest.cs" />
     <Compile Include="Configurations\TestConfigurationManager.cs" />
     <Compile Include="EmailReader\MailboxApi.cs" />
+    <Compile Include="EmailService\EmailTypes.cs" />
     <Compile Include="Extensions.cs">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
     <Compile Include="Generators\EmailAddressGenerator.cs" />
-    <Compile Include="GmailService\GmailService.cs" />
-    <Compile Include="GmailService\IGmailService.cs" />
+    <Compile Include="EmailService\EmailService.cs" />
+    <Compile Include="EmailService\IEmailService.cs" />
+    <Compile Include="Helpers\StringHelper.cs" />
     <Compile Include="Pages\AlternativeEmailPage.cs" />
     <Compile Include="Pages\ComplaintsPolicyPage.cs" />
     <Compile Include="Pages\CookiePolicyPage.cs" />
@@ -137,6 +139,9 @@
   <ItemGroup>
     <None Include="App.config">
       <SubType>Designer</SubType>
+    </None>
+    <None Include="client_secret.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="packages.config" />
   </ItemGroup>
