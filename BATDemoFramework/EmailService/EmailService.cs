@@ -60,10 +60,7 @@ namespace BATDemoFramework.EmailService
             });
         }
 
-        /// <summary>
-        /// Get token from Email
-        /// </summary>
-        /// <param name="message">Email message used to extract token from</param>
+        
         public string GetTokenFromEmail(Message message)
         {
             if (message.Payload.Headers.FirstOrDefault(x => x.Name == "Subject").Value != EmailTypes.ConfirmYourEmail)
@@ -76,26 +73,33 @@ namespace BATDemoFramework.EmailService
             return GetTokenFromHtml(html);
         }
 
-
-
-        /// <summary>
-        /// List all Messages of the user's mailbox matching the query.
-        /// </summary>
-        /// <param name="query">String used to filter Message ids returned.</param>
-        public async Task<List<Message>> GetMessagesByQuery(string query)
+        
+        public async Task<List<Message>> GetMessagesByQuery(string query, string recipient = null)
         {
             var ids = GetMessageIdsByQuery(query);
 
-            return await GetMessagesById(ids);
+            return await GetMessagesById(ids, recipient);
         }
 
-        /// <summary>
-        /// Delete a Message.
-        /// </summary>
-        /// <param name="messageId">ID of the Message to delete.</param>
+        
         public void DeleteMessage(string messageId)
         {
             service.Users.Messages.Delete("me", messageId).Execute();
+        }
+
+        
+        public List<string> GetUrlsFromMessage(Message messaage)
+        {
+            var html = GetDecodedHtmlFromEmail(messaage);
+
+            var urlMatches = StringHelper.GetURLsWithMatchingPattern(html, string.Empty);
+
+            if (urlMatches == null || !urlMatches.Any())
+            {
+                throw new Exception("No confirm your email url found");
+            }
+
+            return urlMatches.ToList();
         }
 
 
@@ -123,9 +127,9 @@ namespace BATDemoFramework.EmailService
         }
 
 
-        private async Task<List<Message>> GetMessagesById(List<string> messageIds)
+        private async Task<List<Message>> GetMessagesById(IEnumerable<string> messageIds, string recipient = null)
         {
-            List<Message> messages = new List<Message>();
+            var messages = new List<Message>();
             try
             {
                 foreach (var id in messageIds)
@@ -137,6 +141,19 @@ namespace BATDemoFramework.EmailService
             catch (Exception e)
             {
                 Console.WriteLine("An error occurred: " + e.Message);
+            }
+
+            return FilterByRecipient(messages, recipient);
+        }
+
+        private List<Message> FilterByRecipient(List<Message> messages, string recipient)
+        {
+            if (!string.IsNullOrWhiteSpace(recipient))
+            {
+                messages = messages.Where(message =>
+                {
+                    return message.Payload.Headers.FirstOrDefault(x => x.Name == "To").Value == recipient;
+                }).ToList();
             }
 
             return messages;
@@ -178,7 +195,10 @@ namespace BATDemoFramework.EmailService
 
         private string DecodeBase64(string data)
         {
-            var base64 = Convert.FromBase64String(data.Replace("-", "+"));
+            data = data.Replace("-", "+");
+            data = data.Replace("_", "/");
+
+            var base64 = Convert.FromBase64String(data);
 
             var str = Encoding.UTF8.GetString(base64);
 

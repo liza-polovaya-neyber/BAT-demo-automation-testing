@@ -59,7 +59,7 @@ namespace BATDemoTests.TestCases
         }
 
         [Test]
-        public async Task GetToken_InvalidEmail_ThowsException()
+        public async Task GetToken_InvalidEmail_ThrowsException()
         {
             //Arrange
             var messages = await service.GetMessagesByQuery("Stay more organized");
@@ -76,8 +76,9 @@ namespace BATDemoTests.TestCases
         public async Task DeleteMessage_ValidId_NoMessageInTheInbox()
         {
             //Arrange
-            var idToDelete = "1623e30e280d83cb";
             var messages = await service.GetMessagesByQuery("hello");
+            var idToDelete = messages[0].Id;
+
 
             //Act
             service.DeleteMessage(idToDelete);
@@ -99,6 +100,46 @@ namespace BATDemoTests.TestCases
 
             //Assert
             Assert.Throws<GoogleApiException>(() => service.DeleteMessage(idToDelete));
+        }
+
+        [Test]
+        public async Task RetreiveMessages_ByValidSubject_FilterOutByRecipient_NotEmpty()
+        {
+            //Arrange
+            var recipient = "neyber.test+1@gmail.com";
+
+            //Act
+            var messages = await service.GetMessagesByQuery(EmailTypes.ConfirmYourEmail, recipient);
+            
+            //Assert
+            Assert.IsNotEmpty(messages.Where(message => message.Payload.Headers.FirstOrDefault(x => x.Name == "To").Value == recipient));
+        }
+
+        [Test]
+        public async Task RetreiveMessages_ByValidSubject_FilterOutByInvalidRecipient_Empty()
+        {
+            //Arrange
+            var recipient = "unknown recipient";
+
+            //Act
+            var messages = await service.GetMessagesByQuery(EmailTypes.ConfirmYourEmail, recipient);
+
+            //Assert
+            Assert.IsEmpty(messages.Where(message => message.Payload.Headers.FirstOrDefault(x => x.Name == "To").Value == recipient));
+        }
+
+        [Test]
+        public async Task GetUrl_ValidQuery_NotEmpty()
+        {
+            //Arrange
+            var message = await service.GetMessagesByQuery(EmailTypes.ResetPassword);
+
+            //Act
+
+            var urls = service.GetUrlsFromMessage(message[0]);
+
+            //Assert
+            Assert.IsNotEmpty(urls);
         }
     }
 }
