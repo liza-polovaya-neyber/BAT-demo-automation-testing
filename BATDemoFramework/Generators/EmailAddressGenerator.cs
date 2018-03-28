@@ -8,7 +8,7 @@ namespace BATDemoFramework.Generators
 
         public static string GenerateEmailAddress()
         {
-            var email =  $"liza.polovaya.auto{random.Next(10000, 99999)}@yopmail.com";
+            var email =  $"neyber.test+{random.Next(10000, 99999)}@gmail.com";
             LastGeneratedEmail = email;
             return email;
         }

@@ -12,7 +12,7 @@ namespace BATDemoFramework.Generators
             {
                 EmailAddress = EmailAddressGenerator.GenerateEmailAddress(),
                 Password = PasswordGenerator.GetNewPassword(),
-                FirstName = "Randomusername",
+                FirstName = "Randomfirstname",
                 LastName = "Randomlastname"
 
             };

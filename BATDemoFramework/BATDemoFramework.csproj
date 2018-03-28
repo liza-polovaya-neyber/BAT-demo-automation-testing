@@ -90,7 +90,6 @@
   <ItemGroup>
     <Compile Include="BrowserStackTest\BrowserStackNUnitTest.cs" />
     <Compile Include="Configurations\TestConfigurationManager.cs" />
-    <Compile Include="EmailReader\MailboxApi.cs" />
     <Compile Include="EmailService\EmailTypes.cs" />
     <Compile Include="Extensions.cs">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

@@ -88,9 +88,9 @@ namespace BATDemoFramework.EmailService
         }
 
         
-        public List<string> GetUrlsFromMessage(Message messaage)
+        public List<string> GetUrlsFromMessage(Message message)
         {
-            var html = GetDecodedHtmlFromEmail(messaage);
+            var html = GetDecodedHtmlFromEmail(message);
 
             var urlMatches = StringHelper.GetURLsWithMatchingPattern(html, string.Empty);
 
@@ -100,6 +100,25 @@ namespace BATDemoFramework.EmailService
             }
 
             return urlMatches.ToList();
+        }
+
+        public string GetUrlTokenFromMessage(Message message)
+        {
+            var html = GetDecodedHtmlFromEmail(message);
+
+            var urlTokenMatchingPattern = "token=";
+
+            var urlMatches = StringHelper.GetURLsWithMatchingPattern(html, urlTokenMatchingPattern);
+
+            if (urlMatches == null || !urlMatches.Any())
+            {
+                throw new Exception("No confirm your email url found");
+            }
+            else
+            {
+
+                return urlMatches.ToList()[0];
+            }
         }
 
 
@@ -181,6 +200,8 @@ namespace BATDemoFramework.EmailService
             }
         }
 
+      
+         
         private string GetDecodedHtmlFromEmail(Message message)
         {
             var data = message.Payload.Parts[0].Body.Data;
@@ -202,7 +223,7 @@ namespace BATDemoFramework.EmailService
 
             var str = Encoding.UTF8.GetString(base64);
 
-            return str;
+           return str;
         }
     }
 }

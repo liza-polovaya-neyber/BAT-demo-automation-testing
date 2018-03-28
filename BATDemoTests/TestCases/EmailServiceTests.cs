@@ -59,6 +59,16 @@ namespace BATDemoTests.TestCases
         }
 
         [Test]
+        public async Task GetUrlToken_ValidEmail_Success()
+        {
+            var messages = await service.GetMessagesByQuery(EmailTypes.ConfirmYourEmail);
+
+            var urlToken = service.GetUrlTokenFromMessage(messages[0]);
+
+            Assert.IsNotEmpty(urlToken);
+        }
+
+        [Test]
         public async Task GetToken_InvalidEmail_ThrowsException()
         {
             //Arrange
@@ -76,13 +86,14 @@ namespace BATDemoTests.TestCases
         public async Task DeleteMessage_ValidId_NoMessageInTheInbox()
         {
             //Arrange
-            var messages = await service.GetMessagesByQuery("hello");
+            var messages = await service.GetMessagesByQuery("nikita is a fe developer");
             var idToDelete = messages[0].Id;
+
 
 
             //Act
             service.DeleteMessage(idToDelete);
-            messages = await service.GetMessagesByQuery("hello");
+            messages = await service.GetMessagesByQuery("nikita is a fe developer");
 
 
             //Assert

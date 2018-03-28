@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using BATDemoFramework.Generators;
 
 namespace BATDemoTests.TestCases
 {
@@ -56,7 +57,7 @@ namespace BATDemoTests.TestCases
         public void CheckPrimaryEmailsAreCheckedToBeEqual()
         {
             Pages.AboutMe.GoTo();
-            Pages.AboutMe.RegisterUserWithNotMatchingEmails("CheckPrimaryEmailsAreCheckedToBeEqual");
+            Pages.AboutMe.RegisterUserWithNotEqualEmails();
 
             Assert.IsTrue(Pages.AboutMe.EmailsDontMatchErrorIsDisplayed(), "No error shown on different email addresses entered as primary email");
         }
@@ -84,7 +85,7 @@ namespace BATDemoTests.TestCases
         public void AboutMeFormCantBeSubmitted()
         {
             Pages.AboutMe.GoTo();
-            Pages.AboutMe.RegisterUserButDontTickCheckboxes("AboutMeFormCantBeSubmitted");
+            Pages.AboutMe.RegisterUserButDontTickCheckbox();
 
             Assert.IsFalse(Pages.AboutMe.SubmitBtnIsEnabled(), "Submit button is enabled despite two of the checkboxes are not checked");
         }
@@ -93,7 +94,7 @@ namespace BATDemoTests.TestCases
         public void AboutMeFormCantBeSubmittedWithoutTitle()
         {
             Pages.AboutMe.GoTo();
-            Pages.AboutMe.RegisterUserWithBlankTitle("AboutMeFormCantBeSubmittedWithoutTitle");
+            Pages.AboutMe.RegisterUserWithNonSelectedTitle();
 
             Assert.IsFalse(Pages.AboutMe.SubmitBtnIsEnabled(), "Submit button is enabled despite 'Titile' DD hasn't been selected");
         }

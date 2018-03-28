@@ -21,7 +21,7 @@ namespace BATDemoFramework.GmailService
         /// Get all urls found in the email message
         /// </summary>
         /// <param name="message">String used to filter Messages returned.</param>
-        List<string> GetUrlsFromMessage(Message messaage);
+        List<string> GetUrlsFromMessage(Message message);
         /// <summary>
         /// Delete a Message.
         /// </summary>

@@ -86,7 +86,6 @@ namespace BATDemoFramework
         {
             var selectElement = new SelectElement(titleDD);
             selectElement.SelectByValue("Miss");
-
         } 
 
         public void SelectDayOfBirth()
@@ -118,7 +117,7 @@ namespace BATDemoFramework
             checkboxTermsAccepted.Click();
         }
 
-        public void CheckboxOptOutEmailsChecked()
+        public void CheckboxOptOutEmailsChecked() //checkbox has been disabled for non-pmas users
         {
             checkboxOptOutEmail.Click();
         }
@@ -150,7 +149,6 @@ namespace BATDemoFramework
             passwordField.SendKeys(userData.Password);
             SelectHowYouHeardAboutUs();
             CheckboxTermsAcceptedChecked();
-            CheckboxOptOutEmailsChecked();
 
             submitBtn.Click();
         }
@@ -168,10 +166,9 @@ namespace BATDemoFramework
             SelectYearOfBirth();
             emailAddressField.SendKeys(EmailAddressGenerator.GenerateEmailAddress());
             confirmEmailAddressField.SendKeys(EmailAddressGenerator.LastGeneratedEmail);
-            passwordField.SendKeys(PasswordGenerator.GetNewPassword());
+            passwordField.SendKeys(PasswordGenerator.GeneratePassword());
             SelectHowYouHeardAboutUs();
             CheckboxTermsAcceptedChecked();
-            CheckboxOptOutEmailsChecked();
 
             submitBtn.Click();
         }
@@ -187,70 +184,73 @@ namespace BATDemoFramework
             SelectYearOfBirth();
             emailAddressField.SendKeys(EmailAddressGenerator.GenerateEmailAddress());
             confirmEmailAddressField.SendKeys(EmailAddressGenerator.LastGeneratedEmail);
-            passwordField.SendKeys(PasswordGenerator.GetNewPassword());
+            passwordField.SendKeys(PasswordGenerator.GeneratePassword());
             SelectHowYouHeardAboutUs();
             CheckboxTermsAcceptedChecked();
-            CheckboxOptOutEmailsChecked();
 
             submitBtn.Click();
         }
 
-        public void RegisterUserButDontTickCheckboxes(string Key)
+        public void RegisterUserButDontTickCheckbox()
         {
-            //var userGenerator = new UserGenerator();
-            //var user = userGenerator.GetNewUser();
-            var userData = CsvDataAccess.GetTestData(Key);
+            var userGenerator = new UserGenerator();
+            var user = userGenerator.GetNewUser();
 
             SelectTitle();
-            firstNameTextField.SendKeys(userData.FirstName);
-            lastNameTextField.SendKeys(userData.LastName);
+            firstNameTextField.SendKeys(user.FirstName);
+            lastNameTextField.SendKeys(user.LastName);
             SelectDayOfBirth();
             SelectMonthOfBirth();
             SelectYearOfBirth();
-            emailAddressField.SendKeys(userData.EmailPrimary);
-            confirmEmailAddressField.SendKeys(userData.EmailPrimary);
-            passwordField.SendKeys(userData.Password);
+            emailAddressField.SendKeys(EmailAddressGenerator.GenerateEmailAddress());
+            confirmEmailAddressField.SendKeys(EmailAddressGenerator.LastGeneratedEmail);
+            passwordField.SendKeys(PasswordGenerator.GeneratePassword());
+            SelectHowYouHeardAboutUs();
 
             submitBtn.Click();
-
         }
 
-        public void RegisterUserWithNotMatchingEmails(string Key)
+
+        public void RegisterUserWithNotEqualEmails()
         {
-            //var userGenerator = new UserGenerator();
-            //var user = userGenerator.GetNewUser();
-            var userData = CsvDataAccess.GetTestData(Key);
+            var userGenerator = new UserGenerator();
+            var user = userGenerator.GetNewUser();
 
             SelectTitle();
-            firstNameTextField.SendKeys(userData.FirstName);
-            lastNameTextField.SendKeys(userData.LastName);
+            firstNameTextField.SendKeys(user.FirstName);
+            lastNameTextField.SendKeys(user.LastName);
             SelectDayOfBirth();
             SelectMonthOfBirth();
             SelectYearOfBirth();
-            emailAddressField.SendKeys(userData.EmailPrimary);
-            confirmEmailAddressField.SendKeys(userData.EmailPrimaryVerify);
-            passwordField.SendKeys(userData.Password);
+            emailAddressField.SendKeys(user.EmailAddress);
+            confirmEmailAddressField.SendKeys(user.EmailAddress);
+            passwordField.SendKeys(user.Password);
+            SelectHowYouHeardAboutUs();
+            CheckboxTermsAcceptedChecked();
 
             submitBtn.Click();
         }
 
-        public void RegisterUserWithBlankTitle(string Key)
+        public void RegisterUserWithNonSelectedTitle()
         {
-            //var userGenerator = new UserGenerator();
-            //var user = userGenerator.GetNewUser();
-            var userData = CsvDataAccess.GetTestData(Key);
+            var userGenerator = new UserGenerator();
+            var user = userGenerator.GetNewUser();
+            
 
-            firstNameTextField.SendKeys(userData.FirstName);
-            lastNameTextField.SendKeys(userData.LastName);
+            firstNameTextField.SendKeys(user.FirstName);
+            lastNameTextField.SendKeys(user.LastName);
             SelectDayOfBirth();
             SelectMonthOfBirth();
             SelectYearOfBirth();
-            emailAddressField.SendKeys(userData.EmailPrimary);
-            confirmEmailAddressField.SendKeys(userData.EmailPrimary);
-            passwordField.SendKeys(userData.Password);
+            emailAddressField.SendKeys(EmailAddressGenerator.GenerateEmailAddress());
+            confirmEmailAddressField.SendKeys(EmailAddressGenerator.LastGeneratedEmail);
+            passwordField.SendKeys(PasswordGenerator.GeneratePassword());
+            SelectHowYouHeardAboutUs();
+            CheckboxTermsAcceptedChecked();
 
             submitBtn.Click();
         }
+
 
         public bool EmailsDontMatchErrorIsDisplayed()
         {

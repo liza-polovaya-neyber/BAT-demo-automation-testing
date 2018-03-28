@@ -52,8 +52,9 @@ namespace BATDemoTests.TestCases
         [Test]
         public void NotVerifiedUserWantsToContinue() //a user for this test has to be generated automatically + check email is sent
         {
+
             Pages.AboutMe.GoTo();
-            Pages.AboutMe.RegisterUserFromCsv("NotVerifiedUserWantsToContinue");
+            Pages.AboutMe.RegisterNewRandomUser();
             Pages.VerificationEmail.WaitTillContinueBtnIsVisible(Browser.webDriver);
             Pages.VerificationEmail.ClickOnContinueBtn();
             Pages.NotVerifiedEmail.WaitTillStartAgainLinkIsVisible(Browser.webDriver);
@@ -65,13 +66,13 @@ namespace BATDemoTests.TestCases
         public void NotVerifiedUserRequestsNewResetLink() //a user for this test has to be generated automatically + check email is sent
         {
             Pages.AboutMe.GoTo();
-            Pages.AboutMe.RegisterUserFromCsv("NotVerifiedUserRequestsNewResetLink");
+            Pages.AboutMe.RegisterNewRandomUser();
             Pages.VerificationEmail.WaitTillContinueBtnIsVisible(Browser.webDriver);
             Thread.Sleep(3000);
             Pages.VerificationEmail.ClickOnResendEmailLink();
             Thread.Sleep(3000);
 
-            
+            //check that 2 verification emails are received
             Assert.IsTrue(Pages.ResendEmail.IsAtUrl(), "User is not a /mail/resend page");
         }
     }
