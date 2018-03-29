@@ -1,4 +1,5 @@
 ﻿using BATDemoFramework;
+using BATDemoFramework.EmailService;
 using BATDemoFramework.Generators;
 using NUnit.Framework;
 using System;
@@ -18,22 +19,24 @@ namespace BATDemoTests.TestCases
         public void GoesFromAboutMePageToVerificationEmailPage() //a user for this test has to be generated automatically + check email is sent
         {
             Pages.AboutMe.GoTo();
-            Pages.AboutMe.RegisterUserFromCsv("GoesFromAboutMePageToVerificationEmailPage");
+            Pages.AboutMe.RegisterNewRandomUser();
             Pages.VerificationEmail.WaitTillContinueBtnIsVisible(Browser.webDriver);
 
             Assert.IsTrue(Pages.VerificationEmail.IsAtUrl(), "User is not on Verification email page");
         }
 
+
         [Test]
         public void CanLogoutFromVerificationEmailPage() //a user for this test has to be generated automatically
         {
             Pages.AboutMe.GoTo();
-            Pages.AboutMe.RegisterUserFromCsv("CanLogoutFromVerificationEmailPage");
+            Pages.AboutMe.RegisterNewRandomUser();
             Pages.VerificationEmail.WaitTillContinueBtnIsVisible(Browser.webDriver);
             Pages.VerificationEmail.ClickOnLogoutLink();
 
             Assert.IsTrue(Pages.Login.IsAtUrl(), "User has not redirected to page");
         }
+
 
         [Test]
         public void CanLogoutAndLogBackInToVerificationEmailPage() //a user for this test has to be generated automatically 
@@ -50,6 +53,23 @@ namespace BATDemoTests.TestCases
         }
 
         [Test]
+        public async Task VerificationEmailIsReceived()
+        {
+            var user = new UserGenerator().GetNewUser();
+
+            Pages.AboutMe.GoTo();
+            Pages.AboutMe.RegisterNewUser(user);
+            Pages.VerificationEmail.WaitTillContinueBtnIsVisible(Browser.webDriver);
+
+            Thread.Sleep(TimeSpan.FromSeconds(10)); 
+            var emailService = new EmailService();
+            var messages = await emailService.GetMessagesByQuery(EmailTypes.ConfirmYourEmail, user.EmailAddress);
+
+            Assert.IsNotEmpty(messages, "No verification email is found");
+        }
+
+
+        [Test]
         public void NotVerifiedUserWantsToContinue() //a user for this test has to be generated automatically + check email is sent
         {
 
@@ -63,17 +83,22 @@ namespace BATDemoTests.TestCases
         }
 
         [Test]
-        public void NotVerifiedUserRequestsNewResetLink() //a user for this test has to be generated automatically + check email is sent
+        public async Task NotVerifiedUserRequestsNewResetLink() //a user for this test has to be generated automatically + check email is sent
         {
+            var user = new UserGenerator().GetNewUser();
+
             Pages.AboutMe.GoTo();
-            Pages.AboutMe.RegisterNewRandomUser();
+            Pages.AboutMe.RegisterNewUser(user);
             Pages.VerificationEmail.WaitTillContinueBtnIsVisible(Browser.webDriver);
             Thread.Sleep(3000);
             Pages.VerificationEmail.ClickOnResendEmailLink();
-            Thread.Sleep(3000);
+            Thread.Sleep(5000);
+
+            var emailService = new EmailService();
+            var messages = await emailService.GetMessagesByQuery(EmailTypes.ConfirmYourEmail, user.EmailAddress);
 
             //check that 2 verification emails are received
-            Assert.IsTrue(Pages.ResendEmail.IsAtUrl(), "User is not a /mail/resend page");
+            Assert.AreEqual(2, messages.Count, "Can't find 2 verification emails");
         }
     }
 }

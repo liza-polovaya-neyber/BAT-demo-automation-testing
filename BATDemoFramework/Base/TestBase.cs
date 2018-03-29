@@ -8,6 +8,15 @@ namespace BATDemoFramework
 
     public class TestBase
     {
+        //private string profile;
+        //private string environment;
+
+        //public TestBase(string profile, string environment)
+        //{
+        //    this.profile = profile;
+        //    this.environment = environment;
+        //}
+
         //Core test base class
 
         [OneTimeSetUp]

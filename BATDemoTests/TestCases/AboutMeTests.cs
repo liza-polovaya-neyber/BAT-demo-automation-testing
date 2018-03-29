@@ -1,7 +1,7 @@
 ﻿using BATDemoFramework;
 using NUnit.Framework;
 using OpenQA.Selenium;
-using BATDemoFramework.EmailReader;
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -31,7 +31,7 @@ namespace BATDemoTests.TestCases
         public void CanGoFromAboutMePageToLogin()
         {
             Pages.AboutMe.GoTo();
-            Pages.AboutMe.GoToLoginPage();
+            Pages.AboutMe.ClickOnLoginLink();
 
             Assert.IsTrue(Pages.Login.IsAtUrl(), "User is not on Login page");
         }
@@ -66,7 +66,7 @@ namespace BATDemoTests.TestCases
         public void AboutMeFormIsReadyToBeSubmitted()
         {
             Pages.AboutMe.GoTo();
-            Pages.AboutMe.RegisterUserFromCsv("AboutMeFormIsReadyToBeSubmitted");
+            Pages.AboutMe.FillInAboutMeForm();
 
             Assert.IsTrue(Pages.AboutMe.SubmitBtnIsEnabled(), "'Submit' button is not enabled");
         }

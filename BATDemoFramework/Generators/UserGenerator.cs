@@ -11,7 +11,7 @@ namespace BATDemoFramework.Generators
             var user = new User
             {
                 EmailAddress = EmailAddressGenerator.GenerateEmailAddress(),
-                Password = PasswordGenerator.GetNewPassword(),
+                Password = PasswordGenerator.GeneratePassword(),
                 FirstName = "Randomfirstname",
                 LastName = "Randomlastname"
 
