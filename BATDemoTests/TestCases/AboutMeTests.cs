@@ -21,7 +21,8 @@ namespace BATDemoTests.TestCases
         [Test]
         public void CanGoBackFromAboutMePagetoJoin()
         {
-            Pages.AboutMe.GoTo();
+            Pages.Join.GoTo();
+            Pages.Join.GotoAboutMePage();
             Pages.AboutMe.ClickOnBackLink();
 
             Assert.IsTrue(Pages.Join.IsAtUrl(), "User is not on Join page");
@@ -70,7 +71,6 @@ namespace BATDemoTests.TestCases
 
             Assert.IsTrue(Pages.AboutMe.SubmitBtnIsEnabled(), "'Submit' button is not enabled");
         }
-
         //[Test]
         //public void AboutMeFormIsSubmitted()
         //{
@@ -97,6 +97,50 @@ namespace BATDemoTests.TestCases
             Pages.AboutMe.RegisterUserWithNonSelectedTitle();
 
             Assert.IsFalse(Pages.AboutMe.SubmitBtnIsEnabled(), "Submit button is enabled despite 'Titile' DD hasn't been selected");
+        }
+
+        [Test]
+        public void RightTitleIsSelected()
+        {
+            Pages.AboutMe.GoTo();
+            Pages.AboutMe.SelectTitle(TitleType.Ms);
+
+            Assert.AreEqual(TitleType.Ms, Pages.AboutMe.GetTitleText());
+        }
+
+        [Test]
+        public void RightDayIsSelected()
+        {
+            Pages.AboutMe.GoTo();
+            Pages.AboutMe.SelectDayOfBirth(13);
+
+            Assert.AreEqual(12, Pages.AboutMe.GetDayOfBirth());
+        }
+
+        [Test]
+        public void RightMonthIsSelected()
+        {
+            Pages.AboutMe.GoTo();
+            Pages.AboutMe.SelectMonthOfBirth(MonthType.February);
+
+            Assert.AreEqual(MonthType.February, Pages.AboutMe.GetMonthText());
+        }
+
+        [Test]
+        public void RightYearIsSelected()
+        {
+            Pages.AboutMe.GoTo();
+            Pages.AboutMe.SelectYearOfBirth(5);
+
+            Assert.AreEqual(1997, Pages.AboutMe.GetYearOfBirth());
+        }
+
+        [Test]
+        public void RightAmountOfFeedbackOptions()
+        {
+            Pages.AboutMe.GoTo();
+
+            Assert.AreEqual(17, Pages.AboutMe.GetFeedbackOptionsNumber());
         }
 
     }

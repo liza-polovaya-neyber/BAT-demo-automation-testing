@@ -70,7 +70,7 @@ namespace BATDemoTests.TestCases
 
 
         [Test]
-        public void NotVerifiedUserWantsToContinue() //a user for this test has to be generated automatically + check email is sent
+        public void NotVerifiedUserWantsToContinue() 
         {
 
             Pages.AboutMe.GoTo();
@@ -83,7 +83,7 @@ namespace BATDemoTests.TestCases
         }
 
         [Test]
-        public async Task NotVerifiedUserRequestsNewResetLink() //a user for this test has to be generated automatically + check email is sent
+        public async Task NotVerifiedUserRequestsNewResetLink() 
         {
             var user = new UserGenerator().GetNewUser();
 

@@ -5,6 +5,8 @@ using OpenQA.Selenium.Support.UI;
 using BATDemoFramework;
 using BATDemoFramework.TestDataAccess;
 using System;
+using BATDemoFramework.WebDriverManager.enums;
+using System.Collections.Generic;
 
 namespace BATDemoFramework
 {
@@ -27,6 +29,9 @@ namespace BATDemoFramework
 
         [FindsBy(How = How.Name, Using = "year")]
         private IWebElement yearOfBirthDD;
+
+        [FindsBy(How = How.Name, Using = "mobile_number")]
+        private IWebElement mobileNumberField;
 
         [FindsBy(How = How.Name, Using = "email")]
         private IWebElement emailAddressField;
@@ -82,34 +87,51 @@ namespace BATDemoFramework
             loginLink.Click();
         }
 
-        public void SelectTitle()
+        public void SelectTitle(TitleType type)
         {
             var selectElement = new SelectElement(titleDD);
-            selectElement.SelectByValue("Miss");
+            try
+            {
+                selectElement.SelectByText(type.ToString());
+                selectElement.SelectByValue(type.ToString());
+            }
+            catch (Exception ex)
+            {
+                var ee = 55;
+            }
+            
+            //selectElement.SelectByIndex(type.GetTypeCode());
         } 
+        
 
-        public void SelectDayOfBirth()
+        public void SelectDayOfBirth(int index)
         {
             var selectElement = new SelectElement(dayOfBirthDD);
-            selectElement.SelectByValue("12");
+            selectElement.SelectByIndex(index);
         }
 
-        public void SelectMonthOfBirth()
+        public void SelectMonthOfBirth(MonthType type)
         {
             var selectElement = new SelectElement(monthOfBirthDD);
-            selectElement.SelectByValue("7");
+            selectElement.SelectByValue(type.ToString());
         }
 
-        public void SelectYearOfBirth()
+        public void SelectYearOfBirth(int index)
         {
             var selectElement = new SelectElement(yearOfBirthDD);
-            selectElement.SelectByValue("1989");
+            selectElement.SelectByIndex(index);
         }
 
-        public void SelectHowYouHeardAboutUs()
+        public void SelectHowYouHeardAboutUs(string option)
         {
             var selectElement = new SelectElement(howYouHeardAboutUsDD);
-            selectElement.SelectByValue("Email from Neyber");
+            selectElement.SelectByValue(option);
+        }
+
+        public int GetFeedbackOptionsNumber()
+        {
+            var selectElement = new SelectElement(howYouHeardAboutUsDD);
+            return selectElement.Options.Count;
         }
 
         public void CheckboxTermsAcceptedChecked()
@@ -121,6 +143,7 @@ namespace BATDemoFramework
         {
             checkboxOptOutEmail.Click();
         }
+
 
         public bool SubmitBtnIsEnabled()
         {
@@ -205,14 +228,15 @@ namespace BATDemoFramework
 
             if (shouldSelectTitle)
             {
-                SelectTitle();
+                SelectTitle(TitleType.Mr);
             }
 
             firstNameTextField.SendKeys(newUser.FirstName);
             lastNameTextField.SendKeys(newUser.LastName);
-            SelectDayOfBirth();
-            SelectMonthOfBirth();
-            SelectYearOfBirth();
+            SelectDayOfBirth(12);
+            SelectMonthOfBirth(MonthType.July);
+            SelectYearOfBirth(1990);
+            EnterMobileNumber(07523698547);
 
             if (!areEmailsEqual)
             {
@@ -223,7 +247,7 @@ namespace BATDemoFramework
             emailAddressField.SendKeys(newUser.EmailAddress);
             confirmEmailAddressField.SendKeys(newUser.EmailAddress);
             passwordField.SendKeys(newUser.Password);
-            SelectHowYouHeardAboutUs();
+            SelectHowYouHeardAboutUs("Google Search");
 
    
             if (shouldTickCheckbox)
@@ -237,7 +261,30 @@ namespace BATDemoFramework
             }
 
         }
+        public void EnterMobileNumber(long number)
+        {
+            mobileNumberField.SendKeys(number.ToString());
+        }
 
+        public TitleType GetTitleText()
+        {
+            return EnumHelper.GetTitleType(titleDD.Text); 
+        }
+
+        public string GetDayOfBirth()
+        {
+            return dayOfBirthDD.Text;
+        }
+
+        public MonthType GetMonthText()
+        {
+            return EnumHelper.GetMonthType(monthOfBirthDD.Text);
+        }
+
+        public string GetYearOfBirth()
+        {
+            return yearOfBirthDD.Text;
+        }
 
         public bool EmailsDontMatchErrorIsDisplayed()
         {
@@ -263,5 +310,33 @@ namespace BATDemoFramework
         {
             Browser.Url.Contains(Urls.AboutMePage);
         }
+    }
+
+    public enum TitleType
+    {
+        Title,
+        Mr,
+        Ms,
+        Mrs,
+        Miss,
+        Dr,
+        Prof
+    }
+
+    public enum MonthType
+    {
+        Month,
+        January,
+        February,
+        March,
+        April,
+        May,
+        June,
+        July, 
+        August, 
+        September,
+        October,
+        November,
+        December
     }
 }

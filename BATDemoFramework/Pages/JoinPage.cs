@@ -7,7 +7,7 @@ namespace BATDemoFramework
     {
         private IWebDriver driver;
 
-        [FindsBy(How = How.ClassName, Using = "button button button_white welcome-page-module__button___1xdDp button-module__button___p4iTs")]
+        [FindsBy(How = How.CssSelector, Using = "#root > div > div > div > div > div > div > main > div > button")]
         private IWebElement letsRegisterLink;
 
         [FindsBy(How = How.ClassName, Using = "already-customer-login-module__login-link___2DwCr")]
