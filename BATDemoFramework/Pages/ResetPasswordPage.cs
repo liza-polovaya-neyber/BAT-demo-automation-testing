@@ -2,6 +2,7 @@
 using BATDemoFramework.TestDataAccess;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
+using BATDemoFramework.Generators;
 
 namespace BATDemoFramework
 {
@@ -62,14 +63,21 @@ namespace BATDemoFramework
         }
 
         //Fills email box with the email from CSV file and submits sending a link
-        public void EnterEmailAndClickOnResetLinkButton(string testName)
+        public void EnterEmailAndClickOnResetLinkButton()
         {
-            var userData = CsvDataAccess.GetTestData(testName);
+            var user = new UserGenerator().GetNewUser();
+            //var userData = CsvDataAccess.GetTestData(testName);
 
             emailTextField.Click();
-            emailTextField.SendKeys(userData.EmailPrimary);
+            emailTextField.SendKeys(user.EmailAddress);
 
             sendMyResetLinkButton.Click();
+        }
+
+        public void EnterEmailAndClickToResetPassword(User user)
+        {
+            emailTextField.Click();
+            emailTextField.SendKeys(user.EmailAddress);
         }
 
         //Browser navigates to Reset Password page

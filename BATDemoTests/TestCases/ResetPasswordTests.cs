@@ -1,7 +1,10 @@
 ﻿using BATDemoFramework;
+using BATDemoFramework.EmailService;
+using BATDemoFramework.Generators;
 using NUnit.Framework;
 using OpenQA.Selenium;
 using System.Threading;
+using System.Threading.Tasks;
 
 namespace BATDemoTests
 {
@@ -37,37 +40,62 @@ namespace BATDemoTests
         }
 
         [Test]
-        public void ResetPasswordLinkIsSent()
+        public void TryDifferentEmailLinkIsShown()
         {
-            //requires later changes - we have to check whether actual email is sent
             Pages.ResetPassword.GoTo();
-            Pages.ResetPassword.EnterEmailAndClickOnResetLinkButton("ResetPasswordLinkIsSent");
+            Pages.ResetPassword.EnterEmailAndClickOnResetLinkButton();
 
             Assert.IsTrue(Pages.ResetPassword.TryDifferentEmailLinkIsVisible(Browser.webDriver));
         }
 
         [Test]
-        public void ResetPasswordLinkisResent()
-        {   //requires later changes - we have to check whether actual email is sent
+        public async Task ResetPasswordLinkIsSent()
+        {
+            var user = new UserGenerator().GetNewUser();
+
             Pages.ResetPassword.GoTo();
-            Pages.ResetPassword.EnterEmailAndClickOnResetLinkButton("ResetPasswordLinkisResent");
+            Pages.ResetPassword.EnterEmailAndClickToResetPassword(user);
+
+            var emailService = new EmailService();
+            var messages = await emailService.GetMessagesByQuery(EmailTypes.ResetPassword, user.EmailAddress);
+
+            Assert.IsNotEmpty(messages, "No reset password emails found");
+        }
+
+        [Test]
+        public async Task ResetPasswordLinkisResent()
+        {  
+            var user = new UserGenerator().GetNewUser();
+
+            Pages.ResetPassword.GoTo();
+            Pages.ResetPassword.EnterEmailAndClickToResetPassword(user);
             Pages.ResetPassword.TryDifferentEmailLinkIsVisible(Browser.webDriver);
             Pages.ResetPassword.ClickOnResendMyResetLinkButton();
-           
+            Pages.ResetPassword.WaitForResendMyResetLinkButtonIsDisplayed(Browser.webDriver); //can be replaced by Thread sleep
 
-            Assert.IsTrue(Pages.ResetPassword.WaitForResendMyResetLinkButtonIsDisplayed(Browser.webDriver));
+
+            var emailService = new EmailService();
+            var messages = await emailService.GetMessagesByQuery(EmailTypes.ResetPassword, user.EmailAddress);
+
+            Assert.AreEqual(2, messages.Count, "Can't find 2 reset password emails");
         }
 
         [Test]
-        public void ResetPasswordLinkIsSentToDifferentEmail()
+        public async Task ResetPasswordLinkIsSentToDifferentEmail()
         {   //requires later changes - we have to check whether actual email is sent
+            var user = new UserGenerator().GetNewUser();
+
             Pages.ResetPassword.GoTo();
-            Pages.ResetPassword.EnterEmailAndClickOnResetLinkButton("ResetPasswordLinkIsSentToDifferentEmail");
+            Pages.ResetPassword.EnterEmailAndClickToResetPassword(user);
             Pages.ResetPassword.TryDifferentEmailLinkIsVisible(Browser.webDriver);
             Pages.ResetPassword.ClickOnTryDifferentEmailLink();
-            Pages.ResetPassword.EnterEmailAndClickOnResetLinkButton("ResetPasswordLinkIsSentToDifferentEmail");
+            Pages.ResetPassword.EnterEmailAndClickToResetPassword(user);
+            Pages.ResetPassword.TryDifferentEmailLinkIsVisible(Browser.webDriver);  //can be replaced by Thread sleep
 
-            Assert.IsTrue(Pages.ResetPassword.TryDifferentEmailLinkIsVisible(Browser.webDriver));
+            var emailService = new EmailService();
+            var messages = await emailService.GetMessagesByQuery(EmailTypes.ResetPassword, user.EmailAddress);
+
+            Assert.AreEqual(2, messages.Count, "Can't find 2 reset password emails");
         }
 
 

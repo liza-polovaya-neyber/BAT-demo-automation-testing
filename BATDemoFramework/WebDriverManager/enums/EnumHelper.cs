@@ -15,12 +15,12 @@ namespace BATDemoFramework.WebDriverManager.enums
 
         public static TitleType GetTitleType(string value)
         {
-            return (TitleType)Enum.Parse(typeof(TitleType), value.ToUpper(), ignoreCase: true);
+            return (TitleType)Enum.Parse(typeof(TitleType), value, ignoreCase: true);
         }
 
-        public static MonthType GetMonthType(string value)
-        {
-            return (MonthType)Enum.Parse(typeof(MonthType), value.ToUpper(), ignoreCase: true);
-        }
+        //public static MonthType GetMonthType(string value)
+        //{
+        //    return (MonthType)Enum.Parse(typeof(MonthType), value, ignoreCase: true);
+        //}
     }
 }

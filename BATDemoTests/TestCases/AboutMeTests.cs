@@ -69,7 +69,7 @@ namespace BATDemoTests.TestCases
             Pages.AboutMe.GoTo();
             Pages.AboutMe.FillInAboutMeForm();
 
-            Assert.IsTrue(Pages.AboutMe.SubmitBtnIsEnabled(), "'Submit' button is not enabled");
+            Assert.IsFalse(Pages.AboutMe.SubmitBtnIsDisabled(), "'Submit' button is not enabled");
         }
         //[Test]
         //public void AboutMeFormIsSubmitted()
@@ -83,11 +83,11 @@ namespace BATDemoTests.TestCases
 
         [Test]
         public void AboutMeFormCantBeSubmitted()
-        {
+       {
             Pages.AboutMe.GoTo();
             Pages.AboutMe.RegisterUserButDontTickCheckbox();
 
-            Assert.IsFalse(Pages.AboutMe.SubmitBtnIsEnabled(), "Submit button is enabled despite two of the checkboxes are not checked");
+            Assert.IsTrue(Pages.AboutMe.SubmitBtnIsDisabled(), "Submit button is enabled despite two of the checkboxes are not checked");
         }
 
         [Test]
@@ -96,7 +96,7 @@ namespace BATDemoTests.TestCases
             Pages.AboutMe.GoTo();
             Pages.AboutMe.RegisterUserWithNonSelectedTitle();
 
-            Assert.IsFalse(Pages.AboutMe.SubmitBtnIsEnabled(), "Submit button is enabled despite 'Titile' DD hasn't been selected");
+            Assert.IsTrue(Pages.AboutMe.SubmitBtnIsDisabled(), "Submit button is enabled despite 'Titile' DD hasn't been selected");
         }
 
         [Test]
@@ -114,25 +114,25 @@ namespace BATDemoTests.TestCases
             Pages.AboutMe.GoTo();
             Pages.AboutMe.SelectDayOfBirth(13);
 
-            Assert.AreEqual(12, Pages.AboutMe.GetDayOfBirth());
+            Assert.AreEqual(13.ToString(), Pages.AboutMe.GetDayOfBirth());
         }
 
         [Test]
         public void RightMonthIsSelected()
         {
             Pages.AboutMe.GoTo();
-            Pages.AboutMe.SelectMonthOfBirth(MonthType.February);
+            Pages.AboutMe.SelectMonthOfBirth(7);
 
-            Assert.AreEqual(MonthType.February, Pages.AboutMe.GetMonthText());
+            Assert.AreEqual(6.ToString(), Pages.AboutMe.GetMonthOfBirth()); //exp result == 6, because css value of 7th month (July) is 6
         }
 
         [Test]
         public void RightYearIsSelected()
         {
             Pages.AboutMe.GoTo();
-            Pages.AboutMe.SelectYearOfBirth(5);
+            Pages.AboutMe.SelectYearOfBirth(1997);
 
-            Assert.AreEqual(1997, Pages.AboutMe.GetYearOfBirth());
+            Assert.AreEqual(1997.ToString(), Pages.AboutMe.GetYearOfBirth());
         }
 
         [Test]

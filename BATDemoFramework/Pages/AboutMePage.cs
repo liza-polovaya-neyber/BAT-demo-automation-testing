@@ -110,16 +110,16 @@ namespace BATDemoFramework
             selectElement.SelectByIndex(index);
         }
 
-        public void SelectMonthOfBirth(MonthType type)
+        public void SelectMonthOfBirth(int monthCount)
         {
             var selectElement = new SelectElement(monthOfBirthDD);
-            selectElement.SelectByValue(type.ToString());
+            selectElement.SelectByIndex(monthCount);
         }
 
-        public void SelectYearOfBirth(int index)
+        public void SelectYearOfBirth(int year)
         {
             var selectElement = new SelectElement(yearOfBirthDD);
-            selectElement.SelectByIndex(index);
+            selectElement.SelectByValue(year.ToString());
         }
 
         public void SelectHowYouHeardAboutUs(string option)
@@ -145,9 +145,9 @@ namespace BATDemoFramework
         }
 
 
-        public bool SubmitBtnIsEnabled()
+        public bool SubmitBtnIsDisabled()
         {
-            return submitBtn.IsEnabled();          
+            return submitBtn.IsNotEnabled();          
         }
 
         //public bool SubmitBtnIsNotEnabled()
@@ -196,7 +196,7 @@ namespace BATDemoFramework
         private void RegisterBase(User user = null, 
             string csvKey = "", 
             bool shouldClickSubmitButton = true,        
-            bool shouldGenerateNewUser = false, 
+            bool shouldGenerateNewUser = true, 
             bool shouldTickCheckbox = true, 
             bool shouldSelectTitle = true, 
             bool areEmailsEqual = true)
@@ -234,9 +234,9 @@ namespace BATDemoFramework
             firstNameTextField.SendKeys(newUser.FirstName);
             lastNameTextField.SendKeys(newUser.LastName);
             SelectDayOfBirth(12);
-            SelectMonthOfBirth(MonthType.July);
+            SelectMonthOfBirth(7);
             SelectYearOfBirth(1990);
-            EnterMobileNumber(07523698547);
+            EnterMobileNumber("07523698547");
 
             if (!areEmailsEqual)
             {
@@ -247,7 +247,7 @@ namespace BATDemoFramework
             emailAddressField.SendKeys(newUser.EmailAddress);
             confirmEmailAddressField.SendKeys(newUser.EmailAddress);
             passwordField.SendKeys(newUser.Password);
-            SelectHowYouHeardAboutUs("Google Search");
+            SelectHowYouHeardAboutUs("Google search");
 
    
             if (shouldTickCheckbox)
@@ -261,29 +261,34 @@ namespace BATDemoFramework
             }
 
         }
-        public void EnterMobileNumber(long number)
+        public void EnterMobileNumber(string number)
         {
-            mobileNumberField.SendKeys(number.ToString());
+            mobileNumberField.Click();
+            mobileNumberField.SendKeys(number);
         }
 
         public TitleType GetTitleText()
         {
-            return EnumHelper.GetTitleType(titleDD.Text); 
+            return EnumHelper.GetTitleType(titleDD.GetAttribute("value")); 
         }
 
         public string GetDayOfBirth()
         {
-            return dayOfBirthDD.Text;
+            return dayOfBirthDD.GetAttribute("value");
         }
 
-        public MonthType GetMonthText()
+        public string GetMonthOfBirth()
         {
-            return EnumHelper.GetMonthType(monthOfBirthDD.Text);
+            return monthOfBirthDD.GetAttribute("value");
         }
+        //public MonthType GetMonthText()
+        //{
+        //    return EnumHelper.GetMonthType(monthOfBirthDD.GetAttribute("value"));
+        //}
 
         public string GetYearOfBirth()
         {
-            return yearOfBirthDD.Text;
+            return yearOfBirthDD.GetAttribute("value");
         }
 
         public bool EmailsDontMatchErrorIsDisplayed()
