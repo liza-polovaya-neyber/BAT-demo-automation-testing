@@ -49,12 +49,12 @@ namespace BATDemoTests.TestCases
             Pages.VerificationEmail.ClickOnLogoutLink();
             Pages.Login.LogIn(user);
 
-            Assert.IsTrue(Pages.VerificationEmail.IsAtUrl(), "User is not on the verification email page");
+            Assert.IsTrue(Pages.VerificationEmail.WaitTillContinueBtnIsVisible(Browser.webDriver), "User is not on the verification email page");
         }
 
         [Test]
         public async Task VerificationEmailIsReceived()
-        {
+         {
             var user = new UserGenerator().GetNewUser();
 
             Pages.AboutMe.GoTo();

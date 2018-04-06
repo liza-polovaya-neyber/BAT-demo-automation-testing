@@ -77,6 +77,26 @@ namespace BATDemoFramework
             loginButton.Click();
         }
 
+        public void LoginByRandomUser()
+        {
+            var user = new UserGenerator().GetNewUser();
+
+            emailAddressField.SendKeys(user.EmailAddress);
+            passwordField.SendKeys(user.Password);
+
+            loginButton.Click();
+        }
+
+        public void LoginByUserWithInvalidPassword()
+        {
+            var user = new UserGenerator().GetNewUser();
+
+            emailAddressField.SendKeys(user.EmailAddress);
+            passwordField.SendKeys(PasswordGenerator.GetNewPassword());
+
+            loginButton.Click();
+        }
+
         //Get text property from webElement
         public string GetErrorText()
         {

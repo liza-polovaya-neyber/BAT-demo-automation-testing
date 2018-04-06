@@ -45,7 +45,7 @@ namespace BATDemoFramework
         [FindsBy(How = How.Name, Using = "customerFeedback")]
         private IWebElement howYouHeardAboutUsDD;
 
-        [FindsBy(How = How.CssSelector, Using = "button.button.button-module__button___2VX0t > span")]
+        [FindsBy(How = How.XPath, Using = "//button/span")]
         private IWebElement submitBtn;
 
         [FindsBy(How = How.Id, Using = "terms_accepted")]
@@ -93,7 +93,7 @@ namespace BATDemoFramework
             try
             {
                 selectElement.SelectByText(type.ToString());
-                selectElement.SelectByValue(type.ToString());
+                //selectElement.SelectByValue(type.ToString());
             }
             catch (Exception ex)
             {
@@ -147,13 +147,21 @@ namespace BATDemoFramework
 
         public bool SubmitBtnIsDisabled()
         {
-            return submitBtn.IsNotEnabled();          
+            return submitBtn.IsNotEnabled();
+            //bool result;
+            //string A = submitBtn.GetAttribute("disabled");
+            //if (A == "disabled") { 
+            //    result = true;
+            //}
+            //else
+            //    result = false;
+            //return result;       
         }
 
-        //public bool SubmitBtnIsNotEnabled()
-        //{
-        //    return submitBtn.IsNotEnabled();
-        //}
+        public bool SubmitBtnIsEnabled()
+        {
+            return submitBtn.IsEnabled();
+        }
 
         public void RegisterUserFromCsv(string key)
         {
@@ -179,7 +187,7 @@ namespace BATDemoFramework
 
         public void RegisterUserButDontTickCheckbox()
         {
-            RegisterBase(shouldTickCheckbox: false);
+            RegisterBase(null, null, false, true, false,true, true);
         }
 
 
@@ -328,20 +336,20 @@ namespace BATDemoFramework
         Prof
     }
 
-    public enum MonthType
-    {
-        Month,
-        January,
-        February,
-        March,
-        April,
-        May,
-        June,
-        July, 
-        August, 
-        September,
-        October,
-        November,
-        December
-    }
+    //public enum MonthType
+    //{
+    //    Month,
+    //    January,
+    //    February,
+    //    March,
+    //    April,
+    //    May,
+    //    June,
+    //    July, 
+    //    August, 
+    //    September,
+    //    October,
+    //    November,
+    //    December
+    //}
 }

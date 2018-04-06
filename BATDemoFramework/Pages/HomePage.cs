@@ -24,7 +24,7 @@ namespace BATDemoFramework
             return userAvatar.IsDisplayed();
         }
 
-        public bool IsAt(IWebDriver driver)
+        public bool AvatarIsDisplayed(IWebDriver driver)
         {
             bool result;
             var avatarBlock = Browser.WaitUntilElementIsClickable(driver, userAvatar, 11);

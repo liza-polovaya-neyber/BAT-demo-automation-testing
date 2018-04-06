@@ -53,14 +53,15 @@ namespace BATDemoFramework
         public static bool IsEnabled(this IWebElement element)
         {
             bool result;
-            try
+            if (element.Enabled)
             {
-                result = element.Enabled;
+                result = true;
             }
-            catch (Exception ex)
+            else
             {
                 result = false;
             }
+        
             // Log the Action
             return result;
         }

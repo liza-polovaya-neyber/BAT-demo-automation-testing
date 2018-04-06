@@ -48,20 +48,19 @@ namespace BATDemoTests
         public void ValidUserLogsinSuccessfully()
         {
             Pages.Login.GoTo();
-            Pages.Login.LogInFromCsv("ValidUserLogsinSuccessfully");
+            Pages.Login.LogInFromCsv("ValidUserLogsinSuccessfully"); 
 
-            Assert.IsTrue(Pages.Home.IsAt(Browser.webDriver), "Valid user is not on Home page");
+            Assert.IsTrue(Pages.Home.AvatarIsDisplayed(Browser.webDriver), "Valid user is not on Home page");
             //Assert.IsTrue(Pages.Home.UserAvatarIsDisplayed(), "User avatar is not found");
-            //Assert.IsTrue(Pages.Home.IsAtUrl(), "A valid user was not able to successfully login.");
+            
         }
 
         [Test]
         public void LoginWithInvalidEmailShouldNotWork()
         {
             Pages.Login.GoTo();  
-            Pages.Login.LogInFromCsv("LoginWithInvalidEmailShouldNotWork");
-
-            //Assert.IsTrue(Pages.Login.GetErrorText().Contains("The email address or password you entered is incorrect. Please check and try again."));
+            Pages.Login.LoginByRandomUser();
+            
             Assert.IsTrue(Pages.Login.ErrorBlockIsShown(Browser.webDriver), "Error block is not shown");
         }
 
@@ -70,10 +69,10 @@ namespace BATDemoTests
         public void LoginWithInvalidPasswordShouldNotWork()
         {
             Pages.Login.GoTo();
-            Pages.Login.LogInFromCsv("LoginWithInvalidPasswordShouldNotWork");
+            Pages.Login.LoginByUserWithInvalidPassword();
 
             Assert.IsTrue(Pages.Login.ErrorBlockIsShown(Browser.webDriver), "Error block is not shown");
-            Assert.IsTrue(Pages.Login.IsAtUrl(), "User with invalid password is not on Login page");
+            //Assert.IsTrue(Pages.Login.IsAtUrl(), "User with invalid password is not on Login page");
         }
 
         [Test]

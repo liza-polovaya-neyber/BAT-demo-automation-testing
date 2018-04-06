@@ -71,14 +71,6 @@ namespace BATDemoTests.TestCases
 
             Assert.IsFalse(Pages.AboutMe.SubmitBtnIsDisabled(), "'Submit' button is not enabled");
         }
-        //[Test]
-        //public void AboutMeFormIsSubmitted()
-        //{
-        //    Pages.AboutMe.GoTo();
-        //    Pages.AboutMe.RegisterNewUser("AboutMeFormIsSubmitted");
-
-        //    Assert.IsTrue("Confirm your email", email.Subject);
-        //}
 
 
         [Test]
@@ -87,7 +79,7 @@ namespace BATDemoTests.TestCases
             Pages.AboutMe.GoTo();
             Pages.AboutMe.RegisterUserButDontTickCheckbox();
 
-            Assert.IsTrue(Pages.AboutMe.SubmitBtnIsDisabled(), "Submit button is enabled despite two of the checkboxes are not checked");
+            Assert.IsFalse(Pages.AboutMe.SubmitBtnIsEnabled(), "Submit button is enabled despite two of the checkboxes are not checked");
         }
 
         [Test]
