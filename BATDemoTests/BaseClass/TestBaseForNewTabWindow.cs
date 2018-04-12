@@ -9,7 +9,7 @@ namespace BATDemoTests
     public class TestBaseForNewTabWindow
     {
         [OneTimeSetUp]
-        public void StartUpAfterEachTest()// This method fire at the start of the Test
+        public void StartUpAfterEachTest()// This method fire at the start of the Fixture
         {
             Browser.Initialize();
             //UserGenerator.Initialize();
@@ -32,7 +32,7 @@ namespace BATDemoTests
         }
 
         [OneTimeTearDown]
-        public void EndTestAfterEachTest()// This method will fire at the end of the Test
+        public void EndTestAfterEachTest()// This method will fire at the end of the Fixture
         {
             Browser.Close();
             Browser.Quit();

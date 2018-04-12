@@ -114,6 +114,7 @@
     <Compile Include="TestDataAccess\CsvDataAccess.cs" />
     <Compile Include="TestDataAccess\UserData.cs" />
     <Compile Include="TestDataAccess\UserDataMap.cs" />
+    <Compile Include="Utils\PageTitles.cs" />
     <Compile Include="Utils\Urls.cs" />
     <Compile Include="WebDriverManager\api\ITestBrowserManager.cs" />
     <Compile Include="WebDriverManager\api\ITestBrowserFactory.cs" />

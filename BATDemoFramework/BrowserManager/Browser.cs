@@ -87,13 +87,25 @@ namespace BATDemoFramework
             }
             catch (Exception ex)
             {
-                throw;
+                throw ex;
+            }
+        }
+
+        public static bool WaitUntilPageTitleIsShown(IWebDriver driver, string title, int timeoutInSeconds)
+        {
+            try
+            {
+                return new WebDriverWait(driver, TimeSpan.FromSeconds(timeoutInSeconds))
+                .Until(ExpectedConditions.TitleIs(title));
+            }
+            catch (Exception ex)
+            {
+                throw ex;
             }
         }
 
         public static void Close()
         {
-            webDriver.Close();
         }
 
         public static void Quit()

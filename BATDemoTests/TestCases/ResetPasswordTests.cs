@@ -49,13 +49,14 @@ namespace BATDemoTests
         }
 
         [Test]
-        public async Task ResetPasswordLinkIsSent()
+        public async Task ResetPasswordLinkIsSent()  //there should be a user created prior to running this test
         {
             var user = new UserGenerator().GetNewUser();
 
             Pages.ResetPassword.GoTo();
             Pages.ResetPassword.EnterEmailAndClickToResetPassword(user);
 
+            Thread.Sleep(7000);
             var emailService = new EmailService();
             var messages = await emailService.GetMessagesByQuery(EmailTypes.ResetPassword, user.EmailAddress);
 
@@ -63,7 +64,7 @@ namespace BATDemoTests
         }
 
         [Test]
-        public async Task ResetPasswordLinkisResent()
+        public async Task ResetPasswordLinkisResent()   //there should be a user created prior to running this test
         {  
             var user = new UserGenerator().GetNewUser();
 
@@ -81,8 +82,8 @@ namespace BATDemoTests
         }
 
         [Test]
-        public async Task ResetPasswordLinkIsSentToDifferentEmail()
-        {   //requires later changes - we have to check whether actual email is sent
+        public async Task ResetPasswordLinkIsSentToDifferentEmail()   //there should be a user created prior to running this test
+        {   
             var user = new UserGenerator().GetNewUser();
 
             Pages.ResetPassword.GoTo();

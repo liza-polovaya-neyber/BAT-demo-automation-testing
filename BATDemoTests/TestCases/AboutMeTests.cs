@@ -37,6 +37,7 @@ namespace BATDemoTests.TestCases
             Assert.IsTrue(Pages.Login.IsAtUrl(), "User is not on Login page");
         }
 
+        [Test]
         public void SomeLegalBitsIsShown()
         {
             Pages.AboutMe.GoTo();

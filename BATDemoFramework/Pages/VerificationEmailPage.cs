@@ -1,6 +1,7 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
 using BATDemoFramework.EmailService;
+using BATDemoFramework.Utils;
 
 namespace BATDemoFramework
 {
@@ -41,6 +42,13 @@ namespace BATDemoFramework
             var continueButton = Browser.WaitUntilElementIsVisible(driver, By.ClassName("button button_white mail-message-module__button___NhurA button-module__button___2VX0t"), 25);
             return continueButton.Displayed;
         }
+
+        public bool WaitUntilVerificationEmailPageTitleIsShown(IWebDriver driver)
+        {
+            var VerificationEmailPage = Browser.WaitUntilPageTitleIsShown(driver, PageTitles.VerificationEmailSent, 20);
+            return Pages.VerificationEmail.IsAtUrl();
+        }
+
 
         public void ClickOnContinueBtn()
         {

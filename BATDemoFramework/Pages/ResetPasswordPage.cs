@@ -25,7 +25,7 @@ namespace BATDemoFramework
         private IWebElement resendMyResetLinkButton;
 
 
-        [FindsBy(How = How.LinkText, Using = "Try different email")]
+        [FindsBy(How = How.ClassName, Using = "password-reset-sent-module__different-eamil___3smZ4")]
         private IWebElement tryDifferentEmailLink;
 
 
@@ -46,8 +46,8 @@ namespace BATDemoFramework
         public bool TryDifferentEmailLinkIsVisible(IWebDriver driver)
         {
             bool result;
-            var tryDifferentEmailElement = Browser.WaitUntilElementIsVisible(driver, By.LinkText("Try different email"), 16);
-            return tryDifferentEmailLink.IsDisplayed();
+            var tryDifferentEmailElement = Browser.WaitUntilElementIsVisible(driver, By.ClassName("password-reset-sent-module__different-eamil___3smZ4"), 16);
+            return result = tryDifferentEmailLink.IsDisplayed();
         }
 
         //Clicks on "Resend my reset link" button
@@ -62,7 +62,7 @@ namespace BATDemoFramework
             tryDifferentEmailLink.Click();
         }
 
-        //Fills email box with the email from CSV file and submits sending a link
+        //Fills email box with the newly created email and submits sending a link
         public void EnterEmailAndClickOnResetLinkButton()
         {
             var user = new UserGenerator().GetNewUser();
@@ -75,6 +75,14 @@ namespace BATDemoFramework
         }
 
         public void EnterEmailAndClickToResetPassword(User user)
+        {
+            emailTextField.Click();
+            emailTextField.SendKeys(user.EmailAddress);
+
+            sendMyResetLinkButton.Click();
+        }
+
+        public void EnterEmail(User user)
         {
             emailTextField.Click();
             emailTextField.SendKeys(user.EmailAddress);

@@ -63,7 +63,7 @@ namespace BATDemoFramework
         [FindsBy(How = How.LinkText, Using = "Some legal bits we need to tell you")]
         private IWebElement someLegalBitsMenu;
 
-        [FindsBy(How = How.CssSelector, Using = "css=div.bottom-menu-module__bits___3WlQ1")]
+        [FindsBy(How = How.XPath, Using = "//p[2]")]
         private IWebElement someLegalBitsMenuContent;
 
         [FindsBy(How = How.ClassName, Using = "logo")]
@@ -92,8 +92,8 @@ namespace BATDemoFramework
             var selectElement = new SelectElement(titleDD);
             try
             {
-                selectElement.SelectByText(type.ToString());
-                //selectElement.SelectByValue(type.ToString());
+                //selectElement.SelectByText(type.ToString());
+                selectElement.SelectByValue(type.ToString());
             }
             catch (Exception ex)
             {
@@ -319,9 +319,9 @@ namespace BATDemoFramework
             logoNeyber.Click();
         }
 
-        public void IsAtUrl()
+        public bool IsAtUrl()
         {
-            Browser.Url.Contains(Urls.AboutMePage);
+            return Browser.Url.Contains(Urls.AboutMePage);
         }
     }
 

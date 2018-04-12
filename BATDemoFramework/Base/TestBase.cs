@@ -36,16 +36,17 @@ namespace BATDemoFramework
         [TearDown]
         public void TearDownAfterTestMethod()// This method will fire at the end of EACH Test
         {
-            //Browser.Close();s
+            //Browser.Close();
             //Browser.Quit();
         }
 
         [OneTimeTearDown]
-        public void TearDownAfterTestClass ()// This method will fire at the end of the TestFixture
+        public void TearDownAfterTestClass()// This method will fire at the end of the TestFixture
         {
             Browser.Close();
             //Browser.Quit();
         }
+    }
 
 
         //    [TearDown]
@@ -59,4 +60,3 @@ namespace BATDemoFramework
         //    }
         //}
     }
-}

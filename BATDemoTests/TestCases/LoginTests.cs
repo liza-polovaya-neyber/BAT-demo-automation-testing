@@ -10,12 +10,12 @@ using BATDemoFramework.BrowserStackTest;
 
 namespace BATDemoTests
 {
-   [TestFixture ("single", "ie")]
-   public class LoginTests : BrowserStackNUnitTest
+   [TestFixture /*("single", "ie")*/]
+   public class LoginTests : TestBase
     {
         private IWebElement element;
 
-        public LoginTests(string profile, string environment) : base(profile, environment){}
+        //public LoginTests(string profile, string environment) : base(profile, environment){}
 
         [Test]
         public void CanGoToLoginPage()

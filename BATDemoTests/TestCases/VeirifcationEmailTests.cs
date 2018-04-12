@@ -13,43 +13,44 @@ namespace BATDemoTests.TestCases
 {
     [TestFixture]
 
-    class VeirifcationEmailTests : TestBase
+    class VeirificationEmailTests : TestBase
     {
         [Test]
-        public void GoesFromAboutMePageToVerificationEmailPage() //a user for this test has to be generated automatically + check email is sent
+        public void UserSubmitsAnAccountOnAboutMePage() 
         {
             Pages.AboutMe.GoTo();
             Pages.AboutMe.RegisterNewRandomUser();
-            Pages.VerificationEmail.WaitTillContinueBtnIsVisible(Browser.webDriver);
+            Pages.VerificationEmail.WaitUntilVerificationEmailPageTitleIsShown(Browser.webDriver);
 
             Assert.IsTrue(Pages.VerificationEmail.IsAtUrl(), "User is not on Verification email page");
         }
 
 
         [Test]
-        public void CanLogoutFromVerificationEmailPage() //a user for this test has to be generated automatically
+        public void CanLogoutFromVerificationEmailPage() 
         {
             Pages.AboutMe.GoTo();
             Pages.AboutMe.RegisterNewRandomUser();
-            Pages.VerificationEmail.WaitTillContinueBtnIsVisible(Browser.webDriver);
+            Pages.VerificationEmail.WaitUntilVerificationEmailPageTitleIsShown(Browser.webDriver);
             Pages.VerificationEmail.ClickOnLogoutLink();
 
-            Assert.IsTrue(Pages.Login.IsAtUrl(), "User has not redirected to page");
+            Assert.IsTrue(Pages.Login.IsAtUrl(), "User has not been redirected to login page");
         }
 
 
         [Test]
-        public void CanLogoutAndLogBackInToVerificationEmailPage() //a user for this test has to be generated automatically 
+        public void CanLogoutAndLogBackInToVerificationEmailPage()
         {
             var user = new UserGenerator().GetNewUser();
 
             Pages.AboutMe.GoTo();
             Pages.AboutMe.RegisterNewUser(user);
-            Pages.VerificationEmail.WaitTillContinueBtnIsVisible(Browser.webDriver);
+            Pages.VerificationEmail.WaitUntilVerificationEmailPageTitleIsShown(Browser.webDriver);
             Pages.VerificationEmail.ClickOnLogoutLink();
             Pages.Login.LogIn(user);
+            Pages.VerificationEmail.WaitUntilVerificationEmailPageTitleIsShown(Browser.webDriver);
 
-            Assert.IsTrue(Pages.VerificationEmail.WaitTillContinueBtnIsVisible(Browser.webDriver), "User is not on the verification email page");
+            Assert.IsTrue(Pages.VerificationEmail.IsAtUrl(), "User is not on the verification email page");
         }
 
         [Test]
@@ -59,7 +60,7 @@ namespace BATDemoTests.TestCases
 
             Pages.AboutMe.GoTo();
             Pages.AboutMe.RegisterNewUser(user);
-            Pages.VerificationEmail.WaitTillContinueBtnIsVisible(Browser.webDriver);
+            Pages.VerificationEmail.WaitUntilVerificationEmailPageTitleIsShown(Browser.webDriver);
 
             Thread.Sleep(TimeSpan.FromSeconds(10)); 
             var emailService = new EmailService();
@@ -72,14 +73,38 @@ namespace BATDemoTests.TestCases
         [Test]
         public void NotVerifiedUserWantsToContinue() 
         {
-
             Pages.AboutMe.GoTo();
             Pages.AboutMe.RegisterNewRandomUser();
-            Pages.VerificationEmail.WaitTillContinueBtnIsVisible(Browser.webDriver);
+            Pages.VerificationEmail.WaitUntilVerificationEmailPageTitleIsShown(Browser.webDriver);
+            Pages.VerificationEmail.ClickOnContinueBtn();
+            Pages.NotVerifiedEmail.WaitUntilNotVerifiedEmailPageTitleIsShown(Browser.webDriver);
+           
+            Assert.IsTrue(Pages.NotVerifiedEmail.IsAtUrl(), "User is not a /mail/not-verified page");
+        }
+
+        [Test]
+        public void UserRequestsNewVerificationEmail()
+        {
+            Pages.AboutMe.GoTo();
+            Pages.AboutMe.RegisterNewRandomUser();
+            Pages.VerificationEmail.WaitUntilVerificationEmailPageTitleIsShown(Browser.webDriver);
+            Pages.VerificationEmail.ClickOnResendEmailLink();
+            Pages.ResendEmail.WaitUntilResendEmailPageTitleIsShown(Browser.webDriver);
+
+            Assert.IsTrue(Pages.ResendEmail.IsAtUrl(), "User is not on/mail/resend page");
+        }
+
+        [Test]
+        public void NotVerifiedUserStartsAgain()
+        {
+            Pages.AboutMe.GoTo();
+            Pages.AboutMe.RegisterNewRandomUser();
+            Pages.VerificationEmail.WaitUntilVerificationEmailPageTitleIsShown(Browser.webDriver);
             Pages.VerificationEmail.ClickOnContinueBtn();
             Pages.NotVerifiedEmail.WaitTillStartAgainLinkIsVisible(Browser.webDriver);
+            Pages.NotVerifiedEmail.ClickOnStartAgainLink();
 
-            Assert.IsTrue(Pages.NotVerifiedEmail.IsAtUrl(), "User is not a /mail/not-verified page");
+            Assert.IsTrue(Pages.AboutMe.IsAtUrl(), "User hasn't been redirected to About Me page");
         }
 
         [Test]
@@ -89,8 +114,7 @@ namespace BATDemoTests.TestCases
 
             Pages.AboutMe.GoTo();
             Pages.AboutMe.RegisterNewUser(user);
-            Pages.VerificationEmail.WaitTillContinueBtnIsVisible(Browser.webDriver);
-            Thread.Sleep(3000);
+            Pages.VerificationEmail.WaitUntilVerificationEmailPageTitleIsShown(Browser.webDriver);
             Pages.VerificationEmail.ClickOnResendEmailLink();
             Thread.Sleep(5000);
 

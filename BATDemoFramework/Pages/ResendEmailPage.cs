@@ -1,4 +1,5 @@
-﻿using OpenQA.Selenium;
+﻿using BATDemoFramework.Utils;
+using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
 
 namespace BATDemoFramework
@@ -29,6 +30,12 @@ namespace BATDemoFramework
         public bool IsAtUrl()
         {
             return Browser.Url.Contains(Urls.ResendEmail);
+        }
+
+        public bool WaitUntilResendEmailPageTitleIsShown(IWebDriver driver)
+        {
+            var NotVerifiedEmailPage = Browser.WaitUntilPageTitleIsShown(driver, PageTitles.ResendVerificationEmail, 7);
+            return Pages.ResendEmail.IsAtUrl();
         }
     }
 }

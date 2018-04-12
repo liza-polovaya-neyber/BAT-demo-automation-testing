@@ -1,4 +1,5 @@
-﻿using OpenQA.Selenium;
+﻿using BATDemoFramework.Utils;
+using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
 
 namespace BATDemoFramework
@@ -34,10 +35,21 @@ namespace BATDemoFramework
             return Browser.Url.Contains(Urls.NotVerifiedEmail);
         }
 
+        public void ClickOnStartAgainLink()
+        {
+            startAgainLink.Click();
+        }
+
         public bool WaitTillStartAgainLinkIsVisible(IWebDriver driver)
         {
             var startAgainElem = Browser.WaitUntilElementIsVisible(driver, By.LinkText("start again"), 5);
             return startAgainElem.Displayed;
+        }
+
+        public bool WaitUntilNotVerifiedEmailPageTitleIsShown(IWebDriver driver)
+        {
+            var NotVerifiedEmailPage = Browser.WaitUntilPageTitleIsShown(driver, PageTitles.NotVerifiedEmail, 7);
+            return Pages.NotVerifiedEmail.IsAtUrl();
         }
     }
 }
