@@ -36,6 +36,7 @@ namespace BATDemoFramework
         [TearDown]
         public void TearDownAfterTestMethod()// This method will fire at the end of EACH Test
         {
+            Browser.DeleteCookies("NEYBER_authData_test1");
             //Browser.Close();
             //Browser.Quit();
         }

@@ -106,6 +106,9 @@ namespace BATDemoFramework
             return new SelectElement(element).AllSelectedOptions.SingleOrDefault().Text;
         }
 
+       
+
+
 
         //method which allows you to wait for an element in your code
         //public static IWebElement WaitUntilElementIsPresent(this IWebDriver driver, By by, int timeoutInSeconds)

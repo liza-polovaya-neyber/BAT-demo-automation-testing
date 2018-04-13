@@ -136,6 +136,12 @@ namespace BATDemoFramework
             webDriver.Navigate().GoToUrl(string.Format("{0}/{1}", baseUrl, relativeUrl));
         }
 
+        public static void DeleteCookies(string cookieName)
+        {
+            webDriver.Manage().Cookies.DeleteCookieNamed(cookieName);
+
+        }
+
     }
    
 }
