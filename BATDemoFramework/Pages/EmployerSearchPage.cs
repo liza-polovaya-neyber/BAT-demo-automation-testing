@@ -35,6 +35,24 @@ namespace BATDemoFramework
         [FindsBy(How = How.ClassName, Using = "login-logout-module__profilenav___diW9P")]
         private IWebElement logoutModule;
 
+        [FindsBy(How = How.ClassName, Using = "secure-hint-module__root___4OSbU")]
+        private IWebElement securityBlock;
+
+        [FindsBy(How = How.ClassName, Using = "search-results-module__title___qbzsB")]
+        private IWebElement searchResultsTitle;
+
+        [FindsBy(How = How.ClassName, Using = "control__error")]
+        private IWebElement errorMessage;
+
+        [FindsBy(How = How.Name, Using = "phone")]
+        private IWebElement phoneNoField;
+
+        [FindsBy(How = How.XPath, Using = "(//button[@type='submit'])[2]")]
+        private IWebElement submitPhoneNo;
+
+        [FindsBy(How = How.ClassName, Using = "hint__title")]
+        private IWebElement thankYouBlock;
+
 
         public void GoTo()
         {
@@ -51,7 +69,7 @@ namespace BATDemoFramework
             logoNeyber.Click();
         }
 
-        public void ClickOnLogout()
+        public void Logout()
         {
             logoutLink.Click();
         }
@@ -66,13 +84,90 @@ namespace BATDemoFramework
             continueBtn.Click();
         }
 
-        public void SelectAnEmployer()
+        public void EnterTextIntoSearchbox(string text)
         {
-            inputField.SendKeys("Bupa"); //integration with ares needed to be able to pull out the actual tenants names
+            inputField.SendKeys(text);
+        }
+
+        public void EnterPhoneNumber(string phoneNo)
+        {
+            phoneNoField.SendKeys(phoneNo.ToString());
+        }
+
+        public void ClickToSubmitPhoneNo()
+        {
+            submitPhoneNo.Click();
+        }
+
+
+        public void SelectAnEmployer(string employerName)
+        {
+            EnterTextIntoSearchbox(employerName);
+            //inputField.SendKeys(employerName); //integration with ares needed to be able to pull out the actual tenants names
             ClickOnSearchBtn();
-            selectBupa.Click();
-            selectResultBtn.Click();
+            WaitUntilSearchResultsAppear(Browser.webDriver);
+            SelectBupa();
+            ClickOnSelectResultBtn();
             ClickOnContinueBtn();
+        }
+
+        public void ClickOnSelectResultBtn()
+        {
+            selectResultBtn.Click();
+        }
+
+        public void SelectBupa()
+        {
+            selectBupa.Click();
+        }
+
+        public void ClickOnRefineSearchLink()
+        {
+            refineSearchLink.Click();
+        }
+
+        public bool ErrorIsShown()
+        {
+            return errorMessage.Displayed;
+        }
+
+        public bool EmployerNoutFoundBlockIsShown()
+        {
+            return phoneNoField.Displayed;
+        }
+
+        public bool ThankYouBlockIsShown()
+        {
+            return thankYouBlock.Displayed;
+        }
+
+        public bool InputFieldIsShown()
+        {
+            return inputField.Displayed;
+        }
+
+        public bool WaitUntilPageIsLoaded(IWebDriver driver)
+        {
+            var employerSearchPage = Browser.WaitUntilUrlIsLoaded(driver, Urls.EmployerSearch, 15);
+            return Pages.EmployerSearch.IsAtUrl();
+        }
+
+        public bool WaitUntilSecurityBlockIsLoaded(IWebDriver driver)
+        {
+            var employerSearchPage = Browser.WaitUntilElementIsVisible(driver, By.ClassName("secure-hint-module__root___4OSbU"), 15);
+            return securityBlock.Displayed;
+        }
+
+        public bool WaitUntilSearchResultsAppear(IWebDriver driver)
+        {
+            var employerSearchPage = Browser.WaitUntilElementIsVisible(driver, By.ClassName("search-results-module__title___qbzsB"), 5);
+            return searchResultsTitle.Displayed;
+        }
+
+        public bool WaitUntilPhoneNumberFieldAppears(IWebDriver driver)
+        {
+            var employerSearchPage = Browser.WaitUntilElementIsVisible(driver, By.Name("phone"), 5);
+            return phoneNoField.Displayed;
         }
 
     }

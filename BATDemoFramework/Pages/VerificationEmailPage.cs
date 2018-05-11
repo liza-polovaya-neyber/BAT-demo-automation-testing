@@ -45,7 +45,7 @@ namespace BATDemoFramework
 
         public bool WaitUntilVerificationEmailPageTitleIsShown(IWebDriver driver)
         {
-            var VerificationEmailPage = Browser.WaitUntilPageTitleIsShown(driver, PageTitles.VerificationEmailSent, 20);
+            var VerificationEmailPage = Browser.WaitUntilPageTitleIsShown(driver, PageTitles.VerificationEmailSent, 30);
             return Pages.VerificationEmail.IsAtUrl();
         }
 
@@ -65,46 +65,6 @@ namespace BATDemoFramework
             logoutLink.Click();
         }
 
-        //public bool Check_VerificationEmail_IsSent()
-        //{
-        //    bool result;
-        //    var messages = service.GetMessagesByQuery(EmailTypes.ConfirmYourEmail);
-        //    var subject = messages[0].Payload.Headers.FirstOrDefault(x => x.Name == "Subject").Value;
-        //    int [] numberOfEmails = 
-            
-        //    int sizeOfArray = numberOfEmails.Length;
-
-        //    if (sizeOfArray = 1)
-        //    {
-        //        result = true;
-        //    }
-        //    else
-        //    {
-        //        result = false;
-        //    }
-
-        //    return result;
-        //}
-
-        //public bool Check_VerificationEmails_AreSent()
-        //{
-        //    bool result;
-        //    var messages = service.GetMessagesByQuery(EmailTypes.ConfirmYourEmail);
-        //    var subject = messages[0].Payload.Headers.FirstOrDefault(x => x.Name == "Subject").Value;
-        //    int [] numberOfEmails =
-
-        //    int sizeOfArray = numberOfEmails.Length;
-
-        //    if (sizeOfArray = 2)
-        //    {
-        //        result = true;
-        //    }
-        //    else
-        //    {
-        //        result = false;
-        //    }
-
-        //    return result;
-        //}
+        
     }
 }

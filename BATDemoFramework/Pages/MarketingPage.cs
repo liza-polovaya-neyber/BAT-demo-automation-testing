@@ -23,14 +23,27 @@ namespace BATDemoFramework
         [FindsBy(How = How.ClassName, Using = "button button email-form-module__button___3vdUD button-module__button___2VX0t")]
         private IWebElement submitBtn;
 
+        [FindsBy(How = How.ClassName, Using = "secure-hint-module__root___4OSbU")]
+        private IWebElement securityBlock;
+
         public void GoTo()
         {
             Browser.GoTo("join/marketing");
         }
 
-        public void IsAtUrl()
+        public void CanLogout()
         {
-            Browser.Url.Contains(Urls.Marketing);
+            logoutLink.Click();
+        }
+
+        public bool WaitUntilSecurityBlockIsLoaded(IWebDriver driver)
+        {
+            var marketingPage = Browser.WaitUntilElementIsVisible(driver, By.ClassName("secure-hint-module__root___4OSbU"), 13);
+            return securityBlock.Displayed;
+        }
+        public bool IsAtUrl()
+        {
+            return Browser.Url.Contains(Urls.Marketing);
         }
 
 

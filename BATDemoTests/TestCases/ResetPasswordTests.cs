@@ -49,7 +49,22 @@ namespace BATDemoTests
         }
 
         [Test]
-        public async Task ResetPasswordLinkIsSent()  //there should be a user created prior to running this test
+        public async Task NotExistingUserRequestsResetPwdLink()
+        {
+            var user = new UserGenerator().GetNewUser();
+
+            Pages.ResetPassword.GoTo();
+            Pages.ResetPassword.EnterEmailAndClickToResetPassword(user);
+
+            Thread.Sleep(7000);
+            var emailService = new EmailService();
+            var messages = await emailService.GetMessagesByQuery(EmailTypes.ResetPassword, user.EmailAddress);
+
+            Assert.IsEmpty(messages, "Reset password email is received");
+        }
+
+        [Test]
+        public async Task ExistingUserRequestsResetPasswordLink()  //there should be a user created prior to running this test
         {
             var user = new UserGenerator().GetNewUser();
 

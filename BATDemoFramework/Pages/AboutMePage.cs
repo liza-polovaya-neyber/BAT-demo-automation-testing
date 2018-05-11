@@ -7,11 +7,14 @@ using BATDemoFramework.TestDataAccess;
 using System;
 using BATDemoFramework.WebDriverManager.enums;
 using System.Collections.Generic;
+using System.IO;
 
 namespace BATDemoFramework
 {
     public class AboutMePage
     {
+        IWebDriver webDriver;
+
         [FindsBy(How = How.Name, Using = "title")]
         private IWebElement titleDD;
 
@@ -147,15 +150,7 @@ namespace BATDemoFramework
 
         public bool SubmitBtnIsDisabled()
         {
-            return submitBtn.IsNotEnabled();
-            //bool result;
-            //string A = submitBtn.GetAttribute("disabled");
-            //if (A == "disabled") { 
-            //    result = true;
-            //}
-            //else
-            //    result = false;
-            //return result;       
+            return submitBtn.IsNotEnabled();     
         }
 
         public bool SubmitBtnIsEnabled()
@@ -289,10 +284,7 @@ namespace BATDemoFramework
         {
             return monthOfBirthDD.GetAttribute("value");
         }
-        //public MonthType GetMonthText()
-        //{
-        //    return EnumHelper.GetMonthType(monthOfBirthDD.GetAttribute("value"));
-        //}
+        
 
         public string GetYearOfBirth()
         {
@@ -335,21 +327,4 @@ namespace BATDemoFramework
         Dr,
         Prof
     }
-
-    //public enum MonthType
-    //{
-    //    Month,
-    //    January,
-    //    February,
-    //    March,
-    //    April,
-    //    May,
-    //    June,
-    //    July, 
-    //    August, 
-    //    September,
-    //    October,
-    //    November,
-    //    December
-    //}
 }

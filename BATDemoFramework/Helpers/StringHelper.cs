@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using BATDemoFramework.EmailService;
+using System.Collections.Generic;
 using System.Text.RegularExpressions;
 
 namespace BATDemoFramework.Helpers
@@ -12,7 +13,7 @@ namespace BATDemoFramework.Helpers
             MatchCollection matches = urlRx.Matches(rawHtml);
             foreach (Match match in matches)
             {
-                if (match.Value.ToLower().Contains(matchingPattern.ToLower()))
+                if (match.Value.ToLower().Contains(matchingPattern.ToLower())) 
                 {
                     yield return match.Value;
                 }

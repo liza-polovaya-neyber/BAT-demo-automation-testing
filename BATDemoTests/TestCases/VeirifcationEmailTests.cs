@@ -16,7 +16,7 @@ namespace BATDemoTests.TestCases
     class VeirificationEmailTests : TestBase
     {
         [Test]
-        public void UserSubmitsAnAccountOnAboutMePage() 
+        public void UserSubmitsAnAccountOnAboutMePage()
         {
             Pages.AboutMe.GoTo();
             Pages.AboutMe.RegisterNewRandomUser();
@@ -27,7 +27,7 @@ namespace BATDemoTests.TestCases
 
 
         [Test]
-        public void CanLogoutFromVerificationEmailPage() 
+        public void CanLogoutFromVerificationEmailPage()
         {
             Pages.AboutMe.GoTo();
             Pages.AboutMe.RegisterNewRandomUser();
@@ -55,14 +55,14 @@ namespace BATDemoTests.TestCases
 
         [Test]
         public async Task VerificationEmailIsReceived()
-         {
+        {
             var user = new UserGenerator().GetNewUser();
 
             Pages.AboutMe.GoTo();
             Pages.AboutMe.RegisterNewUser(user);
             Pages.VerificationEmail.WaitUntilVerificationEmailPageTitleIsShown(Browser.webDriver);
 
-            Thread.Sleep(TimeSpan.FromSeconds(10)); 
+            Thread.Sleep(TimeSpan.FromSeconds(10));
             var emailService = new EmailService();
             var messages = await emailService.GetMessagesByQuery(EmailTypes.ConfirmYourEmail, user.EmailAddress);
 
@@ -71,14 +71,14 @@ namespace BATDemoTests.TestCases
 
 
         [Test]
-        public void NotVerifiedUserWantsToContinue() 
+        public void NotVerifiedUserWantsToContinue()
         {
             Pages.AboutMe.GoTo();
             Pages.AboutMe.RegisterNewRandomUser();
             Pages.VerificationEmail.WaitUntilVerificationEmailPageTitleIsShown(Browser.webDriver);
             Pages.VerificationEmail.ClickOnContinueBtn();
             Pages.NotVerifiedEmail.WaitUntilNotVerifiedEmailPageTitleIsShown(Browser.webDriver);
-           
+
             Assert.IsTrue(Pages.NotVerifiedEmail.IsAtUrl(), "User is not a /mail/not-verified page");
         }
 
@@ -108,7 +108,7 @@ namespace BATDemoTests.TestCases
         }
 
         [Test]
-        public async Task NotVerifiedUserRequestsNewResetLink() 
+        public async Task NotVerifiedUserRequestsNewResetLink()
         {
             var user = new UserGenerator().GetNewUser();
 
@@ -116,13 +116,35 @@ namespace BATDemoTests.TestCases
             Pages.AboutMe.RegisterNewUser(user);
             Pages.VerificationEmail.WaitUntilVerificationEmailPageTitleIsShown(Browser.webDriver);
             Pages.VerificationEmail.ClickOnResendEmailLink();
-            Thread.Sleep(5000);
+            Thread.Sleep(8000);
 
             var emailService = new EmailService();
             var messages = await emailService.GetMessagesByQuery(EmailTypes.ConfirmYourEmail, user.EmailAddress);
 
             //check that 2 verification emails are received
-            Assert.AreEqual(2, messages.Count, "Can't find 2 verification emails");
+            Assert.AreEqual(2, messages.Count, "Can't find 2 verification emails"); 
+        }
+
+        [Test]
+        public async Task CanVerifyPrimaryEmail()
+        {
+            var user = new UserGenerator().GetNewUser();
+
+            Pages.AboutMe.GoTo();
+            Pages.AboutMe.RegisterNewUser(user);
+            Pages.VerificationEmail.WaitUntilVerificationEmailPageTitleIsShown(Browser.webDriver);
+
+            Thread.Sleep(TimeSpan.FromSeconds(10));
+            var emailService = new EmailService();
+
+            var messages = await emailService.GetMessagesByQuery(EmailTypes.ConfirmYourEmail, user.EmailAddress);
+            var urlToken = emailService.GetUrlTokenFromMessage(messages[0]);
+
+            Browser.GoToUrl(urlToken);
+
+            Assert.IsTrue(Pages.EmployerSearch.WaitUntilPageIsLoaded(Browser.webDriver), "User wasn't able to pass email verification step");
+
+
         }
     }
 }

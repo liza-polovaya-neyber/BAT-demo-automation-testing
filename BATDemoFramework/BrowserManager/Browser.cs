@@ -104,6 +104,19 @@ namespace BATDemoFramework
             }
         }
 
+        public static bool WaitUntilUrlIsLoaded(IWebDriver driver, string url, int timeoutInSeconds)
+        {
+            try
+            {
+                return new WebDriverWait(driver, TimeSpan.FromSeconds(timeoutInSeconds)).Until(ExpectedConditions.UrlMatches(url));
+            }
+
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
         public static void Close()
         {
         }
@@ -134,6 +147,16 @@ namespace BATDemoFramework
         public static void GoTo(string relativeUrl)
         {
             webDriver.Navigate().GoToUrl(string.Format("{0}/{1}", baseUrl, relativeUrl));
+        }
+
+        public static void GoToUrl(string url)
+        {
+            webDriver.Navigate().GoToUrl(url);
+        }
+
+        public static void RefreshThePage()
+        {
+            webDriver.Navigate().Refresh();
         }
 
         public static void DeleteCookies(string cookieName)

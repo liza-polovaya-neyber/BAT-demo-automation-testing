@@ -8,27 +8,26 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace BATDemoTests.TestCases
+namespace BATDemoTests
 {
-    class ProfileRegistration : TestBase
+    static class Preconditions
     {
-        public async Task CanVerifyPrimaryEmail()
+        public static async Task HaveNewUserCreated()
         {
             var user = new UserGenerator().GetNewUser();
-            var emailService = new EmailService();
 
             Pages.AboutMe.GoTo();
             Pages.AboutMe.RegisterNewUser(user);
             Pages.VerificationEmail.WaitUntilVerificationEmailPageTitleIsShown(Browser.webDriver);
-            Thread.Sleep(TimeSpan.FromSeconds(5));
 
+            Thread.Sleep(TimeSpan.FromSeconds(10));
 
+            var emailService = new EmailService();
 
             var messages = await emailService.GetMessagesByQuery(EmailTypes.ConfirmYourEmail, user.EmailAddress);
-            //var url = await emailService.GetLastConfirmationUrlFromMessage(messages);
+            var urlToken = emailService.GetUrlTokenFromMessage(messages[0]);
 
-
+            Browser.GoToUrl(urlToken);
         }
-    
     }
 }

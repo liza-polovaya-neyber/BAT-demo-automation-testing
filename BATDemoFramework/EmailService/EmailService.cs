@@ -87,12 +87,12 @@ namespace BATDemoFramework.EmailService
             service.Users.Messages.Delete("me", messageId).Execute();
         }
 
-        
+
         public List<string> GetUrlsFromMessage(Message message)
         {
             var html = GetDecodedHtmlFromEmail(message);
 
-            var urlMatches = StringHelper.GetURLsWithMatchingPattern(html, string.Empty);
+            var urlMatches = StringHelper.GetURLsWithMatchingPattern(html, NeyberUrls.NeyberUrlMatchingPattern);
 
             if (urlMatches == null || !urlMatches.Any())
             {
