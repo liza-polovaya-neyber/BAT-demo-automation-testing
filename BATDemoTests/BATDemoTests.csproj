@@ -92,7 +92,8 @@
     <Compile Include="TestCases\EmployerSearchTests.cs" />
     <Compile Include="TestCases\HelpLinksTests.cs" />
     <Compile Include="TestCases\LoginTests.cs" />
-    <Compile Include="TestCases\ProfileRegistration.cs" />
+    <Compile Include="TestCases\MarketingPreferencesTests.cs" />
+    <Compile Include="TestCases\ProfileDashboardTests.cs" />
     <Compile Include="TestCases\ResetPasswordTests.cs" />
     <Compile Include="BaseClass\TestBaseForNewTabWindow.cs" />
     <Compile Include="TestCases\VeirifcationEmailTests.cs" />

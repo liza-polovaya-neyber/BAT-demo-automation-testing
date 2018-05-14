@@ -58,5 +58,11 @@ namespace BATDemoFramework
             var alternativeEmailPage = Browser.WaitUntilElementIsVisible(driver, By.ClassName("secure-hint-module__root___4OSbU"), 13);
             return securityBlock.IsDisplayed();
         }
+
+        public bool WaitUntilAlternativeUrlIsLoaded(IWebDriver driver)
+        {
+            var alternativeEmailPage = Browser.WaitUntilUrlIsLoaded(driver, Urls.AlternativeEmail, 10);
+            return Pages.AlternativeEmail.IsAtUrl();
+        }
     }
 }

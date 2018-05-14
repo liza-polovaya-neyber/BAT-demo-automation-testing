@@ -1,5 +1,6 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
+using OpenQA.Selenium.Support.UI;
 
 namespace BATDemoFramework
 {
@@ -8,19 +9,19 @@ namespace BATDemoFramework
         [FindsBy(How = How.ClassName, Using = "login-logout-module__logout___1lxME")]
         private IWebElement logoutLink;
 
-        [FindsBy(How = How.Id, Using = "sms")]
+        [FindsBy(How = How.XPath, Using = "//label/span")]
         private IWebElement smsOption;
 
-        [FindsBy(How = How.Id, Using = "email")]
+        [FindsBy(How = How.XPath, Using = "//div[2]/label")]
         private IWebElement emailOption;
 
-        [FindsBy(How = How.Id, Using = "post")]
+        [FindsBy(How = How.XPath, Using = "//div[3]/label")]
         private IWebElement postOption;
 
-        [FindsBy(How = How.Id, Using = "Telephone")]
+        [FindsBy(How = How.XPath, Using = "//div[4]/label")]
         private IWebElement phoneOption;
 
-        [FindsBy(How = How.ClassName, Using = "button button email-form-module__button___3vdUD button-module__button___2VX0t")]
+        [FindsBy(How = How.XPath, Using = "//form/button/span")]
         private IWebElement submitBtn;
 
         [FindsBy(How = How.ClassName, Using = "secure-hint-module__root___4OSbU")]
@@ -30,16 +31,46 @@ namespace BATDemoFramework
         {
             Browser.GoTo("join/marketing");
         }
+       
+        public void ChooseSMSOption()
+        {
+           smsOption.Click();
+        }
 
-        public void CanLogout()
+        public void ChooseEmailOption()
+        {
+            emailOption.Click();
+        }
+
+        public void ChoosePostOption()
+        {
+            postOption.Click();
+        }
+
+        public void ChoosePhoneOption()
+        {
+            phoneOption.Click();
+        }
+
+        public void Logout()
         {
             logoutLink.Click();
+        }
+        public void ClickOnSubmitBtn()
+        {
+            submitBtn.Click();
         }
 
         public bool WaitUntilSecurityBlockIsLoaded(IWebDriver driver)
         {
             var marketingPage = Browser.WaitUntilElementIsVisible(driver, By.ClassName("secure-hint-module__root___4OSbU"), 13);
             return securityBlock.Displayed;
+        }
+
+        public bool WaitUntilMarketingUrlIsLoaded(IWebDriver driver)
+        {
+            var marketingPage = Browser.WaitUntilUrlIsLoaded(driver, Urls.Marketing, 10);
+            return Pages.Marketing.IsAtUrl();
         }
         public bool IsAtUrl()
         {

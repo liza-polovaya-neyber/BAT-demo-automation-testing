@@ -29,5 +29,34 @@ namespace BATDemoTests
 
             Browser.GoToUrl(urlToken);
         }
+
+
+        public static async Task HaveNewUserPassedProfileJourney()
+        {
+            var user = new UserGenerator().GetNewUser();
+
+            Pages.AboutMe.GoTo();
+            Pages.AboutMe.RegisterNewUser(user);
+            Pages.VerificationEmail.WaitUntilVerificationEmailPageTitleIsShown(Browser.webDriver);
+
+            Thread.Sleep(TimeSpan.FromSeconds(10));
+
+            var emailService = new EmailService();
+            var messages = await emailService.GetMessagesByQuery(EmailTypes.ConfirmYourEmail, user.EmailAddress);
+            var urlToken = emailService.GetUrlTokenFromMessage(messages[0]);
+
+            Browser.GoToUrl(urlToken);
+            Pages.EmployerSearch.WaitUntilSecurityBlockIsLoaded(Browser.webDriver);
+            Pages.EmployerSearch.SelectAnEmployer("Bupa");
+            Pages.AlternativeEmail.WaitUntilAlternativeUrlIsLoaded(Browser.webDriver);
+            Pages.AlternativeEmail.ClickOnSkipLink();
+            Pages.Marketing.WaitUntilMarketingUrlIsLoaded(Browser.webDriver);
+            Pages.Marketing.ChooseEmailOption();
+            Pages.Marketing.ChooseSMSOption();
+            Pages.Marketing.ChoosePostOption();
+            Pages.Marketing.ChoosePhoneOption();
+            Pages.Marketing.ClickOnSubmitBtn();
+            Pages.Home.WaitUntilHomeUrlIsLoaded(Browser.webDriver);
+        }
     }
 }

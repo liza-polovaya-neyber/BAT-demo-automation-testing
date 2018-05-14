@@ -15,7 +15,8 @@ namespace BATDemoFramework
         [FindsBy(How = How.CssSelector, Using = "span.login-logout-module__defaultavatar___3VRWc")]
         private IWebElement loanTile;
 
-
+        [FindsBy(How = How.XPath, Using = "//section[2]/div/button/span")]
+        private IWebElement finWellTile;
 
         private IWebDriver driver;
 
@@ -24,19 +25,27 @@ namespace BATDemoFramework
             return userAvatar.IsDisplayed();
         }
 
-        public bool AvatarIsDisplayed(IWebDriver driver)
+        public void Logout()
         {
-            bool result;
-            var avatarBlock = Browser.WaitUntilElementIsClickable(driver, userAvatar, 11);
-            result = avatarBlock.Displayed;
-
-            return result;
-            //return Browser.Title.Contains("https://hellotest1.neyber.co.uk/home");
+            logoutLink.Click();
         }
 
         public bool IsAtUrl()
-        { 
+        {
             return Browser.Url.Contains(Urls.HomePage);
         }
+
+        public bool WaitUntilHomeUrlIsLoaded(IWebDriver driver)
+        {
+            var homePage = Browser.WaitUntilUrlIsLoaded(driver, Urls.HomePage, 10);
+            return Pages.Home.IsAtUrl();
+        }
+
+        public bool AvatarIsDisplayed(IWebDriver driver)
+        {
+            var avatarBlock = Browser.WaitUntilElementIsClickable(driver, userAvatar, 11);
+            return avatarBlock.Displayed;
+        }
+
     }
 }
