@@ -16,7 +16,7 @@ namespace BATDemoTests.TestCases
     class VeirificationEmailTests : TestBase
     {
         [Test]
-        public void UserSubmitsAnAccountOnAboutMePage()
+        public void CanSubmitAnProfileOnAboutMePage()
         {
             Pages.AboutMe.GoTo();
             Pages.AboutMe.RegisterNewRandomUser();
@@ -71,7 +71,7 @@ namespace BATDemoTests.TestCases
 
 
         [Test]
-        public void NotVerifiedUserWantsToContinue()
+        public void CanNotContinueIfNotVerified()
         {
             Pages.AboutMe.GoTo();
             Pages.AboutMe.RegisterNewRandomUser();
@@ -83,7 +83,7 @@ namespace BATDemoTests.TestCases
         }
 
         [Test]
-        public void UserRequestsNewVerificationEmail()
+        public void CanRequestNewVerificationEmail()
         {
             Pages.AboutMe.GoTo();
             Pages.AboutMe.RegisterNewRandomUser();
@@ -95,7 +95,7 @@ namespace BATDemoTests.TestCases
         }
 
         [Test]
-        public void NotVerifiedUserStartsAgain()
+        public void CanStartAgainWhenNotVerified()
         {
             Pages.AboutMe.GoTo();
             Pages.AboutMe.RegisterNewRandomUser();
@@ -108,7 +108,7 @@ namespace BATDemoTests.TestCases
         }
 
         [Test]
-        public async Task NotVerifiedUserRequestsNewResetLink()
+        public async Task CanRequestNewResetLinkWhenNotVerified()
         {
             var user = new UserGenerator().GetNewUser();
 
@@ -144,7 +144,31 @@ namespace BATDemoTests.TestCases
 
             Assert.IsTrue(Pages.EmployerSearch.WaitUntilPageIsLoaded(Browser.webDriver), "User wasn't able to pass email verification step");
 
-
         }
+
+
+        [Test]
+        public async Task CanCloseGreenVerificationBanner()
+        {
+            var user = new UserGenerator().GetNewUser();
+
+            Pages.AboutMe.GoTo();
+            Pages.AboutMe.RegisterNewUser(user);
+            Pages.VerificationEmail.WaitUntilVerificationEmailPageTitleIsShown(Browser.webDriver);
+
+            Thread.Sleep(TimeSpan.FromSeconds(10));
+            var emailService = new EmailService();
+            var messages = await emailService.GetMessagesByQuery(EmailTypes.ConfirmYourEmail, user.EmailAddress);
+            var urlToken = emailService.GetUrlTokenFromMessage(messages[0]);
+
+            Browser.GoToUrl(urlToken);
+            Pages.VerificationEmail.WaitUntilGreenBannerIsShown(Browser.webDriver);
+            Pages.VerificationEmail.CloseGreenBanner();
+            Pages.EmployerSearch.WaitUntilPageIsLoaded(Browser.webDriver);
+
+            Assert.IsFalse(Pages.VerificationEmail.GreenBannerIsShown(), "Green banner is still shown");
+        }
+
+
     }
 }

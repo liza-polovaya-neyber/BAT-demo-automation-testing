@@ -20,7 +20,6 @@ namespace BATDemoTests
         [Test]
         public void CanGoToLoginPage()
         {
-
             Pages.Login.GoTo();
 
             Assert.IsTrue(Pages.Login.IsAtUrl());

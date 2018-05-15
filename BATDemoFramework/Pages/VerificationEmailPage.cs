@@ -2,6 +2,7 @@
 using OpenQA.Selenium.Support.PageObjects;
 using BATDemoFramework.EmailService;
 using BATDemoFramework.Utils;
+using System;
 
 namespace BATDemoFramework
 {
@@ -27,6 +28,12 @@ namespace BATDemoFramework
         [FindsBy(How = How.ClassName, Using = "logo")]
         private IWebElement logoNeyber;
 
+        [FindsBy(How = How.LinkText, Using = "Close")]
+        private IWebElement closeBtn;
+
+        [FindsBy(How = How.XPath, Using = "//section/div")]
+        private IWebElement greenVerificationBanner;
+
         public void GoTo()
         {
             Browser.GoTo("mail/sent");
@@ -45,10 +52,20 @@ namespace BATDemoFramework
 
         public bool WaitUntilVerificationEmailPageTitleIsShown(IWebDriver driver)
         {
-            var VerificationEmailPage = Browser.WaitUntilPageTitleIsShown(driver, PageTitles.VerificationEmailSent, 30);
+            var verificationEmailPage = Browser.WaitUntilPageTitleIsShown(driver, PageTitles.VerificationEmailSent, 30);
             return Pages.VerificationEmail.IsAtUrl();
         }
 
+        public bool WaitUntilGreenBannerIsShown(IWebDriver driver)
+        {
+            var verificationEmailPage = Browser.WaitUntilElementIsClickable(driver, greenVerificationBanner, 10);
+            return greenVerificationBanner.Displayed;
+        }
+
+        public void CloseGreenBanner()
+        {
+            closeBtn.Click();
+        }
 
         public void ClickOnContinueBtn()
         {
@@ -65,6 +82,9 @@ namespace BATDemoFramework
             logoutLink.Click();
         }
 
-        
+        public bool GreenBannerIsShown()
+        {
+            return greenVerificationBanner.Exists();
+        }
     }
 }

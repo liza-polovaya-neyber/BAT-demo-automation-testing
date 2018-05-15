@@ -90,6 +90,7 @@
     <Compile Include="TestCases\AlternativeEmailTests.cs" />
     <Compile Include="TestCases\EmailServiceTests.cs" />
     <Compile Include="TestCases\EmployerSearchTests.cs" />
+    <Compile Include="TestCases\ExpiredLinkTests.cs" />
     <Compile Include="TestCases\HelpLinksTests.cs" />
     <Compile Include="TestCases\LoginTests.cs" />
     <Compile Include="TestCases\MarketingPreferencesTests.cs" />

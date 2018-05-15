@@ -38,7 +38,7 @@ namespace BATDemoTests.TestCases
         }
 
         [Test]
-        public void SomeLegalBitsIsShown()
+        public void CanSeeSomeLegalBitsMenu()
         {
             Pages.AboutMe.GoTo();
             Pages.AboutMe.OpenSomeLegalBitsMenu();
@@ -47,7 +47,7 @@ namespace BATDemoTests.TestCases
         }
 
         [Test]
-        public void ClickOnLogoRedirectsToLoginPage()
+        public void CanGoToLoginPageOnLogoClick()
         {
             Pages.AboutMe.GoTo();
             Pages.AboutMe.ClickOnNeyberLogo();
@@ -56,16 +56,16 @@ namespace BATDemoTests.TestCases
         }
 
         [Test]
-        public void CheckPrimaryEmailsAreCheckedToBeEqual()
+        public void CanNotEnterDifferentPrimaryEmails()
         {
             Pages.AboutMe.GoTo();
             Pages.AboutMe.RegisterUserWithNotEqualEmails();
 
-            Assert.IsTrue(Pages.AboutMe.EmailsDontMatchErrorIsDisplayed(), "No error shown on different email addresses entered as primary email");
+            Assert.AreEqual(Pages.AboutMe.GetEmailsMismatchError(), "The email addresses do not match");
         }
 
         [Test]
-        public void AboutMeFormIsReadyToBeSubmitted()
+        public void CanNotSubmitAboutMeForm()
         {
             Pages.AboutMe.GoTo();
             Pages.AboutMe.FillInAboutMeForm();
@@ -75,7 +75,7 @@ namespace BATDemoTests.TestCases
 
 
         [Test]
-        public void AboutMeFormCantBeSubmitted()
+        public void CanSubmitAboutMeForm()
        {
             Pages.AboutMe.GoTo();
             Pages.AboutMe.RegisterUserButDontTickCheckbox();
@@ -84,7 +84,7 @@ namespace BATDemoTests.TestCases
         }
 
         [Test]
-        public void AboutMeFormCantBeSubmittedWithoutTitle()
+        public void CanNotSubmitAboutMeFormWithoutTitle()
         {
             Pages.AboutMe.GoTo();
             Pages.AboutMe.RegisterUserWithNonSelectedTitle();
@@ -93,16 +93,28 @@ namespace BATDemoTests.TestCases
         }
 
         [Test]
-        public void RightTitleIsSelected()
+        public void CanSelectRightTitle()
         {
             Pages.AboutMe.GoTo();
             Pages.AboutMe.SelectTitle(TitleType.Ms);
 
             Assert.AreEqual(TitleType.Ms, Pages.AboutMe.GetTitleText());
         }
+        
+        [TestCase("09523697411", "Must start with 07")]
+        [TestCase("0752369741101", "Must be 11 digits")]
+        [TestCase("0752369741", "Must be 11 digits")]
+        public void CanNotEnterWrongPhoneNoFormat(string a, string b)
+        {
+            Pages.AboutMe.GoTo();
+            Pages.AboutMe.EnterMobileNumber(a);
+            Pages.AboutMe.PutCursorOnEmailInput();
+
+            Assert.AreEqual(Pages.AboutMe.GetErrorMessage(), b);
+        }
 
         [Test]
-        public void RightDayIsSelected()
+        public void CanSelectRightDay()
         {
             Pages.AboutMe.GoTo();
             Pages.AboutMe.SelectDayOfBirth(13);
@@ -111,7 +123,7 @@ namespace BATDemoTests.TestCases
         }
 
         [Test]
-        public void RightMonthIsSelected()
+        public void CanSelectRightMonth()
         {
             Pages.AboutMe.GoTo();
             Pages.AboutMe.SelectMonthOfBirth(7);
@@ -120,7 +132,7 @@ namespace BATDemoTests.TestCases
         }
 
         [Test]
-        public void RightYearIsSelected()
+        public void CanSelectRightYear()
         {
             Pages.AboutMe.GoTo();
             Pages.AboutMe.SelectYearOfBirth(1997);
@@ -129,7 +141,7 @@ namespace BATDemoTests.TestCases
         }
 
         [Test]
-        public void RightAmountOfFeedbackOptions()
+        public void CanSeeRightAmountOfFeedbackOptions()
         {
             Pages.AboutMe.GoTo();
 

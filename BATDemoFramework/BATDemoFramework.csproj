@@ -100,6 +100,7 @@
     <Compile Include="Pages\ComplaintsPolicyPage.cs" />
     <Compile Include="Pages\CookiePolicyPage.cs" />
     <Compile Include="Pages\EmployerSearchPage.cs" />
+    <Compile Include="Pages\ExpiredLinkPage.cs" />
     <Compile Include="Pages\HomePage.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Pages\MarketingPage.cs" />

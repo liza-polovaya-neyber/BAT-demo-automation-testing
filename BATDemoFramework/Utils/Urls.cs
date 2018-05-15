@@ -20,6 +20,7 @@ namespace BATDemoFramework
         public const string VerificationEmail = "https://hellotest1.neyber.co.uk/mail/sent";
         public const string NotVerifiedEmail = "https://hellotest1.neyber.co.uk/mail/not-verified";
         public const string ResendEmail = "https://hellotest1.neyber.co.uk/mail/resend";
+        public const string ExpiredLink = "https://hellotest1.neyber.co.uk/verification-expired";
         public const string EmployerSearch = "https://hellotest1.neyber.co.uk/join/search";
         public const string AlternativeEmail = "https://hellotest1.neyber.co.uk/join/alternative-email";
         public const string Marketing = "https://hellotest1.neyber.co.uk/join/marketing";

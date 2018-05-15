@@ -126,9 +126,9 @@ namespace BATDemoFramework
             refineSearchLink.Click();
         }
 
-        public bool ErrorIsShown()
+        public string GetErrorText()
         {
-            return errorMessage.Displayed;
+            return errorMessage.Text;
         }
 
         public bool EmployerNoutFoundBlockIsShown()

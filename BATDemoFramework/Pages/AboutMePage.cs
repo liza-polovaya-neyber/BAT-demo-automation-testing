@@ -75,6 +75,9 @@ namespace BATDemoFramework
         [FindsBy(How = How.CssSelector, Using = "p.control__error")]
         private IWebElement errorEmailsDontMatch;
 
+        [FindsBy(How = How.XPath, Using = "//div[2]/div/p")]
+        private IWebElement errorWrongPhoneNo;
+
         public void GoTo()
         {
             Browser.GoTo("join/about-me");
@@ -291,9 +294,19 @@ namespace BATDemoFramework
             return yearOfBirthDD.GetAttribute("value");
         }
 
-        public bool EmailsDontMatchErrorIsDisplayed()
+        public string GetEmailsMismatchError()
         {
-            return errorEmailsDontMatch.IsDisplayed();
+            return errorEmailsDontMatch.Text;
+        }
+
+        public string GetErrorMessage()
+        {
+            return errorWrongPhoneNo.Text;
+        }
+
+        public void PutCursorOnEmailInput()
+        {
+            emailAddressField.Click();
         }
 
         public void OpenSomeLegalBitsMenu()

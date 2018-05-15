@@ -34,7 +34,7 @@ namespace BATDemoTests.TestCases
             Pages.EmployerSearch.EnterTextIntoSearchbox("r");
             Pages.EmployerSearch.ClickOnSearchBtn();
 
-            Assert.IsTrue(Pages.EmployerSearch.ErrorIsShown(), "There is no validation error message shown");
+            Assert.AreEqual(Pages.EmployerSearch.GetErrorText(), "Field must contain 2 or more characters");
 
         }
 

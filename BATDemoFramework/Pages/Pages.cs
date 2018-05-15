@@ -48,6 +48,10 @@ namespace BATDemoFramework
             get { return GetPage<ResendEmailPage>(); }
         }
 
+        public static ExpiredLinkPage ExpiredLink
+        {
+            get { return GetPage<ExpiredLinkPage>(); }
+        }
         public static EmployerSearchPage EmployerSearch
         {
             get { return GetPage<EmployerSearchPage>(); }
