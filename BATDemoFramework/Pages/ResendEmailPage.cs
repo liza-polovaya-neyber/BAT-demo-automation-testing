@@ -22,11 +22,6 @@ namespace BATDemoFramework
         private IWebElement someLegalBitsMenuContent;
 
 
-        public void GoTo()
-        {
-            Browser.GoTo("mail/resend");
-        }
-
         public bool IsAtUrl()
         {
             return Browser.Url.Contains(Urls.ResendEmail);

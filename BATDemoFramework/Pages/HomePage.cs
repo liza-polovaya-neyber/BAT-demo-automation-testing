@@ -37,7 +37,7 @@ namespace BATDemoFramework
 
         public bool WaitUntilHomeUrlIsLoaded(IWebDriver driver)
         {
-            var homePage = Browser.WaitUntilUrlIsLoaded(driver, Urls.HomePage, 10);
+            var homePage = Browser.WaitUntilUrlIsLoaded(driver, Urls.HomePage, 35);
             return Pages.Home.IsAtUrl();
         }
 

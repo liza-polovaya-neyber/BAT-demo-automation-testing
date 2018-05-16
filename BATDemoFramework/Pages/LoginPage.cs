@@ -28,30 +28,39 @@ namespace BATDemoFramework
         [FindsBy(How = How.ClassName, Using = "auth__title")]
         private IWebElement loginPageHello;
 
-        [FindsBy(How = How.XPath, Using = "//p[2]")]
-        private IWebElement errorInvalidCredentials;
+        [FindsBy(How = How.CssSelector, Using = "p.hint.hint_alert.np-i.login-form-module__error___2lW1y")]
+        private IWebElement errorMessage;
+
+        [FindsBy(How = How.XPath, Using = "//div[2]/div[2]")]
+        private IWebElement showHidePasswordToggle;
 
         private IWebDriver driver;
 
 
-        //Browser is navigated to Login Page
         public void GoTo()
         {
             Browser.GoTo("login");
         }
-
-        //Go from Login page => Join page
+    
         public void GoToJoinPage()
         {
             registerButton.Click();
         }
-
-        //Go from Login page => Reset Password page
+       
         public void GoToResetPasswordPage()
         {
             forgottenYourPasswordLink.Click();
         }
 
+        public void EnterPassword(string text)
+        {
+            passwordField.SendKeys(text);
+        }
+
+        public void ClickToShowHidePassword()
+        {
+            showHidePasswordToggle.Click();
+        }
 
         //Login by using credentials stored in CSV file
         public void LogInFromCsv(string Key)
@@ -87,33 +96,28 @@ namespace BATDemoFramework
             loginButton.Click();
         }
 
-        public void LoginByUserWithInvalidPassword()
+        public void LoginByUserWithWrongPassword()
         {
             var user = new UserGenerator().GetNewUser();
 
             emailAddressField.SendKeys(user.EmailAddress);
-            passwordField.SendKeys(PasswordGenerator.GetNewPassword());
+            passwordField.SendKeys(PasswordGenerator.GeneratePassword());
 
             loginButton.Click();
         }
 
-        //Get text property from webElement
         public string GetErrorText()
         {
-            return errorInvalidCredentials.Text;
+            return errorMessage.Text;
         }
 
-
-        public bool ErrorBlockIsShown(IWebDriver driver)
-        {
-            bool result;
-            var errorBlock = Browser.WaitUntilElementIsPresent(driver, By.XPath("//p[2]"), 10);
-            result = errorBlock.Displayed;
-            return result;
+        public bool WaitUntilErrorBlockIsShown(IWebDriver driver)
+        { 
+            var errorBlock = Browser.WaitUntilElementIsPresent(driver, By.CssSelector("p.hint.hint_alert.np-i.login-form-module__error___2lW1y"), 30);
+            return errorBlock.IsDisplayed();
         }
 
-        //Verify the page title (url)
-        public bool IsAt()
+        public bool IsAtTitle()
         {
             return Browser.Title.Contains("/login");
         }
@@ -122,12 +126,6 @@ namespace BATDemoFramework
         {
             return Browser.Url.Contains(Urls.LoginPage);
         }
-
-        public string GetTitle()
-        {
-            return Browser.Title;
-        }
-
       
 
         //public void LogInAsLastRegisteredUser()

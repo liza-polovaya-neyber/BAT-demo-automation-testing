@@ -1,7 +1,6 @@
 Key,EmailPrimary,Password,FirstName,LastName,EmailPrimaryVerify
-ValidUserLogsinSuccessfully,liza.polovaya1701@yopmail.com,Password1,
-LoginWithInvalidEmailShouldNotWork,liza.polovaya04qq@yopmail.com,Password1,
-LoginWithInvalidPasswordShouldNotWork,liza.polovaya0400@yopmail.com,Password111,
+CanLogin,liza.polovaya1701@yopmail.com,Password1,
+
 ResetPasswordLinkIsSent,liza.polovaya0701@yopmail.com,Password1,
 ResetPasswordLinkisResent,liza.polovaya0701@yopmail.com,Password1,
 ResetPasswordLinkIsSentToDifferentEmail,liza.polovaya1101@yopmail.com,Password1,
@@ -13,6 +12,5 @@ CheckPrimaryEmailsAreCheckedToBeEqual,nuttyone.kiucydsg@mailosaur.io,Password1,s
 GoesFromAboutMePageToVerificationEmailPage,liza13.kiucydsg@mailosaur.io,Password1,sampleFirst,sampleLast,nuttyone.kiucyds666g@mailosaur.io,
 NotVerifiedUserWantsToContinue,lizap4.kiucydsg@mailosaur.io,Password1,sampleFirst,sampleLast,nuttyone.kiucyds666g@mailosaur.io,
 NotVerifiedUserRequestsNewResetLink,lizapo9.kiucydsg@mailosaur.io,Password1,sampleFirst,sampleLast,nuttyone.kiucyds666g@mailosaur.io,
-CanLogoutFromVerificationEmailPage,lizapol3.kiucydsg@mailosaur.io,Password1,sampleFirst,sampleLast,nuttyone.kiucyds666g@mailosaur.io,
-AboutMeFormCantBeSubmittedWithoutTitle,liza.polovaya0400@yopmail.com,Password1,
-CanLogoutAndLogBackInToVerificationEmailPage,liza.polovaya0503@yopmail.com,Password1,FirstSample,lastnameSample,
+
+

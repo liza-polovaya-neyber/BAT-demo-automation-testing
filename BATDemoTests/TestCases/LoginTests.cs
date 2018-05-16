@@ -7,6 +7,7 @@ using System;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
 using BATDemoFramework.BrowserStackTest;
+using System.Threading.Tasks;
 
 namespace BATDemoTests
 {
@@ -44,34 +45,46 @@ namespace BATDemoTests
         }
 
         [Test]
-        public void ValidUserLogsinSuccessfully()
+        public void CanLogin()
         {
             Pages.Login.GoTo();
-            Pages.Login.LogInFromCsv("ValidUserLogsinSuccessfully"); 
+            Pages.Login.LogInFromCsv("CanLogin");
 
-            Assert.IsTrue(Pages.Home.AvatarIsDisplayed(Browser.webDriver), "Valid user is not on Home page");
-            //Assert.IsTrue(Pages.Home.UserAvatarIsDisplayed(), "User avatar is not found");
-            
+            Assert.IsTrue(Pages.Home.WaitUntilHomeUrlIsLoaded(Browser.webDriver), "Valid user is not on Hpage");     
         }
 
         [Test]
-        public void LoginWithInvalidEmailShouldNotWork()
+        public void CanNotLoginWithNonRegisteredEmail()
         {
             Pages.Login.GoTo();  
             Pages.Login.LoginByRandomUser();
+            Pages.Login.WaitUntilErrorBlockIsShown(Browser.webDriver);
             
-            Assert.IsTrue(Pages.Login.ErrorBlockIsShown(Browser.webDriver), "Error block is not shown");
+            Assert.AreEqual(Pages.Login.GetErrorText(), "The email address or password you entered is incorrect. Please check and try again.");
         }
 
 
         [Test]
-        public void LoginWithInvalidPasswordShouldNotWork()
+        public void CanNotLoginWithWrongPassword()
         {
             Pages.Login.GoTo();
-            Pages.Login.LoginByUserWithInvalidPassword();
+            Pages.Login.LoginByUserWithWrongPassword();
+            Pages.Login.WaitUntilErrorBlockIsShown(Browser.webDriver);
 
-            Assert.IsTrue(Pages.Login.ErrorBlockIsShown(Browser.webDriver), "Error block is not shown");
-            //Assert.IsTrue(Pages.Login.IsAtUrl(), "User with invalid password is not on Login page");
+            Assert.AreEqual(Pages.Login.GetErrorText(), "The email address or password you entered is incorrect. Please check and try again.");
+        }
+
+        [TestCase("ukr", "Must be more than 8 characters")]
+        [TestCase("lowercase", "Must contain at least one upper letter, one lower letter and one number")]
+        [TestCase("lowecaseP", "Must contain at least one upper letter, one lower letter and one number")]
+        [TestCase("lowecase10", "Must contain at least one upper letter, one lower letter and one number")]
+        public void GetsValidationMessageWhenInvalidPassword(string a, string b)
+        {
+            Pages.Login.GoTo();
+            Pages.Login.EnterPassword(a);
+            Pages.Login.ClickToShowHidePassword();
+
+            Assert.AreEqual(Pages.AboutMe.GetErrorMessage(), b);
         }
 
         [Test]
@@ -82,9 +95,5 @@ namespace BATDemoTests
 
             Assert.IsTrue(Pages.Join.SomeLegalBitsMenuIsDisplayed());
         }
-
-
     }
-
-
 }

@@ -36,18 +36,9 @@ namespace BATDemoTests.TestCases
         public void CheckCookiePolicyLinkOpens()
         {
             Pages.Join.GoTo();
-
-            // Store the parent window of the driver
-            //String parentWindowHandle = driver.CurrentWindowHandle;
-            //Console.WriteLine("Parent window's handle -> " + parentWindowHandle);
-
             Pages.Join.GoToCookiePolicyPage();
-            //String lastWindowHandle = driver.CurrentWindowHandle;
-            //driver.SwitchTo().Window(driver.WindowHandles.Last());
 
-            Assert.IsTrue(Pages.CookiePolicy.IsAtUrl());
-
-            //driver.SwitchTo().Window(parentWindowHandle);
+            Assert.IsTrue(Pages.CookiePolicy.IsAtUrl());  
         }
 
         [Test]
