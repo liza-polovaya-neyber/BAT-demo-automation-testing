@@ -168,7 +168,5 @@ namespace BATDemoTests.TestCases
 
             Assert.IsFalse(Pages.VerificationEmail.GreenBannerIsShown(), "Green banner is still shown");
         }
-
-
     }
 }

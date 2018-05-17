@@ -15,6 +15,7 @@ namespace BATDemoTests
    public class LoginTests : TestBase
     {
         private IWebElement element;
+        WebDriverWait wait;
 
         //public LoginTests(string profile, string environment) : base(profile, environment){}
 
@@ -49,8 +50,10 @@ namespace BATDemoTests
         {
             Pages.Login.GoTo();
             Pages.Login.LogInFromCsv("CanLogin");
+            Pages.Home.WaitUntilHomeUrlIsLoaded(Browser.webDriver);
 
-            Assert.IsTrue(Pages.Home.WaitUntilHomeUrlIsLoaded(Browser.webDriver), "Valid user is not on Hpage");     
+
+            Assert.IsTrue(Pages.Home.IsAtUrl(), "Valid user is not on Hpage");     
         }
 
         [Test]

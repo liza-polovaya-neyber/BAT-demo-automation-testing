@@ -2,7 +2,7 @@ namespace BATDemoFramework.Generators
 {
     public class UserGenerator
     {
-        public User LastGeneratedUser { get; set; }
+        public static User LastGeneratedUser { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
 

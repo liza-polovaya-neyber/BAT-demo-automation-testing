@@ -28,41 +28,37 @@ namespace BATDemoFramework
         [FindsBy(How = How.ClassName, Using = "password-reset-sent-module__different-eamil___3smZ4")]
         private IWebElement tryDifferentEmailLink;
 
+        [FindsBy(How = How.CssSelector, Using = "p.control__error")]
+        private IWebElement errorValidation;
 
-        //Verifies if "Resend my reset link" button is displayed
-        public bool ResendMyResetLinkButtonIsDisplayed()
+        
+        public bool CheckResendMyResetLinkButtonIsDisplayed()
         {
             return resendMyResetLinkButton.IsDisplayed();
         }
 
         public bool WaitForResendMyResetLinkButtonIsDisplayed(IWebDriver driver)
         {
-            bool result;
             var resetLinkBtn = Browser.WaitUntilElementIsClickable(driver, resendMyResetLinkButton, 8);
-            result = resetLinkBtn.Displayed;
-            return result;
+            return resetLinkBtn.Displayed; 
         }
 
         public bool TryDifferentEmailLinkIsVisible(IWebDriver driver)
-        {
-            bool result;
-            var tryDifferentEmailElement = Browser.WaitUntilElementIsVisible(driver, By.ClassName("password-reset-sent-module__different-eamil___3smZ4"), 16);
-            return result = tryDifferentEmailLink.IsDisplayed();
+        {     
+            var tryDifferentEmailElement = Browser.WaitUntilElementIsVisible(driver, By.ClassName("password-reset-sent-module__different-eamil___3smZ4"), 30);
+            return tryDifferentEmailLink.IsDisplayed();
         }
 
-        //Clicks on "Resend my reset link" button
         public void ClickOnResendMyResetLinkButton()
         {
             resendMyResetLinkButton.Click();
         }
 
-        //Clicks on "Try different email" link
         public void ClickOnTryDifferentEmailLink()
         {
             tryDifferentEmailLink.Click();
         }
 
-        //Fills email box with the newly created email and submits sending a link
         public void EnterEmailAndClickOnResetLinkButton()
         {
             var user = new UserGenerator().GetNewUser();
@@ -82,37 +78,37 @@ namespace BATDemoFramework
             sendMyResetLinkButton.Click();
         }
 
-        public void EnterEmail(User user)
+        public void EnterEmail(string email)
         {
             emailTextField.Click();
-            emailTextField.SendKeys(user.EmailAddress);
+            emailTextField.SendKeys(email);
         }
 
-        //Browser navigates to Reset Password page
+        public string GetTextError()
+        {
+            return errorValidation.Text;
+        }
+
         public void GoTo()
         {
             Browser.GoTo("reset-password");
         }
 
-        //Go from Reset Password page => Join page
         public void ClickOnRegisterLink()
         {
             registerLink.Click();
         }
 
-        //Go from Reset Password page => Login page
         public void ClickOnReturntoLoginLink()
         {
             returnToLoginLink.Click();
         }
 
-        //Verifies the browser page title
         public bool IsAt()
         {
             return Browser.Title.Contains("/reset-password");
         }
 
-        //verifis page's url
         public bool IsAtUrl()
         {
             return Browser.Url.Contains(Urls.ResetPassword);

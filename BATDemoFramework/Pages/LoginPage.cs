@@ -34,6 +34,9 @@ namespace BATDemoFramework
         [FindsBy(How = How.XPath, Using = "//div[2]/div[2]")]
         private IWebElement showHidePasswordToggle;
 
+        [FindsBy(How = How.XPath, Using = "//a[contains(@href, '')]")]
+        private IWebElement redBanner;
+
         private IWebDriver driver;
 
 
@@ -41,12 +44,12 @@ namespace BATDemoFramework
         {
             Browser.GoTo("login");
         }
-    
+
         public void GoToJoinPage()
         {
             registerButton.Click();
         }
-       
+
         public void GoToResetPasswordPage()
         {
             forgottenYourPasswordLink.Click();
@@ -77,7 +80,7 @@ namespace BATDemoFramework
 
         //Login by the new user that was just created
         public void LogIn(User user)
-        { 
+        {
             emailAddressField.Click();
             emailAddressField.SendKeys(user.EmailAddress);
             passwordField.Click();
@@ -111,10 +114,21 @@ namespace BATDemoFramework
             return errorMessage.Text;
         }
 
+        public string GetErrorBannerText()
+        {
+            return redBanner.Text;
+        }
+
         public bool WaitUntilErrorBlockIsShown(IWebDriver driver)
-        { 
+        {
             var errorBlock = Browser.WaitUntilElementIsPresent(driver, By.CssSelector("p.hint.hint_alert.np-i.login-form-module__error___2lW1y"), 30);
             return errorBlock.IsDisplayed();
+        }
+
+        public bool WaitUntilLoginUrlIsLoaded(IWebDriver driver)
+        {
+            var loginPage = Browser.WaitUntilUrlIsLoaded(driver, Urls.LoginPage, 15);
+            return loginPage;
         }
 
         public bool IsAtTitle()
@@ -126,35 +140,35 @@ namespace BATDemoFramework
         {
             return Browser.Url.Contains(Urls.LoginPage);
         }
-      
 
-        //public void LogInAsLastRegisteredUser()
-        //{
-        //    LogIn(UserGenerator.LastGeneratedUser);
-        //}
 
-        //public void LogInAsLastRegisteredUser(LoginOptions useLastGeneratedPassword)
-        //{
-        //    var user = new User()
-        //    {
-        //        EmailAddress = UserGenerator.LastGeneratedUser.EmailAddress,
-        //        Password = PasswordGenerator.LastGeneratedPassword
-        //    };
+        public void LogInAsLastRegisteredUser()
+        {
+            LogIn(UserGenerator.LastGeneratedUser);
+        }
 
-        //    LogIn(user);
-        //}
+        public void LogInAsLastRegisteredUser(LoginOptions useLastGeneratedPassword)
+        {
+            var user = new User()
+            {
+                EmailAddress = UserGenerator.LastGeneratedUser.EmailAddress,
+                Password = PasswordGenerator.LastGeneratedPassword
+            };
+
+            LogIn(user);
+        }
+
+        public enum LoginOptions
+        {
+            UseLastGeneratedPassword
+        }
 
         //public void LogIn(User user)
         //{
         //    emailAddressField.SendKeys(user.EmailAddress);
         //    passwordField.SendKeys(user.Password);
 
-        //    logInButton.Click();
-        // }
-
-        //public enum LoginOptions
-        //{
-        //    UseLastGeneratedPassword
+        //    loginButton.Click();
         //}
     }
 }

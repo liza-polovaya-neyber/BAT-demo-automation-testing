@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using OpenQA.Selenium;
+using OpenQA.Selenium.Support.UI;
 
 namespace BATDemoTests.TestCases
 {
@@ -47,7 +48,7 @@ namespace BATDemoTests.TestCases
             Pages.Join.GoTo();
             Pages.Join.GoToComplaintsPolicyPage();
 
-            Assert.IsTrue(Pages.ComplaintsPolicy.IsAtUrl());
+           Assert.IsTrue(Pages.ComplaintsPolicy.IsAtUrl());
         }
 
 

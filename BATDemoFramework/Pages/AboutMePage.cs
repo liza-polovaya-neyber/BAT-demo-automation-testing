@@ -224,7 +224,7 @@ namespace BATDemoFramework
                 newUser.LastName = userData.LastName;
                 newUser.EmailAddress = userData.EmailPrimary;
                 newUser.Password = userData.Password;
-
+                shouldGenerateNewUser = false;
             }
             if (shouldGenerateNewUser)
             {

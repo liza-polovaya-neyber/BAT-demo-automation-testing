@@ -58,5 +58,22 @@ namespace BATDemoTests
             Pages.Marketing.ClickOnSubmitBtn();
             Pages.Home.WaitUntilHomeUrlIsLoaded(Browser.webDriver);
         }
+
+        //new user creation => email verification. Method takes a user that already generated prior to method execution
+        public static async Task NewUserCreated(User user)
+        {
+            Pages.AboutMe.GoTo();
+            Pages.AboutMe.RegisterNewUser(user);
+            Pages.VerificationEmail.WaitUntilVerificationEmailPageTitleIsShown(Browser.webDriver);
+
+            Thread.Sleep(TimeSpan.FromSeconds(10));
+
+            var emailService = new EmailService();
+
+            var messages = await emailService.GetMessagesByQuery(EmailTypes.ConfirmYourEmail, user.EmailAddress);
+            var urlToken = emailService.GetUrlTokenFromMessage(messages[0]);
+
+            Browser.GoToUrl(urlToken);
+        }
     }
 }

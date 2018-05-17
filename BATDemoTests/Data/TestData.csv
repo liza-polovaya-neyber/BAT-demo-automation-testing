@@ -1,5 +1,5 @@
 Key,EmailPrimary,Password,FirstName,LastName,EmailPrimaryVerify
-CanLogin,liza.polovaya1701@yopmail.com,Password1,
+CanLogin,liza.polovaya1701@yopmail.com,Password1,sampleFirst,sampleLast
 
 ResetPasswordLinkIsSent,liza.polovaya0701@yopmail.com,Password1,
 ResetPasswordLinkisResent,liza.polovaya0701@yopmail.com,Password1,

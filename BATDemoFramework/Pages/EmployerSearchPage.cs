@@ -148,7 +148,7 @@ namespace BATDemoFramework
 
         public bool WaitUntilPageIsLoaded(IWebDriver driver)
         {
-            var employerSearchPage = Browser.WaitUntilUrlIsLoaded(driver, Urls.EmployerSearch, 15);
+            var employerSearchPage = Browser.WaitUntilUrlIsLoaded(driver, Urls.EmployerSearch, 20);
             return Pages.EmployerSearch.IsAtUrl();
         }
 

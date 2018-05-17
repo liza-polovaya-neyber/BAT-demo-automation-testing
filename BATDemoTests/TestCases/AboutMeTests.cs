@@ -148,5 +148,26 @@ namespace BATDemoTests.TestCases
             Assert.AreEqual(17, Pages.AboutMe.GetFeedbackOptionsNumber());
         }
 
+        [Test]
+        public void CanNotRegisterWithAlreadyRegisteredEmail()
+        {
+            Pages.AboutMe.GoTo();
+            Pages.AboutMe.RegisterUserFromCsv("CanLogin");
+            Pages.Login.WaitUntilLoginUrlIsLoaded(Browser.webDriver);
+
+            Assert.IsTrue(Pages.Login.IsAtUrl(), "User has not been redirected to Login page");    
+        }
+
+
+        [Test]
+        public void CanSeeRedErrorBanner()
+        {
+            Pages.AboutMe.GoTo();
+            Pages.AboutMe.RegisterUserFromCsv("CanLogin");
+            Pages.Login.WaitUntilLoginUrlIsLoaded(Browser.webDriver);
+
+            Assert.AreEqual(Pages.Login.GetErrorBannerText(), "Close");
+        }
+
     }
 }

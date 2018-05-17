@@ -39,8 +39,19 @@ namespace BATDemoTests
             Assert.IsTrue(Pages.Join.IsAtUrl());
         }
 
+        [TestCase("qwerty", "Please enter a valid email address")]
+        [TestCase("", "Please enter your email address")]
+        public void CanNotEnterInvalidEmail(string a, string b)
+        {
+            Pages.ResetPassword.GoTo();
+            Pages.ResetPassword.EnterEmail(a);
+            Pages.ResetPassword.ClickOnResendMyResetLinkButton();
+
+            Assert.AreEqual(Pages.ResetPassword.GetTextError(), b);
+        }
+
         [Test]
-        public void TryDifferentEmailLinkIsShown()
+        public void CanSeeTryDifferentEmailLink()
         {
             Pages.ResetPassword.GoTo();
             Pages.ResetPassword.EnterEmailAndClickOnResetLinkButton();
@@ -49,7 +60,7 @@ namespace BATDemoTests
         }
 
         [Test]
-        public async Task NotExistingUserRequestsResetPwdLink()
+        public async Task ResetLinkIsNotSentToNotRegisteredUser()
         {
             var user = new UserGenerator().GetNewUser();
 
@@ -64,12 +75,15 @@ namespace BATDemoTests
         }
 
         [Test]
-        public async Task ExistingUserRequestsResetPasswordLink()  //there should be a user created prior to running this test
+        public async Task ExistingUserReceivesResetPasswordLink()  
         {
             var user = new UserGenerator().GetNewUser();
+            await Preconditions.NewUserCreated(user);
 
+            Pages.EmployerSearch.WaitUntilPageIsLoaded(Browser.webDriver);
+            Pages.EmployerSearch.Logout();
             Pages.ResetPassword.GoTo();
-            Pages.ResetPassword.EnterEmailAndClickToResetPassword(user);
+            Pages.ResetPassword.EnterEmailAndClickToResetPassword(user);   
 
             Thread.Sleep(7000);
             var emailService = new EmailService();
@@ -79,17 +93,20 @@ namespace BATDemoTests
         }
 
         [Test]
-        public async Task ResetPasswordLinkisResent()   //there should be a user created prior to running this test
+        public async Task CanResendResetPasswordLink()  
         {  
             var user = new UserGenerator().GetNewUser();
+            await Preconditions.NewUserCreated(user);
 
+            Pages.EmployerSearch.WaitUntilPageIsLoaded(Browser.webDriver);
+            Pages.EmployerSearch.Logout();
             Pages.ResetPassword.GoTo();
             Pages.ResetPassword.EnterEmailAndClickToResetPassword(user);
             Pages.ResetPassword.TryDifferentEmailLinkIsVisible(Browser.webDriver);
             Pages.ResetPassword.ClickOnResendMyResetLinkButton();
-            Pages.ResetPassword.WaitForResendMyResetLinkButtonIsDisplayed(Browser.webDriver); //can be replaced by Thread sleep
+            //Pages.ResetPassword.WaitForResendMyResetLinkButtonIsDisplayed(Browser.webDriver); can be replaced by Thread sleep
 
-
+            Thread.Sleep(7000);
             var emailService = new EmailService();
             var messages = await emailService.GetMessagesByQuery(EmailTypes.ResetPassword, user.EmailAddress);
 
@@ -100,14 +117,18 @@ namespace BATDemoTests
         public async Task ResetPasswordLinkIsSentToDifferentEmail()   //there should be a user created prior to running this test
         {   
             var user = new UserGenerator().GetNewUser();
+            await Preconditions.NewUserCreated(user);
 
+            Pages.EmployerSearch.WaitUntilPageIsLoaded(Browser.webDriver);
+            Pages.EmployerSearch.Logout();
             Pages.ResetPassword.GoTo();
             Pages.ResetPassword.EnterEmailAndClickToResetPassword(user);
             Pages.ResetPassword.TryDifferentEmailLinkIsVisible(Browser.webDriver);
             Pages.ResetPassword.ClickOnTryDifferentEmailLink();
             Pages.ResetPassword.EnterEmailAndClickToResetPassword(user);
-            Pages.ResetPassword.TryDifferentEmailLinkIsVisible(Browser.webDriver);  //can be replaced by Thread sleep
+            //Pages.ResetPassword.TryDifferentEmailLinkIsVisible(Browser.webDriver);  //can be replaced by Thread sleep
 
+            Thread.Sleep(7000);
             var emailService = new EmailService();
             var messages = await emailService.GetMessagesByQuery(EmailTypes.ResetPassword, user.EmailAddress);
 
