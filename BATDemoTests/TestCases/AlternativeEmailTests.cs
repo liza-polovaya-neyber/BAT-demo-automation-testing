@@ -22,7 +22,7 @@ namespace BATDemoTests.TestCases
             Pages.EmployerSearch.WaitUntilSecurityBlockIsLoaded(Browser.webDriver);
             Pages.EmployerSearch.SelectAnEmployer("Bupa");
             Pages.AlternativeEmail.WaitUntilAlternativeUrlIsLoaded(Browser.webDriver);
-            Pages.AlternativeEmail.EnterTextIntoEmailField(user.EmailAddress);
+            Pages.AlternativeEmail.EnterEmail(user.EmailAddress);
             Pages.AlternativeEmail.ClickOnSubmitBtn();
             Pages.Marketing.WaitUntilMarketingUrlIsLoaded(Browser.webDriver);
 
@@ -41,6 +41,51 @@ namespace BATDemoTests.TestCases
             Pages.Marketing.WaitUntilMarketingUrlIsLoaded(Browser.webDriver);
 
             Assert.IsTrue(Pages.Marketing.IsAtUrl(), "User hasn't been redirected to Marketing preferences page");
+        }
+
+        [Test]
+        public async Task CanNotSetPrimaryEmailAsAlternative()
+        {
+            var user = new UserGenerator().GetNewUser();
+            await Preconditions.NewUserCreated(user);
+
+            Pages.EmployerSearch.WaitUntilSecurityBlockIsLoaded(Browser.webDriver);
+            Pages.EmployerSearch.SelectAnEmployer("Bupa");
+            Pages.AlternativeEmail.WaitUntilAlternativeUrlIsLoaded(Browser.webDriver);
+            Pages.AlternativeEmail.EnterEmail(user.EmailAddress);
+            Pages.AlternativeEmail.ClickOnSubmitBtn();
+
+            Assert.AreEqual(Pages.AlternativeEmail.GetErrorMessage(), "You've already registered with this email. Please provide an alternative");
+        }
+
+        [Test]
+        public async Task CanNotSetRegisteredEmailAsAlternative()
+        {
+            await Preconditions.HaveNewUserCreated();
+
+            Pages.EmployerSearch.WaitUntilPageIsLoaded(Browser.webDriver);
+            Pages.EmployerSearch.SelectAnEmployer("Bupa");
+            Pages.AlternativeEmail.WaitUntilAlternativeUrlIsLoaded(Browser.webDriver);
+            Pages.AlternativeEmail.EnterEmailFromCsv("CanLogin");
+            Pages.AlternativeEmail.ClickOnSubmitBtn();
+            Pages.AlternativeEmail.WaitUntilRedBannerIsShown(Browser.webDriver);
+
+            Assert.IsTrue(Pages.AlternativeEmail.GetErrorBannerMessage(), "dgfg");
+        }
+
+        [TestCase("email", "Please enter a valid email address")]
+        [TestCase("", "Please enter your email address")]
+        public async Task CanNotEnterInvalidEmail(string a, string b)
+        {
+            await Preconditions.HaveNewUserCreated();
+
+            Pages.EmployerSearch.WaitUntilPageIsLoaded(Browser.webDriver);
+            Pages.EmployerSearch.SelectAnEmployer("Bupa");
+            Pages.AlternativeEmail.WaitUntilAlternativeUrlIsLoaded(Browser.webDriver);
+            Pages.AlternativeEmail.EnterEmail(a);
+            Pages.AlternativeEmail.ClickOnSubmitBtn();
+
+            Assert.AreEqual(Pages.AlternativeEmail.GetErrorMessage(), b);
         }
 
 
@@ -83,5 +128,6 @@ namespace BATDemoTests.TestCases
 
             Assert.IsTrue(Pages.AlternativeEmail.IsAtUrl(), "User was able to go back from the alternative email page to the Employer search page");
         }
+
     }
 }

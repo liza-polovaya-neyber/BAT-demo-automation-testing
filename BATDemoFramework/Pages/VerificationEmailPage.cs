@@ -52,7 +52,7 @@ namespace BATDemoFramework
 
         public bool WaitUntilVerificationEmailPageTitleIsShown(IWebDriver driver)
         {
-            var verificationEmailPage = Browser.WaitUntilPageTitleIsShown(driver, PageTitles.VerificationEmailSent, 35);
+            var verificationEmailPage = Browser.WaitUntilPageTitleIsShown(driver, PageTitles.VerificationEmailSent, 40);
             return Pages.VerificationEmail.IsAtUrl();
         }
 

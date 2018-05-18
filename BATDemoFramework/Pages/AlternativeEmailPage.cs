@@ -1,5 +1,7 @@
-﻿using OpenQA.Selenium;
+﻿using System;
+using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
+using BATDemoFramework.TestDataAccess;
 
 namespace BATDemoFramework
 {
@@ -23,6 +25,12 @@ namespace BATDemoFramework
         [FindsBy(How = How.ClassName, Using = "secure-hint-module__root___4OSbU")]
         private IWebElement securityBlock;
 
+        [FindsBy(How = How.XPath, Using = "//form/div/p")]
+        private IWebElement errorValidation;
+
+        [FindsBy(How = How.CssSelector, Using = "div.global-message-module__container___1hY2-")]
+        private IWebElement errorRedBanner;
+
         public void GoTo()
         {
             Browser.GoTo("join/alternative");
@@ -33,9 +41,16 @@ namespace BATDemoFramework
             return Browser.Url.Contains(Urls.AlternativeEmail);
         }
 
-        public void EnterTextIntoEmailField(string text)
+        public void EnterEmail(string text)
         {
             alternativeEmailField.SendKeys(text);
+        }
+
+        public void EnterEmailFromCsv(string Key)
+        {
+            var userData = CsvDataAccess.GetTestData(Key);
+
+            alternativeEmailField.SendKeys(userData.EmailPrimary);
         }
 
         public void ClickOnSubmitBtn()
@@ -53,6 +68,16 @@ namespace BATDemoFramework
             logoutLink.Click();
         }
 
+        public string GetErrorMessage()
+        {
+            return errorValidation.Text;
+        }
+
+        public bool GetErrorBannerMessage()
+        {
+            return errorRedBanner.Text.Contains("This email is already registered. Please provide an alternative.");
+        }
+
         public bool WaitUntilSecurityBlockIsLoaded(IWebDriver driver)
         {
             var alternativeEmailPage = Browser.WaitUntilElementIsVisible(driver, By.ClassName("secure-hint-module__root___4OSbU"), 13);
@@ -63,6 +88,12 @@ namespace BATDemoFramework
         {
             var alternativeEmailPage = Browser.WaitUntilUrlIsLoaded(driver, Urls.AlternativeEmail, 10);
             return Pages.AlternativeEmail.IsAtUrl();
+        }
+
+        public bool WaitUntilRedBannerIsShown(IWebDriver driver)
+        {
+            var alternativeEmailPage = Browser.WaitUntilElementIsVisible(driver, By.CssSelector("div.global-message-module__container___1hY2-"), 7);
+            return errorRedBanner.IsDisplayed();
         }
     }
 }
