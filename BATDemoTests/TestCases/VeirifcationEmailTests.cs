@@ -142,7 +142,7 @@ namespace BATDemoTests.TestCases
 
             Browser.GoToUrl(urlToken);
 
-            Assert.IsTrue(Pages.EmployerSearch.WaitUntilPageIsLoaded(Browser.webDriver), "User wasn't able to pass email verification step");
+            Assert.IsTrue(Pages.EmployerSearch.WaitUntilUrlIsLoaded(Browser.webDriver), "User wasn't able to pass email verification step");
 
         }
 
@@ -164,7 +164,7 @@ namespace BATDemoTests.TestCases
             Browser.GoToUrl(urlToken);
             Pages.VerificationEmail.WaitUntilGreenBannerIsShown(Browser.webDriver);
             Pages.VerificationEmail.CloseGreenBanner();
-            Pages.EmployerSearch.WaitUntilPageIsLoaded(Browser.webDriver);
+            Pages.EmployerSearch.WaitUntilUrlIsLoaded(Browser.webDriver);
 
             Assert.IsFalse(Pages.VerificationEmail.GreenBannerIsShown(), "Green banner is still shown");
         }

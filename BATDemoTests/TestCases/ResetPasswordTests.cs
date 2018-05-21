@@ -80,7 +80,7 @@ namespace BATDemoTests
             var user = new UserGenerator().GetNewUser();
             await Preconditions.NewUserCreated(user);
 
-            Pages.EmployerSearch.WaitUntilPageIsLoaded(Browser.webDriver);
+            Pages.EmployerSearch.WaitUntilUrlIsLoaded(Browser.webDriver);
             Pages.EmployerSearch.Logout();
             Pages.ResetPassword.GoTo();
             Pages.ResetPassword.EnterEmailAndClickToResetPassword(user);   
@@ -98,7 +98,7 @@ namespace BATDemoTests
             var user = new UserGenerator().GetNewUser();
             await Preconditions.NewUserCreated(user);
 
-            Pages.EmployerSearch.WaitUntilPageIsLoaded(Browser.webDriver);
+            Pages.EmployerSearch.WaitUntilUrlIsLoaded(Browser.webDriver);
             Pages.EmployerSearch.Logout();
             Pages.ResetPassword.GoTo();
             Pages.ResetPassword.EnterEmailAndClickToResetPassword(user);
@@ -119,7 +119,7 @@ namespace BATDemoTests
             var user = new UserGenerator().GetNewUser();
             await Preconditions.NewUserCreated(user);
 
-            Pages.EmployerSearch.WaitUntilPageIsLoaded(Browser.webDriver);
+            Pages.EmployerSearch.WaitUntilUrlIsLoaded(Browser.webDriver);
             Pages.EmployerSearch.Logout();
             Pages.ResetPassword.GoTo();
             Pages.ResetPassword.EnterEmailAndClickToResetPassword(user);
@@ -134,8 +134,6 @@ namespace BATDemoTests
 
             Assert.AreEqual(2, messages.Count, "Can't find 2 reset password emails");
         }
-
-
 
     }
 

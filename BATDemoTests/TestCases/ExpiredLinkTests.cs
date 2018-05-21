@@ -15,7 +15,7 @@ namespace BATDemoTests.TestCases
     class ExpiredLinkTests : TestBase
     {
         [Test]
-        public async Task CanGetToExpiredLinkPage()
+        public async Task CanGetToExpiredLinkPageWhenVerifyingPrimaryEmail()
         {
             var user = new UserGenerator().GetNewUser();
 
@@ -30,12 +30,38 @@ namespace BATDemoTests.TestCases
             var urlToken = emailService.GetUrlTokenFromMessage(messages[0]);
 
             Browser.GoToUrl(urlToken);
-            Pages.EmployerSearch.WaitUntilPageIsLoaded(Browser.webDriver);
+            Pages.EmployerSearch.WaitUntilUrlIsLoaded(Browser.webDriver);
             Browser.GoToUrl(urlToken);
             Pages.ExpiredLink.WaitUntilPageIsLoaded(Browser.webDriver);
 
             Assert.IsTrue(Pages.ExpiredLink.IsAtUrl(), "User wasn't able to get to the Expired link page");
 
+        }
+
+        [Test]
+        public async Task CanGetToExpiredLinkPageWhenVerifyingAlternativeEmail()
+        {
+            var user = new UserGenerator().GetNewUser();
+            await Preconditions.HaveNewUserCreated();
+
+            Pages.EmployerSearch.WaitUntilUrlIsLoaded(Browser.webDriver);
+            Pages.EmployerSearch.SelectAnEmployer("Bupa");
+            Pages.AlternativeEmail.WaitUntilAlternativeUrlIsLoaded(Browser.webDriver);
+            Pages.AlternativeEmail.EnterEmail(user.EmailAddress);
+            Pages.AlternativeEmail.ClickOnSubmitBtn();
+            Pages.Marketing.WaitUntilMarketingUrlIsLoaded(Browser.webDriver);
+            Pages.Marketing.Logout();
+            Thread.Sleep(TimeSpan.FromSeconds(5));
+
+            var emailService = new EmailService();
+            var messages = await emailService.GetMessagesByQuery(EmailTypes.ConfirmYourEmail, user.EmailAddress);
+            var urlToken = emailService.GetUrlTokenFromMessage(messages[0]);
+
+            Browser.GoToUrl(urlToken);
+            Pages.Login.WaitUntilLoginUrlIsLoaded(Browser.webDriver);
+            Browser.GoToUrl(urlToken);
+
+            Assert.IsTrue(Pages.ExpiredLink.IsAtUrl(), "User wasn't able to get to the Expired link page");
         }
 
         [Test]
@@ -54,7 +80,7 @@ namespace BATDemoTests.TestCases
             var urlToken = emailService.GetUrlTokenFromMessage(messages[0]);
 
             Browser.GoToUrl(urlToken);
-            Pages.EmployerSearch.WaitUntilPageIsLoaded(Browser.webDriver);
+            Pages.EmployerSearch.WaitUntilUrlIsLoaded(Browser.webDriver);
             Browser.GoToUrl(urlToken);
             Pages.ExpiredLink.WaitUntilPageIsLoaded(Browser.webDriver);
             Pages.ExpiredLink.ClickOnLogo();
@@ -78,7 +104,7 @@ namespace BATDemoTests.TestCases
             var urlToken = emailService.GetUrlTokenFromMessage(messages[0]);
 
             Browser.GoToUrl(urlToken);
-            Pages.EmployerSearch.WaitUntilPageIsLoaded(Browser.webDriver);
+            Pages.EmployerSearch.WaitUntilUrlIsLoaded(Browser.webDriver);
             Browser.GoToUrl(urlToken);
             Pages.ExpiredLink.WaitUntilPageIsLoaded(Browser.webDriver);
             Pages.ExpiredLink.ClickOnReturnBtn();
@@ -102,7 +128,7 @@ namespace BATDemoTests.TestCases
             var urlToken = emailService.GetUrlTokenFromMessage(messages[0]);
 
             Browser.GoToUrl(urlToken);
-            Pages.EmployerSearch.WaitUntilPageIsLoaded(Browser.webDriver);
+            Pages.EmployerSearch.WaitUntilUrlIsLoaded(Browser.webDriver);
             Pages.EmployerSearch.Logout();
             Browser.GoToUrl(urlToken);
             Pages.ExpiredLink.WaitUntilPageIsLoaded(Browser.webDriver);

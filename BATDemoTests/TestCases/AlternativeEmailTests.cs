@@ -1,4 +1,5 @@
 ﻿using BATDemoFramework;
+using BATDemoFramework.EmailService;
 using BATDemoFramework.Generators;
 using NUnit.Framework;
 using System;
@@ -63,7 +64,7 @@ namespace BATDemoTests.TestCases
         {
             await Preconditions.HaveNewUserCreated();
 
-            Pages.EmployerSearch.WaitUntilPageIsLoaded(Browser.webDriver);
+            Pages.EmployerSearch.WaitUntilUrlIsLoaded(Browser.webDriver);
             Pages.EmployerSearch.SelectAnEmployer("Bupa");
             Pages.AlternativeEmail.WaitUntilAlternativeUrlIsLoaded(Browser.webDriver);
             Pages.AlternativeEmail.EnterEmailFromCsv("CanLogin");
@@ -79,13 +80,88 @@ namespace BATDemoTests.TestCases
         {
             await Preconditions.HaveNewUserCreated();
 
-            Pages.EmployerSearch.WaitUntilPageIsLoaded(Browser.webDriver);
+            Pages.EmployerSearch.WaitUntilUrlIsLoaded(Browser.webDriver);
             Pages.EmployerSearch.SelectAnEmployer("Bupa");
             Pages.AlternativeEmail.WaitUntilAlternativeUrlIsLoaded(Browser.webDriver);
             Pages.AlternativeEmail.EnterEmail(a);
             Pages.AlternativeEmail.ClickOnSubmitBtn();
 
             Assert.AreEqual(Pages.AlternativeEmail.GetErrorMessage(), b);
+        }
+
+        [Test]
+        public async Task CanVerifyAlternativeEmail()
+        {
+            var user = new UserGenerator().GetNewUser();
+            await Preconditions.HaveNewUserCreated();
+
+            Pages.EmployerSearch.WaitUntilSecurityBlockIsLoaded(Browser.webDriver);
+            Pages.EmployerSearch.SelectAnEmployer("Bupa");
+            Pages.AlternativeEmail.WaitUntilAlternativeUrlIsLoaded(Browser.webDriver);
+            Pages.AlternativeEmail.EnterEmail(user.EmailAddress);
+            Pages.AlternativeEmail.ClickOnSubmitBtn();
+            Thread.Sleep(TimeSpan.FromSeconds(10));
+
+            var emailService = new EmailService();
+            var messages = await emailService.GetMessagesByQuery(EmailTypes.ConfirmYourEmail, user.EmailAddress);
+            var urlToken = emailService.GetUrlTokenFromMessage(messages[0]);
+
+            Browser.GoToUrl(urlToken);
+            Pages.Marketing.WaitUntilMarketingUrlIsLoaded(Browser.webDriver);
+
+            Assert.IsTrue(Pages.Marketing.IsAtUrl(), "User was not able to verify their alternative email");
+        }
+
+        [Test]
+        public async Task CanVerifyAlternativeEmailWhenLoggedOut()
+        {
+            var user = new UserGenerator().GetNewUser();
+            await Preconditions.HaveNewUserCreated();
+
+            Pages.EmployerSearch.WaitUntilSecurityBlockIsLoaded(Browser.webDriver);
+            Pages.EmployerSearch.SelectAnEmployer("Bupa");
+            Pages.AlternativeEmail.WaitUntilAlternativeUrlIsLoaded(Browser.webDriver);
+            Pages.AlternativeEmail.EnterEmail(user.EmailAddress);
+            Pages.AlternativeEmail.ClickOnSubmitBtn();
+            Pages.Marketing.WaitUntilMarketingUrlIsLoaded(Browser.webDriver);
+            Pages.Marketing.Logout();
+            Thread.Sleep(TimeSpan.FromSeconds(5));
+
+            var emailService = new EmailService();
+            var messages = await emailService.GetMessagesByQuery(EmailTypes.ConfirmYourEmail, user.EmailAddress);
+            var urlToken = emailService.GetUrlTokenFromMessage(messages[0]);
+
+            Browser.GoToUrl(urlToken);
+            Pages.Login.WaitUntilLoginUrlIsLoaded(Browser.webDriver);
+
+            Assert.IsTrue(Pages.Login.GetGreenBannerText(), "Green verification banner doesn't contain needed info");
+        }
+
+        [Test]
+        public async Task CanVerifyAlternativeEmailAndLogBackIn()
+        {
+            var user = new UserGenerator().GetNewUser();
+            await Preconditions.HaveNewUserCreated();
+
+            Pages.EmployerSearch.WaitUntilUrlIsLoaded(Browser.webDriver);
+            Pages.EmployerSearch.SelectAnEmployer("Bupa");
+            Pages.AlternativeEmail.WaitUntilAlternativeUrlIsLoaded(Browser.webDriver);
+            Pages.AlternativeEmail.EnterEmail(user.EmailAddress);
+            Pages.AlternativeEmail.ClickOnSubmitBtn();
+            Pages.Marketing.WaitUntilMarketingUrlIsLoaded(Browser.webDriver);
+            Pages.Marketing.Logout();
+            Thread.Sleep(TimeSpan.FromSeconds(5));
+
+            var emailService = new EmailService();
+            var messages = await emailService.GetMessagesByQuery(EmailTypes.ConfirmYourEmail, user.EmailAddress);
+            var urlToken = emailService.GetUrlTokenFromMessage(messages[0]);
+
+            Browser.GoToUrl(urlToken);
+            Pages.Login.WaitUntilLoginUrlIsLoaded(Browser.webDriver);
+            Pages.Login.LogIn(user);
+            Pages.Marketing.WaitUntilMarketingUrlIsLoaded(Browser.webDriver);
+
+            Assert.IsTrue(Pages.Marketing.IsAtUrl(), "User was unable to get back to Marketing page");
         }
 
 

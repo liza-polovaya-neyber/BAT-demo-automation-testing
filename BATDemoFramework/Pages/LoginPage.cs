@@ -37,6 +37,9 @@ namespace BATDemoFramework
         [FindsBy(How = How.XPath, Using = "//a[contains(@href, '')]")]
         private IWebElement redBanner;
 
+        [FindsBy(How = How.XPath, Using = "//section/div")]
+        private IWebElement greenVerificationBanner;
+
         private IWebDriver driver;
 
 
@@ -117,6 +120,11 @@ namespace BATDemoFramework
         public string GetErrorBannerText()
         {
             return redBanner.Text;
+        }
+
+        public bool GetGreenBannerText()
+        {
+            return greenVerificationBanner.Text.Contains("Your email has been verified! Please log in to continue");
         }
 
         public bool WaitUntilErrorBlockIsShown(IWebDriver driver)
