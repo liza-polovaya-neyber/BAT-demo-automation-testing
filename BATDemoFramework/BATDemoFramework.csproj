@@ -97,6 +97,7 @@
     <Compile Include="EmailService\IEmailService.cs" />
     <Compile Include="Helpers\StringHelper.cs" />
     <Compile Include="Pages\AlternativeEmailPage.cs" />
+    <Compile Include="Pages\ChangePasswordPage.cs" />
     <Compile Include="Pages\ComplaintsPolicyPage.cs" />
     <Compile Include="Pages\CookiePolicyPage.cs" />
     <Compile Include="Pages\EmployerSearchPage.cs" />

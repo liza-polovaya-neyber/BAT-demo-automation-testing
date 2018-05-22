@@ -33,6 +33,11 @@ namespace BATDemoFramework
             get { return GetPage<ResetPasswordPage>(); }
         }
 
+        public static ChangePasswordPage ChangePassword
+        {
+            get { return GetPage<ChangePasswordPage>(); }
+        }
+
         public static VerificationEmailPage VerificationEmail
         {
             get { return GetPage<VerificationEmailPage>(); }

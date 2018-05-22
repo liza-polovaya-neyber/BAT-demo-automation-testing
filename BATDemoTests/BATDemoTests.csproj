@@ -88,6 +88,7 @@
     <Compile Include="Preconditions.cs" />
     <Compile Include="TestCases\AboutMeTests.cs" />
     <Compile Include="TestCases\AlternativeEmailTests.cs" />
+    <Compile Include="TestCases\ChangePassword.cs" />
     <Compile Include="TestCases\EmailServiceTests.cs" />
     <Compile Include="TestCases\EmployerSearchTests.cs" />
     <Compile Include="TestCases\ExpiredLinkTests.cs" />

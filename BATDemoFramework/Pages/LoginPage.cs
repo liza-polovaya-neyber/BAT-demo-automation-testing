@@ -136,7 +136,7 @@ namespace BATDemoFramework
         public bool WaitUntilLoginUrlIsLoaded(IWebDriver driver)
         {
             var loginPage = Browser.WaitUntilUrlIsLoaded(driver, Urls.LoginPage, 15);
-            return loginPage;
+            return Pages.Login.IsAtUrl();
         }
 
         public bool IsAtTitle()
