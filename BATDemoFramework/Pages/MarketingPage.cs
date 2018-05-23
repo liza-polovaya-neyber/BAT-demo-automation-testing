@@ -6,7 +6,7 @@ namespace BATDemoFramework
 {
     public class MarketingPage
     {
-        [FindsBy(How = How.ClassName, Using = "login-logout-module__logout___1lxME")]
+        [FindsBy(How = How.LinkText, Using = "Logout")]
         private IWebElement logoutLink;
 
         [FindsBy(How = How.XPath, Using = "//label/span")]
@@ -69,7 +69,7 @@ namespace BATDemoFramework
 
         public bool WaitUntilMarketingUrlIsLoaded(IWebDriver driver)
         {
-            var marketingPage = Browser.WaitUntilUrlIsLoaded(driver, Urls.Marketing, 10);
+            var marketingPage = Browser.WaitUntilUrlIsLoaded(driver, Urls.Marketing, 15);
             return Pages.Marketing.IsAtUrl();
         }
         public bool IsAtUrl()

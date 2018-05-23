@@ -1,4 +1,5 @@
 ﻿using BATDemoFramework;
+using BATDemoFramework.Generators;
 using NUnit.Framework;
 using NUnit.Framework.Internal;
 using System;
@@ -85,14 +86,17 @@ namespace BATDemoTests.TestCases
 
 
        [Test]
-        public async Task CanLogout()
+        public async Task CanLogoutAndLogbackIn()
             {
-                await Preconditions.HaveNewUserCreated();
+               var user = new UserGenerator().GetNewUser();
+               await Preconditions.NewUserCreated(user);
 
                 Pages.EmployerSearch.WaitUntilSecurityBlockIsLoaded(Browser.webDriver);
                 Pages.EmployerSearch.Logout();
+                Pages.Login.LogIn(user);
+                Pages.EmployerSearch.WaitUntilUrlIsLoaded(Browser.webDriver);
 
-                Assert.IsTrue(Pages.Login.IsAtUrl(), "User wan't able to log out");
+                Assert.IsTrue(Pages.EmployerSearch.IsAtUrl(), "User wan't able to log out");
             }
 
         [Test]

@@ -78,6 +78,17 @@ namespace BATDemoFramework
             sendMyResetLinkButton.Click();
         }
 
+        public void EnterEmailAndClickToReset()
+        {
+            var newUser = new UserGenerator().GetNewUser();
+
+            emailTextField.Click();
+            emailTextField.SendKeys(newUser.EmailAddress);
+
+            sendMyResetLinkButton.Click();
+        }
+
+
         public void EnterEmail(string email)
         {
             emailTextField.Click();
