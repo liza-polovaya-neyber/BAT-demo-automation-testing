@@ -47,7 +47,7 @@ namespace BATDemoTests
 
             Browser.GoToUrl(urlToken);
             Pages.EmployerSearch.WaitUntilSecurityBlockIsLoaded(Browser.webDriver);
-            Pages.EmployerSearch.SelectAnEmployer("Bupa");
+            Pages.EmployerSearch.SelectEnteredEmployer("Bupa");
             Pages.AlternativeEmail.WaitUntilAlternativeUrlIsLoaded(Browser.webDriver);
             Pages.AlternativeEmail.ClickOnSkipLink();
             Pages.Marketing.WaitUntilMarketingUrlIsLoaded(Browser.webDriver);

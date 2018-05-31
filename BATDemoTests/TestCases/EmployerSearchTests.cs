@@ -20,7 +20,7 @@ namespace BATDemoTests.TestCases
             await Preconditions.HaveNewUserCreated();
 
             Pages.EmployerSearch.WaitUntilSecurityBlockIsLoaded(Browser.webDriver);
-            Pages.EmployerSearch.SelectAnEmployer("Bupa");
+            Pages.EmployerSearch.SelectEnteredEmployer("Bupa");
             Pages.AlternativeEmail.WaitUntilSecurityBlockIsLoaded(Browser.webDriver);
 
             Assert.IsTrue(Pages.AlternativeEmail.IsAtUrl(), "User is not on an alternative email page");
@@ -76,7 +76,7 @@ namespace BATDemoTests.TestCases
             Pages.EmployerSearch.EnterTextIntoSearchbox("Bupa");
             Pages.EmployerSearch.ClickOnSearchBtn();
             Pages.EmployerSearch.WaitUntilSearchResultsAppear(Browser.webDriver);
-            Pages.EmployerSearch.SelectBupa();
+            Pages.EmployerSearch.SelectEmployer();
             Pages.EmployerSearch.ClickOnSelectResultBtn();
             Pages.EmployerSearch.ClickOnRefineSearchLink();
 

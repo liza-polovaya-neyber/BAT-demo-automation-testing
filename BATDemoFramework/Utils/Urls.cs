@@ -23,6 +23,8 @@ namespace BATDemoFramework
         public const string ExpiredLink = "https://hellotest1.neyber.co.uk/verification-expired";
         public const string EmployerSearch = "https://hellotest1.neyber.co.uk/join/search";
         public const string AlternativeEmail = "https://hellotest1.neyber.co.uk/join/alternative-email";
+        public const string WorkEmail = "https://hellotest1.neyber.co.uk/join/work-email";
+        public const string EmployerVerification = "https://hellotest1.neyber.co.uk/join/employer-verification";
         public const string Marketing = "https://hellotest1.neyber.co.uk/join/marketing";
 
     }

@@ -86,6 +86,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Base\TestBaseForNewTabWindow.cs" />
+    <Compile Include="Base\TestBaseMarketing.cs" />
     <Compile Include="BrowserStackTest\BrowserStackNUnitTest.cs" />
     <Compile Include="Configurations\TestConfigurationManager.cs" />
     <Compile Include="EmailService\EmailTypes.cs" />
@@ -102,6 +103,7 @@
     <Compile Include="Pages\ComplaintsPolicyPage.cs" />
     <Compile Include="Pages\CookiePolicyPage.cs" />
     <Compile Include="Pages\EmployerSearchPage.cs" />
+    <Compile Include="Pages\EmployerVerificationPage.cs" />
     <Compile Include="Pages\ExpiredLinkPage.cs" />
     <Compile Include="Pages\HomePage.cs" />
     <Compile Include="Models\User.cs" />
@@ -111,6 +113,7 @@
     <Compile Include="Pages\PrivacyPolicyPage.cs" />
     <Compile Include="Pages\ResendEmailPage.cs" />
     <Compile Include="Pages\VerificationEmailPage.cs" />
+    <Compile Include="Pages\WorkEmailPage.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="TestDataAccess\CsvDataAccess.cs" />
     <Compile Include="TestDataAccess\UserData.cs" />

@@ -299,7 +299,7 @@ namespace BATDemoFramework
             return errorEmailsDontMatch.Text;
         }
 
-        public string GetErrorMessage()
+        public string GetErrorText()
         {
             return errorWrongPhoneNo.Text;
         }

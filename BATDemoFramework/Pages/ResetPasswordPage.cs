@@ -3,6 +3,11 @@ using BATDemoFramework.TestDataAccess;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
 using BATDemoFramework.Generators;
+using System.Threading;
+using System.Collections.Generic;
+using Google.Apis.Gmail.v1.Data;
+using System.Threading.Tasks;
+using BATDemoFramework.EmailService;
 
 namespace BATDemoFramework
 {
@@ -94,6 +99,16 @@ namespace BATDemoFramework
             emailTextField.Click();
             emailTextField.SendKeys(email);
         }
+
+        //public async Task<Message> RetrieveResetPasswordEmail(User user)
+        //{
+        //    System.Threading.Thread.Sleep(7000);
+
+        //    var emailService = new EmailService();
+        //    var messages = await emailService.GetMessagesByQuery(EmailTypes.ResetPassword, user.EmailAddress);
+
+        //    return messages;
+        //}
 
         public string GetTextError()
         {

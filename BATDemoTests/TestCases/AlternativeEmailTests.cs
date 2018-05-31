@@ -21,7 +21,7 @@ namespace BATDemoTests.TestCases
             await Preconditions.HaveNewUserCreated();
 
             Pages.EmployerSearch.WaitUntilSecurityBlockIsLoaded(Browser.webDriver);
-            Pages.EmployerSearch.SelectAnEmployer("Bupa");
+            Pages.EmployerSearch.SelectEnteredEmployer("Bupa");
             Pages.AlternativeEmail.WaitUntilAlternativeUrlIsLoaded(Browser.webDriver);
             Pages.AlternativeEmail.EnterEmail(user.EmailAddress);
             Pages.AlternativeEmail.ClickOnSubmitBtn();
@@ -36,7 +36,7 @@ namespace BATDemoTests.TestCases
             await Preconditions.HaveNewUserCreated();
 
             Pages.EmployerSearch.WaitUntilSecurityBlockIsLoaded(Browser.webDriver);
-            Pages.EmployerSearch.SelectAnEmployer("Bupa");
+            Pages.EmployerSearch.SelectEnteredEmployer("Bupa");
             Pages.AlternativeEmail.WaitUntilAlternativeUrlIsLoaded(Browser.webDriver);
             Pages.AlternativeEmail.ClickOnSkipLink();
             Pages.Marketing.WaitUntilMarketingUrlIsLoaded(Browser.webDriver);
@@ -51,7 +51,7 @@ namespace BATDemoTests.TestCases
             await Preconditions.NewUserCreated(user);
 
             Pages.EmployerSearch.WaitUntilSecurityBlockIsLoaded(Browser.webDriver);
-            Pages.EmployerSearch.SelectAnEmployer("Bupa");
+            Pages.EmployerSearch.SelectEnteredEmployer("Bupa");
             Pages.AlternativeEmail.WaitUntilAlternativeUrlIsLoaded(Browser.webDriver);
             Pages.AlternativeEmail.EnterEmail(user.EmailAddress);
             Pages.AlternativeEmail.ClickOnSubmitBtn();
@@ -65,7 +65,7 @@ namespace BATDemoTests.TestCases
             await Preconditions.HaveNewUserCreated();
 
             Pages.EmployerSearch.WaitUntilUrlIsLoaded(Browser.webDriver);
-            Pages.EmployerSearch.SelectAnEmployer("Bupa");
+            Pages.EmployerSearch.SelectEnteredEmployer("Bupa");
             Pages.AlternativeEmail.WaitUntilAlternativeUrlIsLoaded(Browser.webDriver);
             Pages.AlternativeEmail.EnterEmailFromCsv("CanLogin");
             Pages.AlternativeEmail.ClickOnSubmitBtn();
@@ -81,7 +81,7 @@ namespace BATDemoTests.TestCases
             await Preconditions.HaveNewUserCreated();
 
             Pages.EmployerSearch.WaitUntilUrlIsLoaded(Browser.webDriver);
-            Pages.EmployerSearch.SelectAnEmployer("Bupa");
+            Pages.EmployerSearch.SelectEnteredEmployer("Bupa");
             Pages.AlternativeEmail.WaitUntilAlternativeUrlIsLoaded(Browser.webDriver);
             Pages.AlternativeEmail.EnterEmail(a);
             Pages.AlternativeEmail.ClickOnSubmitBtn();
@@ -96,7 +96,7 @@ namespace BATDemoTests.TestCases
             await Preconditions.HaveNewUserCreated();
 
             Pages.EmployerSearch.WaitUntilSecurityBlockIsLoaded(Browser.webDriver);
-            Pages.EmployerSearch.SelectAnEmployer("Bupa");
+            Pages.EmployerSearch.SelectEnteredEmployer("Bupa");
             Pages.AlternativeEmail.WaitUntilAlternativeUrlIsLoaded(Browser.webDriver);
             Pages.AlternativeEmail.EnterEmail(user.EmailAddress);
             Pages.AlternativeEmail.ClickOnSubmitBtn();
@@ -119,7 +119,7 @@ namespace BATDemoTests.TestCases
             await Preconditions.HaveNewUserCreated();
 
             Pages.EmployerSearch.WaitUntilSecurityBlockIsLoaded(Browser.webDriver);
-            Pages.EmployerSearch.SelectAnEmployer("Bupa");
+            Pages.EmployerSearch.SelectEnteredEmployer("Bupa");
             Pages.AlternativeEmail.WaitUntilAlternativeUrlIsLoaded(Browser.webDriver);
             Pages.AlternativeEmail.EnterEmail(user.EmailAddress);
             Pages.AlternativeEmail.ClickOnSubmitBtn();
@@ -144,7 +144,7 @@ namespace BATDemoTests.TestCases
             await Preconditions.HaveNewUserCreated();
 
             Pages.EmployerSearch.WaitUntilUrlIsLoaded(Browser.webDriver);
-            Pages.EmployerSearch.SelectAnEmployer("Bupa");
+            Pages.EmployerSearch.SelectEnteredEmployer("Bupa");
             Pages.AlternativeEmail.WaitUntilAlternativeUrlIsLoaded(Browser.webDriver);
             Pages.AlternativeEmail.EnterEmail(user.EmailAddress);
             Pages.AlternativeEmail.ClickOnSubmitBtn();
@@ -171,7 +171,7 @@ namespace BATDemoTests.TestCases
             await Preconditions.HaveNewUserCreated();
 
             Pages.EmployerSearch.WaitUntilSecurityBlockIsLoaded(Browser.webDriver);
-            Pages.EmployerSearch.SelectAnEmployer("Bupa");
+            Pages.EmployerSearch.SelectEnteredEmployer("Bupa");
             Pages.AlternativeEmail.WaitUntilAlternativeUrlIsLoaded(Browser.webDriver);
             Pages.AlternativeEmail.Logout();
 
@@ -185,7 +185,7 @@ namespace BATDemoTests.TestCases
             await Preconditions.HaveNewUserCreated();
 
             Pages.EmployerSearch.WaitUntilSecurityBlockIsLoaded(Browser.webDriver);
-            Pages.EmployerSearch.SelectAnEmployer("Bupa");
+            Pages.EmployerSearch.SelectEnteredEmployer("Bupa");
             Pages.AlternativeEmail.WaitUntilAlternativeUrlIsLoaded(Browser.webDriver);
             Browser.GoToUrl(Urls.Marketing);
 
@@ -198,7 +198,7 @@ namespace BATDemoTests.TestCases
             await Preconditions.HaveNewUserCreated();
 
             Pages.EmployerSearch.WaitUntilSecurityBlockIsLoaded(Browser.webDriver);
-            Pages.EmployerSearch.SelectAnEmployer("Bupa");
+            Pages.EmployerSearch.SelectEnteredEmployer("Bupa");
             Pages.AlternativeEmail.WaitUntilAlternativeUrlIsLoaded(Browser.webDriver);
             Browser.GoToUrl(Urls.EmployerSearch);
 

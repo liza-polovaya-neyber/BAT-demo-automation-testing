@@ -110,7 +110,7 @@ namespace BATDemoTests.TestCases
             Pages.AboutMe.EnterMobileNumber(a);
             Pages.AboutMe.PutCursorOnEmailInput();
 
-            Assert.AreEqual(Pages.AboutMe.GetErrorMessage(), b);
+            Assert.AreEqual(Pages.AboutMe.GetErrorText(), b);
         }
 
         [Test]

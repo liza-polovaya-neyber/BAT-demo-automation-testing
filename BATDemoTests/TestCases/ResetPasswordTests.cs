@@ -124,7 +124,6 @@ namespace BATDemoTests
             Pages.ResetPassword.EnterEmailAndClickToResetPassword(user);
             Pages.ResetPassword.TryDifferentEmailLinkIsVisible(Browser.webDriver);
             Pages.ResetPassword.ClickOnResendMyResetLinkButton();
-            //Pages.ResetPassword.WaitForResendMyResetLinkButtonIsDisplayed(Browser.webDriver); can be replaced by Thread sleep
 
             Thread.Sleep(7000);
             var emailService = new EmailService();
@@ -146,7 +145,6 @@ namespace BATDemoTests
             Pages.ResetPassword.TryDifferentEmailLinkIsVisible(Browser.webDriver);
             Pages.ResetPassword.ClickOnTryDifferentEmailLink();
             Pages.ResetPassword.EnterEmailAndClickToReset();
-            //Pages.ResetPassword.TryDifferentEmailLinkIsVisible(Browser.webDriver);  //can be replaced by Thread sleep
 
             Thread.Sleep(7000);
             var emailService = new EmailService();
@@ -162,7 +160,7 @@ namespace BATDemoTests
             await Preconditions.HaveNewUserCreated();
 
             Pages.EmployerSearch.WaitUntilSecurityBlockIsLoaded(Browser.webDriver);
-            Pages.EmployerSearch.SelectAnEmployer("Bupa");
+            Pages.EmployerSearch.SelectEnteredEmployer("Bupa");
             Pages.AlternativeEmail.WaitUntilAlternativeUrlIsLoaded(Browser.webDriver);
             Pages.AlternativeEmail.EnterEmail(user.EmailAddress);
             Pages.AlternativeEmail.ClickOnSubmitBtn();

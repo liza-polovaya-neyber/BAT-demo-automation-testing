@@ -1,10 +1,13 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
+using System.Collections.Generic;
 
 namespace BATDemoFramework
 {
     public class EmployerSearchPage
     {
+        IWebDriver driver;
+
         [FindsBy(How = How.ClassName, Using = "search-form-module__button-text___1Xrj1")]
         private IWebElement searchEmployerBtn;
 
@@ -14,8 +17,8 @@ namespace BATDemoFramework
         [FindsBy(How = How.LinkText, Using = "Select")]
         private IWebElement selectResultBtn;
 
-        [FindsBy(How = How.LinkText, Using = "Bupa Care Services")]
-        private IWebElement selectBupa;
+        //[FindsBy(How = How.LinkText, Using = "Bupa Care Services")]
+        //private IWebElement selectBupa;
 
         [FindsBy(How = How.LinkText, Using = "Click here to refine your search")]
         private IWebElement refineSearchLink;
@@ -53,6 +56,8 @@ namespace BATDemoFramework
         [FindsBy(How = How.ClassName, Using = "hint__title")]
         private IWebElement thankYouBlock;
 
+        [FindsBy(How = How.ClassName, Using = "search-item-module__item___1y90n")]
+        private IWebElement searchResult;
 
         public void GoTo()
         {
@@ -100,13 +105,23 @@ namespace BATDemoFramework
         }
 
 
-        public void SelectAnEmployer(string employerName)
+        //public void SelectAnEmployer(string employerName)
+        //{
+        //    EnterTextIntoSearchbox(employerName);
+        //    //inputField.SendKeys(employerName); //integration with ares needed to be able to pull out the actual tenants names
+        //    ClickOnSearchBtn();
+        //    WaitUntilSearchResultsAppear(Browser.webDriver);
+        //    SelectBupa();
+        //    ClickOnSelectResultBtn();
+        //    ClickOnContinueBtn();
+        //}
+
+        public void SelectEnteredEmployer(string employerName)
         {
             EnterTextIntoSearchbox(employerName);
-            //inputField.SendKeys(employerName); //integration with ares needed to be able to pull out the actual tenants names
             ClickOnSearchBtn();
             WaitUntilSearchResultsAppear(Browser.webDriver);
-            SelectBupa();
+            SelectEmployer();
             ClickOnSelectResultBtn();
             ClickOnContinueBtn();
         }
@@ -116,9 +131,14 @@ namespace BATDemoFramework
             selectResultBtn.Click();
         }
 
-        public void SelectBupa()
+        //public void SelectBupa()
+        //{
+        //    selectBupa.Click();
+        //}
+
+        public void SelectEmployer()
         {
-            selectBupa.Click();
+            searchResult.Click();
         }
 
         public void ClickOnRefineSearchLink()

@@ -67,6 +67,16 @@ namespace BATDemoFramework
             get { return GetPage<AlternativeEmailPage>(); }
         }
 
+        public static WorkEmailPage WorkEmail
+        {
+            get { return GetPage<WorkEmailPage>(); }
+        }
+
+        public static EmployerVerificationPage EmployerVerification
+        {
+            get { return GetPage<EmployerVerificationPage>(); }
+        }
+
         public static MarketingPage Marketing
         {
             get { return GetPage<MarketingPage>(); }
@@ -96,5 +106,7 @@ namespace BATDemoFramework
         {
             get { return GetPage<OurTermsPage>(); }
         }
+
+       
     }
 }
