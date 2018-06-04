@@ -19,7 +19,6 @@ namespace BATDemoTests.TestCases
         {
             await Preconditions.HaveNewUserCreatedAndVerifiedEmail();
 
-            Pages.EmployerSearch.WaitUntilSecurityBlockIsLoaded(Browser.webDriver);
             Pages.EmployerSearch.SelectEnteredEmployer("Bupa");
             Pages.AlternativeEmail.WaitUntilAlternativeUrlIsLoaded(Browser.webDriver);
 
@@ -31,7 +30,6 @@ namespace BATDemoTests.TestCases
         {
             await Preconditions.HaveNewUserCreatedAndVerifiedEmail();
 
-            Pages.EmployerSearch.WaitUntilSecurityBlockIsLoaded(Browser.webDriver);
             Pages.EmployerSearch.EnterTextIntoSearchbox("r");
             Pages.EmployerSearch.ClickOnSearchBtn();
 
@@ -44,7 +42,6 @@ namespace BATDemoTests.TestCases
         {
             await Preconditions.HaveNewUserCreatedAndVerifiedEmail();
 
-            Pages.EmployerSearch.WaitUntilSecurityBlockIsLoaded(Browser.webDriver);
             Pages.EmployerSearch.EnterTextIntoSearchbox("qwerty");
             Pages.EmployerSearch.ClickOnSearchBtn();
             Pages.EmployerSearch.WaitUntilPhoneNumberFieldAppears(Browser.webDriver);
@@ -57,7 +54,6 @@ namespace BATDemoTests.TestCases
         {
             await Preconditions.HaveNewUserCreatedAndVerifiedEmail();
 
-            Pages.EmployerSearch.WaitUntilSecurityBlockIsLoaded(Browser.webDriver);
             Pages.EmployerSearch.EnterTextIntoSearchbox("qwerty");
             Pages.EmployerSearch.ClickOnSearchBtn();
             Pages.EmployerSearch.WaitUntilPhoneNumberFieldAppears(Browser.webDriver);
@@ -72,7 +68,6 @@ namespace BATDemoTests.TestCases
         {
             await Preconditions.HaveNewUserCreatedAndVerifiedEmail();
 
-            Pages.EmployerSearch.WaitUntilSecurityBlockIsLoaded(Browser.webDriver);
             Pages.EmployerSearch.EnterTextIntoSearchbox("Bupa");
             Pages.EmployerSearch.ClickOnSearchBtn();
             Pages.EmployerSearch.WaitUntilSearchResultsAppear(Browser.webDriver);
@@ -91,7 +86,6 @@ namespace BATDemoTests.TestCases
                var user = new UserGenerator().GetNewUser();
                await Preconditions.NewUserCreated(user);
 
-                Pages.EmployerSearch.WaitUntilSecurityBlockIsLoaded(Browser.webDriver);
                 Pages.EmployerSearch.Logout();
                 Pages.Login.LogIn(user);
                 Pages.EmployerSearch.WaitUntilUrlIsLoaded(Browser.webDriver);
@@ -104,7 +98,6 @@ namespace BATDemoTests.TestCases
         {
             await Preconditions.HaveNewUserCreatedAndVerifiedEmail();
 
-            Pages.EmployerSearch.WaitUntilSecurityBlockIsLoaded(Browser.webDriver);
             Browser.GoToUrl(Urls.AlternativeEmail);
 
             Assert.IsTrue(Pages.EmployerSearch.IsAtUrl(), "User was able to skip the employer search page and go to Alternative email page");

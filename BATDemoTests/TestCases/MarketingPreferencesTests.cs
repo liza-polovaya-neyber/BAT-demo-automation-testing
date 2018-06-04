@@ -14,13 +14,8 @@ namespace BATDemoTests.TestCases
         [Test]
         public async Task CanGoToDashboard()
         {
-            await Preconditions.HaveNewUserCreatedAndVerifiedEmail();
+            await Preconditions.HaveNewUserCreatedAndSkippedAlternativeEmail();
 
-            Pages.EmployerSearch.WaitUntilSecurityBlockIsLoaded(Browser.webDriver);
-            Pages.EmployerSearch.SelectEnteredEmployer("Bupa");
-            Pages.AlternativeEmail.WaitUntilAlternativeUrlIsLoaded(Browser.webDriver);
-            Pages.AlternativeEmail.ClickOnSkipLink();
-            Pages.Marketing.WaitUntilMarketingUrlIsLoaded(Browser.webDriver);
             Pages.Marketing.ClickOnSubmitBtn();
             Pages.Home.WaitUntilHomeUrlIsLoaded(Browser.webDriver);
 
@@ -30,13 +25,8 @@ namespace BATDemoTests.TestCases
         [Test]
         public async Task CanSelectSMSOption()
         {
-            await Preconditions.HaveNewUserCreatedAndVerifiedEmail();
+            await Preconditions.HaveNewUserCreatedAndSkippedAlternativeEmail();
 
-            Pages.EmployerSearch.WaitUntilSecurityBlockIsLoaded(Browser.webDriver);
-            Pages.EmployerSearch.SelectEnteredEmployer("Bupa");
-            Pages.AlternativeEmail.WaitUntilAlternativeUrlIsLoaded(Browser.webDriver);
-            Pages.AlternativeEmail.ClickOnSkipLink();
-            Pages.Marketing.WaitUntilMarketingUrlIsLoaded(Browser.webDriver);
             Pages.Marketing.ChooseSMSOption();
             Pages.Marketing.ClickOnSubmitBtn();
             Pages.Home.WaitUntilHomeUrlIsLoaded(Browser.webDriver);
@@ -47,13 +37,8 @@ namespace BATDemoTests.TestCases
         [Test]
         public async Task CanSelectEmailOption()
         {
-            await Preconditions.HaveNewUserCreatedAndVerifiedEmail();
+            await Preconditions.HaveNewUserCreatedAndSkippedAlternativeEmail();
 
-            Pages.EmployerSearch.WaitUntilSecurityBlockIsLoaded(Browser.webDriver);
-            Pages.EmployerSearch.SelectEnteredEmployer("Bupa");
-            Pages.AlternativeEmail.WaitUntilAlternativeUrlIsLoaded(Browser.webDriver);
-            Pages.AlternativeEmail.ClickOnSkipLink();
-            Pages.Marketing.WaitUntilMarketingUrlIsLoaded(Browser.webDriver);
             Pages.Marketing.ChooseEmailOption();
             Pages.Marketing.ClickOnSubmitBtn();
             Pages.Home.WaitUntilHomeUrlIsLoaded(Browser.webDriver);
@@ -64,13 +49,8 @@ namespace BATDemoTests.TestCases
         [Test]
         public async Task CanSelectPostOption()
         {
-            await Preconditions.HaveNewUserCreatedAndVerifiedEmail();
+            await Preconditions.HaveNewUserCreatedAndSkippedAlternativeEmail();
 
-            Pages.EmployerSearch.WaitUntilSecurityBlockIsLoaded(Browser.webDriver);
-            Pages.EmployerSearch.SelectEnteredEmployer("Bupa");
-            Pages.AlternativeEmail.WaitUntilAlternativeUrlIsLoaded(Browser.webDriver);
-            Pages.AlternativeEmail.ClickOnSkipLink();
-            Pages.Marketing.WaitUntilMarketingUrlIsLoaded(Browser.webDriver);
             Pages.Marketing.ChoosePostOption();
             Pages.Marketing.ClickOnSubmitBtn();
             Pages.Home.WaitUntilHomeUrlIsLoaded(Browser.webDriver);
@@ -81,13 +61,8 @@ namespace BATDemoTests.TestCases
         [Test]
         public async Task CanSelectPhoneOption()
         {
-            await Preconditions.HaveNewUserCreatedAndVerifiedEmail();
+            await Preconditions.HaveNewUserCreatedAndSkippedAlternativeEmail();
 
-            Pages.EmployerSearch.WaitUntilSecurityBlockIsLoaded(Browser.webDriver);
-            Pages.EmployerSearch.SelectEnteredEmployer("Bupa");
-            Pages.AlternativeEmail.WaitUntilAlternativeUrlIsLoaded(Browser.webDriver);
-            Pages.AlternativeEmail.ClickOnSkipLink();
-            Pages.Marketing.WaitUntilMarketingUrlIsLoaded(Browser.webDriver);
             Pages.Marketing.ChoosePhoneOption();
             Pages.Marketing.ClickOnSubmitBtn();
             Pages.Home.WaitUntilHomeUrlIsLoaded(Browser.webDriver);
@@ -98,13 +73,8 @@ namespace BATDemoTests.TestCases
         [Test]
         public async Task CanSelectAllOptions()
         {
-            await Preconditions.HaveNewUserCreatedAndVerifiedEmail();
+            await Preconditions.HaveNewUserCreatedAndSkippedAlternativeEmail();
 
-            Pages.EmployerSearch.WaitUntilSecurityBlockIsLoaded(Browser.webDriver);
-            Pages.EmployerSearch.SelectEnteredEmployer("Bupa");
-            Pages.AlternativeEmail.WaitUntilAlternativeUrlIsLoaded(Browser.webDriver);
-            Pages.AlternativeEmail.ClickOnSkipLink();
-            Pages.Marketing.WaitUntilMarketingUrlIsLoaded(Browser.webDriver);
             Pages.Marketing.ChooseEmailOption();
             Pages.Marketing.ChooseSMSOption();
             Pages.Marketing.ChoosePostOption();
@@ -118,13 +88,8 @@ namespace BATDemoTests.TestCases
         [Test]
         public async Task CanLogout()
         {
-            await Preconditions.HaveNewUserCreatedAndVerifiedEmail();
+            await Preconditions.HaveNewUserCreatedAndSkippedAlternativeEmail();
 
-            Pages.EmployerSearch.WaitUntilSecurityBlockIsLoaded(Browser.webDriver);
-            Pages.EmployerSearch.SelectEnteredEmployer("Bupa");
-            Pages.AlternativeEmail.WaitUntilAlternativeUrlIsLoaded(Browser.webDriver);
-            Pages.AlternativeEmail.ClickOnSkipLink();
-            Pages.Marketing.WaitUntilMarketingUrlIsLoaded(Browser.webDriver);
             Pages.Marketing.Logout();
 
             Assert.IsTrue(Pages.Login.IsAtUrl(), "User hasn't been redirected to login page");
@@ -133,13 +98,8 @@ namespace BATDemoTests.TestCases
         [Test]
         public async Task CanNotSkipMarketingPage()
         {
-            await Preconditions.HaveNewUserCreatedAndVerifiedEmail();
+            await Preconditions.HaveNewUserCreatedAndSkippedAlternativeEmail();
 
-            Pages.EmployerSearch.WaitUntilSecurityBlockIsLoaded(Browser.webDriver);
-            Pages.EmployerSearch.SelectEnteredEmployer("Bupa");
-            Pages.AlternativeEmail.WaitUntilAlternativeUrlIsLoaded(Browser.webDriver);
-            Pages.AlternativeEmail.ClickOnSkipLink();
-            Pages.Marketing.WaitUntilMarketingUrlIsLoaded(Browser.webDriver);
             Browser.GoToUrl(Urls.HomePage);
 
             Assert.IsTrue(Pages.Marketing.IsAtUrl(), "User was able to skip the marketing preferences page and go to Profile dashboard page");
@@ -148,18 +108,12 @@ namespace BATDemoTests.TestCases
         [Test]
         public async Task CanNotGoBackFromMarketingPage()
         {
-            await Preconditions.HaveNewUserCreatedAndVerifiedEmail();
-
-            Pages.EmployerSearch.WaitUntilSecurityBlockIsLoaded(Browser.webDriver);
-            Pages.EmployerSearch.SelectEnteredEmployer("Bupa");
-            Pages.AlternativeEmail.WaitUntilAlternativeUrlIsLoaded(Browser.webDriver);
-            Pages.AlternativeEmail.ClickOnSkipLink();
-            Pages.Marketing.WaitUntilMarketingUrlIsLoaded(Browser.webDriver);
+            await Preconditions.HaveNewUserCreatedAndSkippedAlternativeEmail();
+  
             Browser.GoToUrl(Urls.AlternativeEmail);
 
             Assert.IsTrue(Pages.Marketing.IsAtUrl(), "User was able to skip the marketing preferences page and go back to Alternative email page");
         }
-
 
     }
 }

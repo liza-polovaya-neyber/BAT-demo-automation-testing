@@ -20,7 +20,6 @@ namespace BATDemoTests.TestCases
             var user = new UserGenerator().GetNewUser();
             await Preconditions.HaveNewUserCreatedAndVerifiedEmail();
 
-            Pages.EmployerSearch.WaitUntilSecurityBlockIsLoaded(Browser.webDriver);
             Pages.EmployerSearch.SelectEnteredEmployer("Foster Denovo");
             Pages.WorkEmail.WaitUntilWorkEmailUrlIsLoaded(Browser.webDriver);
             Pages.WorkEmail.EnterEmail(user.EmailAddress);
@@ -38,7 +37,6 @@ namespace BATDemoTests.TestCases
             var user = new UserGenerator().GetNewUser();
             await Preconditions.HaveNewUserCreatedAndVerifiedEmail();
 
-            Pages.EmployerSearch.WaitUntilSecurityBlockIsLoaded(Browser.webDriver);
             Pages.EmployerSearch.SelectEnteredEmployer("Foster Denovo");
             Pages.WorkEmail.WaitUntilWorkEmailUrlIsLoaded(Browser.webDriver);
             Pages.WorkEmail.EnterEmail(user.EmailAddress);
@@ -59,7 +57,6 @@ namespace BATDemoTests.TestCases
         {
             await Preconditions.HaveNewUserCreatedAndVerifiedEmail();
 
-            Pages.EmployerSearch.WaitUntilSecurityBlockIsLoaded(Browser.webDriver);
             Pages.EmployerSearch.SelectEnteredEmployer("Foster Denovo");
             Pages.WorkEmail.WaitUntilWorkEmailUrlIsLoaded(Browser.webDriver);
             Pages.WorkEmail.EnterEmail(a);

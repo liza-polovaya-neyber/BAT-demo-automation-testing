@@ -28,6 +28,7 @@ namespace BATDemoTests
             var urlToken = emailService.GetUrlTokenFromMessage(messages[0]);
 
             Browser.GoToUrl(urlToken);
+            Pages.EmployerSearch.WaitUntilUrlIsLoaded(Browser.webDriver);
         }
 
         public static async Task HaveNewUserCreatedAndSelectedAnEmployer()
@@ -50,6 +51,30 @@ namespace BATDemoTests
             Pages.EmployerSearch.WaitUntilUrlIsLoaded(Browser.webDriver);
             Pages.EmployerSearch.SelectEnteredEmployer("Bupa");
             Pages.AlternativeEmail.WaitUntilAlternativeUrlIsLoaded(Browser.webDriver);
+        }
+
+        public static async Task HaveNewUserCreatedAndSkippedAlternativeEmail()
+        {
+            var user = new UserGenerator().GetNewUser();
+
+            Pages.AboutMe.GoTo();
+            Pages.AboutMe.RegisterNewUser(user);
+            Pages.VerificationEmail.WaitUntilVerificationEmailPageTitleIsShown(Browser.webDriver);
+
+            Thread.Sleep(TimeSpan.FromSeconds(10));
+
+            var emailService = new EmailService();
+
+            var messages = await emailService.GetMessagesByQuery(EmailTypes.ConfirmYourEmail, user.EmailAddress);
+            var urlToken = emailService.GetUrlTokenFromMessage(messages[0]);
+
+            Browser.GoToUrl(urlToken);
+
+            Pages.EmployerSearch.WaitUntilUrlIsLoaded(Browser.webDriver);
+            Pages.EmployerSearch.SelectEnteredEmployer("Bupa");
+            Pages.AlternativeEmail.WaitUntilAlternativeUrlIsLoaded(Browser.webDriver);
+            Pages.AlternativeEmail.ClickOnSkipLink();
+            Pages.Marketing.WaitUntilMarketingUrlIsLoaded(Browser.webDriver);
         }
 
         public static async Task HaveNewUserPassedProfileJourney()
@@ -95,6 +120,7 @@ namespace BATDemoTests
             var urlToken = emailService.GetUrlTokenFromMessage(messages[0]);
 
             Browser.GoToUrl(urlToken);
+            Pages.EmployerSearch.WaitUntilUrlIsLoaded(Browser.webDriver);
         }
     }
 }
