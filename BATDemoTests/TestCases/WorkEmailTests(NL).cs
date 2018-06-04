@@ -18,7 +18,7 @@ namespace BATDemoTests.TestCases
         public async Task CanNotVerifyNonExistingWorkEmail()
         {
             var user = new UserGenerator().GetNewUser();
-            await Preconditions.HaveNewUserCreated();
+            await Preconditions.HaveNewUserCreatedAndVerifiedEmail();
 
             Pages.EmployerSearch.WaitUntilSecurityBlockIsLoaded(Browser.webDriver);
             Pages.EmployerSearch.SelectEnteredEmployer("Foster Denovo");
@@ -36,7 +36,7 @@ namespace BATDemoTests.TestCases
         public async Task CanTickConsentOnWorkEmailPage()
         {
             var user = new UserGenerator().GetNewUser();
-            await Preconditions.HaveNewUserCreated();
+            await Preconditions.HaveNewUserCreatedAndVerifiedEmail();
 
             Pages.EmployerSearch.WaitUntilSecurityBlockIsLoaded(Browser.webDriver);
             Pages.EmployerSearch.SelectEnteredEmployer("Foster Denovo");
@@ -57,7 +57,7 @@ namespace BATDemoTests.TestCases
         //[TestCase("testemail@hello", "Please enter a valid email address")]
         public async Task CanNotEnterInvalidEmail(string a, string b)
         {
-            await Preconditions.HaveNewUserCreated();
+            await Preconditions.HaveNewUserCreatedAndVerifiedEmail();
 
             Pages.EmployerSearch.WaitUntilSecurityBlockIsLoaded(Browser.webDriver);
             Pages.EmployerSearch.SelectEnteredEmployer("Foster Denovo");

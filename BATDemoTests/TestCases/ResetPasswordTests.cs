@@ -157,7 +157,7 @@ namespace BATDemoTests
         public async Task ResetPasswordLinkIsReceivedOnAlternativeEmail()   
         {
             var user = new UserGenerator().GetNewUser();
-            await Preconditions.HaveNewUserCreated();
+            await Preconditions.HaveNewUserCreatedAndVerifiedEmail();
 
             Pages.EmployerSearch.WaitUntilSecurityBlockIsLoaded(Browser.webDriver);
             Pages.EmployerSearch.SelectEnteredEmployer("Bupa");

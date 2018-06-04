@@ -17,9 +17,6 @@ namespace BATDemoFramework
         [FindsBy(How = How.LinkText, Using = "Select")]
         private IWebElement selectResultBtn;
 
-        //[FindsBy(How = How.LinkText, Using = "Bupa Care Services")]
-        //private IWebElement selectBupa;
-
         [FindsBy(How = How.LinkText, Using = "Click here to refine your search")]
         private IWebElement refineSearchLink;
 
@@ -104,18 +101,6 @@ namespace BATDemoFramework
             submitPhoneNo.Click();
         }
 
-
-        //public void SelectAnEmployer(string employerName)
-        //{
-        //    EnterTextIntoSearchbox(employerName);
-        //    //inputField.SendKeys(employerName); //integration with ares needed to be able to pull out the actual tenants names
-        //    ClickOnSearchBtn();
-        //    WaitUntilSearchResultsAppear(Browser.webDriver);
-        //    SelectBupa();
-        //    ClickOnSelectResultBtn();
-        //    ClickOnContinueBtn();
-        //}
-
         public void SelectEnteredEmployer(string employerName)
         {
             EnterTextIntoSearchbox(employerName);
@@ -130,11 +115,6 @@ namespace BATDemoFramework
         {
             selectResultBtn.Click();
         }
-
-        //public void SelectBupa()
-        //{
-        //    selectBupa.Click();
-        //}
 
         public void SelectEmployer()
         {

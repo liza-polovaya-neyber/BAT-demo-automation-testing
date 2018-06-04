@@ -15,7 +15,6 @@ namespace BATDemoTests.TestCases
 
     class AboutMeTests : TestBase
     {
-        private IWebDriver driver;
         private IWebElement element;
 
         [Test]

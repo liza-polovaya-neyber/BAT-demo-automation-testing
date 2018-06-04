@@ -42,7 +42,7 @@ namespace BATDemoTests.TestCases
         public async Task CanGetToExpiredLinkPageWhenVerifyingAlternativeEmail()
         {
             var user = new UserGenerator().GetNewUser();
-            await Preconditions.HaveNewUserCreated();
+            await Preconditions.HaveNewUserCreatedAndVerifiedEmail();
 
             Pages.EmployerSearch.WaitUntilUrlIsLoaded(Browser.webDriver);
             Pages.EmployerSearch.SelectEnteredEmployer("Bupa");

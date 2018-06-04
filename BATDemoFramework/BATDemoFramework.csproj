@@ -86,7 +86,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Base\TestBaseForNewTabWindow.cs" />
-    <Compile Include="Base\TestBaseMarketing.cs" />
     <Compile Include="BrowserStackTest\BrowserStackNUnitTest.cs" />
     <Compile Include="Configurations\TestConfigurationManager.cs" />
     <Compile Include="EmailService\EmailTypes.cs" />

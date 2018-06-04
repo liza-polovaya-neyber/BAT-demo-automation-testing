@@ -14,7 +14,7 @@ namespace BATDemoTests.TestCases
         [Test]
         public async Task CanGoToDashboard()
         {
-            await Preconditions.HaveNewUserCreated();
+            await Preconditions.HaveNewUserCreatedAndVerifiedEmail();
 
             Pages.EmployerSearch.WaitUntilSecurityBlockIsLoaded(Browser.webDriver);
             Pages.EmployerSearch.SelectEnteredEmployer("Bupa");
@@ -30,7 +30,7 @@ namespace BATDemoTests.TestCases
         [Test]
         public async Task CanSelectSMSOption()
         {
-            await Preconditions.HaveNewUserCreated();
+            await Preconditions.HaveNewUserCreatedAndVerifiedEmail();
 
             Pages.EmployerSearch.WaitUntilSecurityBlockIsLoaded(Browser.webDriver);
             Pages.EmployerSearch.SelectEnteredEmployer("Bupa");
@@ -47,7 +47,7 @@ namespace BATDemoTests.TestCases
         [Test]
         public async Task CanSelectEmailOption()
         {
-            await Preconditions.HaveNewUserCreated();
+            await Preconditions.HaveNewUserCreatedAndVerifiedEmail();
 
             Pages.EmployerSearch.WaitUntilSecurityBlockIsLoaded(Browser.webDriver);
             Pages.EmployerSearch.SelectEnteredEmployer("Bupa");
@@ -64,7 +64,7 @@ namespace BATDemoTests.TestCases
         [Test]
         public async Task CanSelectPostOption()
         {
-            await Preconditions.HaveNewUserCreated();
+            await Preconditions.HaveNewUserCreatedAndVerifiedEmail();
 
             Pages.EmployerSearch.WaitUntilSecurityBlockIsLoaded(Browser.webDriver);
             Pages.EmployerSearch.SelectEnteredEmployer("Bupa");
@@ -81,7 +81,7 @@ namespace BATDemoTests.TestCases
         [Test]
         public async Task CanSelectPhoneOption()
         {
-            await Preconditions.HaveNewUserCreated();
+            await Preconditions.HaveNewUserCreatedAndVerifiedEmail();
 
             Pages.EmployerSearch.WaitUntilSecurityBlockIsLoaded(Browser.webDriver);
             Pages.EmployerSearch.SelectEnteredEmployer("Bupa");
@@ -98,7 +98,7 @@ namespace BATDemoTests.TestCases
         [Test]
         public async Task CanSelectAllOptions()
         {
-            await Preconditions.HaveNewUserCreated();
+            await Preconditions.HaveNewUserCreatedAndVerifiedEmail();
 
             Pages.EmployerSearch.WaitUntilSecurityBlockIsLoaded(Browser.webDriver);
             Pages.EmployerSearch.SelectEnteredEmployer("Bupa");
@@ -118,7 +118,7 @@ namespace BATDemoTests.TestCases
         [Test]
         public async Task CanLogout()
         {
-            await Preconditions.HaveNewUserCreated();
+            await Preconditions.HaveNewUserCreatedAndVerifiedEmail();
 
             Pages.EmployerSearch.WaitUntilSecurityBlockIsLoaded(Browser.webDriver);
             Pages.EmployerSearch.SelectEnteredEmployer("Bupa");
@@ -133,7 +133,7 @@ namespace BATDemoTests.TestCases
         [Test]
         public async Task CanNotSkipMarketingPage()
         {
-            await Preconditions.HaveNewUserCreated();
+            await Preconditions.HaveNewUserCreatedAndVerifiedEmail();
 
             Pages.EmployerSearch.WaitUntilSecurityBlockIsLoaded(Browser.webDriver);
             Pages.EmployerSearch.SelectEnteredEmployer("Bupa");
@@ -148,7 +148,7 @@ namespace BATDemoTests.TestCases
         [Test]
         public async Task CanNotGoBackFromMarketingPage()
         {
-            await Preconditions.HaveNewUserCreated();
+            await Preconditions.HaveNewUserCreatedAndVerifiedEmail();
 
             Pages.EmployerSearch.WaitUntilSecurityBlockIsLoaded(Browser.webDriver);
             Pages.EmployerSearch.SelectEnteredEmployer("Bupa");

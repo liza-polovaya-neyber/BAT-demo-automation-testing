@@ -2,9 +2,11 @@
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.IE;
+using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.UI;
 using System;
 using System.Configuration;
+using System.Threading;
 
 namespace BATDemoFramework
 {
@@ -144,6 +146,8 @@ namespace BATDemoFramework
             get { return webDriver; }
         }
 
+        public static object WebDriver { get; private set; }
+
         public static void GoTo(string relativeUrl)
         {
             webDriver.Navigate().GoToUrl(string.Format("{0}/{1}", baseUrl, relativeUrl));
@@ -164,6 +168,24 @@ namespace BATDemoFramework
             webDriver.Manage().Cookies.DeleteCookieNamed(cookieName);
 
         }
+
+        public static void DragAndDrop(IWebElement source, IWebElement destination)
+        {
+            (new Actions(webDriver)).DragAndDrop(source, destination).Build().Perform();
+        }
+
+        public static void NavigateBack()
+        {
+            webDriver.Navigate().Back();
+        }
+
+        public static void AlertAccept()
+        {
+            Thread.Sleep(2000);
+            webDriver.SwitchTo().Alert().Accept();
+            webDriver.SwitchTo().DefaultContent();
+        }
+
 
     }
    

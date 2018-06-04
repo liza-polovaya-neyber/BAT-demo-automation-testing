@@ -17,11 +17,11 @@ namespace BATDemoTests.TestCases
         [Test]
         public async Task CanSelectAnEmployer()
         {
-            await Preconditions.HaveNewUserCreated();
+            await Preconditions.HaveNewUserCreatedAndVerifiedEmail();
 
             Pages.EmployerSearch.WaitUntilSecurityBlockIsLoaded(Browser.webDriver);
             Pages.EmployerSearch.SelectEnteredEmployer("Bupa");
-            Pages.AlternativeEmail.WaitUntilSecurityBlockIsLoaded(Browser.webDriver);
+            Pages.AlternativeEmail.WaitUntilAlternativeUrlIsLoaded(Browser.webDriver);
 
             Assert.IsTrue(Pages.AlternativeEmail.IsAtUrl(), "User is not on an alternative email page");
         }
@@ -29,7 +29,7 @@ namespace BATDemoTests.TestCases
         [Test]
         public async Task CanGetValidationError()
         {
-            await Preconditions.HaveNewUserCreated();
+            await Preconditions.HaveNewUserCreatedAndVerifiedEmail();
 
             Pages.EmployerSearch.WaitUntilSecurityBlockIsLoaded(Browser.webDriver);
             Pages.EmployerSearch.EnterTextIntoSearchbox("r");
@@ -42,7 +42,7 @@ namespace BATDemoTests.TestCases
         [Test]
         public async Task EmployerNotFound()
         {
-            await Preconditions.HaveNewUserCreated();
+            await Preconditions.HaveNewUserCreatedAndVerifiedEmail();
 
             Pages.EmployerSearch.WaitUntilSecurityBlockIsLoaded(Browser.webDriver);
             Pages.EmployerSearch.EnterTextIntoSearchbox("qwerty");
@@ -55,7 +55,7 @@ namespace BATDemoTests.TestCases
         [Test]
         public async Task CanEnterPhoneNumberWhenEmployerNotFound()
         {
-            await Preconditions.HaveNewUserCreated();
+            await Preconditions.HaveNewUserCreatedAndVerifiedEmail();
 
             Pages.EmployerSearch.WaitUntilSecurityBlockIsLoaded(Browser.webDriver);
             Pages.EmployerSearch.EnterTextIntoSearchbox("qwerty");
@@ -70,7 +70,7 @@ namespace BATDemoTests.TestCases
         [Test]
         public async Task CanRefineSearch()
         {
-            await Preconditions.HaveNewUserCreated();
+            await Preconditions.HaveNewUserCreatedAndVerifiedEmail();
 
             Pages.EmployerSearch.WaitUntilSecurityBlockIsLoaded(Browser.webDriver);
             Pages.EmployerSearch.EnterTextIntoSearchbox("Bupa");
@@ -102,7 +102,7 @@ namespace BATDemoTests.TestCases
         [Test]
         public async Task CanNotSkipEmployerPage()
         {
-            await Preconditions.HaveNewUserCreated();
+            await Preconditions.HaveNewUserCreatedAndVerifiedEmail();
 
             Pages.EmployerSearch.WaitUntilSecurityBlockIsLoaded(Browser.webDriver);
             Browser.GoToUrl(Urls.AlternativeEmail);
