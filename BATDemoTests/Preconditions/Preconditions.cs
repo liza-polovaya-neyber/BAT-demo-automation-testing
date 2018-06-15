@@ -112,11 +112,12 @@ namespace BATDemoTests
             Pages.AboutMe.RegisterNewUser(user);
             Pages.VerificationEmail.WaitUntilVerificationEmailPageTitleIsShown(Browser.webDriver);
 
-            Thread.Sleep(TimeSpan.FromSeconds(20));
+            await Task.Delay(TimeSpan.FromSeconds(20));
 
             var emailService = new EmailService();
 
             var messages = await emailService.GetMessagesByQuery(EmailTypes.ConfirmYourEmail, user.EmailAddress);
+            Console.WriteLine($"messages.Count: {messages.Count}");
             var urlToken = emailService.GetUrlTokenFromMessage(messages[0]);
 
             Browser.GoToUrl(urlToken);

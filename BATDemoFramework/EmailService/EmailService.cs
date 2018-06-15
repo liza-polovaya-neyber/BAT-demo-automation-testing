@@ -33,6 +33,7 @@ namespace BATDemoFramework.EmailService
 
         public EmailService()
         {
+            Console.WriteLine($"Start email service");
             UserCredential credential;
 
             var clientSecretPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "client_secret.json");
@@ -58,6 +59,7 @@ namespace BATDemoFramework.EmailService
                 HttpClientInitializer = credential,
                 ApplicationName = ApplicationName,
             });
+            Console.WriteLine($"End start email service");
         }
 
         
