@@ -4,6 +4,7 @@ using BATDemoFramework.Generators;
 using NUnit.Framework;
 using OpenQA.Selenium;
 using System;
+using System.Diagnostics;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -115,6 +116,8 @@ namespace BATDemoTests
         [Test]
         public async Task CanResendResetPasswordLink()  
         {  
+            Console.WriteLine("CanResendResetPasswordLink from console");
+            Trace.WriteLine("CanResendResetPasswordLink from trace");
             var user = new UserGenerator().GetNewUser();
             await Preconditions.NewUserCreated(user);
 
