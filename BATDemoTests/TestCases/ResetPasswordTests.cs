@@ -69,7 +69,7 @@ namespace BATDemoTests
             Pages.ResetPassword.GoTo();
             Pages.ResetPassword.EnterEmailAndClickToResetPassword(user);
 
-            Thread.Sleep(7000);
+            await Task.Delay(7000);
             var emailService = new EmailService();
             var messages = await emailService.GetMessagesByQuery(EmailTypes.ResetPassword, user.EmailAddress);
 
@@ -88,7 +88,7 @@ namespace BATDemoTests
             Pages.ResetPassword.EnterEmailAndClickToResetPassword(user);
 
 
-            Thread.Sleep(7000);
+            await Task.Delay(7000);
             var emailService = new EmailService();
             var messages = await emailService.GetMessagesByQuery(EmailTypes.ResetPassword, user.EmailAddress);
 
@@ -104,9 +104,9 @@ namespace BATDemoTests
             Pages.EmployerSearch.WaitUntilUrlIsLoaded(Browser.webDriver);
             Pages.EmployerSearch.Logout();
             Pages.ResetPassword.GoTo();
-            Pages.ResetPassword.EnterEmailAndClickToResetPassword(user);   
+            Pages.ResetPassword.EnterEmailAndClickToResetPassword(user);
 
-            Thread.Sleep(7000);
+            await Task.Delay(7000);
             var emailService = new EmailService();
             var messages = await emailService.GetMessagesByQuery(EmailTypes.ResetPassword, user.EmailAddress);
 
@@ -116,8 +116,6 @@ namespace BATDemoTests
         [Test]
         public async Task CanResendResetPasswordLink()  
         {  
-            Console.WriteLine("CanResendResetPasswordLink from console");
-            Trace.WriteLine("CanResendResetPasswordLink from trace");
             var user = new UserGenerator().GetNewUser();
             await Preconditions.NewUserCreated(user);
 
@@ -128,7 +126,7 @@ namespace BATDemoTests
             Pages.ResetPassword.TryDifferentEmailLinkIsVisible(Browser.webDriver);
             Pages.ResetPassword.ClickOnResendMyResetLinkButton();
 
-            Thread.Sleep(7000);
+            await Task.Delay(7000);
             var emailService = new EmailService();
             var messages = await emailService.GetMessagesByQuery(EmailTypes.ResetPassword, user.EmailAddress);
 
@@ -149,7 +147,7 @@ namespace BATDemoTests
             Pages.ResetPassword.ClickOnTryDifferentEmailLink();
             Pages.ResetPassword.EnterEmailAndClickToReset();
 
-            Thread.Sleep(7000);
+            await Task.Delay(7000);
             var emailService = new EmailService();
             var messages = await emailService.GetMessagesByQuery(EmailTypes.ResetPassword, user.EmailAddress);
 
@@ -169,7 +167,7 @@ namespace BATDemoTests
             Pages.AlternativeEmail.ClickOnSubmitBtn();
             Pages.Marketing.WaitUntilMarketingUrlIsLoaded(Browser.webDriver);
             Pages.Marketing.Logout();
-            Thread.Sleep(TimeSpan.FromSeconds(10));
+            await Task.Delay(TimeSpan.FromSeconds(10));
 
             var emailService = new EmailService();
             var messages = await emailService.GetMessagesByQuery(EmailTypes.ConfirmYourEmail, user.EmailAddress);
@@ -183,7 +181,7 @@ namespace BATDemoTests
             Pages.ResetPassword.ClickOnTryDifferentEmailLink();
             Pages.ResetPassword.EnterEmailAndClickToResetPassword(user);
 
-            Thread.Sleep(10000);
+            await Task.Delay(10000);
    
             var newMessages = await emailService.GetMessagesByQuery(EmailTypes.ResetPassword, user.EmailAddress);
 
