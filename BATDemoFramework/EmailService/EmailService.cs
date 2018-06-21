@@ -39,9 +39,7 @@ namespace BATDemoFramework.EmailService
 
             using (var stream = new FileStream(clientSecretPath, FileMode.Open, FileAccess.Read))
             {
-                string credPath = System.Environment.GetFolderPath(
-                    System.Environment.SpecialFolder.Personal);
-                credPath = Path.Combine(credPath, ".credentials/gmail-dotnet-quickstart.json");
+                var credPath = "C:/.credentials/gmail-dotnet-quickstart.json";
 
                 credential = GoogleWebAuthorizationBroker.AuthorizeAsync(
                     GoogleClientSecrets.Load(stream).Secrets,
