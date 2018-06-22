@@ -25,9 +25,8 @@ namespace BATDemoTests.TestCases
             Pages.ResetPassword.GoTo();
             Pages.ResetPassword.EnterEmailAndClickToResetPassword(user);
 
-            await Task.Delay(7000);
             var emailService = new EmailService();
-            var messages = await emailService.GetMessagesByQuery(EmailTypes.ResetPassword, user.EmailAddress);
+            var messages = await emailService.GetMessagesBySubject(EmailTypes.ResetPassword, user.EmailAddress);
             var urlToken = emailService.GetUrlTokenFromMessage(messages[0]);
 
             Browser.GoToUrl(urlToken);
@@ -47,9 +46,8 @@ namespace BATDemoTests.TestCases
             Pages.ResetPassword.GoTo();
             Pages.ResetPassword.EnterEmailAndClickToResetPassword(user);
 
-            await Task.Delay(7000);
             var emailService = new EmailService();
-            var messages = await emailService.GetMessagesByQuery(EmailTypes.ResetPassword, user.EmailAddress);
+            var messages = await emailService.GetMessagesBySubject(EmailTypes.ResetPassword, user.EmailAddress);
             var urlToken = emailService.GetUrlTokenFromMessage(messages[0]);
 
             Browser.GoToUrl(urlToken);
@@ -72,9 +70,8 @@ namespace BATDemoTests.TestCases
             Pages.ResetPassword.GoTo();
             Pages.ResetPassword.EnterEmailAndClickToResetPassword(user);
 
-            await Task.Delay(7000);
             var emailService = new EmailService();
-            var messages = await emailService.GetMessagesByQuery(EmailTypes.ResetPassword, user.EmailAddress);
+            var messages = await emailService.GetMessagesBySubject(EmailTypes.ResetPassword, user.EmailAddress);
             var urlToken = emailService.GetUrlTokenFromMessage(messages[0]);
 
             Browser.GoToUrl(urlToken);
@@ -96,9 +93,8 @@ namespace BATDemoTests.TestCases
             Pages.ResetPassword.GoTo();
             Pages.ResetPassword.EnterEmailAndClickToResetPassword(user);
 
-            await Task.Delay(7000);
             var emailService = new EmailService();
-            var messages = await emailService.GetMessagesByQuery(EmailTypes.ResetPassword, user.EmailAddress);
+            var messages = await emailService.GetMessagesBySubject(EmailTypes.ResetPassword, user.EmailAddress);
             var urlToken = emailService.GetUrlTokenFromMessage(messages[0]);
 
             Browser.GoToUrl(urlToken);
@@ -121,9 +117,8 @@ namespace BATDemoTests.TestCases
             Pages.ResetPassword.GoTo();
             Pages.ResetPassword.EnterEmailAndClickToResetPassword(user);
 
-            await Task.Delay(7000);
             var emailService = new EmailService();
-            var messages = await emailService.GetMessagesByQuery(EmailTypes.ResetPassword, user.EmailAddress);
+            var messages = await emailService.GetMessagesBySubject(EmailTypes.ResetPassword, user.EmailAddress);
             var urlToken = emailService.GetUrlTokenFromMessage(messages[0]);
 
             Browser.GoToUrl(urlToken);
@@ -148,9 +143,8 @@ namespace BATDemoTests.TestCases
             Pages.ResetPassword.GoTo();
             Pages.ResetPassword.EnterEmailAndClickToResetPassword(user);
 
-            await Task.Delay(7000);
             var emailService = new EmailService();
-            var messages = await emailService.GetMessagesByQuery(EmailTypes.ResetPassword, user.EmailAddress);
+            var messages = await emailService.GetMessagesBySubject(EmailTypes.ResetPassword, user.EmailAddress);
             var urlToken = emailService.GetUrlTokenFromMessage(messages[0]);
 
             Browser.GoToUrl(urlToken);

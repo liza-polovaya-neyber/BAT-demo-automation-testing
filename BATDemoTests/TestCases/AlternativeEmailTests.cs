@@ -85,10 +85,9 @@ namespace BATDemoTests.TestCases
  
             Pages.AlternativeEmail.EnterEmail(user.EmailAddress);
             Pages.AlternativeEmail.ClickOnSubmitBtn();
-            await Task.Delay(TimeSpan.FromSeconds(10));
 
             var emailService = new EmailService();
-            var messages = await emailService.GetMessagesByQuery(EmailTypes.ConfirmYourEmail, user.EmailAddress);
+            var messages = await emailService.GetMessagesBySubject(EmailTypes.ConfirmYourEmail, user.EmailAddress);
             var urlToken = emailService.GetUrlTokenFromMessage(messages[0]);
 
             Browser.GoToUrl(urlToken);
@@ -107,10 +106,9 @@ namespace BATDemoTests.TestCases
             Pages.AlternativeEmail.ClickOnSubmitBtn();
             Pages.Marketing.WaitUntilMarketingUrlIsLoaded(Browser.webDriver);
             Pages.Marketing.Logout();
-            await Task.Delay(TimeSpan.FromSeconds(5));
 
             var emailService = new EmailService();
-            var messages = await emailService.GetMessagesByQuery(EmailTypes.ConfirmYourEmail, user.EmailAddress);
+            var messages = await emailService.GetMessagesBySubject(EmailTypes.ConfirmYourEmail, user.EmailAddress);
             var urlToken = emailService.GetUrlTokenFromMessage(messages[0]);
 
             Browser.GoToUrl(urlToken);
@@ -129,10 +127,9 @@ namespace BATDemoTests.TestCases
             Pages.AlternativeEmail.ClickOnSubmitBtn();
             Pages.Marketing.WaitUntilMarketingUrlIsLoaded(Browser.webDriver);
             Pages.Marketing.Logout();
-            await Task.Delay(TimeSpan.FromSeconds(5));
 
             var emailService = new EmailService();
-            var messages = await emailService.GetMessagesByQuery(EmailTypes.ConfirmYourEmail, user.EmailAddress);
+            var messages = await emailService.GetMessagesBySubject(EmailTypes.ConfirmYourEmail, user.EmailAddress);
             var urlToken = emailService.GetUrlTokenFromMessage(messages[0]);
 
             Browser.GoToUrl(urlToken);

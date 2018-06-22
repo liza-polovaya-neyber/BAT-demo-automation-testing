@@ -16,7 +16,7 @@ namespace BATDemoFramework.GmailService
         /// </summary>
         /// <param name="query">String used to filter Messages returned.</param>
         /// <param name="recipient">String used to filter out by recipient Messages returned </param>
-        Task<List<Message>> GetMessagesByQuery(string query, string recipient = null);
+        Task<List<Message>> GetMessagesBySubject(string query, string recipient = null);
         /// <summary>
         /// Get all urls found in the email message
         /// </summary>

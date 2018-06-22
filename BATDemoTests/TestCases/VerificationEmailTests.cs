@@ -62,9 +62,8 @@ namespace BATDemoTests.TestCases
             Pages.AboutMe.RegisterNewUser(user);
             Pages.VerificationEmail.WaitUntilVerificationEmailPageTitleIsShown(Browser.webDriver);
 
-            await Task.Delay(TimeSpan.FromSeconds(10));
             var emailService = new EmailService();
-            var messages = await emailService.GetMessagesByQuery(EmailTypes.ConfirmYourEmail, user.EmailAddress);
+            var messages = await emailService.GetMessagesBySubject(EmailTypes.ConfirmYourEmail, user.EmailAddress);
 
             Assert.IsNotEmpty(messages, "No verification email is found");
         }
@@ -116,10 +115,9 @@ namespace BATDemoTests.TestCases
             Pages.AboutMe.RegisterNewUser(user);
             Pages.VerificationEmail.WaitUntilVerificationEmailPageTitleIsShown(Browser.webDriver);
             Pages.VerificationEmail.ClickOnResendEmailLink();
-            await Task.Delay(8000);
 
             var emailService = new EmailService();
-            var messages = await emailService.GetMessagesByQuery(EmailTypes.ConfirmYourEmail, user.EmailAddress);
+            var messages = await emailService.GetMessagesBySubject(EmailTypes.ConfirmYourEmail, user.EmailAddress);
 
             //check that 2 verification emails are received
             Assert.AreEqual(2, messages.Count, "Can't find 2 verification emails"); 
@@ -134,10 +132,9 @@ namespace BATDemoTests.TestCases
             Pages.AboutMe.RegisterNewUser(user);
             Pages.VerificationEmail.WaitUntilVerificationEmailPageTitleIsShown(Browser.webDriver);
 
-            await Task.Delay(TimeSpan.FromSeconds(10));
             var emailService = new EmailService();
 
-            var messages = await emailService.GetMessagesByQuery(EmailTypes.ConfirmYourEmail, user.EmailAddress);
+            var messages = await emailService.GetMessagesBySubject(EmailTypes.ConfirmYourEmail, user.EmailAddress);
             var urlToken = emailService.GetUrlTokenFromMessage(messages[0]);
 
             Browser.GoToUrl(urlToken);
@@ -156,9 +153,8 @@ namespace BATDemoTests.TestCases
             Pages.AboutMe.RegisterNewUser(user);
             Pages.VerificationEmail.WaitUntilVerificationEmailPageTitleIsShown(Browser.webDriver);
 
-            await Task.Delay(TimeSpan.FromSeconds(10));
             var emailService = new EmailService();
-            var messages = await emailService.GetMessagesByQuery(EmailTypes.ConfirmYourEmail, user.EmailAddress);
+            var messages = await emailService.GetMessagesBySubject(EmailTypes.ConfirmYourEmail, user.EmailAddress);
             var urlToken = emailService.GetUrlTokenFromMessage(messages[0]);
 
             Browser.GoToUrl(urlToken);

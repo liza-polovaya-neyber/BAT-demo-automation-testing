@@ -69,9 +69,8 @@ namespace BATDemoTests
             Pages.ResetPassword.GoTo();
             Pages.ResetPassword.EnterEmailAndClickToResetPassword(user);
 
-            await Task.Delay(7000);
             var emailService = new EmailService();
-            var messages = await emailService.GetMessagesByQuery(EmailTypes.ResetPassword, user.EmailAddress);
+            var messages = await emailService.GetMessagesBySubject(EmailTypes.ResetPassword, user.EmailAddress);
 
             Assert.IsEmpty(messages, "Reset password email is received");
         }
@@ -87,10 +86,8 @@ namespace BATDemoTests
             Pages.ResetPassword.ClickOnTryDifferentEmailLink();
             Pages.ResetPassword.EnterEmailAndClickToResetPassword(user);
 
-
-            await Task.Delay(7000);
             var emailService = new EmailService();
-            var messages = await emailService.GetMessagesByQuery(EmailTypes.ResetPassword, user.EmailAddress);
+            var messages = await emailService.GetMessagesBySubject(EmailTypes.ResetPassword, user.EmailAddress);
 
             Assert.IsEmpty(messages, "Reset password email is received");
         }
@@ -106,9 +103,8 @@ namespace BATDemoTests
             Pages.ResetPassword.GoTo();
             Pages.ResetPassword.EnterEmailAndClickToResetPassword(user);
 
-            await Task.Delay(7000);
             var emailService = new EmailService();
-            var messages = await emailService.GetMessagesByQuery(EmailTypes.ResetPassword, user.EmailAddress);
+            var messages = await emailService.GetMessagesBySubject(EmailTypes.ResetPassword, user.EmailAddress);
 
             Assert.IsNotEmpty(messages, "No reset password emails found");
         }
@@ -126,9 +122,8 @@ namespace BATDemoTests
             Pages.ResetPassword.TryDifferentEmailLinkIsVisible(Browser.webDriver);
             Pages.ResetPassword.ClickOnResendMyResetLinkButton();
 
-            await Task.Delay(7000);
             var emailService = new EmailService();
-            var messages = await emailService.GetMessagesByQuery(EmailTypes.ResetPassword, user.EmailAddress);
+            var messages = await emailService.GetMessagesBySubject(EmailTypes.ResetPassword, user.EmailAddress);
 
             Assert.AreEqual(2, messages.Count, "Can't find 2 reset password emails");
         }
@@ -147,9 +142,8 @@ namespace BATDemoTests
             Pages.ResetPassword.ClickOnTryDifferentEmailLink();
             Pages.ResetPassword.EnterEmailAndClickToReset();
 
-            await Task.Delay(7000);
             var emailService = new EmailService();
-            var messages = await emailService.GetMessagesByQuery(EmailTypes.ResetPassword, user.EmailAddress);
+            var messages = await emailService.GetMessagesBySubject(EmailTypes.ResetPassword, user.EmailAddress);
 
             Assert.AreEqual(1, messages.Count, "There was not just 1 reset password email in the mailbox");
         }
@@ -167,10 +161,9 @@ namespace BATDemoTests
             Pages.AlternativeEmail.ClickOnSubmitBtn();
             Pages.Marketing.WaitUntilMarketingUrlIsLoaded(Browser.webDriver);
             Pages.Marketing.Logout();
-            await Task.Delay(TimeSpan.FromSeconds(10));
 
             var emailService = new EmailService();
-            var messages = await emailService.GetMessagesByQuery(EmailTypes.ConfirmYourEmail, user.EmailAddress);
+            var messages = await emailService.GetMessagesBySubject(EmailTypes.ConfirmYourEmail, user.EmailAddress);
             var urlToken = emailService.GetUrlTokenFromMessage(messages[0]);
 
             Browser.GoToUrl(urlToken);
@@ -180,10 +173,8 @@ namespace BATDemoTests
             Pages.ResetPassword.TryDifferentEmailLinkIsVisible(Browser.webDriver);
             Pages.ResetPassword.ClickOnTryDifferentEmailLink();
             Pages.ResetPassword.EnterEmailAndClickToResetPassword(user);
-
-            await Task.Delay(10000);
    
-            var newMessages = await emailService.GetMessagesByQuery(EmailTypes.ResetPassword, user.EmailAddress);
+            var newMessages = await emailService.GetMessagesBySubject(EmailTypes.ResetPassword, user.EmailAddress);
 
             Assert.AreEqual(1, messages.Count, "There was not just 1 reset password email in the mailbox");
         }

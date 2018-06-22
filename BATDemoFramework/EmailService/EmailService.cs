@@ -6,6 +6,7 @@ using Google.Apis.Services;
 using Google.Apis.Util.Store;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
@@ -30,6 +31,8 @@ namespace BATDemoFramework.EmailService
         };
         static string ApplicationName = "BATDemoFramework";
         private Google.Apis.Gmail.v1.GmailService service;
+        private static double emailCheckDelay = Double.Parse(ConfigurationManager.AppSettings["EmailCheckDelay"]);
+        private static int emailCheckAttempts = Int16.Parse(ConfigurationManager.AppSettings["EmailCheckAttempts"]);
 
         public EmailService()
         {
@@ -71,15 +74,26 @@ namespace BATDemoFramework.EmailService
             return GetTokenFromHtml(html);
         }
 
-        
-        public async Task<List<Message>> GetMessagesByQuery(string query, string recipient = null)
+        public async Task<List<Message>> GetMessagesBySubject(string subject, string recipient = null)
         {
-            var ids = GetMessageIdsByQuery(query);
-
-            return await GetMessagesById(ids, recipient);
+            var result = new List<Message>();
+            var request = service.Users.Messages.List("me");
+            request.Q = $"subject: {subject} to: {recipient}";
+            int i = emailCheckAttempts;
+            do
+            {
+                await Task.Delay(TimeSpan.FromSeconds(emailCheckDelay));
+                var response = request.Execute();
+                if (response.Messages != null && response.Messages.Count > 0)
+                {
+                    result.AddRange(response.Messages);
+                    break;
+                }
+                i--;
+            } while (i > 0);
+            return await GetMessagesById(result.Select(x => x.Id), recipient);
         }
 
-        
         public void DeleteMessage(string messageId)
         {
             service.Users.Messages.Delete("me", messageId).Execute();
@@ -160,7 +174,7 @@ namespace BATDemoFramework.EmailService
                 Console.WriteLine("An error occurred: " + e.Message);
             }
 
-            return FilterByRecipient(messages, recipient);
+            return messages;
         }
 
         private List<Message> FilterByRecipient(List<Message> messages, string recipient)
