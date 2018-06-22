@@ -8,7 +8,7 @@ namespace BATDemoFramework
     {
         IWebDriver driver;
 
-        [FindsBy(How = How.ClassName, Using = "search-form-module__button-text___1Xrj1")]
+        [FindsBy(How = How.ClassName, Using = "search-box__button")]
         private IWebElement searchEmployerBtn;
 
         [FindsBy(How = How.Name, Using = "query")]
