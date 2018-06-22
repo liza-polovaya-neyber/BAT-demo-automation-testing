@@ -13,7 +13,7 @@ namespace BATDemoFramework
    public static class Browser
     {
         public static IWebDriver webDriver = new ChromeDriver();
-        private static string baseUrl = "https://hellotest1.neyber.co.uk";
+        private static string baseUrl = ConfigurationManager.AppSettings["ProfileUrl"];
         private static IWebDriver driver;
         private static By locator;
 

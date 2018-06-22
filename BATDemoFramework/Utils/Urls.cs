@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,24 +9,26 @@ namespace BATDemoFramework
 {
     public class Urls
     {
+        private static string profileUrl = ConfigurationManager.AppSettings["ProfileUrl"];
+        private static string hostUrlUrl = ConfigurationManager.AppSettings["HostUrl"];
         public const string OurTerms = "https://neyberweb-testenv1.neyber.co.uk/terms-conditions";
         public const string PrivacyPolicy = "https://neyberweb-testenv1.neyber.co.uk/privacy-policy";
-        public const string CookiePolicy = "https://testenv1.neyber.co.uk/app/policies#cookie";
-        public const string ComplaintsPolicy = "https://testenv1.neyber.co.uk/app/complaints";
-        public const string JoinPage = "https://hellotest1.neyber.co.uk/join";
-        public const string LoginPage = "https://hellotest1.neyber.co.uk/login";
-        public const string HomePage = "https://hellotest1.neyber.co.uk/home";
-        public const string ResetPassword = "https://hellotest1.neyber.co.uk/reset-password";
-        public const string AboutMePage = "https://hellotest1.neyber.co.uk/join/about-me";
-        public const string VerificationEmail = "https://hellotest1.neyber.co.uk/mail/sent";
-        public const string NotVerifiedEmail = "https://hellotest1.neyber.co.uk/mail/not-verified";
-        public const string ResendEmail = "https://hellotest1.neyber.co.uk/mail/resend";
-        public const string ExpiredLink = "https://hellotest1.neyber.co.uk/verification-expired";
-        public const string EmployerSearch = "https://hellotest1.neyber.co.uk/join/search";
-        public const string AlternativeEmail = "https://hellotest1.neyber.co.uk/join/alternative-email";
-        public const string WorkEmail = "https://hellotest1.neyber.co.uk/join/work-email";
-        public const string EmployerVerification = "https://hellotest1.neyber.co.uk/join/employer-verification";
-        public const string Marketing = "https://hellotest1.neyber.co.uk/join/marketing";
+        public static string CookiePolicy = hostUrlUrl + "/app/policies#cookie";
+        public static string ComplaintsPolicy = hostUrlUrl + "/app/complaints";
+        public static string JoinPage = profileUrl + "/join";
+        public static string LoginPage = profileUrl +  "/login";
+        public static string HomePage = profileUrl +  "/home";
+        public static string ResetPassword = profileUrl + "/reset-password";
+        public static string AboutMePage = profileUrl + "/join/about-me";
+        public static string VerificationEmail = profileUrl + "/mail/sent";
+        public static string NotVerifiedEmail = profileUrl + "/mail/not-verified";
+        public static string ResendEmail = profileUrl + "/mail/resend";
+        public static string ExpiredLink = profileUrl + "/verification-expired";
+        public static string EmployerSearch = profileUrl + "/join/search";
+        public static string AlternativeEmail = profileUrl + "/join/alternative-email";
+        public static string WorkEmail = profileUrl + "/join/work-email";
+        public static string EmployerVerification = profileUrl + "/join/employer-verification";
+        public static string Marketing = profileUrl + "/join/marketing";
 
     }
 }
