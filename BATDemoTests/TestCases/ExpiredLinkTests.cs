@@ -55,6 +55,7 @@ namespace BATDemoTests.TestCases
             Browser.GoToUrl(urlToken);
             Pages.Login.WaitUntilLoginUrlIsLoaded(Browser.webDriver);
             Browser.GoToUrl(urlToken);
+            Pages.ExpiredLink.WaitUntilPageIsLoaded(Browser.webDriver);
 
             Assert.IsTrue(Pages.ExpiredLink.IsAtUrl(), "User wasn't able to get to the Expired link page");
         }
