@@ -69,7 +69,7 @@ namespace BATDemoFramework
 
         public bool WaitUntilMarketingUrlIsLoaded(IWebDriver driver)
         {
-            var marketingPage = Browser.WaitUntilUrlIsLoaded(driver, Urls.Marketing, 15);
+            var marketingPage = Browser.WaitUntilUrlIsLoaded(driver, Urls.Marketing, 25);
             return Pages.Marketing.IsAtUrl();
         }
         public bool IsAtUrl()
