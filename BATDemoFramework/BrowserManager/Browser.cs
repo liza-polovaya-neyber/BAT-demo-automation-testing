@@ -13,7 +13,9 @@ namespace BATDemoFramework
    public static class Browser
     {
         public static IWebDriver webDriver = new ChromeDriver();
-        private static string baseUrl = ConfigurationManager.AppSettings["ProfileUrl"];
+        private static readonly string baseUrl = ConfigurationManager.AppSettings["ProfileUrl"];
+        private static readonly double implicitWaitTimeOut = Double.Parse(ConfigurationManager.AppSettings["ImplicitWaitTimeOut"]);
+        private static readonly double pageLoadTimeOut = Double.Parse(ConfigurationManager.AppSettings["PageLoadTimeOut"]);
         private static IWebDriver driver;
         private static By locator;
 
@@ -37,6 +39,8 @@ namespace BATDemoFramework
             //        break;
             //}
             //webDriver.Manage().Window.Maximize();
+            webDriver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(implicitWaitTimeOut);
+            webDriver.Manage().Timeouts().PageLoad = TimeSpan.FromSeconds(pageLoadTimeOut);
             GoTo(baseUrl);
         }
 
