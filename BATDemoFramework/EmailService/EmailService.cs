@@ -82,7 +82,7 @@ namespace BATDemoFramework.EmailService
             int i = emailCheckAttempts;
             do
             {
-                await Task.Delay(TimeSpan.FromSeconds(emailCheckDelay));
+                await Task.Delay(TimeSpan.FromSeconds(emailCheckDelay*(emailCheckAttempts - i + 1)));
                 var response = request.Execute();
                 if (response.Messages != null && response.Messages.Count > 0)
                 {
