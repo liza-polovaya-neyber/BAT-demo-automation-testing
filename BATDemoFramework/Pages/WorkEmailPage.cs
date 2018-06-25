@@ -18,6 +18,9 @@ namespace BATDemoFramework
         [FindsBy(How = How.CssSelector, Using = "p.control__error")]
         private IWebElement errorMessage;
 
+        [FindsBy(How = How.LinkText, Using = "Neyber")]
+        private IWebElement logoNeyber;
+
         public void Submit()
         {
             submitBtn.Click();
@@ -41,6 +44,11 @@ namespace BATDemoFramework
         public string GetErrorText()
         {
             return errorMessage.Text;
+        }
+
+        public void ClickOnLogo()
+        {
+            logoNeyber.Click();
         }
 
     }

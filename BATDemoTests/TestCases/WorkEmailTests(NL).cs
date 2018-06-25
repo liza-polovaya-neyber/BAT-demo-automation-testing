@@ -50,7 +50,7 @@ namespace BATDemoTests.TestCases
             Assert.IsTrue(Pages.EmployerVerification.ThankYouBlockIsShown(), "Thank you block is not shown");
         }
 
-        [TestCase("", "Please enter your email address")]
+        [TestCase(" ", "Please enter your email address")]
         [TestCase("testemail", "Please enter a valid email address")]
         //[TestCase("testemail@hello", "Please enter a valid email address")]
         public async Task CanNotEnterInvalidEmail(string a, string b)
@@ -62,7 +62,7 @@ namespace BATDemoTests.TestCases
             Pages.WorkEmail.EnterEmail(a);
             Pages.WorkEmail.Submit();
 
-            Assert.AreEqual(Pages.AboutMe.GetErrorText(), b);
+            Assert.AreEqual(Pages.WorkEmail.GetErrorText(), b);
         }
 
     }
