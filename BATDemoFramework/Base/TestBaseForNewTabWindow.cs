@@ -18,7 +18,7 @@ namespace BATDemoTests
         [SetUp]
         public void StartUp()// This method fire at the start of the Test
         {
-            Browser.Initialize();
+            //Browser.Initialize();
             //UserGenerator.Initialize();
         }
 
@@ -34,7 +34,7 @@ namespace BATDemoTests
         [OneTimeTearDown]
         public void EndTestAfterEachTest()// This method will fire at the end of the Fixture
         {
-            Browser.Close();
+            //Browser.Close();
             Browser.Quit();
         }
 

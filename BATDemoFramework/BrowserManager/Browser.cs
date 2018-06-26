@@ -11,8 +11,8 @@ using System.Threading;
 namespace BATDemoFramework
 {
    public static class Browser
-    {
-        public static IWebDriver webDriver = new ChromeDriver();
+   {
+        public static IWebDriver webDriver;
         private static readonly string baseUrl = ConfigurationManager.AppSettings["ProfileUrl"];
         private static readonly double implicitWaitTimeOut = Double.Parse(ConfigurationManager.AppSettings["ImplicitWaitTimeOut"]);
         private static readonly double pageLoadTimeOut = Double.Parse(ConfigurationManager.AppSettings["PageLoadTimeOut"]);
@@ -39,8 +39,9 @@ namespace BATDemoFramework
             //        break;
             //}
             //webDriver.Manage().Window.Maximize();
+            webDriver = new ChromeDriver();
             webDriver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(implicitWaitTimeOut);
-            webDriver.Manage().Timeouts().PageLoad = TimeSpan.FromSeconds(pageLoadTimeOut);
+            //webDriver.Manage().Timeouts().PageLoad = TimeSpan.FromSeconds(pageLoadTimeOut);
             GoTo(baseUrl);
         }
 
@@ -125,6 +126,7 @@ namespace BATDemoFramework
 
         public static void Close()
         {
+            webDriver.Close();
         }
 
         public static void Quit()

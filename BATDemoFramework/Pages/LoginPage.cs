@@ -129,7 +129,7 @@ namespace BATDemoFramework
 
         public bool WaitUntilErrorBlockIsShown(IWebDriver driver)
         {
-            var errorBlock = Browser.WaitUntilElementIsPresent(driver, By.CssSelector("p.hint.hint_alert.np-i.login-form-module__error___2lW1y"), 30);
+            var errorBlock = Browser.WaitUntilElementIsPresent(driver, By.CssSelector("p.hint.hint_alert.np-i.login-form-module__error___2lW1y"), 80);
             return errorBlock.IsDisplayed();
         }
 
