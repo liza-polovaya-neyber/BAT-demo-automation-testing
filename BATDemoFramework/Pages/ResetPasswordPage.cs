@@ -50,7 +50,7 @@ namespace BATDemoFramework
 
         public bool TryDifferentEmailLinkIsVisible(IWebDriver driver)
         {     
-            var tryDifferentEmailElement = Browser.WaitUntilElementIsVisible(driver, By.ClassName("password-reset-sent-module__different-eamil___3smZ4"), 30);
+            var tryDifferentEmailElement = Browser.WaitUntilElementIsVisible(driver, By.ClassName("password-reset-sent-module__different-eamil___3smZ4"), 60);
             return tryDifferentEmailLink.IsDisplayed();
         }
 

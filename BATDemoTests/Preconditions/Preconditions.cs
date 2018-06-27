@@ -107,6 +107,10 @@ namespace BATDemoTests
             var emailService = new EmailService();
 
             var messages = await emailService.GetMessagesBySubject(EmailTypes.ConfirmYourEmail, user.EmailAddress);
+            if (messages.Count == 0)
+            {
+                throw new Exception($"Can't get confirmation email: {user.EmailAddress}");
+            }
             var urlToken = emailService.GetUrlTokenFromMessage(messages[0]);
 
             Browser.GoToUrl(urlToken);
