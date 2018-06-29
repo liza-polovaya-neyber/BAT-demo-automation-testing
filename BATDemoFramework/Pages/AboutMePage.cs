@@ -78,6 +78,9 @@ namespace BATDemoFramework
         [FindsBy(How = How.XPath, Using = "//div[2]/div/p")]
         private IWebElement errorWrongPhoneNo;
 
+        [FindsBy(How = How.XPath, Using = "//div[4]/div/div/p")]
+        private IWebElement errorWrongPassword;
+
         public void GoTo()
         {
             Browser.GoTo("join/about-me");
@@ -273,6 +276,12 @@ namespace BATDemoFramework
             mobileNumberField.SendKeys(number);
         }
 
+        public void EnterPassword(string password)
+        {
+            passwordField.Click();
+            passwordField.SendKeys(password);
+        }
+
         public TitleType GetTitleText()
         {
             return EnumHelper.GetTitleType(titleDD.GetAttribute("value")); 
@@ -299,9 +308,14 @@ namespace BATDemoFramework
             return errorEmailsDontMatch.Text;
         }
 
-        public string GetErrorText()
+        public string GetErrorPhoneNoText()
         {
             return errorWrongPhoneNo.Text;
+        }
+
+        public string GetErrorPasswordText()
+        {
+            return errorWrongPassword.Text;
         }
 
         public void PutCursorOnEmailInput()

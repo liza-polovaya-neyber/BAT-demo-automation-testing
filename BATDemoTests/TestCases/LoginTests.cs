@@ -87,7 +87,7 @@ namespace BATDemoTests
             Pages.Login.EnterPassword(a);
             Pages.Login.ClickToShowHidePassword();
 
-            Assert.AreEqual(Pages.AboutMe.GetErrorText(), b);
+            Assert.AreEqual(Pages.Login.GetErrorPasswordText(), b);
         }
 
         [Test]

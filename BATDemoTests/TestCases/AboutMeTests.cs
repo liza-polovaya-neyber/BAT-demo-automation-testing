@@ -111,7 +111,19 @@ namespace BATDemoTests.TestCases
             Pages.AboutMe.EnterMobileNumber(a);
             Pages.AboutMe.PutCursorOnEmailInput();
 
-            Assert.AreEqual(Pages.AboutMe.GetErrorText(), b);
+            Assert.AreEqual(Pages.AboutMe.GetErrorPhoneNoText(), b);
+        }
+
+        [TestCase("Password", "See hint indicators")]
+        [TestCase("password1", "See hint indicators")]
+        [TestCase("passwor", "See hint indicators")]
+        public void CanNotEnterWrongPassword(string a, string b)
+        {
+            Pages.AboutMe.GoTo();
+            Pages.AboutMe.EnterPassword(a);
+            Pages.AboutMe.PutCursorOnEmailInput();
+
+            Assert.AreEqual(Pages.AboutMe.GetErrorPasswordText(), b);
         }
 
         [Test]

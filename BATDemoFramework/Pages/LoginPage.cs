@@ -40,6 +40,9 @@ namespace BATDemoFramework
         [FindsBy(How = How.XPath, Using = "//section/div")]
         private IWebElement greenVerificationBanner;
 
+        [FindsBy(How = How.XPath, Using = "//div[2]/div/p")]
+        private IWebElement errorWrongPassword;
+
         private IWebDriver driver;
 
 
@@ -115,6 +118,11 @@ namespace BATDemoFramework
         public string GetErrorText()
         {
             return errorMessage.Text;
+        }
+
+        public string GetErrorPasswordText()
+        {
+            return errorWrongPassword.Text;
         }
 
         public string GetErrorBannerText()
