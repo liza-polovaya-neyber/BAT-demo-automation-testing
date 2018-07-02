@@ -29,9 +29,9 @@ namespace BATDemoFramework
             submitBtn.Click();
         }
 
-        public bool WaitUntilEmployerVerificationUrlIsLoaded(IWebDriver driver)
+        public bool WaitUntilEmployerVerificationUrlIsLoaded()
         {
-            var employerVerificationEmailPage = Browser.WaitUntilUrlIsLoaded(driver, Urls.EmployerVerification, 10);
+            var employerVerificationEmailPage = Browser.WaitUntilUrlIsLoaded(Urls.EmployerVerification, 10);
             return Pages.EmployerVerification.IsAtUrl();
         }
 
@@ -44,9 +44,9 @@ namespace BATDemoFramework
             return thankYouBlock.Displayed;
         }
 
-        public bool WaitUntilThankYouBlockIsVisible(IWebDriver driver)
+        public bool WaitUntilThankYouBlockIsVisible()
         {
-            var employerVerificationPage = Browser.WaitUntilElementIsVisible(driver, By.CssSelector("h4.hint__title"), 5);
+            var employerVerificationPage = Browser.WaitUntilElementIsVisible(By.CssSelector("h4.hint__title"), 5);
             return thankYouBlock.Displayed;
 
         }

@@ -14,38 +14,38 @@ namespace BATDemoTests.TestCases
     [TestFixture]
     class WorkEmailTests_NL_ : TestBase
     {
-        [Test]
+        [Test][Retry(3)]
         public async Task CanNotVerifyNonExistingWorkEmail()
         {
             var user = new UserGenerator().GetNewUser();
             await Preconditions.HaveNewUserCreatedAndVerifiedEmail();
 
             Pages.EmployerSearch.SelectEnteredEmployer("Foster Denovo");
-            Pages.WorkEmail.WaitUntilWorkEmailUrlIsLoaded(Browser.webDriver);
+            Pages.WorkEmail.WaitUntilWorkEmailUrlIsLoaded();
             Pages.WorkEmail.EnterEmail(user.EmailAddress);
             Pages.WorkEmail.Submit();
 
-            Pages.EmployerVerification.WaitUntilEmployerVerificationUrlIsLoaded(Browser.webDriver);
+            Pages.EmployerVerification.WaitUntilEmployerVerificationUrlIsLoaded();
 
             Assert.IsTrue(Pages.EmployerVerification.IsAtUrl(), "User was not able to proceed to Employer Verification page");
         }
 
 
-        [Test]
+        [Test][Retry(3)]
         public async Task CanTickConsentOnWorkEmailPage()
         {
             var user = new UserGenerator().GetNewUser();
             await Preconditions.HaveNewUserCreatedAndVerifiedEmail();
 
             Pages.EmployerSearch.SelectEnteredEmployer("Foster Denovo");
-            Pages.WorkEmail.WaitUntilWorkEmailUrlIsLoaded(Browser.webDriver);
+            Pages.WorkEmail.WaitUntilWorkEmailUrlIsLoaded();
             Pages.WorkEmail.EnterEmail(user.EmailAddress);
             Pages.WorkEmail.Submit();
 
-            Pages.EmployerVerification.WaitUntilEmployerVerificationUrlIsLoaded(Browser.webDriver);
+            Pages.EmployerVerification.WaitUntilEmployerVerificationUrlIsLoaded();
             Pages.EmployerVerification.CheckConsentCheckbox();
             Pages.EmployerVerification.Submit();
-            Pages.EmployerVerification.WaitUntilThankYouBlockIsVisible(Browser.webDriver);
+            Pages.EmployerVerification.WaitUntilThankYouBlockIsVisible();
 
             Assert.IsTrue(Pages.EmployerVerification.ThankYouBlockIsShown(), "Thank you block is not shown");
         }
@@ -58,7 +58,7 @@ namespace BATDemoTests.TestCases
             await Preconditions.HaveNewUserCreatedAndVerifiedEmail();
 
             Pages.EmployerSearch.SelectEnteredEmployer("Foster Denovo");
-            Pages.WorkEmail.WaitUntilWorkEmailUrlIsLoaded(Browser.webDriver);
+            Pages.WorkEmail.WaitUntilWorkEmailUrlIsLoaded();
             Pages.WorkEmail.EnterEmail(a);
             Pages.WorkEmail.Submit();
 

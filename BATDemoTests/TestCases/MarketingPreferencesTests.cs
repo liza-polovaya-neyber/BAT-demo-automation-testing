@@ -11,66 +11,66 @@ namespace BATDemoTests.TestCases
     [TestFixture]
     class MarketingPreferencesTests : TestBase
     {
-        [Test]
+        [Test][Retry(3)]
         public async Task CanGoToDashboard()
         {
             await Preconditions.HaveNewUserCreatedAndSkippedAlternativeEmail();
 
             Pages.Marketing.ClickOnSubmitBtn();
-            Pages.Home.WaitUntilHomeUrlIsLoaded(Browser.webDriver);
+            Pages.Home.WaitUntilHomeUrlIsLoaded();
 
             Assert.IsTrue(Pages.Home.IsAtUrl(), "User hasn't been redirected to login page");
         }
 
-        [Test]
+        [Test][Retry(3)]
         public async Task CanSelectSMSOption()
         {
             await Preconditions.HaveNewUserCreatedAndSkippedAlternativeEmail();
 
             Pages.Marketing.ChooseSMSOption();
             Pages.Marketing.ClickOnSubmitBtn();
-            Pages.Home.WaitUntilHomeUrlIsLoaded(Browser.webDriver);
+            Pages.Home.WaitUntilHomeUrlIsLoaded();
 
             Assert.IsTrue(Pages.Home.IsAtUrl(), "User hasn't been redirected to login page");
         }
 
-        [Test]
+        [Test][Retry(3)]
         public async Task CanSelectEmailOption()
         {
             await Preconditions.HaveNewUserCreatedAndSkippedAlternativeEmail();
 
             Pages.Marketing.ChooseEmailOption();
             Pages.Marketing.ClickOnSubmitBtn();
-            Pages.Home.WaitUntilHomeUrlIsLoaded(Browser.webDriver);
+            Pages.Home.WaitUntilHomeUrlIsLoaded();
 
             Assert.IsTrue(Pages.Home.IsAtUrl(), "User hasn't been redirected to login page");
         }
 
-        [Test]
+        [Test][Retry(3)]
         public async Task CanSelectPostOption()
         {
             await Preconditions.HaveNewUserCreatedAndSkippedAlternativeEmail();
 
             Pages.Marketing.ChoosePostOption();
             Pages.Marketing.ClickOnSubmitBtn();
-            Pages.Home.WaitUntilHomeUrlIsLoaded(Browser.webDriver);
+            Pages.Home.WaitUntilHomeUrlIsLoaded();
 
             Assert.IsTrue(Pages.Home.IsAtUrl(), "User hasn't been redirected to login page");
         }
 
-        [Test]
+        [Test][Retry(3)]
         public async Task CanSelectPhoneOption()
         {
             await Preconditions.HaveNewUserCreatedAndSkippedAlternativeEmail();
 
             Pages.Marketing.ChoosePhoneOption();
             Pages.Marketing.ClickOnSubmitBtn();
-            Pages.Home.WaitUntilHomeUrlIsLoaded(Browser.webDriver);
+            Pages.Home.WaitUntilHomeUrlIsLoaded();
 
             Assert.IsTrue(Pages.Home.IsAtUrl(), "User hasn't been redirected to login page");
         }
 
-        [Test]
+        [Test][Retry(3)]
         public async Task CanSelectAllOptions()
         {
             await Preconditions.HaveNewUserCreatedAndSkippedAlternativeEmail();
@@ -80,12 +80,12 @@ namespace BATDemoTests.TestCases
             Pages.Marketing.ChoosePostOption();
             Pages.Marketing.ChoosePhoneOption();
             Pages.Marketing.ClickOnSubmitBtn();
-            Pages.Home.WaitUntilHomeUrlIsLoaded(Browser.webDriver);
+            Pages.Home.WaitUntilHomeUrlIsLoaded();
 
             Assert.IsTrue(Pages.Home.IsAtUrl(), "User hasn't been redirected to login page");
         }
 
-        [Test]
+        [Test][Retry(3)]
         public async Task CanLogout()
         {
             await Preconditions.HaveNewUserCreatedAndSkippedAlternativeEmail();
@@ -95,7 +95,7 @@ namespace BATDemoTests.TestCases
             Assert.IsTrue(Pages.Login.IsAtUrl(), "User hasn't been redirected to login page");
         }
 
-        [Test]
+        [Test][Retry(3)]
         public async Task CanNotSkipMarketingPage()
         {
             await Preconditions.HaveNewUserCreatedAndSkippedAlternativeEmail();
@@ -105,7 +105,7 @@ namespace BATDemoTests.TestCases
             Assert.IsTrue(Pages.Marketing.IsAtUrl(), "User was able to skip the marketing preferences page and go to Profile dashboard page");
         }
 
-        [Test]
+        [Test][Retry(3)]
         public async Task CanNotGoBackFromMarketingPage()
         {
             await Preconditions.HaveNewUserCreatedAndSkippedAlternativeEmail();

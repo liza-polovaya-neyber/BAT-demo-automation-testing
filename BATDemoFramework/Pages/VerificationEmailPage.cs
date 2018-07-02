@@ -44,21 +44,21 @@ namespace BATDemoFramework
             return Browser.Url.Contains(Urls.VerificationEmail);
         }
 
-        public bool WaitTillContinueBtnIsVisible(IWebDriver driver)
+        public bool WaitTillContinueBtnIsVisible()
         {
-            var continueButton = Browser.WaitUntilElementIsVisible(driver, By.ClassName("button button_white mail-message-module__button___NhurA button-module__button___2VX0t"), 25);
+            var continueButton = Browser.WaitUntilElementIsVisible(By.ClassName("button button_white mail-message-module__button___NhurA button-module__button___2VX0t"), 25);
             return continueButton.Displayed;
         }
 
-        public bool WaitUntilVerificationEmailPageTitleIsShown(IWebDriver driver)
+        public bool WaitUntilVerificationEmailPageTitleIsShown()
         {
-            var verificationEmailPage = Browser.WaitUntilPageTitleIsShown(driver, PageTitles.VerificationEmailSent, 120);
+            var verificationEmailPage = Browser.WaitUntilPageTitleIsShown(PageTitles.VerificationEmailSent, 120);
             return Pages.VerificationEmail.IsAtUrl();
         }
 
-        public bool WaitUntilGreenBannerIsShown(IWebDriver driver)
+        public bool WaitUntilGreenBannerIsShown()
         {
-            var verificationEmailPage = Browser.WaitUntilElementIsClickable(driver, greenVerificationBanner, 10);
+            var verificationEmailPage = Browser.WaitUntilElementIsClickable(greenVerificationBanner, 10);
             return greenVerificationBanner.Displayed;
         }
 

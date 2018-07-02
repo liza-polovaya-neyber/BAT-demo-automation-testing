@@ -135,15 +135,15 @@ namespace BATDemoFramework
             return greenVerificationBanner.Text.Contains("Your email has been verified! Please log in to continue");
         }
 
-        public bool WaitUntilErrorBlockIsShown(IWebDriver driver)
+        public bool WaitUntilErrorBlockIsShown()
         {
-            var errorBlock = Browser.WaitUntilElementIsPresent(driver, By.CssSelector("p.hint.hint_alert.np-i.login-form-module__error___2lW1y"), 80);
+            var errorBlock = Browser.WaitUntilElementIsPresent(By.CssSelector("p.hint.hint_alert.np-i.login-form-module__error___2lW1y"), 80);
             return errorBlock.IsDisplayed();
         }
 
-        public bool WaitUntilLoginUrlIsLoaded(IWebDriver driver)
+        public bool WaitUntilLoginUrlIsLoaded()
         {
-            var loginPage = Browser.WaitUntilUrlIsLoaded(driver, Urls.LoginPage, 40);
+            var loginPage = Browser.WaitUntilUrlIsLoaded(Urls.LoginPage, 40);
             return Pages.Login.IsAtUrl();
         }
 

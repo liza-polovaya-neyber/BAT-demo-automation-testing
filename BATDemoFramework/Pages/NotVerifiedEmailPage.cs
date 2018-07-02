@@ -40,15 +40,15 @@ namespace BATDemoFramework
             startAgainLink.Click();
         }
 
-        public bool WaitTillStartAgainLinkIsVisible(IWebDriver driver)
+        public bool WaitTillStartAgainLinkIsVisible()
         {
-            var startAgainElem = Browser.WaitUntilElementIsVisible(driver, By.LinkText("start again"), 5);
+            var startAgainElem = Browser.WaitUntilElementIsVisible(By.LinkText("start again"), 5);
             return startAgainElem.Displayed;
         }
 
-        public bool WaitUntilNotVerifiedEmailPageTitleIsShown(IWebDriver driver)
+        public bool WaitUntilNotVerifiedEmailPageTitleIsShown()
         {
-            var NotVerifiedEmailPage = Browser.WaitUntilPageTitleIsShown(driver, PageTitles.NotVerifiedEmail, 7);
+            var NotVerifiedEmailPage = Browser.WaitUntilPageTitleIsShown(PageTitles.NotVerifiedEmail, 7);
             return Pages.NotVerifiedEmail.IsAtUrl();
         }
     }

@@ -30,9 +30,9 @@ namespace BATDemoFramework
             workEmailField.SendKeys(text);
         }
 
-        public bool WaitUntilWorkEmailUrlIsLoaded(IWebDriver driver)
+        public bool WaitUntilWorkEmailUrlIsLoaded()
         {
-            var workEmailPage = Browser.WaitUntilUrlIsLoaded(driver, Urls.WorkEmail, 10);
+            var workEmailPage = Browser.WaitUntilUrlIsLoaded(Urls.WorkEmail, 10);
             return Pages.WorkEmail.IsAtUrl();
         }
 

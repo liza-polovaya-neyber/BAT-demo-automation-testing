@@ -17,7 +17,7 @@ namespace BATDemoTests.TestCases
     {
         private IWebElement element;
 
-        [Test]
+        [Test][Retry(3)]
         public void CanGoBackFromAboutMePagetoJoin()
         {
             Pages.Join.GoTo();
@@ -27,7 +27,7 @@ namespace BATDemoTests.TestCases
             Assert.IsTrue(Pages.Join.IsAtUrl(), "User is not on Join page");
         }
 
-        [Test]
+        [Test][Retry(3)]
         public void CanGoFromAboutMePageToLogin()
         {
             Pages.AboutMe.GoTo();
@@ -36,7 +36,7 @@ namespace BATDemoTests.TestCases
             Assert.IsTrue(Pages.Login.IsAtUrl(), "User is not on Login page");
         }
 
-        [Test]
+        [Test][Retry(3)]
         public void CanSeeSomeLegalBitsMenu()
         {
             Pages.AboutMe.GoTo();
@@ -45,7 +45,7 @@ namespace BATDemoTests.TestCases
             Assert.IsTrue(Pages.AboutMe.SomeLegalBitsMenuIsDisplayed(), "Some Legal bits menu is not opened");
         }
 
-        [Test]
+        [Test][Retry(3)]
         public void CanGoToLoginPageOnLogoClick()
         {
             Pages.AboutMe.GoTo();
@@ -54,7 +54,7 @@ namespace BATDemoTests.TestCases
             Assert.IsTrue(Pages.Login.IsAtUrl(), "User is not on Login page");
         }
 
-        [Test]
+        [Test][Retry(3)]
         public void CanNotEnterDifferentPrimaryEmails()
         {
             Pages.AboutMe.GoTo();
@@ -63,7 +63,7 @@ namespace BATDemoTests.TestCases
             Assert.AreEqual(Pages.AboutMe.GetEmailsMismatchError(), "The email addresses do not match");
         }
 
-        [Test]
+        [Test][Retry(3)]
         public void CanNotSubmitAboutMeForm()
         {
             Pages.AboutMe.GoTo();
@@ -73,7 +73,7 @@ namespace BATDemoTests.TestCases
         }
 
 
-        [Test]
+        [Test][Retry(3)]
         [Ignore("Fix submint reread submit button")]
         public void CanSubmitAboutMeForm()
        {
@@ -83,7 +83,7 @@ namespace BATDemoTests.TestCases
             Assert.IsFalse(Pages.AboutMe.SubmitBtnIsEnabled(), "Submit button is enabled despite two of the checkboxes are not checked");
         }
 
-        [Test]
+        [Test][Retry(3)]
         [Ignore("Fix submint reread submit button")]
         public void CanNotSubmitAboutMeFormWithoutTitle()
         {
@@ -93,7 +93,7 @@ namespace BATDemoTests.TestCases
             Assert.IsTrue(Pages.AboutMe.SubmitBtnIsDisabled(), "Submit button is enabled despite 'Titile' DD hasn't been selected");
         }
 
-        [Test]
+        [Test][Retry(3)]
         public void CanSelectRightTitle()
         {
             Pages.AboutMe.GoTo();
@@ -126,7 +126,7 @@ namespace BATDemoTests.TestCases
             Assert.AreEqual(Pages.AboutMe.GetErrorPasswordText(), b);
         }
 
-        [Test]
+        [Test][Retry(3)]
         public void CanSelectRightDay()
         {
             Pages.AboutMe.GoTo();
@@ -135,7 +135,7 @@ namespace BATDemoTests.TestCases
             Assert.AreEqual(13.ToString(), Pages.AboutMe.GetDayOfBirth());
         }
 
-        [Test]
+        [Test][Retry(3)]
         public void CanSelectRightMonth()
         {
             Pages.AboutMe.GoTo();
@@ -144,7 +144,7 @@ namespace BATDemoTests.TestCases
             Assert.AreEqual(6.ToString(), Pages.AboutMe.GetMonthOfBirth()); //exp result == 6, because css value of 7th month (July) is 6
         }
 
-        [Test]
+        [Test][Retry(3)]
         public void CanSelectRightYear()
         {
             Pages.AboutMe.GoTo();
@@ -153,7 +153,7 @@ namespace BATDemoTests.TestCases
             Assert.AreEqual(1997.ToString(), Pages.AboutMe.GetYearOfBirth());
         }
 
-        [Test]
+        [Test][Retry(3)]
         public void CanSeeRightAmountOfFeedbackOptions()
         {
             Pages.AboutMe.GoTo();
@@ -161,23 +161,23 @@ namespace BATDemoTests.TestCases
             Assert.AreEqual(17, Pages.AboutMe.GetFeedbackOptionsNumber());
         }
 
-        [Test]
+        [Test][Retry(3)]
         public void CanNotRegisterWithAlreadyRegisteredEmail()
         {
             Pages.AboutMe.GoTo();
             Pages.AboutMe.RegisterUserFromCsv("CanLogin");
-            Pages.Login.WaitUntilLoginUrlIsLoaded(Browser.webDriver);
+            Pages.Login.WaitUntilLoginUrlIsLoaded();
 
             Assert.IsTrue(Pages.Login.IsAtUrl(), "User has not been redirected to Login page");    
         }
 
 
-        [Test]
+        [Test][Retry(3)]
         public void CanSeeRedErrorBanner()
         {
             Pages.AboutMe.GoTo();
             Pages.AboutMe.RegisterUserFromCsv("CanLogin");
-            Pages.Login.WaitUntilLoginUrlIsLoaded(Browser.webDriver);
+            Pages.Login.WaitUntilLoginUrlIsLoaded();
 
             Assert.AreEqual(Pages.Login.GetErrorBannerText(), "Close");
         }

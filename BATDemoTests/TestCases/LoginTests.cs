@@ -19,7 +19,7 @@ namespace BATDemoTests
 
         //public LoginTests(string profile, string environment) : base(profile, environment){}
 
-        [Test]
+        [Test][Retry(3)]
         public void CanGoToLoginPage()
         {
             Pages.Login.GoTo();
@@ -27,7 +27,7 @@ namespace BATDemoTests
             Assert.IsTrue(Pages.Login.IsAtUrl());
         }
 
-        [Test]
+        [Test][Retry(3)]
         public void CanGoFromLoginPageToResetPasswordPage()
         {
             Pages.Login.GoTo();
@@ -36,7 +36,7 @@ namespace BATDemoTests
             Assert.IsTrue(Pages.ResetPassword.IsAtUrl());
         }
 
-        [Test]
+        [Test][Retry(3)]
         public void CanGoFromLoginPageToJoinPage()
         {
             Pages.Login.GoTo();
@@ -45,34 +45,34 @@ namespace BATDemoTests
             Assert.IsTrue(Pages.Join.IsAtUrl());
         }
 
-        [Test]
+        [Test][Retry(3)]
         public void CanLogin()
         {
             Pages.Login.GoTo();
             Pages.Login.LogInFromCsv("CanLogin");
-            Pages.Home.WaitUntilHomeUrlIsLoaded(Browser.webDriver);
+            Pages.Home.WaitUntilHomeUrlIsLoaded();
 
 
             Assert.IsTrue(Pages.Home.IsAtUrl(), "Valid user is not on Hpage");     
         }
 
-        [Test]
+        [Test][Retry(3)]
         public void CanNotLoginWithNonRegisteredEmail()
         {
             Pages.Login.GoTo();  
             Pages.Login.LoginByRandomUser();
-            Pages.Login.WaitUntilErrorBlockIsShown(Browser.webDriver);
+            Pages.Login.WaitUntilErrorBlockIsShown();
             
             Assert.AreEqual(Pages.Login.GetErrorText(), "The email address or password you entered is incorrect. Please check and try again.");
         }
 
 
-        [Test]
+        [Test][Retry(3)]
         public void CanNotLoginWithWrongPassword()
         {
             Pages.Login.GoTo();
             Pages.Login.LoginByUserWithWrongPassword();
-            Pages.Login.WaitUntilErrorBlockIsShown(Browser.webDriver);
+            Pages.Login.WaitUntilErrorBlockIsShown();
 
             Assert.AreEqual(Pages.Login.GetErrorText(), "The email address or password you entered is incorrect. Please check and try again.");
         }
@@ -90,7 +90,7 @@ namespace BATDemoTests
             Assert.AreEqual(Pages.Login.GetErrorPasswordText(), b);
         }
 
-        [Test]
+        [Test][Retry(3)]
         public void CheckSomeLegalBitsMenuIsDisplayed()
         {
             Pages.Join.GoTo();

@@ -1,6 +1,7 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
 using System.Collections.Generic;
+using NUnit.Framework;
 
 namespace BATDemoFramework
 {
@@ -105,7 +106,7 @@ namespace BATDemoFramework
         {
             EnterTextIntoSearchbox(employerName);
             ClickOnSearchBtn();
-            WaitUntilSearchResultsAppear(Browser.webDriver);
+            WaitUntilSearchResultsAppear();
             SelectEmployer();
             ClickOnSelectResultBtn();
             ClickOnContinueBtn();
@@ -146,27 +147,27 @@ namespace BATDemoFramework
             return inputField.Displayed;
         }
 
-        public bool WaitUntilUrlIsLoaded(IWebDriver driver)
+        public bool WaitUntilUrlIsLoaded()
         {
-            var employerSearchPage = Browser.WaitUntilUrlIsLoaded(driver, Urls.EmployerSearch, 60);
+            Browser.WaitUntilUrlIsLoaded(Urls.EmployerSearch, 60);
             return Pages.EmployerSearch.IsAtUrl();
         }
 
-        public bool WaitUntilSecurityBlockIsLoaded(IWebDriver driver)
+        public bool WaitUntilSecurityBlockIsLoaded()
         {
-            var employerSearchPage = Browser.WaitUntilElementIsVisible(driver, By.ClassName("secure-hint-module__root___4OSbU"), 15);
+            var employerSearchPage = Browser.WaitUntilElementIsVisible(By.ClassName("secure-hint-module__root___4OSbU"), 15);
             return securityBlock.Displayed;
         }
 
-        public bool WaitUntilSearchResultsAppear(IWebDriver driver)
+        public bool WaitUntilSearchResultsAppear()
         {
-            var employerSearchPage = Browser.WaitUntilElementIsVisible(driver, By.ClassName("search-results-module__title___qbzsB"), 5);
+            var employerSearchPage = Browser.WaitUntilElementIsVisible(By.ClassName("search-results-module__title___qbzsB"), 5);
             return searchResultsTitle.Displayed;
         }
 
-        public bool WaitUntilPhoneNumberFieldAppears(IWebDriver driver)
+        public bool WaitUntilPhoneNumberFieldAppears()
         {
-            var employerSearchPage = Browser.WaitUntilElementIsVisible(driver, By.Name("phone"), 5);
+            var employerSearchPage = Browser.WaitUntilElementIsVisible(By.Name("phone"), 5);
             return phoneNoField.Displayed;
         }
 

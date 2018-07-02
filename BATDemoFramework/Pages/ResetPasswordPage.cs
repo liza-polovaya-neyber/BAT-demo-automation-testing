@@ -42,15 +42,15 @@ namespace BATDemoFramework
             return resendMyResetLinkButton.IsDisplayed();
         }
 
-        public bool WaitForResendMyResetLinkButtonIsDisplayed(IWebDriver driver)
+        public bool WaitForResendMyResetLinkButtonIsDisplayed()
         {
-            var resetLinkBtn = Browser.WaitUntilElementIsClickable(driver, resendMyResetLinkButton, 8);
+            var resetLinkBtn = Browser.WaitUntilElementIsClickable(resendMyResetLinkButton, 8);
             return resetLinkBtn.Displayed; 
         }
 
-        public bool TryDifferentEmailLinkIsVisible(IWebDriver driver)
+        public bool TryDifferentEmailLinkIsVisible()
         {     
-            var tryDifferentEmailElement = Browser.WaitUntilElementIsVisible(driver, By.ClassName("password-reset-sent-module__different-eamil___3smZ4"), 60);
+            var tryDifferentEmailElement = Browser.WaitUntilElementIsVisible(By.ClassName("password-reset-sent-module__different-eamil___3smZ4"), 60);
             return tryDifferentEmailLink.IsDisplayed();
         }
 

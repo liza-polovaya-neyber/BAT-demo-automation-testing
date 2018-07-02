@@ -61,15 +61,15 @@ namespace BATDemoFramework
             submitBtn.Click();
         }
 
-        public bool WaitUntilSecurityBlockIsLoaded(IWebDriver driver)
+        public bool WaitUntilSecurityBlockIsLoaded()
         {
-            var marketingPage = Browser.WaitUntilElementIsVisible(driver, By.ClassName("secure-hint-module__root___4OSbU"), 13);
+            var marketingPage = Browser.WaitUntilElementIsVisible(By.ClassName("secure-hint-module__root___4OSbU"), 13);
             return securityBlock.Displayed;
         }
 
-        public bool WaitUntilMarketingUrlIsLoaded(IWebDriver driver)
+        public bool WaitUntilMarketingUrlIsLoaded()
         {
-            var marketingPage = Browser.WaitUntilUrlIsLoaded(driver, Urls.Marketing, 25);
+            var marketingPage = Browser.WaitUntilUrlIsLoaded(Urls.Marketing, 25);
             return Pages.Marketing.IsAtUrl();
         }
         public bool IsAtUrl()

@@ -14,14 +14,14 @@ namespace BATDemoTests.TestCases
     [TestFixture]
     class ExpiredLinkTests : TestBase
     {
-        [Test]
+        [Test][Retry(3)]
         public async Task CanGetToExpiredLinkPageWhenVerifyingPrimaryEmail()
         {
             var user = new UserGenerator().GetNewUser();
 
             Pages.AboutMe.GoTo();
             Pages.AboutMe.RegisterNewUser(user);
-            Pages.VerificationEmail.WaitUntilVerificationEmailPageTitleIsShown(Browser.webDriver);
+            Pages.VerificationEmail.WaitUntilVerificationEmailPageTitleIsShown();
 
             var emailService = new EmailService();
 
@@ -29,7 +29,7 @@ namespace BATDemoTests.TestCases
             var urlToken = emailService.GetUrlTokenFromMessage(messages[0]);
 
             Browser.GoToUrl(urlToken);
-            Pages.EmployerSearch.WaitUntilUrlIsLoaded(Browser.webDriver);
+            Pages.EmployerSearch.WaitUntilUrlIsLoaded();
             Browser.GoToUrl(urlToken);
             Pages.ExpiredLink.WaitUntilPageIsLoaded(Browser.webDriver);
 
@@ -37,7 +37,7 @@ namespace BATDemoTests.TestCases
 
         }
 
-        [Test]
+        [Test][Retry(3)]
         public async Task CanGetToExpiredLinkPageWhenVerifyingAlternativeEmail()
         {
             var user = new UserGenerator().GetNewUser();
@@ -45,7 +45,7 @@ namespace BATDemoTests.TestCases
 
             Pages.AlternativeEmail.EnterEmail(user.EmailAddress);
             Pages.AlternativeEmail.ClickOnSubmitBtn();
-            Pages.Marketing.WaitUntilMarketingUrlIsLoaded(Browser.webDriver);
+            Pages.Marketing.WaitUntilMarketingUrlIsLoaded();
             Pages.Marketing.Logout();
 
             var emailService = new EmailService();
@@ -53,21 +53,21 @@ namespace BATDemoTests.TestCases
             var urlToken = emailService.GetUrlTokenFromMessage(messages[0]);
 
             Browser.GoToUrl(urlToken);
-            Pages.Login.WaitUntilLoginUrlIsLoaded(Browser.webDriver);
+            Pages.Login.WaitUntilLoginUrlIsLoaded();
             Browser.GoToUrl(urlToken);
             Pages.ExpiredLink.WaitUntilPageIsLoaded(Browser.webDriver);
 
             Assert.IsTrue(Pages.ExpiredLink.IsAtUrl(), "User wasn't able to get to the Expired link page");
         }
 
-        [Test]
+        [Test][Retry(3)]
         public async Task CanHitTheLogo()
         {
             var user = new UserGenerator().GetNewUser();
 
             Pages.AboutMe.GoTo();
             Pages.AboutMe.RegisterNewUser(user);
-            Pages.VerificationEmail.WaitUntilVerificationEmailPageTitleIsShown(Browser.webDriver);
+            Pages.VerificationEmail.WaitUntilVerificationEmailPageTitleIsShown();
 
             var emailService = new EmailService();
 
@@ -75,7 +75,7 @@ namespace BATDemoTests.TestCases
             var urlToken = emailService.GetUrlTokenFromMessage(messages[0]);
 
             Browser.GoToUrl(urlToken);
-            Pages.EmployerSearch.WaitUntilUrlIsLoaded(Browser.webDriver);
+            Pages.EmployerSearch.WaitUntilUrlIsLoaded();
             Browser.GoToUrl(urlToken);
             Pages.ExpiredLink.WaitUntilPageIsLoaded(Browser.webDriver);
             Pages.ExpiredLink.ClickOnLogo();
@@ -83,14 +83,14 @@ namespace BATDemoTests.TestCases
             Assert.IsTrue(Pages.EmployerSearch.IsAtUrl(), "User wasn't able to get to the Login page");
         }
 
-        [Test]
+        [Test][Retry(3)]
         public async Task CanReturnToNeyber()
         {
             var user = new UserGenerator().GetNewUser();
 
             Pages.AboutMe.GoTo();
             Pages.AboutMe.RegisterNewUser(user);
-            Pages.VerificationEmail.WaitUntilVerificationEmailPageTitleIsShown(Browser.webDriver);
+            Pages.VerificationEmail.WaitUntilVerificationEmailPageTitleIsShown();
 
             var emailService = new EmailService();
 
@@ -98,7 +98,7 @@ namespace BATDemoTests.TestCases
             var urlToken = emailService.GetUrlTokenFromMessage(messages[0]);
 
             Browser.GoToUrl(urlToken);
-            Pages.EmployerSearch.WaitUntilUrlIsLoaded(Browser.webDriver);
+            Pages.EmployerSearch.WaitUntilUrlIsLoaded();
             Browser.GoToUrl(urlToken);
             Pages.ExpiredLink.WaitUntilPageIsLoaded(Browser.webDriver);
             Pages.ExpiredLink.ClickOnReturnBtn();
@@ -106,14 +106,14 @@ namespace BATDemoTests.TestCases
             Assert.IsTrue(Pages.EmployerSearch.IsAtUrl(), "User wasn't able to get to the Login page");
         }
 
-        [Test]
+        [Test][Retry(3)]
         public async Task CanReturnToNeyberLogin()
         {
             var user = new UserGenerator().GetNewUser();
 
             Pages.AboutMe.GoTo();
             Pages.AboutMe.RegisterNewUser(user);
-            Pages.VerificationEmail.WaitUntilVerificationEmailPageTitleIsShown(Browser.webDriver);
+            Pages.VerificationEmail.WaitUntilVerificationEmailPageTitleIsShown();
 
             var emailService = new EmailService();
 
@@ -121,7 +121,7 @@ namespace BATDemoTests.TestCases
             var urlToken = emailService.GetUrlTokenFromMessage(messages[0]);
 
             Browser.GoToUrl(urlToken);
-            Pages.EmployerSearch.WaitUntilUrlIsLoaded(Browser.webDriver);
+            Pages.EmployerSearch.WaitUntilUrlIsLoaded();
             Pages.EmployerSearch.Logout();
             Browser.GoToUrl(urlToken);
             Pages.ExpiredLink.WaitUntilPageIsLoaded(Browser.webDriver);
