@@ -15,7 +15,7 @@ namespace BATDemoTests
     {
         private IWebDriver driver;
 
-        [Test]
+        [Test][Retry(3)]
         public void CanGoToResetPasswordPage()
         {
             Pages.ResetPassword.GoTo();
@@ -23,7 +23,7 @@ namespace BATDemoTests
             Assert.IsTrue(Pages.ResetPassword.IsAtUrl());
         }
 
-        [Test]
+        [Test][Retry(3)]
         public void CanGoFromResetPasswordPageToLoginPage()
         {
             Pages.ResetPassword.GoTo();
@@ -32,7 +32,7 @@ namespace BATDemoTests
             Assert.IsTrue(Pages.Login.IsAtUrl());
         }
 
-        [Test]
+        [Test][Retry(3)]
         public void CanGoFromResetPasswordPageToJoinPage()
         {
             Pages.ResetPassword.GoTo();
@@ -52,16 +52,16 @@ namespace BATDemoTests
             Assert.AreEqual(Pages.ResetPassword.GetTextError(), b);
         }
 
-        [Test]
+        [Test][Retry(3)]
         public void CanSeeTryDifferentEmailLink()
         {
             Pages.ResetPassword.GoTo();
             Pages.ResetPassword.EnterEmailAndClickOnResetLinkButton();
 
-            Assert.IsTrue(Pages.ResetPassword.TryDifferentEmailLinkIsVisible(Browser.webDriver));
+            Assert.IsTrue(Pages.ResetPassword.TryDifferentEmailLinkIsVisible());
         }
 
-        [Test]
+        [Test][Retry(3)]
         public async Task ResetLinkIsNotSentToNotRegisteredUser()
         {
             var user = new UserGenerator().GetNewUser();
@@ -75,14 +75,14 @@ namespace BATDemoTests
             Assert.IsEmpty(messages, "Reset password email is received");
         }
 
-        [Test]
+        [Test][Retry(3)]
         public async Task TryDifferentResetLinkIsNotSentToNotRegisteredUser()
         {
             var user = new UserGenerator().GetNewUser();
 
             Pages.ResetPassword.GoTo();
             Pages.ResetPassword.EnterEmailAndClickToReset();
-            Pages.ResetPassword.TryDifferentEmailLinkIsVisible(Browser.webDriver);
+            Pages.ResetPassword.TryDifferentEmailLinkIsVisible();
             Pages.ResetPassword.ClickOnTryDifferentEmailLink();
             Pages.ResetPassword.EnterEmailAndClickToResetPassword(user);
 
@@ -92,13 +92,13 @@ namespace BATDemoTests
             Assert.IsEmpty(messages, "Reset password email is received");
         }
 
-        [Test]
+        [Test][Retry(3)]
         public async Task RegisteredUserReceivesResetPasswordLink()  
         {
             var user = new UserGenerator().GetNewUser();
             await Preconditions.NewUserCreated(user);
 
-            Pages.EmployerSearch.WaitUntilUrlIsLoaded(Browser.webDriver);
+            Pages.EmployerSearch.WaitUntilUrlIsLoaded();
             Pages.EmployerSearch.Logout();
             Pages.ResetPassword.GoTo();
             Pages.ResetPassword.EnterEmailAndClickToResetPassword(user);
@@ -109,17 +109,17 @@ namespace BATDemoTests
             Assert.IsNotEmpty(messages, "No reset password emails found");
         }
 
-        [Test]
+        [Test][Retry(3)]
         public async Task CanResendResetPasswordLink()  
         {  
             var user = new UserGenerator().GetNewUser();
             await Preconditions.NewUserCreated(user);
 
-            Pages.EmployerSearch.WaitUntilUrlIsLoaded(Browser.webDriver);
+            Pages.EmployerSearch.WaitUntilUrlIsLoaded();
             Pages.EmployerSearch.Logout();
             Pages.ResetPassword.GoTo();
             Pages.ResetPassword.EnterEmailAndClickToResetPassword(user);
-            Pages.ResetPassword.TryDifferentEmailLinkIsVisible(Browser.webDriver);
+            Pages.ResetPassword.TryDifferentEmailLinkIsVisible();
             Pages.ResetPassword.ClickOnResendMyResetLinkButton();
 
             var emailService = new EmailService();
@@ -128,17 +128,17 @@ namespace BATDemoTests
             Assert.AreEqual(2, messages.Count, "Can't find 2 reset password emails");
         }
 
-        [Test]
+        [Test][Retry(3)]
         public async Task ResetPasswordLinkIsSentToDifferentEmail()   
         {   
             var user = new UserGenerator().GetNewUser();
             await Preconditions.NewUserCreated(user);
 
-            Pages.EmployerSearch.WaitUntilUrlIsLoaded(Browser.webDriver);
+            Pages.EmployerSearch.WaitUntilUrlIsLoaded();
             Pages.EmployerSearch.Logout();
             Pages.ResetPassword.GoTo();
             Pages.ResetPassword.EnterEmailAndClickToResetPassword(user);
-            Pages.ResetPassword.TryDifferentEmailLinkIsVisible(Browser.webDriver);
+            Pages.ResetPassword.TryDifferentEmailLinkIsVisible();
             Pages.ResetPassword.ClickOnTryDifferentEmailLink();
             Pages.ResetPassword.EnterEmailAndClickToReset();
 
@@ -148,18 +148,18 @@ namespace BATDemoTests
             Assert.AreEqual(1, messages.Count, "There was not just 1 reset password email in the mailbox");
         }
 
-        [Test]
+        [Test][Retry(3)]
         public async Task ResetPasswordLinkIsReceivedOnAlternativeEmail()   
         {
             var user = new UserGenerator().GetNewUser();
             await Preconditions.HaveNewUserCreatedAndVerifiedEmail();
 
-            Pages.EmployerSearch.WaitUntilSecurityBlockIsLoaded(Browser.webDriver);
+            Pages.EmployerSearch.WaitUntilSecurityBlockIsLoaded();
             Pages.EmployerSearch.SelectEnteredEmployer("Bupa");
-            Pages.AlternativeEmail.WaitUntilAlternativeUrlIsLoaded(Browser.webDriver);
+            Pages.AlternativeEmail.WaitUntilAlternativeUrlIsLoaded();
             Pages.AlternativeEmail.EnterEmail(user.EmailAddress);
             Pages.AlternativeEmail.ClickOnSubmitBtn();
-            Pages.Marketing.WaitUntilMarketingUrlIsLoaded(Browser.webDriver);
+            Pages.Marketing.WaitUntilMarketingUrlIsLoaded();
             Pages.Marketing.Logout();
 
             var emailService = new EmailService();
@@ -170,7 +170,7 @@ namespace BATDemoTests
 
             Pages.ResetPassword.GoTo();
             Pages.ResetPassword.EnterEmailAndClickToReset();
-            Pages.ResetPassword.TryDifferentEmailLinkIsVisible(Browser.webDriver);
+            Pages.ResetPassword.TryDifferentEmailLinkIsVisible();
             Pages.ResetPassword.ClickOnTryDifferentEmailLink();
             Pages.ResetPassword.EnterEmailAndClickToResetPassword(user);
    

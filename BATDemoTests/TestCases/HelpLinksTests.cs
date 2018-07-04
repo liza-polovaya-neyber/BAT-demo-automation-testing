@@ -15,7 +15,7 @@ namespace BATDemoTests.TestCases
     {
         private IWebDriver driver;
 
-        [Test]
+        [Test][Retry(3)]
         public void CheckOurTermsLinkOpens()
         {
             Pages.Join.GoTo();
@@ -24,7 +24,7 @@ namespace BATDemoTests.TestCases
             Assert.IsTrue(Pages.OurTerms.IsAtUrl());
         }
 
-        [Test]
+        [Test][Retry(3)]
         public void CheckPrivacyPolicyLinkOpens()
         {
             Pages.Join.GoTo();
@@ -33,7 +33,7 @@ namespace BATDemoTests.TestCases
             Assert.IsTrue(Pages.PrivacyPolicy.IsAtUrl());
         }
 
-        [Test]
+        [Test][Retry(3)]
         public void CheckCookiePolicyLinkOpens()
         {
             Pages.Join.GoTo();
@@ -42,7 +42,7 @@ namespace BATDemoTests.TestCases
             Assert.IsTrue(Pages.CookiePolicy.IsAtUrl());  
         }
 
-        [Test]
+        [Test][Retry(3)]
         public void CheckComplaintsPolicyLinkOpens()
         {
             Pages.Join.GoTo();

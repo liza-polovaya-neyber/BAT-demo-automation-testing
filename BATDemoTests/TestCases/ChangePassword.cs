@@ -14,13 +14,13 @@ namespace BATDemoTests.TestCases
     [TestFixture]
     class ChangePassword : TestBase
     {
-        [Test]
+        [Test][Retry(3)]
         public async Task CanGetToNewPasswordPage()
         {
             var user = new UserGenerator().GetNewUser();
             await Preconditions.NewUserCreated(user);
 
-            Pages.EmployerSearch.WaitUntilUrlIsLoaded(Browser.webDriver);
+            Pages.EmployerSearch.WaitUntilUrlIsLoaded();
             Pages.EmployerSearch.Logout();
             Pages.ResetPassword.GoTo();
             Pages.ResetPassword.EnterEmailAndClickToResetPassword(user);
@@ -30,18 +30,18 @@ namespace BATDemoTests.TestCases
             var urlToken = emailService.GetUrlTokenFromMessage(messages[0]);
 
             Browser.GoToUrl(urlToken);
-            Pages.ChangePassword.WaitUntilTitleIsShown(Browser.webDriver);
+            Pages.ChangePassword.WaitUntilTitleIsShown();
 
             Assert.IsTrue(Pages.ChangePassword.IsAtTitle(), "User couldn't land on Change password page");
         }
 
-        [Test]
+        [Test][Retry(3)]
         public async Task CanGoToJoinPage()
         {
             var user = new UserGenerator().GetNewUser();
             await Preconditions.NewUserCreated(user);
 
-            Pages.EmployerSearch.WaitUntilUrlIsLoaded(Browser.webDriver);
+            Pages.EmployerSearch.WaitUntilUrlIsLoaded();
             Pages.EmployerSearch.Logout();
             Pages.ResetPassword.GoTo();
             Pages.ResetPassword.EnterEmailAndClickToResetPassword(user);
@@ -51,7 +51,7 @@ namespace BATDemoTests.TestCases
             var urlToken = emailService.GetUrlTokenFromMessage(messages[0]);
 
             Browser.GoToUrl(urlToken);
-            Pages.ChangePassword.WaitUntilTitleIsShown(Browser.webDriver);
+            Pages.ChangePassword.WaitUntilTitleIsShown();
             Pages.ChangePassword.GoToJoinPage();
 
             Assert.IsTrue(Pages.Join.IsAtUrl(), "User wasn't redirected to Join page");
@@ -65,7 +65,7 @@ namespace BATDemoTests.TestCases
             var user = new UserGenerator().GetNewUser();
             await Preconditions.NewUserCreated(user);
 
-            Pages.EmployerSearch.WaitUntilUrlIsLoaded(Browser.webDriver);
+            Pages.EmployerSearch.WaitUntilUrlIsLoaded();
             Pages.EmployerSearch.Logout();
             Pages.ResetPassword.GoTo();
             Pages.ResetPassword.EnterEmailAndClickToResetPassword(user);
@@ -75,20 +75,20 @@ namespace BATDemoTests.TestCases
             var urlToken = emailService.GetUrlTokenFromMessage(messages[0]);
 
             Browser.GoToUrl(urlToken);
-            Pages.ChangePassword.WaitUntilTitleIsShown(Browser.webDriver);
+            Pages.ChangePassword.WaitUntilTitleIsShown();
             Pages.ChangePassword.EntersNewPassword(a);
             Pages.ChangePassword.ClickToShowHidePassword();
 
             Assert.AreEqual(Pages.ChangePassword.GetErrorMessage(), b);
         }
 
-        [Test]
+        [Test][Retry(3)]
         public async Task CanSetNewPassword()
         {
             var user = new UserGenerator().GetNewUser();
             await Preconditions.NewUserCreated(user);
 
-            Pages.EmployerSearch.WaitUntilUrlIsLoaded(Browser.webDriver);
+            Pages.EmployerSearch.WaitUntilUrlIsLoaded();
             Pages.EmployerSearch.Logout();
             Pages.ResetPassword.GoTo();
             Pages.ResetPassword.EnterEmailAndClickToResetPassword(user);
@@ -98,21 +98,21 @@ namespace BATDemoTests.TestCases
             var urlToken = emailService.GetUrlTokenFromMessage(messages[0]);
 
             Browser.GoToUrl(urlToken);
-            Pages.ChangePassword.WaitUntilTitleIsShown(Browser.webDriver);
+            Pages.ChangePassword.WaitUntilTitleIsShown();
 
             Pages.ChangePassword.SetNewPassword();
-            Pages.Login.WaitUntilLoginUrlIsLoaded(Browser.webDriver);
+            Pages.Login.WaitUntilLoginUrlIsLoaded();
 
             Assert.IsTrue(Pages.Login.IsAtUrl(), "User was not able to set new password");
         }
 
-        [Test]
+        [Test][Retry(3)]
         public async Task CanLoginWithNewPassword()
         {
             var user = new UserGenerator().GetNewUser();
             await Preconditions.NewUserCreated(user);
 
-            Pages.EmployerSearch.WaitUntilUrlIsLoaded(Browser.webDriver);
+            Pages.EmployerSearch.WaitUntilUrlIsLoaded();
             Pages.EmployerSearch.Logout();
             Pages.ResetPassword.GoTo();
             Pages.ResetPassword.EnterEmailAndClickToResetPassword(user);
@@ -122,23 +122,23 @@ namespace BATDemoTests.TestCases
             var urlToken = emailService.GetUrlTokenFromMessage(messages[0]);
 
             Browser.GoToUrl(urlToken);
-            Pages.ChangePassword.WaitUntilTitleIsShown(Browser.webDriver);
+            Pages.ChangePassword.WaitUntilTitleIsShown();
 
             Pages.ChangePassword.SetNewPassword();
-            Pages.Login.WaitUntilLoginUrlIsLoaded(Browser.webDriver);
+            Pages.Login.WaitUntilLoginUrlIsLoaded();
             Pages.Login.LogInAsLastRegisteredUser(LoginPage.LoginOptions.UseLastGeneratedPassword);
-            Pages.EmployerSearch.WaitUntilUrlIsLoaded(Browser.webDriver);
+            Pages.EmployerSearch.WaitUntilUrlIsLoaded();
 
             Assert.IsTrue(Pages.EmployerSearch.IsAtUrl(), "User was not able to set new password");
         }
 
-        [Test]
+        [Test][Retry(3)]
         public async Task CanNotLoginWithOldPassword()
         {
             var user = new UserGenerator().GetNewUser();
             await Preconditions.NewUserCreated(user);
 
-            Pages.EmployerSearch.WaitUntilUrlIsLoaded(Browser.webDriver);
+            Pages.EmployerSearch.WaitUntilUrlIsLoaded();
             Pages.EmployerSearch.Logout();
             Pages.ResetPassword.GoTo();
             Pages.ResetPassword.EnterEmailAndClickToResetPassword(user);
@@ -148,12 +148,12 @@ namespace BATDemoTests.TestCases
             var urlToken = emailService.GetUrlTokenFromMessage(messages[0]);
 
             Browser.GoToUrl(urlToken);
-            Pages.ChangePassword.WaitUntilTitleIsShown(Browser.webDriver);
+            Pages.ChangePassword.WaitUntilTitleIsShown();
 
             Pages.ChangePassword.SetNewPassword();
-            Pages.Login.WaitUntilLoginUrlIsLoaded(Browser.webDriver);
+            Pages.Login.WaitUntilLoginUrlIsLoaded();
             Pages.Login.LogInAsLastRegisteredUser();
-            Pages.Login.WaitUntilErrorBlockIsShown(Browser.webDriver);
+            Pages.Login.WaitUntilErrorBlockIsShown();
 
             Assert.AreEqual(Pages.Login.GetErrorText(), "The email address or password you entered is incorrect. Please check and try again.");
         }

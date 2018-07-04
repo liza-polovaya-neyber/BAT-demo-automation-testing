@@ -35,15 +35,15 @@ namespace BATDemoFramework
             return Browser.Url.Contains(Urls.HomePage);
         }
 
-        public bool WaitUntilHomeUrlIsLoaded(IWebDriver driver)
+        public bool WaitUntilHomeUrlIsLoaded()
         {
-            var homePage = Browser.WaitUntilUrlIsLoaded(driver, Urls.HomePage, 45);
+            var homePage = Browser.WaitUntilUrlIsLoaded(Urls.HomePage, 45);
             return Pages.Home.IsAtUrl();
         }
 
-        public bool AvatarIsDisplayed(IWebDriver driver)
+        public bool AvatarIsDisplayed()
         {
-            var avatarBlock = Browser.WaitUntilElementIsClickable(driver, userAvatar, 11);
+            var avatarBlock = Browser.WaitUntilElementIsClickable(userAvatar, 11);
             return avatarBlock.Displayed;
         }
 

@@ -41,9 +41,9 @@ namespace BATDemoFramework
             return Browser.Title.Contains("Neyber New Password");
         }
 
-        public bool WaitUntilTitleIsShown(IWebDriver driver)
+        public bool WaitUntilTitleIsShown()
         {
-            var changePasswordPage = Browser.WaitUntilPageTitleIsShown(driver, "Neyber New Password", 10);
+            var changePasswordPage = Browser.WaitUntilPageTitleIsShown("Neyber New Password", 10);
             return Pages.ChangePassword.IsAtTitle();
         }
 

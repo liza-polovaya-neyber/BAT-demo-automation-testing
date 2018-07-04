@@ -14,18 +14,18 @@ namespace BATDemoTests.TestCases
 
     class EmployerSearchTests : TestBase
     {
-        [Test]
+        [Test][Retry(3)]
         public async Task CanSelectAnEmployer()
         {
             await Preconditions.HaveNewUserCreatedAndVerifiedEmail();
 
             Pages.EmployerSearch.SelectEnteredEmployer("Bupa");
-            Pages.AlternativeEmail.WaitUntilAlternativeUrlIsLoaded(Browser.webDriver);
+            Pages.AlternativeEmail.WaitUntilAlternativeUrlIsLoaded();
 
             Assert.IsTrue(Pages.AlternativeEmail.IsAtUrl(), "User is not on an alternative email page");
         }
 
-        [Test]
+        [Test][Retry(3)]
         public async Task CanGetValidationError()
         {
             await Preconditions.HaveNewUserCreatedAndVerifiedEmail();
@@ -37,40 +37,40 @@ namespace BATDemoTests.TestCases
 
         }
 
-        [Test]
+        [Test][Retry(3)]
         public async Task EmployerNotFound()
         {
             await Preconditions.HaveNewUserCreatedAndVerifiedEmail();
 
             Pages.EmployerSearch.EnterTextIntoSearchbox("qwerty");
             Pages.EmployerSearch.ClickOnSearchBtn();
-            Pages.EmployerSearch.WaitUntilPhoneNumberFieldAppears(Browser.webDriver);
+            Pages.EmployerSearch.WaitUntilPhoneNumberFieldAppears();
 
             Assert.IsTrue(Pages.EmployerSearch.EmployerNoutFoundBlockIsShown(), "Employer not found block doesn't show up");
         }
 
-        [Test]
+        [Test][Retry(3)]
         public async Task CanEnterPhoneNumberWhenEmployerNotFound()
         {
             await Preconditions.HaveNewUserCreatedAndVerifiedEmail();
 
             Pages.EmployerSearch.EnterTextIntoSearchbox("qwerty");
             Pages.EmployerSearch.ClickOnSearchBtn();
-            Pages.EmployerSearch.WaitUntilPhoneNumberFieldAppears(Browser.webDriver);
+            Pages.EmployerSearch.WaitUntilPhoneNumberFieldAppears();
             Pages.EmployerSearch.EnterPhoneNumber("07523698747");
             Pages.EmployerSearch.ClickToSubmitPhoneNo();
 
             Assert.IsTrue(Pages.EmployerSearch.ThankYouBlockIsShown(), "Thank you block is not shown");
         }
 
-        [Test]
+        [Test][Retry(3)]
         public async Task CanRefineSearch()
         {
             await Preconditions.HaveNewUserCreatedAndVerifiedEmail();
 
             Pages.EmployerSearch.EnterTextIntoSearchbox("Bupa");
             Pages.EmployerSearch.ClickOnSearchBtn();
-            Pages.EmployerSearch.WaitUntilSearchResultsAppear(Browser.webDriver);
+            Pages.EmployerSearch.WaitUntilSearchResultsAppear();
             Pages.EmployerSearch.SelectEmployer();
             Pages.EmployerSearch.ClickOnSelectResultBtn();
             Pages.EmployerSearch.ClickOnRefineSearchLink();
@@ -80,7 +80,7 @@ namespace BATDemoTests.TestCases
 
 
 
-       [Test]
+       [Test][Retry(3)]
         public async Task CanLogoutAndLogbackIn()
             {
                var user = new UserGenerator().GetNewUser();
@@ -88,12 +88,12 @@ namespace BATDemoTests.TestCases
 
                 Pages.EmployerSearch.Logout();
                 Pages.Login.LogIn(user);
-                Pages.EmployerSearch.WaitUntilUrlIsLoaded(Browser.webDriver);
+                Pages.EmployerSearch.WaitUntilUrlIsLoaded();
 
                 Assert.IsTrue(Pages.EmployerSearch.IsAtUrl(), "User wan't able to log out");
             }
 
-        [Test]
+        [Test][Retry(3)]
         public async Task CanNotSkipEmployerPage()
         {
             await Preconditions.HaveNewUserCreatedAndVerifiedEmail();

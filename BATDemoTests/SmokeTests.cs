@@ -6,28 +6,28 @@ namespace BATDemoTests
     //[TestFixture]
     //public class SmokeTests : TestBase
     //{
-    //    [Test]
+    //    [Test][Retry(3)]
     //    public void CanGoToAboutPage()
     //    {
     //        Pages.About.Goto();
     //        Assert.IsTrue(Pages.About.IsAt());
     //    }
 
-    //    [Test]
+    //    [Test][Retry(3)]
     //    public void CanGoToHomePage()
     //    {
     //        Pages.Home.Goto();
     //        Assert.IsTrue(Pages.Home.IsAt());
     //    }
 
-    //    [Test]
+    //    [Test][Retry(3)]
     //    public void CanGoToContactPage()
     //    {
     //        Pages.Contact.Goto();
     //        Assert.IsTrue(Pages.Contact.IsAt());
     //    }
 
-    //    [Test]
+    //    [Test][Retry(3)]
     //    public void CanRegisterNewAccount()
     //    {
     //        Pages.Register.Goto();
@@ -37,7 +37,7 @@ namespace BATDemoTests
 
     //    }
 
-    //    [Test]
+    //    [Test][Retry(3)]
     //    public void CanLogIn()
     //    {
     //        Pages.Register.Goto();
@@ -49,7 +49,7 @@ namespace BATDemoTests
     //        Assert.IsTrue(Pages.TopNavigation.LoggedInAsLastRegisteredUser());
     //    }
 
-    //    [Test]
+    //    [Test][Retry(3)]
     //    public void CanLogout()
     //    {
     //        // Create a new user
@@ -61,7 +61,7 @@ namespace BATDemoTests
     //        Assert.IsFalse(Pages.TopNavigation.IsLoggedIn());
     //    }
 
-    //    [Test]
+    //    [Test][Retry(3)]
     //    public void CanChangePassword()
     //    {
     //        // Create a new user

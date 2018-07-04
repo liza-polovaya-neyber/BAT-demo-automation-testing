@@ -27,9 +27,9 @@ namespace BATDemoFramework
             return Browser.Url.Contains(Urls.ResendEmail);
         }
 
-        public bool WaitUntilResendEmailPageTitleIsShown(IWebDriver driver)
+        public bool WaitUntilResendEmailPageTitleIsShown()
         {
-            var NotVerifiedEmailPage = Browser.WaitUntilPageTitleIsShown(driver, PageTitles.ResendVerificationEmail, 7);
+            var NotVerifiedEmailPage = Browser.WaitUntilPageTitleIsShown(PageTitles.ResendVerificationEmail, 7);
             return Pages.ResendEmail.IsAtUrl();
         }
     }

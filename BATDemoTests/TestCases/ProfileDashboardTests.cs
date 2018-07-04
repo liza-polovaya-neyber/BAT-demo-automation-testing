@@ -11,7 +11,7 @@ namespace BATDemoTests.TestCases
     [TestFixture]
     class ProfileDashboardTests : TestBase
     {
-      [Test]
+      [Test][Retry(3)]
       public async Task CanLogout()
         {
             await Preconditions.HaveNewUserPassedProfileJourney();
@@ -21,13 +21,13 @@ namespace BATDemoTests.TestCases
             Assert.IsTrue(Pages.Login.IsAtUrl(), "User has not been redirected to login page");
         }
 
-        [Test]
+        [Test][Retry(3)]
         public async Task CanNotGoBackToMarketingPage()
         {
             await Preconditions.HaveNewUserPassedProfileJourney();
 
             Browser.GoToUrl(Urls.Marketing);
-            Pages.Home.WaitUntilHomeUrlIsLoaded(Browser.webDriver);
+            Pages.Home.WaitUntilHomeUrlIsLoaded();
 
             Assert.IsTrue(Pages.Home.IsAtUrl(), "User can go back to Marketing page");
         }

@@ -7,6 +7,8 @@ using OpenQA.Selenium.Support.UI;
 using System;
 using System.Configuration;
 using System.Threading;
+using System.Web.UI.WebControls;
+using NUnit.Framework;
 
 namespace BATDemoFramework
 {
@@ -16,13 +18,19 @@ namespace BATDemoFramework
         private static readonly string baseUrl = ConfigurationManager.AppSettings["ProfileUrl"];
         private static readonly double implicitWaitTimeOut = Double.Parse(ConfigurationManager.AppSettings["ImplicitWaitTimeOut"]);
         private static readonly double pageLoadTimeOut = Double.Parse(ConfigurationManager.AppSettings["PageLoadTimeOut"]);
-        private static IWebDriver driver;
-        private static By locator;
 
         //private static IWebDriver webDriver;
         //private static string baseUrl = ConfigurationManager.AppSettings["url"];
         //private static string browser = ConfigurationManager.AppSettings["browser"];
 
+        private static TResult WaitUntil<TResult>(Func<IWebDriver, TResult> condition, TimeSpan timeout)
+        {
+            // workaround on Retry attribute.
+            TResult result = default(TResult);
+            Assert.That(() => result =
+                new WebDriverWait(webDriver, timeout).Until(condition), Throws.Nothing);
+            return result;
+        }
 
         public static void Initialize()
         {
@@ -59,69 +67,29 @@ namespace BATDemoFramework
 
         }
       
-        public static IWebElement WaitUntilElementIsPresent(IWebDriver driver, By locator, int timeoutInSeconds)
+        public static IWebElement WaitUntilElementIsPresent(By locator, int timeoutInSeconds)
         {
-            try
-            {
-                return new WebDriverWait(driver, TimeSpan.FromSeconds(timeoutInSeconds))
-                .Until(ExpectedConditions.ElementIsVisible((locator)));
-            }
-            catch (Exception ex)
-            {
-                throw;
-            }
+            return WaitUntil(ExpectedConditions.ElementIsVisible(locator), TimeSpan.FromSeconds(timeoutInSeconds));
         }
 
-        public static IWebElement WaitUntilElementIsClickable(IWebDriver driver, IWebElement element, int timeoutInSeconds)
+        public static IWebElement WaitUntilElementIsClickable(IWebElement element, int timeoutInSeconds)
         {
-            try
-            {
-                return new WebDriverWait(driver, TimeSpan.FromSeconds(timeoutInSeconds))
-                .Until(ExpectedConditions.ElementToBeClickable(element));
-            }
-            catch (Exception ex)
-            {
-                throw;
-            }
+            return WaitUntil(ExpectedConditions.ElementToBeClickable(element), TimeSpan.FromSeconds(timeoutInSeconds));
         }
 
-        public static IWebElement WaitUntilElementIsVisible(IWebDriver driver, By locator, int timeoutInSeconds)
+        public static IWebElement WaitUntilElementIsVisible(By locator, int timeoutInSeconds)
         {
-            try
-            {
-                return new WebDriverWait(driver, TimeSpan.FromSeconds(timeoutInSeconds))
-                .Until(ExpectedConditions.ElementIsVisible(locator));
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
+            return WaitUntil(ExpectedConditions.ElementIsVisible(locator), TimeSpan.FromSeconds(timeoutInSeconds));
         }
 
-        public static bool WaitUntilPageTitleIsShown(IWebDriver driver, string title, int timeoutInSeconds)
+        public static bool WaitUntilPageTitleIsShown(string title, int timeoutInSeconds)
         {
-            try
-            {
-                return new WebDriverWait(driver, TimeSpan.FromSeconds(timeoutInSeconds))
-                .Until(ExpectedConditions.TitleIs(title));
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
+            return WaitUntil(ExpectedConditions.TitleIs(title), TimeSpan.FromSeconds(timeoutInSeconds));
         }
 
-        public static bool WaitUntilUrlIsLoaded(IWebDriver driver, string url, int timeoutInSeconds)
+        public static bool WaitUntilUrlIsLoaded(string url, int timeoutInSeconds)
         {
-            try
-            {
-                return new WebDriverWait(driver, TimeSpan.FromSeconds(timeoutInSeconds)).Until(ExpectedConditions.UrlMatches(url));
-            }
-
-            catch (Exception ex)
-            {
-                throw ex;
-            }
+            return WaitUntil(ExpectedConditions.UrlMatches(url), TimeSpan.FromSeconds(timeoutInSeconds));
         }
 
         public static void Close()

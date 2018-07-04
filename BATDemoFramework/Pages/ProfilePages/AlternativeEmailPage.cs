@@ -78,21 +78,21 @@ namespace BATDemoFramework
             return errorRedBanner.Text.Contains("This email is already registered. Please provide an alternative.");
         }
 
-        public bool WaitUntilSecurityBlockIsLoaded(IWebDriver driver)
+        public bool WaitUntilSecurityBlockIsLoaded()
         {
-            var alternativeEmailPage = Browser.WaitUntilElementIsVisible(driver, By.ClassName("secure-hint-module__root___4OSbU"), 13);
+            var alternativeEmailPage = Browser.WaitUntilElementIsVisible(By.ClassName("secure-hint-module__root___4OSbU"), 13);
             return securityBlock.IsDisplayed();
         }
 
-        public bool WaitUntilAlternativeUrlIsLoaded(IWebDriver driver)
+        public bool WaitUntilAlternativeUrlIsLoaded()
         {
-            var alternativeEmailPage = Browser.WaitUntilUrlIsLoaded(driver, Urls.AlternativeEmail, 10);
+            var alternativeEmailPage = Browser.WaitUntilUrlIsLoaded(Urls.AlternativeEmail, 10);
             return Pages.AlternativeEmail.IsAtUrl();
         }
 
-        public bool WaitUntilRedBannerIsShown(IWebDriver driver)
+        public bool WaitUntilRedBannerIsShown()
         {
-            var alternativeEmailPage = Browser.WaitUntilElementIsVisible(driver, By.CssSelector("div.global-message-module__container___1hY2-"), 7);
+            var alternativeEmailPage = Browser.WaitUntilElementIsVisible(By.CssSelector("div.global-message-module__container___1hY2-"), 7);
             return errorRedBanner.IsDisplayed();
         }
     }

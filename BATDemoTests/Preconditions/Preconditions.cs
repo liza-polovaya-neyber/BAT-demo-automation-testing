@@ -18,7 +18,7 @@ namespace BATDemoTests
 
             Pages.AboutMe.GoTo();
             Pages.AboutMe.RegisterNewUser(user);
-            Pages.VerificationEmail.WaitUntilVerificationEmailPageTitleIsShown(Browser.webDriver);
+            Pages.VerificationEmail.WaitUntilVerificationEmailPageTitleIsShown();
 
             var emailService = new EmailService();
 
@@ -26,7 +26,7 @@ namespace BATDemoTests
             var urlToken = emailService.GetUrlTokenFromMessage(messages[0]);
 
             Browser.GoToUrl(urlToken);
-            Pages.EmployerSearch.WaitUntilUrlIsLoaded(Browser.webDriver);
+            Pages.EmployerSearch.WaitUntilUrlIsLoaded();
         }
 
         public static async Task HaveNewUserCreatedAndSelectedAnEmployer()
@@ -35,7 +35,7 @@ namespace BATDemoTests
 
             Pages.AboutMe.GoTo();
             Pages.AboutMe.RegisterNewUser(user);
-            Pages.VerificationEmail.WaitUntilVerificationEmailPageTitleIsShown(Browser.webDriver);
+            Pages.VerificationEmail.WaitUntilVerificationEmailPageTitleIsShown();
 
             var emailService = new EmailService();
 
@@ -44,9 +44,9 @@ namespace BATDemoTests
 
             Browser.GoToUrl(urlToken);
 
-            Pages.EmployerSearch.WaitUntilUrlIsLoaded(Browser.webDriver);
+            Pages.EmployerSearch.WaitUntilUrlIsLoaded();
             Pages.EmployerSearch.SelectEnteredEmployer("Bupa");
-            Pages.AlternativeEmail.WaitUntilAlternativeUrlIsLoaded(Browser.webDriver);
+            Pages.AlternativeEmail.WaitUntilAlternativeUrlIsLoaded();
         }
 
         public static async Task HaveNewUserCreatedAndSkippedAlternativeEmail()
@@ -55,7 +55,7 @@ namespace BATDemoTests
 
             Pages.AboutMe.GoTo();
             Pages.AboutMe.RegisterNewUser(user);
-            Pages.VerificationEmail.WaitUntilVerificationEmailPageTitleIsShown(Browser.webDriver);
+            Pages.VerificationEmail.WaitUntilVerificationEmailPageTitleIsShown();
 
             var emailService = new EmailService();
 
@@ -64,11 +64,11 @@ namespace BATDemoTests
 
             Browser.GoToUrl(urlToken);
 
-            Pages.EmployerSearch.WaitUntilUrlIsLoaded(Browser.webDriver);
+            Pages.EmployerSearch.WaitUntilUrlIsLoaded();
             Pages.EmployerSearch.SelectEnteredEmployer("Bupa");
-            Pages.AlternativeEmail.WaitUntilAlternativeUrlIsLoaded(Browser.webDriver);
+            Pages.AlternativeEmail.WaitUntilAlternativeUrlIsLoaded();
             Pages.AlternativeEmail.ClickOnSkipLink();
-            Pages.Marketing.WaitUntilMarketingUrlIsLoaded(Browser.webDriver);
+            Pages.Marketing.WaitUntilMarketingUrlIsLoaded();
         }
 
         public static async Task HaveNewUserPassedProfileJourney()
@@ -77,24 +77,24 @@ namespace BATDemoTests
 
             Pages.AboutMe.GoTo();
             Pages.AboutMe.RegisterNewUser(user);
-            Pages.VerificationEmail.WaitUntilVerificationEmailPageTitleIsShown(Browser.webDriver);
+            Pages.VerificationEmail.WaitUntilVerificationEmailPageTitleIsShown();
 
             var emailService = new EmailService();
             var messages = await emailService.GetMessagesBySubject(EmailTypes.ConfirmYourEmail, user.EmailAddress);
             var urlToken = emailService.GetUrlTokenFromMessage(messages[0]);
 
             Browser.GoToUrl(urlToken);
-            Pages.EmployerSearch.WaitUntilSecurityBlockIsLoaded(Browser.webDriver);
+            Pages.EmployerSearch.WaitUntilSecurityBlockIsLoaded();
             Pages.EmployerSearch.SelectEnteredEmployer("Bupa");
-            Pages.AlternativeEmail.WaitUntilAlternativeUrlIsLoaded(Browser.webDriver);
+            Pages.AlternativeEmail.WaitUntilAlternativeUrlIsLoaded();
             Pages.AlternativeEmail.ClickOnSkipLink();
-            Pages.Marketing.WaitUntilMarketingUrlIsLoaded(Browser.webDriver);
+            Pages.Marketing.WaitUntilMarketingUrlIsLoaded();
             Pages.Marketing.ChooseEmailOption();
             Pages.Marketing.ChooseSMSOption();
             Pages.Marketing.ChoosePostOption();
             Pages.Marketing.ChoosePhoneOption();
             Pages.Marketing.ClickOnSubmitBtn();
-            Pages.Home.WaitUntilHomeUrlIsLoaded(Browser.webDriver);
+            Pages.Home.WaitUntilHomeUrlIsLoaded();
         }
 
         //new user creation => email verification. Method takes a user that already generated prior to method execution
@@ -102,7 +102,7 @@ namespace BATDemoTests
         {
             Pages.AboutMe.GoTo();
             Pages.AboutMe.RegisterNewUser(user);
-            Pages.VerificationEmail.WaitUntilVerificationEmailPageTitleIsShown(Browser.webDriver);
+            Pages.VerificationEmail.WaitUntilVerificationEmailPageTitleIsShown();
 
             var emailService = new EmailService();
 
@@ -114,7 +114,7 @@ namespace BATDemoTests
             var urlToken = emailService.GetUrlTokenFromMessage(messages[0]);
 
             Browser.GoToUrl(urlToken);
-            Pages.EmployerSearch.WaitUntilUrlIsLoaded(Browser.webDriver);
+            Pages.EmployerSearch.WaitUntilUrlIsLoaded();
         }
     }
 }
