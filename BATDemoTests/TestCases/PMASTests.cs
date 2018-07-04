@@ -11,7 +11,7 @@ namespace BATDemoTests.TestCases
     [TestFixture]
     class PoliceMutualTests : TestBase
     {
-        [Test]
+        [Test][Retry(3)]
         public void CanGoFromApolloPMASToAboutMePageTopBtn()
         {
             Pages.ApolloPMAS.GoToUrl();
@@ -20,7 +20,7 @@ namespace BATDemoTests.TestCases
             Assert.True(Pages.AboutMe.IsAtUrl(), "User was not redirected to About Me page from Apollo landing page");
         }
 
-        [Test]
+        [Test][Retry(3)]
         public void CanGoFromApolloPMASToAboutMePageMiddleBtn()
         {
             Pages.ApolloPMAS.GoToUrl();
@@ -29,7 +29,7 @@ namespace BATDemoTests.TestCases
             Assert.True(Pages.AboutMe.IsAtUrl(), "User was not redirected to About Me page from Apollo landing page");
         }
 
-        [Test]
+        [Test][Retry(3)]
         public void CanGoFromApolloPMASToAboutMePageBottomBtn()
         {
             Pages.ApolloPMAS.GoToUrl();
@@ -39,7 +39,7 @@ namespace BATDemoTests.TestCases
             Assert.True(Pages.AboutMe.IsAtUrl(), "User was not redirected to About Me page from Apollo landing page");
         }
 
-        [Test]
+        [Test][Retry(3)]
         public void CanGoToEligibilityCriteriaPage()
         {
             Pages.ApolloPMAS.GoToUrl();
@@ -49,7 +49,7 @@ namespace BATDemoTests.TestCases
             Assert.True(Pages.EligibilityCriteria.IsAtUrl(), "Userwas not redirected to eligibility criteria page");
         }
 
-        [Test]
+        [Test][Retry(3)]
         public void CanApplyThroughEligibilityCriteriaPage()
         {
             Pages.ApolloPMAS.GoToUrl();
@@ -60,7 +60,7 @@ namespace BATDemoTests.TestCases
             Assert.True(Pages.AboutMe.IsAtUrl(), "User was not redirected to About Me page");
         }
 
-        [Test]
+        [Test][Retry(3)]
         public void CanGoToLogin()
         {
             Pages.ApolloPMAS.GoToUrl();
@@ -70,7 +70,7 @@ namespace BATDemoTests.TestCases
         }
 
 
-        [Test]
+        [Test][Retry(3)]
         public void CanGoToGetInTouchPage()
         {
             Pages.ApolloPMAS.GoToUrl();
@@ -79,17 +79,17 @@ namespace BATDemoTests.TestCases
             Assert.True(Pages.GetInTouch.IsAtUrl(), "User was not redirected to the page with contact details");
         }
 
-        [Test]
+        [Test][Retry(3)]
         public void CanGoToFAQPage()
         {
             Pages.ApolloPMAS.GoToUrl();
             Pages.ApolloPMAS.ClickOnFAQ();
-            Pages.FAQ.WaitUntilUrlIsLoaded(Browser.webDriver);
+            Pages.FAQ.WaitUntilUrlIsLoaded();
 
             Assert.True(Pages.FAQ.IsAtUrl(), "User was not redirected to the page with contact details");
         }
 
-        [Test]
+        [Test][Retry(3)]
         public void CanComeBackToApolloPMASPage()
         {
             Pages.ApolloPMAS.GoToUrl();

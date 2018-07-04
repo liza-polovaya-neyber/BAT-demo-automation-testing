@@ -343,9 +343,9 @@ namespace BATDemoFramework
             return Browser.Url.Contains(Urls.AboutMePage);
         }
 
-        public bool WaitUntilUrlIsLoaded(IWebDriver driver)
+        public bool WaitUntilUrlIsLoaded()
         {
-            var aboutMePage = Browser.WaitUntilUrlIsLoaded(driver, Urls.AboutMePage, 20);
+            var aboutMePage = Browser.WaitUntilUrlIsLoaded(Urls.AboutMePage, 20);
             return Pages.AboutMe.IsAtUrl();
         }
     }

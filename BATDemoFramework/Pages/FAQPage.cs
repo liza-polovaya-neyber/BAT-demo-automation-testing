@@ -18,9 +18,9 @@ namespace BATDemoFramework
             return Browser.Url.Contains(Urls.FAQPage);
         }
 
-        public bool WaitUntilUrlIsLoaded(IWebDriver driver)
+        public bool WaitUntilUrlIsLoaded()
         {
-            var faqPage = Browser.WaitUntilUrlIsLoaded(driver, Urls.FAQPage, 20);
+            var faqPage = Browser.WaitUntilUrlIsLoaded(Urls.FAQPage, 20);
             return Pages.FAQ.IsAtUrl();
         }
     }

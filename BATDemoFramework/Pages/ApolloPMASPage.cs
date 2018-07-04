@@ -89,9 +89,9 @@ namespace BATDemoFramework
             return Browser.Url.Contains(Urls.ApolloPMASPage);
         }
 
-        public bool WaitUntilBottomApplyNowBtnIsClickable(IWebDriver driver)
+        public bool WaitUntilBottomApplyNowBtnIsClickable()
         {
-            var applyNowBtn = Browser.WaitUntilElementIsClickable(driver, bottomApplyNowBtn, 10);
+            var applyNowBtn = Browser.WaitUntilElementIsClickable(bottomApplyNowBtn, 10);
             return applyNowBtn.Displayed;
 
         }
