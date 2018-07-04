@@ -185,6 +185,13 @@ namespace BATDemoFramework
             webDriver.Navigate().Back();
         }
 
+        public static void ClickTheElement(IWebDriver driver, IWebElement element)
+        {
+            Actions action = new Actions(driver);
+            action.MoveToElement(element).Perform(); // move to the button
+            element.Click();
+        }
+
         public static void AlertAccept()
         {
             Thread.Sleep(2000);

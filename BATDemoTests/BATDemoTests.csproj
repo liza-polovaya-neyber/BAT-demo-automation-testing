@@ -94,6 +94,7 @@
     <Compile Include="TestCases\HelpLinksTests.cs" />
     <Compile Include="TestCases\LoginTests.cs" />
     <Compile Include="TestCases\MarketingPreferencesTests.cs" />
+    <Compile Include="TestCases\PMASTests.cs" />
     <Compile Include="TestCases\ProfileDashboardTests.cs" />
     <Compile Include="TestCases\ResetPasswordTests.cs" />
     <Compile Include="TestCases\VerificationEmailTests.cs" />

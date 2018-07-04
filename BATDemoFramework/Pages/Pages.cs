@@ -1,5 +1,4 @@
-﻿
-using OpenQA.Selenium.Support.PageObjects;
+﻿using OpenQA.Selenium.Support.PageObjects;
 
 namespace BATDemoFramework
 {
@@ -107,6 +106,24 @@ namespace BATDemoFramework
             get { return GetPage<OurTermsPage>(); }
         }
 
-       
+        public static ApolloPMASPage ApolloPMAS
+        {
+            get { return GetPage<ApolloPMASPage>(); }
+        }
+
+        public static EligibilityCriteriaPage EligibilityCriteria
+        {
+            get { return GetPage<EligibilityCriteriaPage>(); }
+        }
+
+        public static GetInTouchPage GetInTouch
+        {
+            get { return GetPage<GetInTouchPage>(); }
+        }
+
+        public static FAQPage FAQ
+        {
+            get { return GetPage<FAQPage>(); }
+        }
     }
 }

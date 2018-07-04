@@ -342,10 +342,16 @@ namespace BATDemoFramework
         {
             return Browser.Url.Contains(Urls.AboutMePage);
         }
+
+        public bool WaitUntilUrlIsLoaded(IWebDriver driver)
+        {
+            var aboutMePage = Browser.WaitUntilUrlIsLoaded(driver, Urls.AboutMePage, 20);
+            return Pages.AboutMe.IsAtUrl();
+        }
     }
 
-    public enum TitleType
-    {
+        public enum TitleType
+       {  
         Title,
         Mr,
         Ms,
@@ -354,4 +360,5 @@ namespace BATDemoFramework
         Dr,
         Prof
     }
+
 }
