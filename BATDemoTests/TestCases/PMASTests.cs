@@ -1,4 +1,6 @@
 ﻿using BATDemoFramework;
+using BATDemoFramework.EmailService;
+using BATDemoFramework.Generators;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
@@ -97,6 +99,28 @@ namespace BATDemoTests.TestCases
             Pages.FAQ.ClickOnPersonalLoans();
 
             Assert.True(Pages.ApolloPMAS.IsAtUrl(), "User was not redirected back to Apollo PMAS landing page");
+        }
+
+        [Test]
+        [Retry(3)]
+        public async Task CanSkipEmployerSearchPage()
+        {
+            var user = new UserGenerator().GetNewUser();
+
+            Pages.ApolloPMAS.GoToUrl();
+            Pages.ApolloPMAS.ClickToApplyTopBtn();
+            Pages.AboutMe.RegisterNewUser(user);
+            Pages.VerificationEmail.WaitUntilVerificationEmailPageTitleIsShown();
+
+            var emailService = new EmailService();
+
+            var messages = await emailService.GetMessagesBySubject(EmailTypes.ConfirmYourEmail, user.EmailAddress);
+            var urlToken = emailService.GetUrlTokenFromMessage(messages[0]);
+
+            Browser.GoToUrl(urlToken);
+            Pages.AlternativeEmail.WaitUntilAlternativeUrlIsLoaded();
+
+            Assert.True(Pages.AlternativeEmail.IsAtUrl(), "User was not redirected back to Apollo PMAS landing page");
         }
 
     }
