@@ -117,6 +117,7 @@
     <Compile Include="Pages\ProfilePages\ResendEmailPage.cs" />
     <Compile Include="Pages\ProfilePages\VerificationEmailPage.cs" />
     <Compile Include="Pages\ProfilePages\WorkEmailPage.cs" />
+    <Compile Include="Pages\ProfilePages\SSOLoginRequiredPage.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="TestDataAccess\CsvDataAccess.cs" />
     <Compile Include="TestDataAccess\UserData.cs" />

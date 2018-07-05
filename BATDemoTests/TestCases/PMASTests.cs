@@ -19,7 +19,7 @@ namespace BATDemoTests.TestCases
             Pages.ApolloPMAS.GoToUrl();
             Pages.ApolloPMAS.ClickToApplyTopBtn();
 
-            Assert.True(Pages.AboutMe.IsAtUrl(), "User was not redirected to About Me page from Apollo landing page");
+            Assert.AreEqual(Urls.AboutMePMASPage, Browser.Url, "User was not redirected back to Apollo PMAS landing page");
         }
 
         [Test][Retry(3)]
@@ -28,7 +28,7 @@ namespace BATDemoTests.TestCases
             Pages.ApolloPMAS.GoToUrl();
             Pages.ApolloPMAS.ClickToApplyMiddleBtn();
 
-            Assert.True(Pages.AboutMe.IsAtUrl(), "User was not redirected to About Me page from Apollo landing page");
+            Assert.AreEqual(Urls.AboutMePMASPage, Browser.Url, "User was not redirected back to Apollo PMAS landing page");
         }
 
         [Test][Retry(3)]
@@ -37,8 +37,8 @@ namespace BATDemoTests.TestCases
             Pages.ApolloPMAS.GoToUrl();
             Pages.ApolloPMAS.AcceptCookiesPolicy();
             Pages.ApolloPMAS.ClickToApplyBottomBtn();
- 
-            Assert.True(Pages.AboutMe.IsAtUrl(), "User was not redirected to About Me page from Apollo landing page");
+
+            Assert.AreEqual(Urls.AboutMePMASPage, Browser.Url, "User was not redirected back to Apollo PMAS landing page");
         }
 
         [Test][Retry(3)]
@@ -59,7 +59,7 @@ namespace BATDemoTests.TestCases
             Pages.ApolloPMAS.ShowEligibilityCriteria();
             Pages.EligibilityCriteria.ClickToApplyNow();
 
-            Assert.True(Pages.AboutMe.IsAtUrl(), "User was not redirected to About Me page");
+            Assert.AreEqual(Urls.AboutMePMASPage, Browser.Url, "User was not redirected back to Apollo PMAS landing page");
         }
 
         [Test][Retry(3)]
@@ -98,7 +98,35 @@ namespace BATDemoTests.TestCases
             Pages.ApolloPMAS.ClickOnFAQ();
             Pages.FAQ.ClickOnPersonalLoans();
 
-            Assert.True(Pages.ApolloPMAS.IsAtUrl(), "User was not redirected back to Apollo PMAS landing page");
+            Assert.True(Pages.ApolloPMAS.IsAtUrl(), "User was not redirected back to Apollo PMAS landing page");     
+        }
+         
+        [Test]
+        [Retry(3)]
+        public async Task CanGetToProfileDashboardPage()
+        {
+            var user = new UserGenerator().GetNewUser();
+
+            Pages.ApolloPMAS.GoToUrl();
+            Pages.ApolloPMAS.ClickToApplyTopBtn();
+            Pages.AboutMe.RegisterNewUser(user);
+            Pages.VerificationEmail.WaitUntilVerificationEmailPageTitleIsShown();
+
+            var emailService = new EmailService();
+
+            var messages = await emailService.GetMessagesBySubject(EmailTypes.ConfirmYourEmail, user.EmailAddress);
+            var urlToken = emailService.GetUrlTokenFromMessage(messages[0]);
+
+            Browser.GoToUrl(urlToken);
+            Pages.AlternativeEmail.WaitUntilAlternativeUrlIsLoaded();
+            Pages.AlternativeEmail.ClickOnSkipLink();
+            Pages.Marketing.WaitUntilMarketingUrlIsLoaded();
+            Pages.Marketing.ChoosePostOption();
+            Pages.Marketing.ChoosePhoneOption();
+            Pages.Marketing.ClickOnSubmitBtn();
+            Pages.Home.WaitUntilHomeUrlIsLoaded();
+
+            Assert.True(Pages.Home.IsAtUrl(), "User was not able to get to Profile dashboard page");
         }
 
         [Test]
@@ -120,7 +148,8 @@ namespace BATDemoTests.TestCases
             Browser.GoToUrl(urlToken);
             Pages.AlternativeEmail.WaitUntilAlternativeUrlIsLoaded();
 
-            Assert.True(Pages.AlternativeEmail.IsAtUrl(), "User was not redirected back to Apollo PMAS landing page");
+
+            Assert.True(Pages.AlternativeEmail.IsAtUrl(), "User was not able to get to Alternative email page");
         }
 
     }

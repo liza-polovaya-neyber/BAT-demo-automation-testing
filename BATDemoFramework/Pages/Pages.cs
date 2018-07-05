@@ -125,5 +125,11 @@ namespace BATDemoFramework
         {
             get { return GetPage<FAQPage>(); }
         }
+
+        public static SSOLoginRequiredPage SSOLoginRequired
+        {
+            get { return GetPage<SSOLoginRequiredPage>(); }
+        }
+      
     }
 }

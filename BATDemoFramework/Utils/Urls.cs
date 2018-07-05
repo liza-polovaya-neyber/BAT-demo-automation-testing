@@ -30,9 +30,11 @@ namespace BATDemoFramework
         public static readonly string EmployerVerification = profileUrl + "/join/employer-verification";
         public static readonly string Marketing = profileUrl + "/join/marketing";
         public static readonly string ApolloPMASPage = "https://testenv1.neyber.co.uk/app/policemutualloans";
+        public static readonly string AboutMePMASPage = "https://hellotest1.neyber.co.uk/join/about-me?tenantName=Police%20Mutual";
         public static readonly string EligibilityCriteriaPage = "https://testenv1.neyber.co.uk/app/eligibility-criteria";
         public static readonly string GetInTouchPage = "https://testenv1.neyber.co.uk/app/contact-us";
         public static readonly string FAQPage = "https://testenv1.neyber.co.uk/app/faq";
+        public static readonly string SSOLoginRequired = "https://hellotest1.neyber.co.uk/join/sso-login-required";
 
     }
 }
