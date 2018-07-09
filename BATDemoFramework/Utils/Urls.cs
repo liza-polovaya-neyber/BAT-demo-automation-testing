@@ -35,6 +35,8 @@ namespace BATDemoFramework
         public static readonly string GetInTouchPage = "https://testenv1.neyber.co.uk/app/contact-us";
         public static readonly string FAQPage = "https://testenv1.neyber.co.uk/app/faq";
         public static readonly string SSOLoginRequired = "https://hellotest1.neyber.co.uk/join/sso-login-required";
+        public static readonly string SSOAboutMePage = "https://hellotest1.neyber.co.uk/join/sso-employee";
+        public static readonly string SSOAccountConfirm = "https://hellotest1.neyber.co.uk/join/account-confirm";
 
     }
 }

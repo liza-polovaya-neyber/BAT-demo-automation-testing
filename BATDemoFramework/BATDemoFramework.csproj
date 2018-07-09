@@ -97,10 +97,10 @@
     <Compile Include="EmailService\EmailService.cs" />
     <Compile Include="EmailService\IEmailService.cs" />
     <Compile Include="Helpers\StringHelper.cs" />
-    <Compile Include="Pages\ApolloPMASPage.cs" />
-    <Compile Include="Pages\EligibilityCriteriaPage.cs" />
-    <Compile Include="Pages\FAQPage.cs" />
-    <Compile Include="Pages\GetInTouchPage.cs" />
+    <Compile Include="Pages\ApolloPages\ApolloPMASPage.cs" />
+    <Compile Include="Pages\ApolloPages\EligibilityCriteriaPage.cs" />
+    <Compile Include="Pages\ApolloPages\FAQPage.cs" />
+    <Compile Include="Pages\ApolloPages\GetInTouchPage.cs" />
     <Compile Include="Pages\ProfilePages\AlternativeEmailPage.cs" />
     <Compile Include="Pages\ProfilePages\ChangePasswordPage.cs" />
     <Compile Include="Pages\ProfilePages\ComplaintsPolicyPage.cs" />
@@ -118,6 +118,8 @@
     <Compile Include="Pages\ProfilePages\VerificationEmailPage.cs" />
     <Compile Include="Pages\ProfilePages\WorkEmailPage.cs" />
     <Compile Include="Pages\ProfilePages\SSOLoginRequiredPage.cs" />
+    <Compile Include="Pages\SSOAboutMePage.cs" />
+    <Compile Include="Pages\SSOAccountConfirmPage.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="TestDataAccess\CsvDataAccess.cs" />
     <Compile Include="TestDataAccess\UserData.cs" />

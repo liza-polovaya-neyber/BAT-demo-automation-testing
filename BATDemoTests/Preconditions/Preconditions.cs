@@ -84,7 +84,7 @@ namespace BATDemoTests
             var urlToken = emailService.GetUrlTokenFromMessage(messages[0]);
 
             Browser.GoToUrl(urlToken);
-            Pages.EmployerSearch.WaitUntilSecurityBlockIsLoaded();
+            Pages.EmployerSearch.WaitUntilUrlIsLoaded();
             Pages.EmployerSearch.SelectEnteredEmployer("Bupa");
             Pages.AlternativeEmail.WaitUntilAlternativeUrlIsLoaded();
             Pages.AlternativeEmail.ClickOnSkipLink();
@@ -98,7 +98,7 @@ namespace BATDemoTests
         }
 
         //new user creation => email verification. Method takes a user that already generated prior to method execution
-        public static async Task NewUserCreated(User user)
+        public static async Task NewUserCreatedAndVerifiedEmail(User user)
         {
             Pages.AboutMe.GoTo();
             Pages.AboutMe.RegisterNewUser(user);
@@ -115,6 +115,32 @@ namespace BATDemoTests
 
             Browser.GoToUrl(urlToken);
             Pages.EmployerSearch.WaitUntilUrlIsLoaded();
+        }
+
+        public static async Task NewUserCreatedAndPassedProfileJourney(User user)
+        {
+            Pages.AboutMe.GoTo();
+            Pages.AboutMe.RegisterNewUser(user);
+            Pages.VerificationEmail.WaitUntilVerificationEmailPageTitleIsShown();
+
+            var emailService = new EmailService();
+
+            var messages = await emailService.GetMessagesBySubject(EmailTypes.ConfirmYourEmail, user.EmailAddress);
+            if (messages.Count == 0)
+            {
+                throw new Exception($"Can't get confirmation email: {user.EmailAddress}");
+            }
+            var urlToken = emailService.GetUrlTokenFromMessage(messages[0]);
+
+            Browser.GoToUrl(urlToken);
+            Pages.EmployerSearch.WaitUntilUrlIsLoaded();
+            Pages.EmployerSearch.SelectEnteredEmployer("Bupa");
+            Pages.AlternativeEmail.WaitUntilAlternativeUrlIsLoaded();
+            Pages.AlternativeEmail.ClickOnSkipLink();
+            Pages.Marketing.WaitUntilMarketingUrlIsLoaded();
+            Pages.Marketing.ChooseEmailOption();
+            Pages.Marketing.ClickOnSubmitBtn();
+            Pages.Home.WaitUntilHomeUrlIsLoaded();
         }
     }
 }

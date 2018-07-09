@@ -96,7 +96,7 @@ namespace BATDemoTests
         public async Task RegisteredUserReceivesResetPasswordLink()  
         {
             var user = new UserGenerator().GetNewUser();
-            await Preconditions.NewUserCreated(user);
+            await Preconditions.NewUserCreatedAndVerifiedEmail(user);
 
             Pages.EmployerSearch.WaitUntilUrlIsLoaded();
             Pages.EmployerSearch.Logout();
@@ -113,7 +113,7 @@ namespace BATDemoTests
         public async Task CanResendResetPasswordLink()  
         {  
             var user = new UserGenerator().GetNewUser();
-            await Preconditions.NewUserCreated(user);
+            await Preconditions.NewUserCreatedAndVerifiedEmail(user);
 
             Pages.EmployerSearch.WaitUntilUrlIsLoaded();
             Pages.EmployerSearch.Logout();
@@ -132,7 +132,7 @@ namespace BATDemoTests
         public async Task ResetPasswordLinkIsSentToDifferentEmail()   
         {   
             var user = new UserGenerator().GetNewUser();
-            await Preconditions.NewUserCreated(user);
+            await Preconditions.NewUserCreatedAndVerifiedEmail(user);
 
             Pages.EmployerSearch.WaitUntilUrlIsLoaded();
             Pages.EmployerSearch.Logout();

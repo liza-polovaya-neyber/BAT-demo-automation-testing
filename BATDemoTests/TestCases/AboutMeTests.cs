@@ -162,10 +162,15 @@ namespace BATDemoTests.TestCases
         }
 
         [Test][Retry(3)]
-        public void CanNotRegisterWithAlreadyRegisteredEmail()
+        public async Task CanNotRegisterWithAlreadyRegisteredEmail()
         {
+            var user = new UserGenerator().GetNewUser();
+            await Preconditions.NewUserCreatedAndPassedProfileJourney(user);
+            Pages.Home.Logout();
+
+
             Pages.AboutMe.GoTo();
-            Pages.AboutMe.RegisterUserFromCsv("CanLogin");
+            Pages.AboutMe.RegisterNewUser(user);
             Pages.Login.WaitUntilLoginUrlIsLoaded();
 
             Assert.IsTrue(Pages.Login.IsAtUrl(), "User has not been redirected to Login page");    
@@ -173,10 +178,14 @@ namespace BATDemoTests.TestCases
 
 
         [Test][Retry(3)]
-        public void CanSeeRedErrorBanner()
+        public async Task CanSeeRedErrorBanner()
         {
+            var user = new UserGenerator().GetNewUser();
+            await Preconditions.NewUserCreatedAndPassedProfileJourney(user);
+            Pages.Home.Logout();
+
             Pages.AboutMe.GoTo();
-            Pages.AboutMe.RegisterUserFromCsv("CanLogin");
+            Pages.AboutMe.RegisterNewUser(user);
             Pages.Login.WaitUntilLoginUrlIsLoaded();
 
             Assert.AreEqual(Pages.Login.GetErrorBannerText(), "Close");

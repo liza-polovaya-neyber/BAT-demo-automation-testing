@@ -8,6 +8,7 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
 using BATDemoFramework.BrowserStackTest;
 using System.Threading.Tasks;
+using BATDemoFramework.Generators;
 
 namespace BATDemoTests
 {
@@ -46,10 +47,14 @@ namespace BATDemoTests
         }
 
         [Test][Retry(3)]
-        public void CanLogin()
+        public async Task CanLogin()
         {
-            Pages.Login.GoTo();
-            Pages.Login.LogInFromCsv("CanLogin");
+            var user = new UserGenerator().GetNewUser();
+            await Preconditions.NewUserCreatedAndPassedProfileJourney(user);
+            Pages.Home.Logout();
+
+            //Pages.Login.GoTo();
+            Pages.Login.LogIn(user);
             Pages.Home.WaitUntilHomeUrlIsLoaded();
 
 

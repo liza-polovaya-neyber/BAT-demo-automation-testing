@@ -42,7 +42,7 @@ namespace BATDemoTests.TestCases
         public async Task CanNotSetPrimaryEmailAsAlternative()
         {
             var user = new UserGenerator().GetNewUser();
-            await Preconditions.NewUserCreated(user);
+            await Preconditions.NewUserCreatedAndVerifiedEmail(user);
 
             Pages.EmployerSearch.WaitUntilSecurityBlockIsLoaded();
             Pages.EmployerSearch.SelectEnteredEmployer("Bupa");

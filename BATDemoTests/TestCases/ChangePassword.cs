@@ -18,9 +18,8 @@ namespace BATDemoTests.TestCases
         public async Task CanGetToNewPasswordPage()
         {
             var user = new UserGenerator().GetNewUser();
-            await Preconditions.NewUserCreated(user);
+            await Preconditions.NewUserCreatedAndVerifiedEmail(user);
 
-            Pages.EmployerSearch.WaitUntilUrlIsLoaded();
             Pages.EmployerSearch.Logout();
             Pages.ResetPassword.GoTo();
             Pages.ResetPassword.EnterEmailAndClickToResetPassword(user);
@@ -39,9 +38,8 @@ namespace BATDemoTests.TestCases
         public async Task CanGoToJoinPage()
         {
             var user = new UserGenerator().GetNewUser();
-            await Preconditions.NewUserCreated(user);
+            await Preconditions.NewUserCreatedAndVerifiedEmail(user);
 
-            Pages.EmployerSearch.WaitUntilUrlIsLoaded();
             Pages.EmployerSearch.Logout();
             Pages.ResetPassword.GoTo();
             Pages.ResetPassword.EnterEmailAndClickToResetPassword(user);
@@ -63,9 +61,8 @@ namespace BATDemoTests.TestCases
         public async Task CanGetValidationMessageWhenEntersNewPassword(string a, string b)
         {
             var user = new UserGenerator().GetNewUser();
-            await Preconditions.NewUserCreated(user);
-
-            Pages.EmployerSearch.WaitUntilUrlIsLoaded();
+            await Preconditions.NewUserCreatedAndVerifiedEmail(user);
+            
             Pages.EmployerSearch.Logout();
             Pages.ResetPassword.GoTo();
             Pages.ResetPassword.EnterEmailAndClickToResetPassword(user);
@@ -86,9 +83,8 @@ namespace BATDemoTests.TestCases
         public async Task CanSetNewPassword()
         {
             var user = new UserGenerator().GetNewUser();
-            await Preconditions.NewUserCreated(user);
+            await Preconditions.NewUserCreatedAndVerifiedEmail(user);
 
-            Pages.EmployerSearch.WaitUntilUrlIsLoaded();
             Pages.EmployerSearch.Logout();
             Pages.ResetPassword.GoTo();
             Pages.ResetPassword.EnterEmailAndClickToResetPassword(user);
@@ -110,9 +106,8 @@ namespace BATDemoTests.TestCases
         public async Task CanLoginWithNewPassword()
         {
             var user = new UserGenerator().GetNewUser();
-            await Preconditions.NewUserCreated(user);
+            await Preconditions.NewUserCreatedAndVerifiedEmail(user);
 
-            Pages.EmployerSearch.WaitUntilUrlIsLoaded();
             Pages.EmployerSearch.Logout();
             Pages.ResetPassword.GoTo();
             Pages.ResetPassword.EnterEmailAndClickToResetPassword(user);
@@ -136,9 +131,8 @@ namespace BATDemoTests.TestCases
         public async Task CanNotLoginWithOldPassword()
         {
             var user = new UserGenerator().GetNewUser();
-            await Preconditions.NewUserCreated(user);
+            await Preconditions.NewUserCreatedAndVerifiedEmail(user);
 
-            Pages.EmployerSearch.WaitUntilUrlIsLoaded();
             Pages.EmployerSearch.Logout();
             Pages.ResetPassword.GoTo();
             Pages.ResetPassword.EnterEmailAndClickToResetPassword(user);

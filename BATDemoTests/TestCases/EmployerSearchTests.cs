@@ -84,7 +84,7 @@ namespace BATDemoTests.TestCases
         public async Task CanLogoutAndLogbackIn()
             {
                var user = new UserGenerator().GetNewUser();
-               await Preconditions.NewUserCreated(user);
+               await Preconditions.NewUserCreatedAndVerifiedEmail(user);
 
                 Pages.EmployerSearch.Logout();
                 Pages.Login.LogIn(user);

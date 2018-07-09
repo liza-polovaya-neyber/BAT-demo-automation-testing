@@ -130,6 +130,15 @@ namespace BATDemoFramework
         {
             get { return GetPage<SSOLoginRequiredPage>(); }
         }
-      
+
+        public static SSOAboutMePage SSOAboutMe
+        {
+            get { return GetPage<SSOAboutMePage>(); }
+        }
+
+        public static SSOAccountConfirPage SSOAccountConfirm
+        {
+            get { return GetPage<SSOAccountConfirPage>(); }
+        }
     }
 }
