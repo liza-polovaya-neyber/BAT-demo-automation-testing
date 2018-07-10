@@ -136,9 +136,14 @@ namespace BATDemoFramework
             get { return GetPage<SSOAboutMePage>(); }
         }
 
-        public static SSOAccountConfirPage SSOAccountConfirm
+        public static SSOAccountConfirmPage SSOAccountConfirm
         {
-            get { return GetPage<SSOAccountConfirPage>(); }
+            get { return GetPage<SSOAccountConfirmPage>(); }
+        }
+
+        public static StubIDPPage StubIDP
+        {
+            get { return GetPage<StubIDPPage>(); }
         }
     }
 }

@@ -3,7 +3,7 @@ using OpenQA.Selenium.Support.PageObjects;
 
 namespace BATDemoFramework
 {
-    public class SSOAccountConfirPage
+    public class SSOAccountConfirmPage
     {
         [FindsBy(How = How.Name, Using = "email")]
         private IWebElement emailField;
@@ -17,6 +17,17 @@ namespace BATDemoFramework
         [FindsBy(How = How.LinkText, Using = "Continue")]
         private IWebElement continueBtn;
 
+
+        public void ClickToContinue()
+        {
+            continueBtn.Click();
+        }
+
+        public bool WaitUntilUrlIsLoaded()
+        {
+            Browser.WaitUntilUrlIsLoaded(Urls.SSOAccountConfirm, 60);
+            return Pages.SSOAccountConfirm.IsAtUrl();
+        }
 
         public bool IsAtUrl()
         {

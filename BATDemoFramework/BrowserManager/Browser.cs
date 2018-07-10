@@ -167,6 +167,10 @@ namespace BATDemoFramework
             webDriver.SwitchTo().DefaultContent();
         }
 
+        public static object ExecuteScript(string script)
+        {
+            return ((IJavaScriptExecutor)webDriver).ExecuteScript(script);
+        }
 
     }
    
