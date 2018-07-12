@@ -5,6 +5,7 @@ using OpenQA.Selenium.Support.PageObjects;
 using BATDemoFramework.TestDataAccess;
 using System;
 using OpenQA.Selenium.Support.UI;
+using BATDemoFramework.Models;
 
 namespace BATDemoFramework
 {
@@ -91,6 +92,26 @@ namespace BATDemoFramework
             emailAddressField.SendKeys(user.EmailAddress);
             passwordField.Click();
             passwordField.SendKeys(user.Password);
+
+            loginButton.Click();
+        }
+
+        public void LogInBySSOUserPrimaryEmail(SSOUser user, User newUser)
+        {
+            emailAddressField.Click();
+            emailAddressField.SendKeys(user.Email);
+            passwordField.Click();
+            passwordField.SendKeys(newUser.Password);
+
+            loginButton.Click();
+        }
+
+        public void LogInBySSOUserAlternativeEmail(User newUser)
+        {
+            emailAddressField.Click();
+            emailAddressField.SendKeys(newUser.EmailAddress);
+            passwordField.Click();
+            passwordField.SendKeys(newUser.Password);
 
             loginButton.Click();
         }

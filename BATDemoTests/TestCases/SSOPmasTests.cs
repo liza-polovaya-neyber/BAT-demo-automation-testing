@@ -57,6 +57,29 @@ namespace BATDemoTests.TestCases
         }
 
         [Test][Retry(3)]
+        public void CanLogoutAndLogBackInOnProfileJourney()
+        {
+            var user = UserGenerator.GetNewSSOUser();
+            var newUser = new UserGenerator().GetNewUser();
+
+            Pages.StubIDP.GoTo();
+            Pages.StubIDP.EnterSSOUserDetailsAndSubmit(user);
+            Pages.SSOAccountConfirm.WaitUntilUrlIsLoaded();
+            Pages.SSOAccountConfirm.ClickToContinue();
+            Pages.SSOAboutMe.RegisterUserWithAllFieldsFilledIn(newUser);
+            Pages.SSOAboutMe.PressSubmitButton();
+            Pages.Marketing.WaitUntilMarketingUrlIsLoaded();
+            Pages.Marketing.Logout();
+            Pages.Login.LogInBySSOUserPrimaryEmail(user, newUser);
+            Pages.Marketing.WaitUntilMarketingUrlIsLoaded();
+            Pages.Marketing.ChooseEmailOption();
+            Pages.Marketing.ChoosePhoneOption();
+            Pages.Marketing.ChoosePostOption();
+
+            Assert.True(Pages.Home.IsAtUrl(), "User wasn't able to get to Home page after logging back in");
+        }
+
+        [Test][Retry(3)]
         public void CanNotEnterDifferentAlternativeEmails()
         {
             var user = UserGenerator.GetNewSSOUser();
@@ -150,6 +173,25 @@ namespace BATDemoTests.TestCases
             Assert.AreEqual(Pages.SSOAboutMe.GetErrorPasswordText(), b);
         }
 
-       
+        [Test][Retry(3)]
+        public void CanNotLoginByNotVerifiedAlternativeEmail()
+        {
+            var user = UserGenerator.GetNewSSOUser();
+            var newUser = new UserGenerator().GetNewUser();
+
+            Pages.StubIDP.GoTo();
+            Pages.StubIDP.EnterSSOUserDetailsAndSubmit(user);
+            Pages.SSOAccountConfirm.WaitUntilUrlIsLoaded();
+            Pages.SSOAccountConfirm.ClickToContinue();
+            Pages.SSOAboutMe.RegisterUserWithAllFieldsFilledIn(newUser);
+            Pages.SSOAboutMe.PressSubmitButton();
+            Pages.Marketing.WaitUntilMarketingUrlIsLoaded();
+            Pages.Marketing.Logout();
+            Pages.Login.LogInBySSOUserAlternativeEmail(newUser);
+            Pages.Login.WaitUntilErrorBlockIsShown();
+
+            Assert.AreEqual(Pages.Login.GetErrorText(), "The email address or password you entered is incorrect. Please check and try again.");
+        }
+
     }
 }
