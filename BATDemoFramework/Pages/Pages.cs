@@ -141,6 +141,11 @@ namespace BATDemoFramework
             get { return GetPage<SSOAccountConfirmPage>(); }
         }
 
+        public static SSOIneligibleStatePage SSOIneligibleState
+        {
+            get { return GetPage<SSOIneligibleStatePage>(); }
+        }
+
         public static StubIDPPage StubIDP
         {
             get { return GetPage<StubIDPPage>(); }

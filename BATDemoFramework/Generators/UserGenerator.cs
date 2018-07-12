@@ -1,3 +1,5 @@
+using System;
+using System.Globalization;
 using BATDemoFramework.Models;
 
 namespace BATDemoFramework.Generators
@@ -22,7 +24,7 @@ namespace BATDemoFramework.Generators
             return user;
         }
 
-        public static SSOUser GetNewSSOUser()
+        public static SSOUser GetNewSSOUser(bool isJoiningDateValid = true)
         {
             var user = new SSOUser
             {
@@ -30,7 +32,7 @@ namespace BATDemoFramework.Generators
                 Surname = "Randomlastname",
                 DOB = "04/01/1980",
                 CompanyName = "British Transport Police",
-                JoiningDate = "05/10/2016", //can be less than 6 months
+                JoiningDate = GetJoiningDate(isJoiningDateValid), //can be less than 6 months
                 Email = EmailAddressGenerator.GenerateEmailAddress(),
                 Salary = "50000",
                 EmployeeId = PasswordGenerator.GeneratePassword(),
@@ -43,6 +45,14 @@ namespace BATDemoFramework.Generators
 
             LastSSOGeneratedUser = user;
             return user;
+        }
+
+        private static string GetJoiningDate(bool isJoiningDateValid)
+        {
+            if (isJoiningDateValid)
+                return DateTime.Now.AddMonths(-7).ToString("dd/MM/yyyy");
+            else
+                return DateTime.Now.AddMonths(-2).ToString("dd/MM/yyyy", CultureInfo.InvariantCulture);
         }
     }
 }    

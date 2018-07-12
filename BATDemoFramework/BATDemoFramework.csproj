@@ -120,6 +120,7 @@
     <Compile Include="Pages\ProfilePages\VerificationEmailPage.cs" />
     <Compile Include="Pages\ProfilePages\WorkEmailPage.cs" />
     <Compile Include="Pages\ProfilePages\SSOLoginRequiredPage.cs" />
+    <Compile Include="Pages\SSOPages\SSOIneligibleStatePage.cs" />
     <Compile Include="Pages\SSOPages\SSOAboutMePage.cs" />
     <Compile Include="Pages\SSOPages\SSOAccountConfirmPage.cs" />
     <Compile Include="Pages\StubIDPPage.cs" />

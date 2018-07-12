@@ -18,10 +18,8 @@ namespace BATDemoFramework
         }
 
 
-        public string GetSSOUserData()
+        public string GetSSOUserData(SSOUser user)
         {
-            var user = UserGenerator.GetNewSSOUser();
-
             return @"(() => {
                 $('#AssertionModel_AssertionConsumerServiceUrl').val('https://testenv0.neyber.co.uk/heracles/saml/login');
                 $('#AssertionModel_Audience').val('https://testenv0.neyber.co.uk/heracles/identity/policemutual');" +
@@ -39,9 +37,9 @@ namespace BATDemoFramework
                 })();";
         }
 
-        public void EnterSSOUserDetailsAndSubmit()
+        public void EnterSSOUserDetailsAndSubmit(SSOUser user)
         {
-            Browser.ExecuteScript(GetSSOUserData());
+            Browser.ExecuteScript(GetSSOUserData(user));
             submitBtn.Click();
         }
 
