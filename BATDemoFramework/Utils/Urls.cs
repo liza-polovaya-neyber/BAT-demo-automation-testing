@@ -11,6 +11,7 @@ namespace BATDemoFramework
     {
         private static readonly string profileUrl = ConfigurationManager.AppSettings["ProfileUrl"];
         private static readonly string corporateUrl = ConfigurationManager.AppSettings["CorporateUrl"];
+        private static readonly string apolloUrl = ConfigurationManager.AppSettings["ApolloUrl"];
         public static readonly string OurTerms = corporateUrl + "/terms-conditions";
         public static readonly string PrivacyPolicy = corporateUrl + "/privacy-policy";
         public static readonly string CookiePolicy = corporateUrl + "/cookie-policy";
@@ -29,15 +30,15 @@ namespace BATDemoFramework
         public static readonly string WorkEmail = profileUrl + "/join/work-email";
         public static readonly string EmployerVerification = profileUrl + "/join/employer-verification";
         public static readonly string Marketing = profileUrl + "/join/marketing";
-        public static readonly string ApolloPMASPage = "https://testenv1.neyber.co.uk/app/policemutualloans";
-        public static readonly string AboutMePMASPage = "https://hellotest1.neyber.co.uk/join/about-me?tenantName=Police%20Mutual";
-        public static readonly string EligibilityCriteriaPage = "https://testenv1.neyber.co.uk/app/eligibility-criteria";
-        public static readonly string GetInTouchPage = "https://testenv1.neyber.co.uk/app/contact-us";
-        public static readonly string FAQPage = "https://testenv1.neyber.co.uk/app/faq";
-        public static readonly string SSOLoginRequired = "https://hellotest1.neyber.co.uk/join/sso-login-required";
-        public static readonly string SSOAboutMePage = "https://hellotest1.neyber.co.uk/join/sso-employee";
-        public static readonly string SSOAccountConfirm = "https://hellotest1.neyber.co.uk/join/account-confirm";
-        public static readonly string SSOIneligibleState = "https://hellotest1.neyber.co.uk/validation-issues?issues";
+        public static readonly string ApolloPMASPage = apolloUrl + "/app/policemutualloans";
+        public static readonly string AboutMePMASPage = profileUrl + "/join/about-me?tenantName=Police%20Mutual";
+        public static readonly string EligibilityCriteriaPage = apolloUrl + "/app/eligibility-criteria";
+        public static readonly string GetInTouchPage = apolloUrl + "/app/contact-us";
+        public static readonly string FAQPage = apolloUrl + "/app/faq";
+        public static readonly string SSOLoginRequired = profileUrl + "/join/sso-login-required";
+        public static readonly string SSOAboutMePage = profileUrl + "/join/sso-employee";
+        public static readonly string SSOAccountConfirm = profileUrl + "/join/account-confirm";
+        public static readonly string SSOIneligibleState = profileUrl + "/validation-issues?issues";
 
         public static readonly string StudIdpPage = "https://stubidp.sustainsys.com/";    
 

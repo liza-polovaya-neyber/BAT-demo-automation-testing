@@ -69,7 +69,7 @@ namespace BATDemoFramework
 
         public bool WaitUntilMarketingUrlIsLoaded()
         {
-            var marketingPage = Browser.WaitUntilUrlIsLoaded(Urls.Marketing, 25);
+            var marketingPage = Browser.WaitUntilUrlIsLoaded(Urls.Marketing, 60);
             return Pages.Marketing.IsAtUrl();
         }
         public bool IsAtUrl()
