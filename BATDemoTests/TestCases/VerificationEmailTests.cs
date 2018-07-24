@@ -138,8 +138,9 @@ namespace BATDemoTests.TestCases
             var urlToken = emailService.GetUrlTokenFromMessage(messages[0]);
 
             Browser.GoToUrl(urlToken);
+            Pages.EmployerSearch.WaitUntilUrlIsLoaded();
 
-            Assert.IsTrue(Pages.EmployerSearch.WaitUntilUrlIsLoaded(), "User wasn't able to pass email verification step");
+            Assert.IsTrue(Pages.EmployerSearch.IsAtUrl(), "User wasn't able to pass email verification step");
 
         }
 

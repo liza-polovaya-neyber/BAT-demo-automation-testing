@@ -4,12 +4,12 @@
     {
         public bool IsAtUrl()
         {
-            return Browser.Url.Contains(Urls.SSOIneligible);
+            return Browser.Url.Contains(Urls.SSOIneligibleState);
         }
 
         public bool WaitUntilUrlIsLoaded()
         {
-            Browser.WaitUntilUrlIsLoaded(Urls.SSOIneligible, 60);
+            Browser.WaitUntilUrlIsLoaded(Urls.SSOIneligibleState, 60);
             return Pages.SSOIneligibleState.IsAtUrl();
         }
     }

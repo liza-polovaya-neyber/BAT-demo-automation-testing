@@ -44,7 +44,7 @@ namespace BATDemoTests.TestCases
             var user = new UserGenerator().GetNewUser();
             await Preconditions.NewUserCreatedAndVerifiedEmail(user);
 
-            Pages.EmployerSearch.WaitUntilSecurityBlockIsLoaded();
+            Pages.EmployerSearch.WaitUntilUrlIsLoaded();
             Pages.EmployerSearch.SelectEnteredEmployer("Bupa");
             Pages.AlternativeEmail.WaitUntilAlternativeUrlIsLoaded();
             Pages.AlternativeEmail.EnterEmail(user.EmailAddress);

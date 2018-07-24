@@ -37,7 +37,7 @@ namespace BATDemoFramework
         public static readonly string SSOLoginRequired = "https://hellotest1.neyber.co.uk/join/sso-login-required";
         public static readonly string SSOAboutMePage = "https://hellotest1.neyber.co.uk/join/sso-employee";
         public static readonly string SSOAccountConfirm = "https://hellotest1.neyber.co.uk/join/account-confirm";
-        public static readonly string SSOIneligible = "https://hellotest1.neyber.co.uk/validation-issues?issues";
+        public static readonly string SSOIneligibleState = "https://hellotest1.neyber.co.uk/validation-issues?issues";
 
         public static readonly string StudIdpPage = "https://stubidp.sustainsys.com/";    
 

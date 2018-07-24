@@ -142,5 +142,14 @@ namespace BATDemoTests
             Pages.Marketing.ClickOnSubmitBtn();
             Pages.Home.WaitUntilHomeUrlIsLoaded();
         }
+
+        public static void NewSSOUserCreated()
+        {
+            var user = UserGenerator.GetNewSSOUser();
+
+            Pages.StubIDP.GoTo();
+            Pages.StubIDP.EnterSSOUserDetailsAndSubmit(user);
+            Pages.SSOAccountConfirm.WaitUntilUrlIsLoaded();
+        }
     }
 }

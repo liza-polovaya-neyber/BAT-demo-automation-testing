@@ -1,4 +1,6 @@
-﻿using OpenQA.Selenium;
+﻿using BATDemoFramework.Generators;
+using BATDemoFramework.Models;
+using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
 
 namespace BATDemoFramework
@@ -11,7 +13,7 @@ namespace BATDemoFramework
         [FindsBy(How = How.Name, Using = "password")]
         private IWebElement passwordField;
 
-        [FindsBy(How = How.CssSelector, Using = "//button/span")]
+        [FindsBy(How = How.XPath, Using = "//button/span")]
         private IWebElement loginBtn;
 
         [FindsBy(How = How.LinkText, Using = "Continue")]
@@ -21,6 +23,13 @@ namespace BATDemoFramework
         public void ClickToContinue()
         {
             continueBtn.Click();
+        }
+
+        public void LogIn(SSOUser user, User newUser)
+        {
+            emailField.SendKeys(user.Email);
+            passwordField.SendKeys(newUser.Password);
+            loginBtn.Click();
         }
 
         public bool WaitUntilUrlIsLoaded()

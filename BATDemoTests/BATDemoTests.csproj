@@ -97,6 +97,7 @@
     <Compile Include="TestCases\PMASTests.cs" />
     <Compile Include="TestCases\ProfileDashboardTests.cs" />
     <Compile Include="TestCases\ResetPasswordTests.cs" />
+    <Compile Include="TestCases\SSOMergingExistingAccounts.cs" />
     <Compile Include="TestCases\SSOPmasTests.cs" />
     <Compile Include="TestCases\SSOProfileJourneyTests.cs" />
     <Compile Include="TestCases\VerificationEmailTests.cs" />

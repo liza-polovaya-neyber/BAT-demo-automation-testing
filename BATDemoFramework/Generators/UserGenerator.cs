@@ -47,12 +47,32 @@ namespace BATDemoFramework.Generators
             return user;
         }
 
+
         private static string GetJoiningDate(bool isJoiningDateValid)
         {
             if (isJoiningDateValid)
                 return DateTime.Now.AddMonths(-7).ToString("dd/MM/yyyy");
             else
                 return DateTime.Now.AddMonths(-2).ToString("dd/MM/yyyy", CultureInfo.InvariantCulture);
+        }
+
+        public static SSOUser ConvertUserToSSOUser(User newUser)
+        {
+            return new SSOUser
+            {
+                Email = newUser.EmailAddress,
+                FirstName = newUser.FirstName,
+                Surname = newUser.LastName,
+                DOB = "04/01/1980",
+                CompanyName = "British Transport Police",
+                JoiningDate = "04/04/2016",
+                Salary = "50000",
+                EmployeeId = PasswordGenerator.GeneratePassword(),
+                JobBand = "Serving Officer",
+                JobTitle = "Admin",
+                NiNumber = PasswordGenerator.GeneratePassword(),
+                CapitaGUID = GuidGenerator.GenerateGuid()
+            };
         }
     }
 }    
