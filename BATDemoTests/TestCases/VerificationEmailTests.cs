@@ -32,7 +32,7 @@ namespace BATDemoTests.TestCases
             Pages.AboutMe.GoTo();
             Pages.AboutMe.RegisterNewRandomUser();
             Pages.VerificationEmail.WaitUntilVerificationEmailPageTitleIsShown();
-            Pages.VerificationEmail.ClickOnLogoutLink();
+            Pages.VerificationEmail.Logout();
 
             Assert.IsTrue(Pages.Login.IsAtUrl(), "User has not been redirected to login page");
         }
@@ -46,7 +46,7 @@ namespace BATDemoTests.TestCases
             Pages.AboutMe.GoTo();
             Pages.AboutMe.RegisterNewUser(user);
             Pages.VerificationEmail.WaitUntilVerificationEmailPageTitleIsShown();
-            Pages.VerificationEmail.ClickOnLogoutLink();
+            Pages.VerificationEmail.Logout();
             Pages.Login.LogIn(user);
             Pages.VerificationEmail.WaitUntilVerificationEmailPageTitleIsShown();
 

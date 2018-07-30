@@ -43,6 +43,7 @@ namespace BATDemoTests.TestCases
             Pages.SSOAccountConfirm.ClickToContinue();
             Pages.SSOAboutMe.RegisterUserWithAllFieldsFilledIn(newUser);
             Pages.SSOAboutMe.PressSubmitButton();
+            Pages.Marketing.WaitUntilMarketingUrlIsLoaded();
 
             Assert.True(Pages.Marketing.IsAtUrl(), "User wasn't able to get to Marketing page");
         }
@@ -188,7 +189,23 @@ namespace BATDemoTests.TestCases
             Pages.Login.WaitUntilLoginUrlIsLoaded();
             Pages.Login.LogInBySSOUserAlternativeEmail(newUser);
 
-            Assert.AreEqual(Pages.Marketing.IsAtUrl(), "User wasn't able to login by verified alternative email address");
+            Assert.IsTrue(Pages.Marketing.IsAtUrl(), "User wasn't able to login by verified alternative email address");
+        }
+
+        [Test][Retry(3)]
+        public void CanNotEnterSSOPrimaryEmailAsAlternative()
+        {
+            var user = UserGenerator.GetNewSSOUser();
+
+            Pages.StubIDP.GoTo();
+            Pages.StubIDP.EnterSSOUserDetailsAndSubmit(user);
+            Pages.SSOAccountConfirm.WaitUntilUrlIsLoaded();
+            Pages.SSOAccountConfirm.ClickToContinue();
+
+            Pages.SSOAboutMe.EnterAlternativeEmail(user.Email);
+
+            Assert.AreEqual(Pages.SSOAboutMe.GetErrorPasswordText(), "This email has already been given by your provider. Please use an alternative.");
+
         }
     }
 }

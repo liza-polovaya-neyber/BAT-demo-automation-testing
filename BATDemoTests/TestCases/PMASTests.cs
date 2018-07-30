@@ -17,7 +17,8 @@ namespace BATDemoTests.TestCases
         public void CanGoFromApolloPMASToAboutMePageTopBtn()
         {
             Pages.ApolloPMAS.GoToUrl();
-            Pages.ApolloPMAS.ClickToApplyTopBtn();
+            Pages.ApolloPMAS.AcceptCookiesOnBanner();
+            Pages.ApolloPMAS.ClickToFMRTopBtn();
 
             Assert.AreEqual(Urls.AboutMePMASPage, Browser.Url, "User was not redirected back to Apollo PMAS landing page");
         }
@@ -26,6 +27,8 @@ namespace BATDemoTests.TestCases
         public void CanGoFromApolloPMASToAboutMePageMiddleBtn()
         {
             Pages.ApolloPMAS.GoToUrl();
+            Pages.ApolloPMAS.AcceptCookiesOnBanner();
+            Pages.ApolloPMAS.AcceptCookiesPolicy();
             Pages.ApolloPMAS.ClickToApplyMiddleBtn();
 
             Assert.AreEqual(Urls.AboutMePMASPage, Browser.Url, "User was not redirected back to Apollo PMAS landing page");
@@ -35,6 +38,7 @@ namespace BATDemoTests.TestCases
         public void CanGoFromApolloPMASToAboutMePageBottomBtn()
         {
             Pages.ApolloPMAS.GoToUrl();
+            Pages.ApolloPMAS.AcceptCookiesOnBanner();
             Pages.ApolloPMAS.AcceptCookiesPolicy();
             Pages.ApolloPMAS.ClickToApplyBottomBtn();
 
@@ -45,6 +49,7 @@ namespace BATDemoTests.TestCases
         public void CanGoToEligibilityCriteriaPage()
         {
             Pages.ApolloPMAS.GoToUrl();
+            Pages.ApolloPMAS.AcceptCookiesOnBanner();
             Pages.ApolloPMAS.AcceptCookiesPolicy();
             Pages.ApolloPMAS.ShowEligibilityCriteria();
 
@@ -55,6 +60,7 @@ namespace BATDemoTests.TestCases
         public void CanApplyThroughEligibilityCriteriaPage()
         {
             Pages.ApolloPMAS.GoToUrl();
+            Pages.ApolloPMAS.AcceptCookiesOnBanner();
             Pages.ApolloPMAS.AcceptCookiesPolicy();
             Pages.ApolloPMAS.ShowEligibilityCriteria();
             Pages.EligibilityCriteria.ClickToApplyNow();
@@ -108,7 +114,8 @@ namespace BATDemoTests.TestCases
             var user = new UserGenerator().GetNewUser();
 
             Pages.ApolloPMAS.GoToUrl();
-            Pages.ApolloPMAS.ClickToApplyTopBtn();
+            Pages.ApolloPMAS.AcceptCookiesOnBanner();
+            Pages.ApolloPMAS.ClickToFMRTopBtn();
             Pages.AboutMe.RegisterNewUser(user);
             Pages.VerificationEmail.WaitUntilVerificationEmailPageTitleIsShown();
 
@@ -136,7 +143,8 @@ namespace BATDemoTests.TestCases
             var user = new UserGenerator().GetNewUser();
 
             Pages.ApolloPMAS.GoToUrl();
-            Pages.ApolloPMAS.ClickToApplyTopBtn();
+            Pages.ApolloPMAS.AcceptCookiesOnBanner();
+            Pages.ApolloPMAS.ClickToFMRTopBtn();
             Pages.AboutMe.RegisterNewUser(user);
             Pages.VerificationEmail.WaitUntilVerificationEmailPageTitleIsShown();
 

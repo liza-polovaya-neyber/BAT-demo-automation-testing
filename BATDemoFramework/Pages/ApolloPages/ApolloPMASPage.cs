@@ -5,14 +5,14 @@ namespace BATDemoFramework
 {
     public class ApolloPMASPage
     {
-        [FindsBy(How = How.LinkText, Using = "Apply Now")]
-        private IWebElement topApplyNowBtn;
+        [FindsBy(How = How.LinkText, Using = "Find My Rate")]
+        private IWebElement topFMRBtn;
 
         [FindsBy(How = How.XPath, Using = "//div[4]/button")]
-        private IWebElement middleApplyNowBtn;
+        private IWebElement middleFMRBtn;
 
         [FindsBy(How = How.XPath, Using = "//div[8]/div/section/div/div[2]/button")]
-        private IWebElement bottomApplyNowBtn;
+        private IWebElement bottomFMRBtn;
 
         [FindsBy(How = How.PartialLinkText, Using = "Am I eligible to apply?")]
         private IWebElement eligibilityCriteriaBlock;
@@ -32,21 +32,24 @@ namespace BATDemoFramework
         [FindsBy(How = How.LinkText, Using = "I accept")]
         private IWebElement acceptPolicyBtn;
 
+        [FindsBy(How = How.Id, Using = "adroll_allow")]
+        private IWebElement acceptCookiesBtn;
+
         private IWebDriver driver;
 
-        public void ClickToApplyTopBtn()
+        public void ClickToFMRTopBtn()
         {
-            topApplyNowBtn.Click();
+            topFMRBtn.Click();
         }
 
         public void ClickToApplyMiddleBtn()
         {
-            middleApplyNowBtn.Click();
+            middleFMRBtn.Click();
         }
 
         public void ClickToApplyBottomBtn()
         {
-            bottomApplyNowBtn.Click();
+            bottomFMRBtn.Click();
         }
 
         public void ShowEligibilityCriteria()
@@ -89,9 +92,14 @@ namespace BATDemoFramework
             return Browser.Url.Contains(Urls.ApolloPMASPage);
         }
 
+        public void AcceptCookiesOnBanner()
+        {
+            acceptCookiesBtn.Click();
+        }
+
         public bool WaitUntilBottomApplyNowBtnIsClickable()
         {
-            var applyNowBtn = Browser.WaitUntilElementIsClickable(bottomApplyNowBtn, 10);
+            var applyNowBtn = Browser.WaitUntilElementIsClickable(bottomFMRBtn, 10);
             return applyNowBtn.Displayed;
 
         }

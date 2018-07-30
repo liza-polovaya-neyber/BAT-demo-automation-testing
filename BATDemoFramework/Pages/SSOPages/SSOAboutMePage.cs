@@ -143,5 +143,11 @@ namespace BATDemoFramework
         {
             passwordField.SendKeys(password);
         }
+
+        public void EnterAlternativeEmail(string email)
+        {
+            emailField.SendKeys(email);
+            emailVerifyField.SendKeys(email);
+        }
     }
 }

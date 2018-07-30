@@ -77,7 +77,7 @@ namespace BATDemoFramework
             resendEmailLink.Click();
         }
 
-        public void ClickOnLogoutLink()
+        public void Logout()
         {
             logoutLink.Click();
         }
