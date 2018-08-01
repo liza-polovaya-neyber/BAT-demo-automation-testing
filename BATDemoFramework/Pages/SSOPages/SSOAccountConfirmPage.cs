@@ -25,9 +25,16 @@ namespace BATDemoFramework
             continueBtn.Click();
         }
 
-        public void LogIn(SSOUser user, User newUser)
+        public void LogInBySSOUser(SSOUser user, User newUser)
         {
             emailField.SendKeys(user.Email);
+            passwordField.SendKeys(newUser.Password);
+            loginBtn.Click();
+        }
+
+        public void LogInByProfileUser(User newUser)
+        {
+            emailField.SendKeys(newUser.EmailAddress);
             passwordField.SendKeys(newUser.Password);
             loginBtn.Click();
         }

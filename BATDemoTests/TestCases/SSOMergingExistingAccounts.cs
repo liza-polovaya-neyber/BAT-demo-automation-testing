@@ -39,7 +39,7 @@ namespace BATDemoTests.TestCases
             Pages.SSOAccountConfirm.WaitUntilUrlIsLoaded();
 
             //4. login by profile user with non-verified email
-            Pages.SSOAccountConfirm.LogIn(user, newUser);
+            Pages.SSOAccountConfirm.LogInBySSOUser(user, newUser);
             Pages.AlternativeEmail.WaitUntilAlternativeUrlIsLoaded();
 
             Assert.IsTrue(Pages.AlternativeEmail.IsAtUrl(), "Profile user with non-verified email wasn't able to login as a new SSO user");
@@ -71,7 +71,7 @@ namespace BATDemoTests.TestCases
             Pages.SSOAccountConfirm.WaitUntilUrlIsLoaded();
 
             //3. login by new SSO user to existing account
-            Pages.SSOAccountConfirm.LogIn(user, newUser);
+            Pages.SSOAccountConfirm.LogInBySSOUser(user, newUser);
             Pages.AlternativeEmail.WaitUntilAlternativeUrlIsLoaded();
 
             Assert.IsTrue(Pages.AlternativeEmail.IsAtUrl(), "User wasn't able to login via SSO platform");
@@ -105,7 +105,7 @@ namespace BATDemoTests.TestCases
             Pages.SSOAccountConfirm.WaitUntilUrlIsLoaded();
 
             //3. login by new SSO user to existing account
-            Pages.SSOAccountConfirm.LogIn(user, newUser);
+            Pages.SSOAccountConfirm.LogInBySSOUser(user, newUser);
             Pages.AlternativeEmail.WaitUntilAlternativeUrlIsLoaded();
 
             Assert.IsTrue(Pages.AlternativeEmail.IsAtUrl(), "User wasn't able to login via SSO platform");
@@ -145,12 +145,10 @@ namespace BATDemoTests.TestCases
 
             //4. login by email from step 2
             Pages.SSOAccountConfirm.WaitUntilUrlIsLoaded();
-            Pages.SSOAccountConfirm.LogIn(user, newUser);
+            Pages.SSOAccountConfirm.LogInByProfileUser(newUser);
 
-            Assert.IsTrue(Pages.AlternativeEmail.IsAtUrl(), "This email has already been given by your provider. Please use an alternative.");
+            Assert.IsTrue(Pages.AlternativeEmail.IsAtUrl(), "User wasn't able to login by the user that was created on /join");
             //to specify whether this is a bug (now user's not able to login with SSO email, but OK with /join email)
-
-
 
         }
 

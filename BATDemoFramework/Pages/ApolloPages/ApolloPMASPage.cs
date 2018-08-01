@@ -101,7 +101,12 @@ namespace BATDemoFramework
         {
             var applyNowBtn = Browser.WaitUntilElementIsClickable(bottomFMRBtn, 10);
             return applyNowBtn.Displayed;
+        }
 
+        public bool WaitUntilCookiesBannerIsVisible()
+        {
+            var cookiesBanner = Browser.WaitUntilElementIsClickable(acceptCookiesBtn, 10);
+            return cookiesBanner.Displayed;
         }
     }
 }
