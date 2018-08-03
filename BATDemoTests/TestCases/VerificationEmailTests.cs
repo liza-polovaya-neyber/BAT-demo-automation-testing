@@ -165,5 +165,18 @@ namespace BATDemoTests.TestCases
 
             Assert.IsFalse(Pages.VerificationEmail.GreenBannerIsShown(), "Green banner is still shown");
         }
+
+        [Test][Retry(3)]
+        public void CanNotSkipVerifyEmailPage()
+        {
+            Pages.AboutMe.GoTo();
+            Pages.AboutMe.RegisterNewRandomUser();
+            Pages.VerificationEmail.WaitUntilVerificationEmailPageTitleIsShown();
+
+            Browser.GoTo(Urls.EmployerSearch);
+            Pages.VerificationEmail.WaitUntilVerificationEmailPageTitleIsShown();
+
+            Assert.IsTrue(Pages.VerificationEmail.IsAtUrl(), "User is not on Verification email page");
+        }
     }
 }

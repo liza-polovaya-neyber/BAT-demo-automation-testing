@@ -14,7 +14,7 @@ namespace BATDemoFramework
     public class ResetPasswordPage
     {
 
-        [FindsBy(How = How.ClassName, Using = "control__input")]
+        [FindsBy(How = How.Name, Using = "email")]
         private IWebElement emailTextField;
 
         [FindsBy(How = How.CssSelector, Using = "button.button.button.auth__button.password-reset-form-module__button___G5XgU.button-module__button___2VX0t > span")]
@@ -28,7 +28,6 @@ namespace BATDemoFramework
 
         [FindsBy(How = How.XPath, Using = "//button[@type='submit']")]
         private IWebElement resendMyResetLinkButton;
-
 
         [FindsBy(How = How.ClassName, Using = "password-reset-sent-module__different-eamil___3smZ4")]
         private IWebElement tryDifferentEmailLink;
@@ -44,13 +43,13 @@ namespace BATDemoFramework
 
         public bool WaitForResendMyResetLinkButtonIsDisplayed()
         {
-            var resetLinkBtn = Browser.WaitUntilElementIsClickable(resendMyResetLinkButton, 8);
-            return resetLinkBtn.Displayed; 
+            Browser.WaitUntilElementIsClickable(resendMyResetLinkButton, 8);
+            return resendMyResetLinkButton.Displayed; 
         }
 
         public bool TryDifferentEmailLinkIsVisible()
         {     
-            var tryDifferentEmailElement = Browser.WaitUntilElementIsVisible(By.ClassName("password-reset-sent-module__different-eamil___3smZ4"), 60);
+            Browser.WaitUntilElementIsVisible(By.ClassName("password-reset-sent-module__different-eamil___3smZ4"), 60);
             return tryDifferentEmailLink.IsDisplayed();
         }
 
@@ -110,7 +109,7 @@ namespace BATDemoFramework
         //    return messages;
         //}
 
-        public string GetTextError()
+        public string GetErrorMessage()
         {
             return errorValidation.Text;
         }

@@ -55,6 +55,7 @@ namespace BATDemoTests.TestCases
             Assert.IsTrue(Pages.Join.IsAtUrl(), "User wasn't redirected to Join page");
         }
 
+
         [TestCase("", "Please create a password")]
         [TestCase("password1", "See hint indicators")]
         [TestCase("Password", "See hint indicators")]
@@ -150,6 +151,34 @@ namespace BATDemoTests.TestCases
             Pages.Login.WaitUntilErrorBlockIsShown();
 
             Assert.AreEqual(Pages.Login.GetErrorText(), "The email address or password you entered is incorrect. Please check and try again.");
+        }
+
+        [Test][Retry(3)]
+        public async Task CanNotUseResetPasswordLinkTwice() //bug ACCO-265!!!
+        {
+            //1. create new user and verify their email
+            var user = new UserGenerator().GetNewUser();
+            await Preconditions.NewUserCreatedAndVerifiedEmail(user);
+            Pages.EmployerSearch.Logout();
+
+            //2. request reset password link
+            Pages.ResetPassword.GoTo();
+            Pages.ResetPassword.EnterEmailAndClickToResetPassword(user);
+
+            var emailService = new EmailService();
+            var messages = await emailService.GetMessagesBySubject(EmailTypes.ResetPassword, user.EmailAddress);
+            var urlToken = emailService.GetUrlTokenFromMessage(messages[0]);
+
+            //3. follow reset password link and reset password
+            Browser.GoToUrl(urlToken);
+            Pages.ChangePassword.WaitUntilTitleIsShown();
+            Pages.ChangePassword.SetNewPassword();
+            Pages.Login.WaitUntilLoginUrlIsLoaded();
+
+            //4. follow same reset password link
+            Browser.GoToUrl(urlToken);
+
+            Assert.IsTrue(Pages.ExpiredLink.IsAtUrl(), "User was not able to set new password");
         }
     }
 }

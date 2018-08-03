@@ -41,7 +41,7 @@ namespace BATDemoTests
             Assert.IsTrue(Pages.Join.IsAtUrl());
         }
 
-        [TestCase("qwerty", "Please enter a valid email address")]
+        [TestCase("hello@com", "Please enter a valid email address")]
         [TestCase("", "Please enter your email address")]
         public void CanNotEnterInvalidEmail(string a, string b)
         {
@@ -49,7 +49,7 @@ namespace BATDemoTests
             Pages.ResetPassword.EnterEmail(a);
             Pages.ResetPassword.ClickOnResendMyResetLinkButton();
 
-            Assert.AreEqual(Pages.ResetPassword.GetTextError(), b);
+            Assert.AreEqual(Pages.ResetPassword.GetErrorMessage(), b);
         }
 
         [Test][Retry(3)]

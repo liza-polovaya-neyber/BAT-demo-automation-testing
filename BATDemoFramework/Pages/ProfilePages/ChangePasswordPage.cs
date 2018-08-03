@@ -8,7 +8,7 @@ namespace BATDemoFramework
     public class ChangePasswordPage
     {
         [FindsBy(How = How.XPath, Using = "//input")]
-        private IWebElement passwordInput;
+        private IWebElement passwordTextField;
 
         [FindsBy(How = How.XPath, Using = "//button/span")]
         private IWebElement setNewPasswordButton;
@@ -24,7 +24,7 @@ namespace BATDemoFramework
 
         public void EntersNewPassword(string text)
         {
-            passwordInput.SendKeys(text);
+            passwordTextField.SendKeys(text);
         }
 
         public void ClickToShowHidePassword()
@@ -54,7 +54,7 @@ namespace BATDemoFramework
 
         public void SetNewPassword()
         {  
-           passwordInput.SendKeys(PasswordGenerator.GeneratePassword());
+           passwordTextField.SendKeys(PasswordGenerator.GeneratePassword());
            setNewPasswordButton.Click();
         }
     }

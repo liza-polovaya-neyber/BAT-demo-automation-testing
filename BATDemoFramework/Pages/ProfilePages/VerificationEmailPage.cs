@@ -46,19 +46,19 @@ namespace BATDemoFramework
 
         public bool WaitTillContinueBtnIsVisible()
         {
-            var continueButton = Browser.WaitUntilElementIsVisible(By.ClassName("button button_white mail-message-module__button___NhurA button-module__button___2VX0t"), 25);
-            return continueButton.Displayed;
+           Browser.WaitUntilElementIsVisible(By.ClassName("button button_white mail-message-module__button___NhurA button-module__button___2VX0t"), 25);
+            return continueBtn.Displayed;
         }
 
         public bool WaitUntilVerificationEmailPageTitleIsShown()
         {
-            var verificationEmailPage = Browser.WaitUntilPageTitleIsShown(PageTitles.VerificationEmailSent, 120);
+            Browser.WaitUntilPageTitleIsShown(PageTitles.VerificationEmailSent, 120);
             return Pages.VerificationEmail.IsAtUrl();
         }
 
         public bool WaitUntilGreenBannerIsShown()
         {
-            var verificationEmailPage = Browser.WaitUntilElementIsClickable(greenVerificationBanner, 10);
+           Browser.WaitUntilElementIsClickable(greenVerificationBanner, 10);
             return greenVerificationBanner.Displayed;
         }
 

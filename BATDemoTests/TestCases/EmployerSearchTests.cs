@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace BATDemoTests.TestCases
@@ -45,8 +46,19 @@ namespace BATDemoTests.TestCases
             Pages.EmployerSearch.EnterTextIntoSearchbox("qwerty");
             Pages.EmployerSearch.ClickOnSearchBtn();
             Pages.EmployerSearch.WaitUntilPhoneNumberFieldAppears();
-
+            
             Assert.IsTrue(Pages.EmployerSearch.EmployerNoutFoundBlockIsShown(), "Employer not found block doesn't show up");
+        }
+
+        [Test][Retry(3)]
+        public async Task CanBeFoundMoreThan10Employers()
+        {
+            await Preconditions.HaveNewUserCreatedAndVerifiedEmail();
+
+            Pages.EmployerSearch.EnterTextIntoSearchbox("re");
+            Pages.EmployerSearch.ClickOnSearchBtn();
+
+            Assert.IsTrue(Pages.EmployerSearch.WarningBlockIsShown(), "Found more than 10 employers block doesn't show up");
         }
 
         [Test][Retry(3)]

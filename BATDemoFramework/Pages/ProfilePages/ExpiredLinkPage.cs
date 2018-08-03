@@ -32,9 +32,9 @@ namespace BATDemoFramework
             return Browser.Url.Contains(Urls.ExpiredLink);
         }
 
-        public bool WaitUntilPageIsLoaded(IWebDriver driver)
+        public bool WaitUntilPageIsLoaded()
         {
-            var expiredLinkPage = Browser.WaitUntilUrlIsLoaded(Urls.ExpiredLink, 25);
+            Browser.WaitUntilUrlIsLoaded(Urls.ExpiredLink, 30);
             return Pages.ExpiredLink.IsAtUrl();
         }
 

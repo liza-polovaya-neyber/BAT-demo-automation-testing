@@ -57,6 +57,9 @@ namespace BATDemoFramework
         [FindsBy(How = How.ClassName, Using = "search-item-module__item___1y90n")]
         private IWebElement searchResult;
 
+        [FindsBy(How = How.CssSelector, Using = "#root > div > div > div > section > section > p.hint.hint_warning.np-i")]
+        private IWebElement warningBlock;
+
         public void GoTo()
         {
             Browser.GoTo("join/search");
@@ -147,6 +150,11 @@ namespace BATDemoFramework
             return inputField.Displayed;
         }
 
+        public bool WarningBlockIsShown()
+        {
+            return warningBlock.Displayed;
+        }
+
         public bool WaitUntilUrlIsLoaded()
         {
             Browser.WaitUntilUrlIsLoaded(Urls.EmployerSearch, 60);
@@ -155,20 +163,26 @@ namespace BATDemoFramework
 
         public bool WaitUntilSecurityBlockIsLoaded()
         {
-            var employerSearchPage = Browser.WaitUntilElementIsVisible(By.ClassName("secure-hint-module__root___4OSbU"), 15);
+            Browser.WaitUntilElementIsVisible(By.ClassName("secure-hint-module__root___4OSbU"), 15);
             return securityBlock.Displayed;
         }
 
         public bool WaitUntilSearchResultsAppear()
         {
-            var employerSearchPage = Browser.WaitUntilElementIsVisible(By.ClassName("search-results-module__title___qbzsB"), 5);
+            Browser.WaitUntilElementIsVisible(By.ClassName("search-results-module__title___qbzsB"), 5);
             return searchResultsTitle.Displayed;
         }
 
         public bool WaitUntilPhoneNumberFieldAppears()
         {
-            var employerSearchPage = Browser.WaitUntilElementIsVisible(By.Name("phone"), 5);
+            Browser.WaitUntilElementIsVisible(By.Name("phone"), 5);
             return phoneNoField.Displayed;
+        }
+
+        public bool WaitUntilWarningBlockIsShown()
+        {
+            Browser.WaitUntilElementIsVisible(By.ClassName("hint hint_warning np-i"), 5);
+            return warningBlock.Displayed;
         }
 
     }

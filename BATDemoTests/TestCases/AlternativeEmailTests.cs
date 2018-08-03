@@ -140,6 +140,30 @@ namespace BATDemoTests.TestCases
             Assert.IsTrue(Pages.Marketing.IsAtUrl(), "User was unable to get back to Marketing page");
         }
 
+        [Test]
+        [Retry(3)]
+        public async Task CanGetToExpiredLinkPage()
+        {
+            var user = new UserGenerator().GetNewUser();
+            await Preconditions.HaveNewUserCreatedAndSelectedAnEmployer();
+
+            Pages.AlternativeEmail.EnterEmail(user.EmailAddress);
+            Pages.AlternativeEmail.ClickOnSubmitBtn();
+            Pages.Marketing.WaitUntilMarketingUrlIsLoaded();
+            Pages.Marketing.Logout();
+
+            var emailService = new EmailService();
+            var messages = await emailService.GetMessagesBySubject(EmailTypes.ConfirmYourEmail, user.EmailAddress);
+            var urlToken = emailService.GetUrlTokenFromMessage(messages[0]);
+
+            Browser.GoToUrl(urlToken);
+            Pages.Login.WaitUntilLoginUrlIsLoaded();
+            Browser.GoToUrl(urlToken);
+            Pages.ExpiredLink.WaitUntilPageIsLoaded();
+
+            Assert.IsTrue(Pages.ExpiredLink.IsAtUrl(), "User wasn't able to get to expired link page after clicking verification link twice in a row");
+        }
+
 
         [Test][Retry(3)]
         public async Task CanLogout()
