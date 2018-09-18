@@ -86,7 +86,7 @@ namespace BATDemoFramework
 
         public bool WaitUntilAlternativeUrlIsLoaded()
         {
-            var alternativeEmailPage = Browser.WaitUntilUrlIsLoaded(Urls.AlternativeEmail, 10);
+            var alternativeEmailPage = Browser.WaitUntilUrlIsLoaded(Urls.AlternativeEmail, 45);
             return Pages.AlternativeEmail.IsAtUrl();
         }
 
