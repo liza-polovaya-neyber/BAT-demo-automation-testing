@@ -72,7 +72,7 @@ namespace BATDemoFramework
             return WaitUntil(ExpectedConditions.ElementIsVisible(locator), TimeSpan.FromSeconds(timeoutInSeconds));
         }
 
-        public static IWebElement WaitUntilElementIsClickable(IWebElement element, int timeoutInSeconds)
+        public static IWebElement WaitUntilElementIsClickable(IWebElement element, int timeoutInSeconds = 30)
         {
             return WaitUntil(ExpectedConditions.ElementToBeClickable(element), TimeSpan.FromSeconds(timeoutInSeconds));
         }

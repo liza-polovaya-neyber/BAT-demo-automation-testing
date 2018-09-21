@@ -67,6 +67,8 @@ namespace BATDemoTests.TestCases
             Pages.Marketing.ChooseEmailOption();
             Pages.Marketing.ChoosePhoneOption();
             Pages.Marketing.ChoosePostOption();
+            Pages.Marketing.ClickOnSubmitBtn();
+            Pages.Home.WaitUntilHomeUrlIsLoaded();
 
             Assert.True(Pages.Home.IsAtUrl(), "User wasn't able to get to Home page after logging back in");
         }
@@ -92,6 +94,7 @@ namespace BATDemoTests.TestCases
             Pages.SSOAccountConfirm.ClickToContinue();
             Pages.SSOAboutMe.RegisterUserButDontEnterAlternativeEmail(newUser);
             Pages.SSOAboutMe.PressSubmitButton();
+            Pages.Marketing.WaitUntilMarketingUrlIsLoaded();
 
             Assert.True(Pages.Marketing.IsAtUrl(), "User wasn't able to get to Marketing page without filling in the alternative email");
         }
@@ -105,6 +108,7 @@ namespace BATDemoTests.TestCases
             Pages.SSOAccountConfirm.ClickToContinue();
             Pages.SSOAboutMe.RegisterUserButDontEnterMobileNumber(newUser);
             Pages.SSOAboutMe.PressSubmitButton();
+            Pages.Marketing.WaitUntilMarketingUrlIsLoaded();
 
             Assert.True(Pages.Marketing.IsAtUrl(), "User wasn't able to get to Marketing page without filling in the alternative email");
         }
@@ -188,6 +192,7 @@ namespace BATDemoTests.TestCases
 
             Pages.Login.WaitUntilLoginUrlIsLoaded();
             Pages.Login.LogInBySSOUserAlternativeEmail(newUser);
+            Pages.Marketing.WaitUntilMarketingUrlIsLoaded();
 
             Assert.IsTrue(Pages.Marketing.IsAtUrl(), "User wasn't able to login by verified alternative email address");
         }

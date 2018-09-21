@@ -22,6 +22,7 @@ namespace BATDemoFramework
 
         public void ClickToContinue()
         {
+            continueBtn = Browser.WaitUntilElementIsClickable(continueBtn);
             continueBtn.Click();
         }
 
