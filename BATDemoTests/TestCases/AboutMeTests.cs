@@ -158,7 +158,7 @@ namespace BATDemoTests.TestCases
         {
             Pages.AboutMe.GoTo();
 
-            Assert.AreEqual(17, Pages.AboutMe.GetFeedbackOptionsNumber());
+            Assert.AreEqual(18, Pages.AboutMe.GetFeedbackOptionsNumber());
         }
 
         [Test][Retry(3)]

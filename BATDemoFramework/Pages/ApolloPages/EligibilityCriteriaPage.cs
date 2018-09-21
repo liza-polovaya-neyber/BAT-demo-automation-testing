@@ -11,6 +11,7 @@ namespace BATDemoFramework
 
         public void ClickToApplyNow()
         {
+            applyNowBtn = Browser.WaitUntilElementIsClickable(this.applyNowBtn, 30);
             applyNowBtn.Click();
         }
 

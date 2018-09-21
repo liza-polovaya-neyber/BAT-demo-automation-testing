@@ -176,6 +176,7 @@ namespace BATDemoTests.TestCases
             Pages.Login.WaitUntilLoginUrlIsLoaded();
 
             //4. follow same reset password link
+            // TODO WORK WRONG WE CAN'T verify resent link in advice only after a new password was entered and submitted.
             Browser.GoToUrl(urlToken);
 
             Assert.IsTrue(Pages.ExpiredLink.IsAtUrl(), "User was not able to set new password");
