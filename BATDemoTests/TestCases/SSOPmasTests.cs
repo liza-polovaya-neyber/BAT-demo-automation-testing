@@ -192,6 +192,7 @@ namespace BATDemoTests.TestCases
 
             Pages.Login.WaitUntilLoginUrlIsLoaded();
             Pages.Login.LogInBySSOUserAlternativeEmail(newUser);
+            Pages.Marketing.WaitUntilMarketingUrlIsLoaded();
 
             Assert.IsTrue(Pages.Marketing.IsAtUrl(), "User wasn't able to login by verified alternative email address");
         }
