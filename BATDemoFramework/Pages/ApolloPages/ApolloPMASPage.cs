@@ -5,14 +5,14 @@ namespace BATDemoFramework
 {
     public class ApolloPMASPage
     {
-        [FindsBy(How = How.LinkText, Using = "Find My Rate")]
-        private IWebElement topFMRBtn;
+        [FindsBy(How = How.LinkText, Using = "Join now")]
+        private IWebElement topJoinNowBtn;
 
-        [FindsBy(How = How.XPath, Using = "//div[4]/button")]
-        private IWebElement middleFMRBtn;
+        [FindsBy(How = How.CssSelector, Using = "button.btn.btn-success.ng-isolate-scope")]
+        private IWebElement middleJoinNowBtn;
 
-        [FindsBy(How = How.XPath, Using = "//div[8]/div/section/div/div[2]/button")]
-        private IWebElement bottomFMRBtn;
+        [FindsBy(How = How.CssSelector, Using = "button.btn.btn-info.cta.ng-binding")]
+        private IWebElement bottomJoinNowBtn;
 
         [FindsBy(How = How.PartialLinkText, Using = "Am I eligible to apply?")]
         private IWebElement eligibilityCriteriaBlock;
@@ -37,19 +37,19 @@ namespace BATDemoFramework
 
         private IWebDriver driver;
 
-        public void ClickToFMRTopBtn()
+        public void ClickOnTopJoinNowBtn()
         {
-            topFMRBtn.Click();
+            topJoinNowBtn.Click();
         }
 
         public void ClickToApplyMiddleBtn()
         {
-            middleFMRBtn.Click();
+            middleJoinNowBtn.Click();
         }
 
-        public void ClickToApplyBottomBtn()
+        public void ClickOnJoinNowBtn()
         {
-            bottomFMRBtn.Click();
+            bottomJoinNowBtn.Click();
         }
 
         public void ShowEligibilityCriteria()
@@ -99,7 +99,7 @@ namespace BATDemoFramework
 
         public bool WaitUntilBottomApplyNowBtnIsClickable()
         {
-            var applyNowBtn = Browser.WaitUntilElementIsClickable(bottomFMRBtn, 10);
+            var applyNowBtn = Browser.WaitUntilElementIsClickable(bottomJoinNowBtn, 10);
             return applyNowBtn.Displayed;
         }
 

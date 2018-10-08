@@ -19,7 +19,7 @@ namespace BATDemoTests.TestCases
             Pages.ApolloPMAS.GoToUrl();
             Pages.ApolloPMAS.WaitUntilCookiesBannerIsVisible();
             Pages.ApolloPMAS.AcceptCookiesOnBanner();
-            Pages.ApolloPMAS.ClickToFMRTopBtn();
+            Pages.ApolloPMAS.ClickOnTopJoinNowBtn();
 
             Assert.AreEqual(Urls.AboutMePMASPage, Browser.Url, "User was not redirected back to Apollo PMAS landing page");
         }
@@ -43,7 +43,7 @@ namespace BATDemoTests.TestCases
             Pages.ApolloPMAS.WaitUntilCookiesBannerIsVisible();
             Pages.ApolloPMAS.AcceptCookiesOnBanner();
             Pages.ApolloPMAS.AcceptCookiesPolicy();
-            Pages.ApolloPMAS.ClickToApplyBottomBtn();
+            Pages.ApolloPMAS.ClickOnJoinNowBtn();
 
             Assert.AreEqual(Urls.AboutMePMASPage, Browser.Url, "User was not redirected back to Apollo PMAS landing page");
         }
@@ -107,7 +107,7 @@ namespace BATDemoTests.TestCases
         {
             Pages.ApolloPMAS.GoToUrl();
             Pages.ApolloPMAS.ClickOnFAQ();
-            Pages.FAQ.ClickOnPersonalLoans();
+            Pages.FAQ.ClickOnHomeLink();
 
             Assert.True(Pages.ApolloPMAS.IsAtUrl(), "User was not redirected back to Apollo PMAS landing page");     
         }
@@ -121,7 +121,7 @@ namespace BATDemoTests.TestCases
             Pages.ApolloPMAS.GoToUrl();
             Pages.ApolloPMAS.WaitUntilCookiesBannerIsVisible();
             Pages.ApolloPMAS.AcceptCookiesOnBanner();
-            Pages.ApolloPMAS.ClickToFMRTopBtn();
+            Pages.ApolloPMAS.ClickOnTopJoinNowBtn();
             Pages.AboutMe.RegisterNewUser(user);
             Pages.VerificationEmail.WaitUntilVerificationEmailPageTitleIsShown();
 
@@ -151,7 +151,7 @@ namespace BATDemoTests.TestCases
             Pages.ApolloPMAS.GoToUrl();
             Pages.ApolloPMAS.WaitUntilCookiesBannerIsVisible();
             Pages.ApolloPMAS.AcceptCookiesOnBanner();
-            Pages.ApolloPMAS.ClickToFMRTopBtn();
+            Pages.ApolloPMAS.ClickOnTopJoinNowBtn();
             Pages.AboutMe.RegisterNewUser(user);
             Pages.VerificationEmail.WaitUntilVerificationEmailPageTitleIsShown();
 

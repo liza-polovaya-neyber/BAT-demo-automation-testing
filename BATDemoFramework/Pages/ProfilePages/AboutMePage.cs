@@ -153,15 +153,9 @@ namespace BATDemoFramework
             checkboxOptOutEmail.Click();
         }
 
-
         public bool SubmitBtnIsDisabled()
         {
-            return submitBtn.IsNotEnabled();     
-        }
-
-        public bool SubmitBtnIsEnabled()
-        {
-            return submitBtn.IsEnabled();
+            return Browser.WaitUntilAttributeIsPresent(submitBtn, "disabled", 10);           
         }
 
         public void RegisterUserFromCsv(string key)

@@ -5,12 +5,12 @@ namespace BATDemoFramework
 {
     public class FAQPage
     {
-        [FindsBy(How = How.LinkText, Using = "Personal loans")]
-        private IWebElement personalLoansLink;
+        [FindsBy(How = How.LinkText, Using = "Home")]
+        private IWebElement homeLink;
 
-        public void ClickOnPersonalLoans()
+        public void ClickOnHomeLink()
         {
-            personalLoansLink.Click();
+            homeLink.Click();
         }
 
         public bool IsAtUrl()

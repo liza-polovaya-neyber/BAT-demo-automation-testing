@@ -69,7 +69,7 @@ namespace BATDemoTests.TestCases
             Pages.AboutMe.GoTo();
             Pages.AboutMe.FillInAboutMeForm();
 
-            Assert.IsFalse(Pages.AboutMe.SubmitBtnIsDisabled(), "'Submit' button is not enabled");
+            //Assert.IsFalse(Pages.AboutMe.SubmitBtnIsDisabled(), "'Submit' button is not enabled");
         }
 
 
@@ -80,7 +80,7 @@ namespace BATDemoTests.TestCases
             Pages.AboutMe.GoTo();
             Pages.AboutMe.RegisterUserButDontTickCheckbox();
 
-            Assert.IsFalse(Pages.AboutMe.SubmitBtnIsEnabled(), "Submit button is enabled despite two of the checkboxes are not checked");
+            Assert.IsTrue(Pages.AboutMe.SubmitBtnIsDisabled(), "Submit button is enabled despite T&C checkboxes aren't being checked");
         }
 
         [Test][Retry(3)]
@@ -158,7 +158,7 @@ namespace BATDemoTests.TestCases
         {
             Pages.AboutMe.GoTo();
 
-            Assert.AreEqual(17, Pages.AboutMe.GetFeedbackOptionsNumber());
+            Assert.AreEqual(18, Pages.AboutMe.GetFeedbackOptionsNumber());
         }
 
         [Test][Retry(3)]
