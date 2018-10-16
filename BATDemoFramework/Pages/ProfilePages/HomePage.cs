@@ -6,7 +6,7 @@ namespace BATDemoFramework
 {
     public class HomePage
     {
-        [FindsBy(How = How.ClassName, Using = "login-logout-module__logout___1lxME")]
+        [FindsBy(How = How.XPath, Using = "//*[@id='root']/div/header/div/div/div[1]/a")]
         private IWebElement logoutLink;
 
         [FindsBy(How = How.CssSelector, Using = "span.login-logout-module__defaultavatar___3VRWc")]

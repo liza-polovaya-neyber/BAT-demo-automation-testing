@@ -1,4 +1,5 @@
 ﻿using BATDemoFramework;
+using BATDemoFramework.Generators;
 using NUnit.Framework;
 using System.Configuration;
 using OpenQA.Selenium.Chrome;
@@ -8,7 +9,9 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
 using BATDemoFramework.BrowserStackTest;
 using System.Threading.Tasks;
-using BATDemoFramework.Generators;
+using BATDemoFramework.Steps.Given;
+using BATDemoFramework.Steps.When;
+using BATDemoFramework.Steps.Then;
 
 namespace BATDemoTests
 {
@@ -21,6 +24,17 @@ namespace BATDemoTests
         //public LoginTests(string profile, string environment) : base(profile, environment){}
 
         [Test][Retry(3)]
+        public async Task CanQuickCreateUserAndLogin()
+        {
+            //      Given
+            var user = await UserCreated.CreateUserAsync();
+            //      When
+            LoginUser.UserLogin(user);
+            //      Then
+            UserIsAtHomePage.IsAt();
+        }
+
+        [Test][Retry(3)]
         public void CanGoToLoginPage()
         {
             Pages.Login.GoTo();
@@ -31,7 +45,7 @@ namespace BATDemoTests
         [Test][Retry(3)]
         public void CanGoFromLoginPageToResetPasswordPage()
         {
-            Pages.Login.GoTo();
+            Pages.Login.GoTo(); 
             Pages.Login.GoToResetPasswordPage();
 
             Assert.IsTrue(Pages.ResetPassword.IsAtUrl());

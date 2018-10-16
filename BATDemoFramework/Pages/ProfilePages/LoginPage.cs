@@ -96,6 +96,16 @@ namespace BATDemoFramework
             loginButton.Click();
         }
 
+        public void LogInQuickUser(UserLoginModel user)
+        {
+            emailAddressField.Click();
+            emailAddressField.SendKeys(user.Email);
+            passwordField.Click();
+            passwordField.SendKeys(user.Password);
+
+            loginButton.Click();
+        }
+
         public void LogInBySSOUserPrimaryEmail(SSOUser user, User newUser)
         {
             emailAddressField.Click();

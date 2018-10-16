@@ -1,6 +1,7 @@
 ﻿using BATDemoFramework;
 using BATDemoFramework.EmailService;
 using BATDemoFramework.Generators;
+using BATDemoFramework.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;

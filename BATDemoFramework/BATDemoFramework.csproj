@@ -88,6 +88,7 @@
     <Compile Include="Base\TestBaseForNewTabWindow.cs" />
     <Compile Include="BrowserStackTest\BrowserStackNUnitTest.cs" />
     <Compile Include="Configurations\TestConfigurationManager.cs" />
+    <Compile Include="Constants\UserDefaultValues.cs" />
     <Compile Include="EmailService\EmailTypes.cs" />
     <Compile Include="EmailService\NeyberUrls.cs" />
     <Compile Include="Extensions.cs">
@@ -97,8 +98,15 @@
     <Compile Include="EmailService\EmailService.cs" />
     <Compile Include="EmailService\IEmailService.cs" />
     <Compile Include="Generators\GuidGenerator.cs" />
+    <Compile Include="Steps\Then\UserIsAtHomePage.cs" />
+    <Compile Include="Steps\When\LoginUser.cs" />
+    <Compile Include="Steps\Given\UserCreated.cs" />
     <Compile Include="Helpers\StringHelper.cs" />
+    <Compile Include="Models\AccessModel.cs" />
+    <Compile Include="Models\AutoLoginModel.cs" />
+    <Compile Include="Models\MarketingPreferenceModel.cs" />
     <Compile Include="Models\SSOUser.cs" />
+    <Compile Include="Models\UserLoginModel.cs" />
     <Compile Include="Pages\ApolloPages\ApolloPMASPage.cs" />
     <Compile Include="Pages\ApolloPages\EligibilityCriteriaPage.cs" />
     <Compile Include="Pages\ApolloPages\FAQPage.cs" />
