@@ -6,13 +6,13 @@ namespace BATDemoFramework
 {
     public class EligibilityCriteriaPage
     {
-        [FindsBy(How = How.CssSelector, Using = "button.btn.btn-success")]
-        private IWebElement applyNowBtn;
+        [FindsBy(How = How.CssSelector, Using = "button.btn.btn-success.ng-isolate-scope")]
+        private IWebElement FMRBtn;
 
         public void ClickToApplyNow()
         {
-            applyNowBtn = Browser.WaitUntilElementIsClickable(this.applyNowBtn, 30);
-            applyNowBtn.Click();
+            FMRBtn = Browser.WaitUntilElementIsClickable(this.FMRBtn, 30);
+            FMRBtn.Click();
         }
 
         public bool IsAtUrl()

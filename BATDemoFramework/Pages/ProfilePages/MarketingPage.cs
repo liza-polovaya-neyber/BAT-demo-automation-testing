@@ -6,8 +6,14 @@ namespace BATDemoFramework
 {
     public class MarketingPage
     {
-        [FindsBy(How = How.LinkText, Using = "Logout")]
+        [FindsBy(How = How.XPath, Using = "//button")]
         private IWebElement logoutLink;
+
+        [FindsBy(How = How.XPath, Using = "//div[2]/button")]
+        private IWebElement logoutBlock;
+
+        [FindsBy(How = How.XPath, Using = "//li/button")]
+        private IWebElement logoutOption;
 
         [FindsBy(How = How.XPath, Using = "//label/span")]
         private IWebElement smsOption;
@@ -56,6 +62,13 @@ namespace BATDemoFramework
         {
             logoutLink.Click();
         }
+
+        public void LogoutOption()
+        {
+            logoutBlock.Click();
+            logoutOption.Click();
+        }
+
         public void ClickOnSubmitBtn()
         {
             submitBtn.Click();

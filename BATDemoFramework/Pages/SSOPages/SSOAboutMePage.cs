@@ -26,7 +26,7 @@ namespace BATDemoFramework
         [FindsBy(How = How.Id, Using = "terms_accepted")]
         private IWebElement policyTickbox;
 
-        [FindsBy(How = How.XPath, Using = "//button/span")]
+        [FindsBy(How = How.XPath, Using = "//div[6]/button/span")]
         private IWebElement submitBtn;
 
         [FindsBy(How = How.CssSelector, Using = "p.control__error")]

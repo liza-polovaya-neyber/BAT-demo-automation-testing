@@ -99,8 +99,10 @@ namespace BATDemoTests
             await Preconditions.NewUserCreatedAndVerifiedEmail(user);
 
             Pages.EmployerSearch.WaitUntilUrlIsLoaded();
+            Pages.EmployerSearch.CloseConfirmationBanner();
             Pages.EmployerSearch.Logout();
-            Pages.ResetPassword.GoTo();
+            Pages.Login.GoToResetPasswordPage();
+            //Pages.ResetPassword.GoTo();
             Pages.ResetPassword.EnterEmailAndClickToResetPassword(user);
 
             var emailService = new EmailService();
@@ -115,7 +117,7 @@ namespace BATDemoTests
             var user = new UserGenerator().GetNewUser();
             await Preconditions.NewUserCreatedAndVerifiedEmail(user);
 
-            Pages.EmployerSearch.WaitUntilUrlIsLoaded();
+            Pages.EmployerSearch.CloseConfirmationBanner();
             Pages.EmployerSearch.Logout();
             Pages.ResetPassword.GoTo();
             Pages.ResetPassword.EnterEmailAndClickToResetPassword(user);
@@ -135,6 +137,7 @@ namespace BATDemoTests
             await Preconditions.NewUserCreatedAndVerifiedEmail(user);
 
             Pages.EmployerSearch.WaitUntilUrlIsLoaded();
+            Pages.EmployerSearch.CloseConfirmationBanner();
             Pages.EmployerSearch.Logout();
             Pages.ResetPassword.GoTo();
             Pages.ResetPassword.EnterEmailAndClickToResetPassword(user);

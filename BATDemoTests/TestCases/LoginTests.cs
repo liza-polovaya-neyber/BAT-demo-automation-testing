@@ -53,7 +53,7 @@ namespace BATDemoTests
             await Preconditions.NewUserCreatedAndPassedProfileJourney(user);
             Pages.Home.Logout();
 
-            //Pages.Login.GoTo();
+            Pages.Login.GoTo();
             Pages.Login.LogIn(user);
             Pages.Home.WaitUntilHomeUrlIsLoaded();
 
@@ -80,19 +80,6 @@ namespace BATDemoTests
             Pages.Login.WaitUntilErrorBlockIsShown();
 
             Assert.AreEqual(Pages.Login.GetErrorText(), "The email address or password you entered is incorrect. Please check and try again.");
-        }
-
-        [TestCase("ukr", "Must be more than 8 characters")]
-        [TestCase("lowercase", "Must contain at least one upper letter, one lower letter and one number")]
-        [TestCase("lowecaseP", "Must contain at least one upper letter, one lower letter and one number")]
-        [TestCase("lowecase10", "Must contain at least one upper letter, one lower letter and one number")]
-        public void GetsValidationMessageWhenInvalidPassword(string a, string b)
-        {
-            Pages.Login.GoTo();
-            Pages.Login.EnterPassword(a);
-            Pages.Login.ClickToShowHidePassword();
-
-            Assert.AreEqual(Pages.Login.GetErrorPasswordText(), b);
         }
 
         [Test][Retry(3)]

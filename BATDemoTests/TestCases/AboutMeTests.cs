@@ -188,7 +188,7 @@ namespace BATDemoTests.TestCases
             Pages.AboutMe.RegisterNewUser(user);
             Pages.Login.WaitUntilLoginUrlIsLoaded();
 
-            Assert.AreEqual(Pages.Login.GetErrorBannerText(), "Close");
+            Assert.AreEqual(Pages.Login.GetErrorBannerText(), "A Neyber account already exists for the email address you entered. Please log in.");
         }
 
     }

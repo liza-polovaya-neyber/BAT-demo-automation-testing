@@ -29,15 +29,15 @@ namespace BATDemoFramework
         [FindsBy(How = How.ClassName, Using = "auth__title")]
         private IWebElement loginPageHello;
 
-        [FindsBy(How = How.CssSelector, Using = "p.hint.hint_alert.np-i.login-form-module__error___2lW1y")]
+        [FindsBy(How = How.CssSelector, Using = "p.hint.hint_alert.np-i")]
         private IWebElement errorMessage;
 
         [FindsBy(How = How.XPath, Using = "//div[2]/div[2]")]
         private IWebElement showHidePasswordToggle;
 
-        [FindsBy(How = How.XPath, Using = "//a[contains(@href, '')]")]
+        [FindsBy(How = How.CssSelector, Using = "div.global-message-module__container___1hY2-")]
         private IWebElement redBanner;
-
+  
         [FindsBy(How = How.XPath, Using = "//section/div")]
         private IWebElement greenVerificationBanner;
 
@@ -158,7 +158,7 @@ namespace BATDemoFramework
 
         public bool WaitUntilErrorBlockIsShown()
         {
-            var errorBlock = Browser.WaitUntilElementIsPresent(By.CssSelector("p.hint.hint_alert.np-i.login-form-module__error___2lW1y"), 80);
+            var errorBlock = Browser.WaitUntilElementIsPresent(By.CssSelector("p.hint.hint_alert.np-i"), 80);
             return errorBlock.IsDisplayed();
         }
 

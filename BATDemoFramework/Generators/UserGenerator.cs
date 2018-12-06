@@ -53,7 +53,7 @@ namespace BATDemoFramework.Generators
             if (isJoiningDateValid)
                 return DateTime.Now.AddMonths(-7).ToString("dd/MM/yyyy");
             else
-                return DateTime.Now.AddMonths(-5).ToString("dd/MM/yyyy", CultureInfo.InvariantCulture);
+                return DateTime.Now.AddMonths(-1).ToString("dd/MM/yyyy", CultureInfo.InvariantCulture);
         }
 
         public static SSOUser ConvertUserToSSOUser(User newUser)

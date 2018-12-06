@@ -66,7 +66,7 @@ namespace BATDemoTests.TestCases
         }
 
         [TestCase("email", "Please enter a valid email address")]
-        [TestCase("", "Please enter your email address")]
+        [TestCase(" ", "Please enter your email address")]
         public async Task CanNotEnterInvalidEmail(string a, string b)
         {
             await Preconditions.HaveNewUserCreatedAndSelectedAnEmployer();
@@ -170,6 +170,7 @@ namespace BATDemoTests.TestCases
         {
             await Preconditions.HaveNewUserCreatedAndSelectedAnEmployer();
 
+            Pages.AlternativeEmail.Logout();
             Pages.AlternativeEmail.Logout();
 
             Assert.IsTrue(Pages.Login.IsAtUrl(), "User hasn't been redirected to login page");
