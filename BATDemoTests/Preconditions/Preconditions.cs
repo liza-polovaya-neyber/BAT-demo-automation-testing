@@ -122,7 +122,7 @@ namespace BATDemoTests
 
         public static async Task NewUserCreatedAndPassedProfileJourney(User user)
         {
-            Pages.AboutMe.GoTo();
+             Pages.AboutMe.GoTo();
             Pages.AboutMe.RegisterNewUser(user);
             Pages.VerificationEmail.WaitUntilVerificationEmailPageTitleIsShown();
 

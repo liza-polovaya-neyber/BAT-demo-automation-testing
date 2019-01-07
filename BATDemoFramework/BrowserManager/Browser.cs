@@ -92,6 +92,11 @@ namespace BATDemoFramework
             return WaitUntil(ExpectedConditions.UrlMatches(url), TimeSpan.FromSeconds(timeoutInSeconds));
         }
 
+        public static bool WaitUntilAttributeIsPresent(IWebElement element, string attribute, int timeoutInSeconds)
+        {
+            return WaitUntil(ExpectedConditions.TextToBePresentInElementValue(element, attribute), TimeSpan.FromSeconds(timeoutInSeconds));
+        }
+
         public static void Close()
         {
             webDriver.Close();

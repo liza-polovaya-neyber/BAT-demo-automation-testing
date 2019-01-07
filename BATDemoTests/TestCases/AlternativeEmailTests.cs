@@ -173,6 +173,7 @@ namespace BATDemoTests.TestCases
             await Preconditions.HaveNewUserCreatedAndSelectedAnEmployer();
 
             Pages.AlternativeEmail.Logout();
+            Pages.AlternativeEmail.Logout();
 
             Assert.IsTrue(Pages.Login.IsAtUrl(), "User hasn't been redirected to login page");
         }

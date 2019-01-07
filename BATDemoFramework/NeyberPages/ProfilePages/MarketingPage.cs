@@ -5,7 +5,7 @@ namespace BATDemoFramework.NeyberPages.ProfilePages
 {
     public class MarketingPage
     {
-        [FindsBy(How = How.LinkText, Using = "Logout")]
+        [FindsBy(How = How.XPath, Using = "//button")]
         private IWebElement logoutLink;
 
         [FindsBy(How = How.XPath, Using = "//div[2]/button")]

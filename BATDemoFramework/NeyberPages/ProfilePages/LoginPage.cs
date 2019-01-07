@@ -35,7 +35,7 @@ namespace BATDemoFramework.NeyberPages.ProfilePages
 
         [FindsBy(How = How.CssSelector, Using = "div.global-message-module__container___1hY2-")]
         private IWebElement redBanner;
-
+  
         [FindsBy(How = How.XPath, Using = "//section/div")]
         private IWebElement greenVerificationBanner;
 
