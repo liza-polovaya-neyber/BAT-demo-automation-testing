@@ -3,7 +3,7 @@ using BATDemoFramework.Models;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
 
-namespace BATDemoFramework
+namespace BATDemoFramework.NeyberPages.SSOPages
 {
     public class SSOAccountConfirmPage
     {
@@ -13,7 +13,7 @@ namespace BATDemoFramework
         [FindsBy(How = How.Name, Using = "password")]
         private IWebElement passwordField;
 
-        [FindsBy(How = How.XPath, Using = "//button/span")]
+        [FindsBy(How = How.XPath, Using = "//form/button")]
         private IWebElement loginBtn;
 
         [FindsBy(How = How.LinkText, Using = "Continue")]
@@ -26,9 +26,9 @@ namespace BATDemoFramework
             continueBtn.Click();
         }
 
-        public void LogInBySSOUser(SSOUser user, User newUser)
+        public void LogInBySSOUser(User newUser)
         {
-            emailField.SendKeys(user.Email);
+            //emailField.SendKeys(user.Email);
             passwordField.SendKeys(newUser.Password);
             loginBtn.Click();
         }

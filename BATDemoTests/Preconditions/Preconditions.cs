@@ -8,6 +8,8 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using BATDemoFramework.NeyberPages;
+using BATDemoFramework.Pages;
 
 namespace BATDemoTests
 {

@@ -1,10 +1,8 @@
-﻿using OpenQA.Selenium;
+﻿using BATDemoFramework.Utils;
+using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
-using BATDemoFramework.EmailService;
-using BATDemoFramework.Utils;
-using System;
 
-namespace BATDemoFramework
+namespace BATDemoFramework.NeyberPages.ProfilePages
 {
     public class VerificationEmailPage
     {
@@ -13,10 +11,10 @@ namespace BATDemoFramework
         [FindsBy(How = How.CssSelector, Using = "button.button.button_white.mail-message-module__button___NhurA.button-module__button___2VX0t")]
         private IWebElement continueBtn;
 
-        [FindsBy(How = How.LinkText, Using = "I haven’t received an email, please send another one.")]
+        [FindsBy(How = How.CssSelector, Using = "button.mail-message-module__note___1wK3m")]
         private IWebElement resendEmailLink;
 
-        [FindsBy(How = How.LinkText, Using = "Logout")]
+        [FindsBy(How = How.XPath, Using = "//button")]
         private IWebElement logoutLink;
 
         [FindsBy(How = How.LinkText, Using = "Some legal bits we need to tell you")]
@@ -28,7 +26,7 @@ namespace BATDemoFramework
         [FindsBy(How = How.ClassName, Using = "logo")]
         private IWebElement logoNeyber;
 
-        [FindsBy(How = How.LinkText, Using = "Close")]
+        [FindsBy(How = How.XPath, Using = "//button")]
         private IWebElement closeBtn;
 
         [FindsBy(How = How.XPath, Using = "//section/div")]

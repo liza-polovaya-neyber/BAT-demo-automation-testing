@@ -1,13 +1,11 @@
-using System.Runtime.InteropServices;
 using BATDemoFramework.Generators;
+using BATDemoFramework.Models;
+using BATDemoFramework.TestDataAccess;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
-using BATDemoFramework.TestDataAccess;
 using System;
-using OpenQA.Selenium.Support.UI;
-using BATDemoFramework.Models;
 
-namespace BATDemoFramework
+namespace BATDemoFramework.NeyberPages.ProfilePages
 {
     public class LoginPage
     {
@@ -29,13 +27,13 @@ namespace BATDemoFramework
         [FindsBy(How = How.ClassName, Using = "auth__title")]
         private IWebElement loginPageHello;
 
-        [FindsBy(How = How.CssSelector, Using = "p.hint.hint_alert.np-i.login-form-module__error___2lW1y")]
+        [FindsBy(How = How.CssSelector, Using = "p.hint.hint_alert.np-i")]
         private IWebElement errorMessage;
 
         [FindsBy(How = How.XPath, Using = "//div[2]/div[2]")]
         private IWebElement showHidePasswordToggle;
 
-        [FindsBy(How = How.XPath, Using = "//a[contains(@href, '')]")]
+        [FindsBy(How = How.CssSelector, Using = "div.global-message-module__container___1hY2-")]
         private IWebElement redBanner;
 
         [FindsBy(How = How.XPath, Using = "//section/div")]
@@ -98,11 +96,12 @@ namespace BATDemoFramework
 
         public void LogInQuickUser(UserLoginModel user)
         {
+            System.Threading.Thread.Sleep(2000);
             emailAddressField.Click();
             emailAddressField.SendKeys(user.Email);
             passwordField.Click();
             passwordField.SendKeys(user.Password);
-
+            
             loginButton.Click();
         }
 
@@ -112,7 +111,7 @@ namespace BATDemoFramework
             emailAddressField.SendKeys(user.Email);
             passwordField.Click();
             passwordField.SendKeys(newUser.Password);
-
+            
             loginButton.Click();
         }
 
@@ -168,7 +167,7 @@ namespace BATDemoFramework
 
         public bool WaitUntilErrorBlockIsShown()
         {
-            var errorBlock = Browser.WaitUntilElementIsPresent(By.CssSelector("p.hint.hint_alert.np-i.login-form-module__error___2lW1y"), 80);
+            var errorBlock = Browser.WaitUntilElementIsPresent(By.CssSelector("p.hint.hint_alert.np-i"), 80);
             return errorBlock.IsDisplayed();
         }
 

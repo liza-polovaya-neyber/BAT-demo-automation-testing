@@ -1,9 +1,8 @@
-﻿using System;
+﻿using BATDemoFramework.Generators;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
-using BATDemoFramework.Generators;
 
-namespace BATDemoFramework
+namespace BATDemoFramework.NeyberPages.ProfilePages
 {
     public class ChangePasswordPage
     {

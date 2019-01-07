@@ -1,4 +1,4 @@
-﻿namespace BATDemoFramework
+﻿namespace BATDemoFramework.NeyberPages.SSOPages
 {
     public class SSOIneligibleStatePage
     {

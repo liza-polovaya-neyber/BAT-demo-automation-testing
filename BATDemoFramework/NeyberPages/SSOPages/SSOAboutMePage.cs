@@ -1,10 +1,11 @@
-﻿using BATDemoFramework.Generators;
+﻿using System;
+using BATDemoFramework.Generators;
+using BATDemoFramework.NeyberPages.ProfilePages;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
 using OpenQA.Selenium.Support.UI;
-using System;
 
-namespace BATDemoFramework
+namespace BATDemoFramework.NeyberPages.SSOPages
 {
     public class SSOAboutMePage
     {
@@ -26,7 +27,7 @@ namespace BATDemoFramework
         [FindsBy(How = How.Id, Using = "terms_accepted")]
         private IWebElement policyTickbox;
 
-        [FindsBy(How = How.XPath, Using = "//button/span")]
+        [FindsBy(How = How.XPath, Using = "//div[6]/button/span")]
         private IWebElement submitBtn;
 
         [FindsBy(How = How.CssSelector, Using = "p.control__error")]

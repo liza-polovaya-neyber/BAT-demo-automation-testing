@@ -1,4 +1,4 @@
-﻿namespace BATDemoFramework
+﻿namespace BATDemoFramework.NeyberPages.ProfilePages
 {
     public class SSOLoginRequiredPage
     {

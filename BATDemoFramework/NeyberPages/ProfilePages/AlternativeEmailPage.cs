@@ -1,22 +1,21 @@
-﻿using System;
+﻿using BATDemoFramework.TestDataAccess;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
-using BATDemoFramework.TestDataAccess;
 
-namespace BATDemoFramework
+namespace BATDemoFramework.NeyberPages.ProfilePages
 {
     public class AlternativeEmailPage
     {
         [FindsBy(How = How.Name, Using = "email")]
         private IWebElement alternativeEmailField;
 
-        [FindsBy(How = How.LinkText, Using = "Skip this step")]
+        [FindsBy(How = How.CssSelector, Using = "button.alternative-email-form-module__skip___3i6rI")]
         private IWebElement skipEmailLink;
 
         [FindsBy(How = How.XPath, Using = "//form/div[2]/button/span")]
         private IWebElement submitBtn;
 
-        [FindsBy(How = How.LinkText, Using = "Logout")]
+        [FindsBy(How = How.XPath, Using = "//button")]
         private IWebElement logoutLink;
 
         [FindsBy(How = How.CssSelector, Using = "p.control__error")]
@@ -50,7 +49,7 @@ namespace BATDemoFramework
         {
             var userData = CsvDataAccess.GetTestData(Key);
 
-            alternativeEmailField.SendKeys(userData.EmailPrimary);
+            alternativeEmailField.SendKeys(userData.EmailPrimary); 
         }
 
         public void ClickOnSubmitBtn()

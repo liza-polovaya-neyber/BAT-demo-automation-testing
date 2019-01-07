@@ -8,6 +8,8 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using BATDemoFramework.NeyberPages;
+using BATDemoFramework.Pages;
 
 namespace BATDemoTests.TestCases
 {
@@ -66,7 +68,7 @@ namespace BATDemoTests.TestCases
         }
 
         [TestCase("email", "Please enter a valid email address")]
-        [TestCase("", "Please enter your email address")]
+        [TestCase(" ", "Please enter your email address")]
         public async Task CanNotEnterInvalidEmail(string a, string b)
         {
             await Preconditions.HaveNewUserCreatedAndSelectedAnEmployer();

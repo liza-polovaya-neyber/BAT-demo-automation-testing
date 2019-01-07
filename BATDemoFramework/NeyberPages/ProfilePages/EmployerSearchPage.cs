@@ -1,9 +1,7 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
-using System.Collections.Generic;
-using NUnit.Framework;
 
-namespace BATDemoFramework
+namespace BATDemoFramework.Pages.ProfilePages
 {
     public class EmployerSearchPage
     {
@@ -18,7 +16,7 @@ namespace BATDemoFramework
         [FindsBy(How = How.LinkText, Using = "Select")]
         private IWebElement selectResultBtn;
 
-        [FindsBy(How = How.LinkText, Using = "Click here to refine your search")]
+        [FindsBy(How = How.CssSelector, Using = "button.employer-selected-module__refine___3pyDx")]
         private IWebElement refineSearchLink;
 
         [FindsBy(How = How.CssSelector, Using = "button.button.button_blue.button-module__button___2VX0t > span")]
@@ -27,13 +25,13 @@ namespace BATDemoFramework
         [FindsBy(How = How.ClassName, Using = "logo")]
         private IWebElement logoNeyber;
 
-        [FindsBy(How = How.LinkText, Using = "Logout")]
+        [FindsBy(How = How.XPath, Using = "//li/button")]
         private IWebElement logoutLink;
 
-        [FindsBy(How = How.ClassName, Using = "login-logout-module__defaultavatar___3VRWc")]
+        [FindsBy(How = How.ClassName, Using = "login-logout-module__defaultavatar___1BEAZ")]
         private IWebElement userAvatar;
 
-        [FindsBy(How = How.ClassName, Using = "login-logout-module__profilenav___diW9P")]
+        [FindsBy(How = How.ClassName, Using = "login-logout-module__menutoggle___31VbT")]
         private IWebElement logoutModule;
 
         [FindsBy(How = How.ClassName, Using = "secure-hint-module__root___4OSbU")]
@@ -59,6 +57,9 @@ namespace BATDemoFramework
 
         [FindsBy(How = How.CssSelector, Using = "#root > div > div > div > section > section > p.hint.hint_warning.np-i")]
         private IWebElement warningBlock;
+
+        [FindsBy(How = How.CssSelector, Using = "button.button.button_square.button_white.global-message-module__button___23Qpy")]
+        private IWebElement closeButton;
 
         public void GoTo()
         {
@@ -158,7 +159,7 @@ namespace BATDemoFramework
         public bool WaitUntilUrlIsLoaded()
         {
             Browser.WaitUntilUrlIsLoaded(Urls.EmployerSearch, 60);
-            return Pages.EmployerSearch.IsAtUrl();
+            return NeyberPages.Pages.EmployerSearch.IsAtUrl();
         }
 
         public bool WaitUntilSecurityBlockIsLoaded()
@@ -183,6 +184,11 @@ namespace BATDemoFramework
         {
             Browser.WaitUntilElementIsVisible(By.ClassName("hint hint_warning np-i"), 5);
             return warningBlock.Displayed;
+        }
+
+        public void CloseConfirmationBanner()
+        {
+            closeButton.Click();
         }
 
     }

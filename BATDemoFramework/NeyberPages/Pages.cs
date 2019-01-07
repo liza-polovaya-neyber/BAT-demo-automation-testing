@@ -1,6 +1,10 @@
-﻿using OpenQA.Selenium.Support.PageObjects;
+﻿using BATDemoFramework.NeyberPages.ProfilePages;
+using BATDemoFramework.NeyberPages.SSOPages;
+using BATDemoFramework.Pages.ApolloPages;
+using BATDemoFramework.Pages.ProfilePages;
+using OpenQA.Selenium.Support.PageObjects;
 
-namespace BATDemoFramework
+namespace BATDemoFramework.NeyberPages
 {
     public static class Pages
     {
@@ -74,6 +78,11 @@ namespace BATDemoFramework
         public static EmployerVerificationPage EmployerVerification
         {
             get { return GetPage<EmployerVerificationPage>(); }
+        }
+
+        public static ConsentPage Consent
+        {
+            get { return GetPage<ConsentPage>(); }
         }
 
         public static MarketingPage Marketing

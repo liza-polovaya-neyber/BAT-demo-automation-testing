@@ -1,15 +1,12 @@
-﻿using BATDemoFramework.Generators;
+﻿using System;
+using BATDemoFramework.Generators;
+using BATDemoFramework.TestDataAccess;
+using BATDemoFramework.WebDriverManager.enums;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
 using OpenQA.Selenium.Support.UI;
-using BATDemoFramework;
-using BATDemoFramework.TestDataAccess;
-using System;
-using BATDemoFramework.WebDriverManager.enums;
-using System.Collections.Generic;
-using System.IO;
 
-namespace BATDemoFramework
+namespace BATDemoFramework.NeyberPages.ProfilePages
 {
     public class AboutMePage
     {
@@ -48,7 +45,7 @@ namespace BATDemoFramework
         [FindsBy(How = How.Name, Using = "customerFeedback")]
         private IWebElement howYouHeardAboutUsDD;
 
-        [FindsBy(How = How.XPath, Using = "//button/span")]
+        [FindsBy(How = How.XPath, Using = "//div[7]/button/span")]
         private IWebElement submitBtn;
 
         [FindsBy(How = How.Id, Using = "terms_accepted")]
@@ -63,7 +60,7 @@ namespace BATDemoFramework
         [FindsBy(How = How.LinkText, Using = "Login")]
         private IWebElement loginLink;
 
-        [FindsBy(How = How.LinkText, Using = "Some legal bits we need to tell you")]
+        [FindsBy(How = How.XPath, Using = "//p/button")]
         private IWebElement someLegalBitsMenu;
 
         [FindsBy(How = How.XPath, Using = "//p[2]")]
@@ -238,6 +235,7 @@ namespace BATDemoFramework
             if (shouldSelectTitle)
             {
                 SelectTitle(TitleType.Mr);
+                firstNameTextField.Click();
             }
 
             firstNameTextField.SendKeys(newUser.FirstName);

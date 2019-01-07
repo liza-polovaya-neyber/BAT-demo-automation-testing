@@ -25,7 +25,7 @@ namespace BATDemoFramework
         [FindsBy(How = How.PartialLinkText, Using = "Complaints")]
         private IWebElement complaintsPolicyLink;
 
-        [FindsBy(How = How.LinkText, Using = "Some legal bits we need to tell you")]
+        [FindsBy(How = How.XPath, Using = "//p/button")]
         private IWebElement someLegalBitsMenu;
 
         [FindsBy(How = How.XPath, Using = "//p[5]")]

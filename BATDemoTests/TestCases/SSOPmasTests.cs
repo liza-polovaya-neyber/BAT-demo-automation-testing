@@ -8,6 +8,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using BATDemoFramework.NeyberPages;
+using BATDemoFramework.Pages;
 
 namespace BATDemoTests.TestCases
 {
@@ -61,7 +63,7 @@ namespace BATDemoTests.TestCases
             Pages.SSOAboutMe.RegisterUserWithAllFieldsFilledIn(newUser);
             Pages.SSOAboutMe.PressSubmitButton();
             Pages.Marketing.WaitUntilMarketingUrlIsLoaded();
-            Pages.Marketing.Logout();
+            Pages.Marketing.LogoutOption();
             Pages.Login.LogInBySSOUserPrimaryEmail(user, newUser);
             Pages.Marketing.WaitUntilMarketingUrlIsLoaded();
             Pages.Marketing.ChooseEmailOption();
@@ -164,7 +166,7 @@ namespace BATDemoTests.TestCases
             Pages.SSOAboutMe.RegisterUserWithAllFieldsFilledIn(newUser);
             Pages.SSOAboutMe.PressSubmitButton();
             Pages.Marketing.WaitUntilMarketingUrlIsLoaded();
-            Pages.Marketing.Logout();
+            Pages.Marketing.LogoutOption();
             Pages.Login.LogInBySSOUserAlternativeEmail(newUser);
             Pages.Login.WaitUntilErrorBlockIsShown();
 
@@ -182,7 +184,7 @@ namespace BATDemoTests.TestCases
             Pages.SSOAboutMe.RegisterUserWithAllFieldsFilledIn(newUser);
             Pages.SSOAboutMe.PressSubmitButton();
             Pages.Marketing.WaitUntilMarketingUrlIsLoaded();
-            Pages.Marketing.Logout();
+            Pages.Marketing.LogoutOption();
 
             var emailService = new EmailService();
 

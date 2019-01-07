@@ -1,7 +1,7 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
 
-namespace BATDemoFramework
+namespace BATDemoFramework.Pages.ApolloPages
 {
     public class FAQPage
     {
@@ -21,7 +21,7 @@ namespace BATDemoFramework
         public bool WaitUntilUrlIsLoaded()
         {
             var faqPage = Browser.WaitUntilUrlIsLoaded(Urls.FAQPage, 20);
-            return Pages.FAQ.IsAtUrl();
+            return NeyberPages.Pages.FAQ.IsAtUrl();
         }
     }
 }

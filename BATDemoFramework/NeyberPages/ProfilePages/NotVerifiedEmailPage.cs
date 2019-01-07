@@ -2,14 +2,14 @@
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
 
-namespace BATDemoFramework
+namespace BATDemoFramework.NeyberPages.ProfilePages
 {
     public class NotVerifiedEmailPage
     {
         [FindsBy(How = How.ClassName, Using = "button button_white mail-message-module__button___NhurA button-module__button___2VX0t")]
         private IWebElement continueBtn;
 
-        [FindsBy(How = How.LinkText, Using = "start again")]
+        [FindsBy(How = How.CssSelector, Using = "strong")]
         private IWebElement startAgainLink;
 
         [FindsBy(How = How.LinkText, Using = "I haven’t received an email, please send another one.")]

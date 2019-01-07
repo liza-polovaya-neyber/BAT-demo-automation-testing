@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace NeyberBATDemoFramework
+namespace BATDemoFramework.Models
 {
-    class Program
+    class TotalIncomeModel
     {
+        public int TotalIncome { get; set; }
     }
 }

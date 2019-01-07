@@ -1,21 +1,19 @@
-﻿using BATDemoFramework;
+﻿using System;
+using BATDemoFramework;
 using BATDemoFramework.Generators;
 using NUnit.Framework;
-using System.Configuration;
-using OpenQA.Selenium.Chrome;
-using System.Threading;
-using System;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
-using BATDemoFramework.BrowserStackTest;
 using System.Threading.Tasks;
+using BATDemoFramework.NeyberPages;
 using BATDemoFramework.Steps.Given;
 using BATDemoFramework.Steps.When;
 using BATDemoFramework.Steps.Then;
+using BATDemoFramework.NeyberPages.ProfilePages;
 
 namespace BATDemoTests
 {
-   [TestFixture /*("single", "ie")*/]
+    [TestFixture /*("single", "ie")*/]
    public class LoginTests : TestBase
     {
         private IWebElement element;
@@ -24,10 +22,22 @@ namespace BATDemoTests
         //public LoginTests(string profile, string environment) : base(profile, environment){}
 
         [Test][Retry(3)]
-        public async Task CanQuickCreateUserAndLogin()
+        public async Task CanCreateUserAndLogin()
         {
             //      Given
-            var user = await UserCreated.CreateUserAsync();
+            var user = await UserCreatedAndMarketingPreferencesSet.CreateUserAndSetMarketingPreferencesAsync();
+            //      When
+            LoginUser.UserLogin(user);
+            //      Then
+            UserIsAtHomePage.IsAt();
+        }
+
+        [Test]
+        [Retry(3)]
+        public async Task CanCreateUserPassFmrAndLogin()
+        {
+            //      Given
+            var user = await UserCreatedAndPassedFmr.CreateUserAndPassFmrAsync();
             //      When
             LoginUser.UserLogin(user);
             //      Then
@@ -67,7 +77,7 @@ namespace BATDemoTests
             await Preconditions.NewUserCreatedAndPassedProfileJourney(user);
             Pages.Home.Logout();
 
-            //Pages.Login.GoTo();
+            Pages.Login.GoTo();
             Pages.Login.LogIn(user);
             Pages.Home.WaitUntilHomeUrlIsLoaded();
 
@@ -94,19 +104,6 @@ namespace BATDemoTests
             Pages.Login.WaitUntilErrorBlockIsShown();
 
             Assert.AreEqual(Pages.Login.GetErrorText(), "The email address or password you entered is incorrect. Please check and try again.");
-        }
-
-        [TestCase("ukr", "Must be more than 8 characters")]
-        [TestCase("lowercase", "Must contain at least one upper letter, one lower letter and one number")]
-        [TestCase("lowecaseP", "Must contain at least one upper letter, one lower letter and one number")]
-        [TestCase("lowecase10", "Must contain at least one upper letter, one lower letter and one number")]
-        public void GetsValidationMessageWhenInvalidPassword(string a, string b)
-        {
-            Pages.Login.GoTo();
-            Pages.Login.EnterPassword(a);
-            Pages.Login.ClickToShowHidePassword();
-
-            Assert.AreEqual(Pages.Login.GetErrorPasswordText(), b);
         }
 
         [Test][Retry(3)]
