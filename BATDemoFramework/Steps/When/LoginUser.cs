@@ -8,7 +8,6 @@ namespace BATDemoFramework.Steps.When
         {
             NeyberPages.Pages.Login.GoTo();
             NeyberPages.Pages.Login.LogInQuickUser(user);
-            NeyberPages.Pages.Home.WaitUntilHomeUrlIsLoaded();
         }       
     }
 }

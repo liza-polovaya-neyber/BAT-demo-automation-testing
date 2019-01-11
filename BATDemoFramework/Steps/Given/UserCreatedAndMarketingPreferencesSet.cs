@@ -14,8 +14,9 @@ namespace BATDemoFramework.Steps.Given
         {
             var userGen = new UserGenerator();
             var user = await userGen.CreateDefaultUser();
-            var result = await userGen.CreateAutoLoginAsync(user.Email, user.Password);
-            await userGen.SetTenant(result);
+            var accessToken = await userGen.CreateAutoLoginAsync(user.Email, user.Password);
+            userGen.UpdateAuthenticationHeader(accessToken);
+            await userGen.SetTenant();
             await userGen.SkipSecondaryEmail();
             await userGen.SetMarketingPreferences();
             return user;

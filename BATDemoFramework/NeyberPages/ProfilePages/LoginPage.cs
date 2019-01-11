@@ -83,7 +83,6 @@ namespace BATDemoFramework.NeyberPages.ProfilePages
             loginButton.Click();
         }
 
-        //Login by the new user that was just created
         public void LogIn(User user)
         {
             emailAddressField.Click();
@@ -96,7 +95,7 @@ namespace BATDemoFramework.NeyberPages.ProfilePages
 
         public void LogInQuickUser(UserLoginModel user)
         {
-            System.Threading.Thread.Sleep(2000);
+            System.Threading.Thread.Sleep(4000);
             emailAddressField.Click();
             emailAddressField.SendKeys(user.Email);
             passwordField.Click();

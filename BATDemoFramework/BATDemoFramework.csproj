@@ -102,11 +102,15 @@
     <Compile Include="Models\ConsentModel.cs" />
     <Compile Include="Models\TotalIncomeModel.cs" />
     <Compile Include="NeyberPages\ProfilePages\ConsentPage.cs" />
+    <Compile Include="Services\RestClient.cs" />
     <Compile Include="Steps\Given\UserCreatedAndAlternativeEmailSkipped.cs" />
     <Compile Include="Steps\Given\UserCreatedAndMarketingPreferencesSet.cs" />
     <Compile Include="Steps\Given\UserCreatedAndPassedFmr.cs" />
     <Compile Include="Steps\Given\UserCreatedAndSelectedEmployer.cs" />
+    <Compile Include="Steps\Then\UserIsAtAlternativeEmailPage.cs" />
+    <Compile Include="Steps\Then\UserIsAtEmployerPage.cs" />
     <Compile Include="Steps\Then\UserIsAtHomePage.cs" />
+    <Compile Include="Steps\Then\UserIsAtMarketingPreferencesPage.cs" />
     <Compile Include="Steps\When\LoginUser.cs" />
     <Compile Include="Steps\Given\UserCreated.cs" />
     <Compile Include="Helpers\StringHelper.cs" />

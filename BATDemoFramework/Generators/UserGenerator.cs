@@ -10,6 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using BATDemoFramework.Constants;
 using BATDemoFramework.EmailService;
+using BATDemoFramework.Helpers;
 using BATDemoFramework.Models;
 using Newtonsoft.Json;
 
@@ -18,6 +19,7 @@ namespace BATDemoFramework.Generators
     public class UserGenerator
     {
         private static readonly HttpClient client = new HttpClient();
+        private static readonly RestClient restClient = new RestClient();
         public static User LastGeneratedUser { get; set; }
         public static SSOUser LastSSOGeneratedUser { get; set; }
         public static UserLoginModel LastQuickGeneratedUser { get; set; }
@@ -107,16 +109,12 @@ namespace BATDemoFramework.Generators
             };
 
             string userCreationUrl = ConfigurationManager.AppSettings["UserCreation.Url"];
-            
-            var json = JsonConvert.SerializeObject(user);
-            ServicePointManager.ServerCertificateValidationCallback += (sender, cert, chain, sslPolicyErrors) => true;
-            var content = new StringContent(json, Encoding.UTF8, "application/json");
-            var response = await client.PostAsync(userCreationUrl, content);
+            await restClient.ExecuteAsync<string>(userCreationUrl, "POST", user);
 
-            if (response.StatusCode != HttpStatusCode.OK)
-            {
-                throw new Exception("Failed to create user.");
-            }
+            /*var json = JsonConvert.SerializeObject(user);
+            var content = new StringContent(json, Encoding.UTF8, "application/json");
+            var response = await client.PostAsync(userCreationUrl, content);*/
+
 
             var emailService = new EmailService.EmailService();
 
@@ -146,49 +144,32 @@ namespace BATDemoFramework.Generators
 
             string loginUrl = ConfigurationManager.AppSettings["Login.Url"];
 
-            var json = JsonConvert.SerializeObject(user);
-            var content = new StringContent(json, Encoding.UTF8, "application/json");
-            var response = await client.PostAsync(loginUrl, content);
 
-            var responseString = await response.Content.ReadAsStringAsync();
-            var responseJson = JsonConvert.DeserializeObject<Dictionary<string, string>>(responseString);
+            var response = await restClient.ExecuteAsync<Dictionary<string, string>>(loginUrl, "POST", user);
 
-            return responseJson["AccessToken"];
+            return response["AccessToken"];
         }
 
-        public async Task<HttpResponseMessage> SetTenant(string accessToken)
+        public void UpdateAuthenticationHeader(string accessToken)
+        {
+            restClient.UpdateAuthenticationHeader(accessToken);
+        }
+
+        public async Task SetTenant()
         {
             string setClientIdUrl = ConfigurationManager.AppSettings["SetClientId.Url"];
 
-            var json = JsonConvert.SerializeObject(new {clientId = UserDefaultValues.ClientId});
-            HttpContent content = new StringContent(json, Encoding.UTF8, "application/json");
-            var request = new HttpRequestMessage(new HttpMethod("PATCH"), setClientIdUrl)
-            {
-                Content = content
-            };
-            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
-            var response = await client.SendAsync(request);
-
-            return response;
+            await restClient.ExecuteAsyncNoResponseExpected(setClientIdUrl, "PATCH", new {clientId = UserDefaultValues.ClientId});
         }
 
-        public async Task<bool> SkipSecondaryEmail()
+        public async Task SkipSecondaryEmail()
         {
             string skipSecondaryEmailUrl = ConfigurationManager.AppSettings["SkipSecondaryEmail.Url"];
 
-            var request = new HttpRequestMessage(new HttpMethod("PATCH"), skipSecondaryEmailUrl);
-            var response = await client.SendAsync(request);
-
-            if(response.StatusCode != HttpStatusCode.OK)
-            {
-                throw new Exception("Failed to skip secondary email.");
-            }
-
-            return true;
-
+            await restClient.ExecuteAsyncNoResponseExpected(skipSecondaryEmailUrl, "PATCH");
         }
 
-        public async Task<HttpResponseMessage> SetMarketingPreferences()
+        public async Task SetMarketingPreferences()
         {
             var user = new MarketingPreferenceModel
             {
@@ -200,15 +181,7 @@ namespace BATDemoFramework.Generators
 
             string setMarketingPreferencesUrl = ConfigurationManager.AppSettings["SetMarketingPreferences.Url"];
 
-            var json = JsonConvert.SerializeObject(user);
-            HttpContent content = new StringContent(json, Encoding.UTF8, "application/json");
-            var request = new HttpRequestMessage(new HttpMethod("PATCH"), setMarketingPreferencesUrl)
-            {
-                Content = content
-            };
-            var response = await client.SendAsync(request);
-
-            return response;
+            await restClient.ExecuteAsyncNoResponseExpected(setMarketingPreferencesUrl, "PATCH", user);
         }
 
         public async Task<string> SetConsent()
@@ -221,22 +194,12 @@ namespace BATDemoFramework.Generators
 
             string setConsentUrl = ConfigurationManager.AppSettings["SetAcceptConsent.Url"];
 
-            var json = JsonConvert.SerializeObject(user);
-            var content = new StringContent(json, Encoding.UTF8, "application/json");
-            var response = await client.PostAsync(setConsentUrl, content);
+            var response = await restClient.ExecuteAsync<Dictionary<string, string>>(setConsentUrl, "POST", user);
 
-            if(response.StatusCode != HttpStatusCode.OK)
-            {
-                throw new Exception("Failed to set consent.");
-            }
-
-            var responseString = await response.Content.ReadAsStringAsync();
-            var responseJson = JsonConvert.DeserializeObject<Dictionary<string, string>>(responseString);
-
-            return responseJson["LoanApplicationId"];
+            return response["LoanApplicationId"];
         }
 
-        public async Task<HttpResponseMessage> SetTotalIncome(string loanApplicationId)
+        public async Task SetTotalIncome(string loanApplicationId)
         {
             var user = new TotalIncomeModel()
             {
@@ -244,29 +207,20 @@ namespace BATDemoFramework.Generators
             };
 
             string setTotalIncome = ConfigurationManager.AppSettings["FMR.Url"];
+            setTotalIncome = setTotalIncome + loanApplicationId + "/totalIncome";
 
-            var json = JsonConvert.SerializeObject(user);
-            HttpContent content = new StringContent(json, Encoding.UTF8, "application/json");
-            var request = new HttpRequestMessage(new HttpMethod("PATCH"), setTotalIncome + loanApplicationId + "/totalIncome")
-            {
-                Content = content
-            };
-            var response = await client.SendAsync(request);
-
-            return response;
+            await restClient.ExecuteAsyncNoResponseExpected(setTotalIncome, "PATCH", user);
         }
 
-        public async Task<HttpResponseMessage> SetSufficentIncome(string loanApplicationId)
+        public async Task SetSufficentIncome(string loanApplicationId)
         {
             string setSufficentIncome = ConfigurationManager.AppSettings["FMR.Url"];
+            setSufficentIncome = setSufficentIncome + loanApplicationId + "/fmrStatus/Sufficient%20Income";
 
-            var request = new HttpRequestMessage(new HttpMethod("PATCH"), setSufficentIncome + loanApplicationId + "/fmrStatus/Sufficient%20Income");
-            var response = await client.SendAsync(request);
-
-            return response;
+            await restClient.ExecuteAsyncNoResponseExpected(setSufficentIncome, "PATCH");
         }
 
-        public async Task<HttpResponseMessage> SetAddress(string loanApplicationId)
+        public async Task SetAddress(string loanApplicationId)
         {
             var user = new AddressModel
             {
@@ -285,25 +239,16 @@ namespace BATDemoFramework.Generators
             };
 
             string setAddress = ConfigurationManager.AppSettings["FMR.Url"];
+            setAddress = setAddress + loanApplicationId + "/address";
 
-            var json = JsonConvert.SerializeObject(user);
-            var content = new StringContent(json, Encoding.UTF8, "application/json");
-            var response = await client.PostAsync(setAddress + loanApplicationId + "/address" , content);
-
-            if(response.StatusCode != HttpStatusCode.OK)
-            {
-                throw new Exception("Failed to add address.");
-            }
-            
-            return response;
+            await restClient.ExecuteAsyncNoResponseExpected(setAddress, "POST", user);
         }
 
-        public async Task<HttpResponseMessage> TriggerCreditCheck()
+        public async Task TriggerCreditCheck()
         {
             string triggerCreditCheckUrl = ConfigurationManager.AppSettings["TriggerCreditCheck.Url"];
 
-            var response = await client.PostAsync(triggerCreditCheckUrl, null);
-            return response;
+            await restClient.ExecuteAsyncNoResponseExpected(triggerCreditCheckUrl, "POST");
         }
     }
 }

@@ -18,7 +18,7 @@ namespace BATDemoFramework
         [SetUp]
         public void SetUpBeforeTestMethod()// This method fire at the start of EACH Test
         {
-            //Browser.Initialize();
+            Browser.Initialize();
             //UserGenerator.Initialize();
         }
 
@@ -27,7 +27,7 @@ namespace BATDemoFramework
         {
             Browser.DeleteCookies("NEYBER_authData_test1");
             //Browser.Close();
-            //Browser.Quit();
+            Browser.Quit();
         }
 
         [OneTimeTearDown]

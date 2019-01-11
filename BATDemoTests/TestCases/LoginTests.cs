@@ -25,6 +25,17 @@ namespace BATDemoTests
         public async Task CanCreateUserAndLogin()
         {
             //      Given
+            var user = await UserCreated.CreateUserAsync();
+            //      When
+            LoginUser.UserLogin(user);
+            //      Then
+            UserIsAtEmployerPage.IsAt();
+        }
+
+        [Test][Retry(3)]
+        public async Task CanCreateUserAndPassInitialProfileJourney()
+        {
+            //      Given
             var user = await UserCreatedAndMarketingPreferencesSet.CreateUserAndSetMarketingPreferencesAsync();
             //      When
             LoginUser.UserLogin(user);
@@ -42,6 +53,28 @@ namespace BATDemoTests
             LoginUser.UserLogin(user);
             //      Then
             UserIsAtHomePage.IsAt();
+        }
+
+        [Test][Retry(3)]
+        public async Task CanCreateUserAndSelectEmployer()
+        {
+            //      Given
+            var user = await UserCreatedAndSelectedEmployer.CreateUserAndSelectEmployerAsync();
+            //      When
+            LoginUser.UserLogin(user);
+            //      Then
+            UserIsAtAlternativeEmailPage.IsAt();
+        }
+
+        [Test][Retry(3)]
+        public async Task CanCreateUserAndSkipAlternativeEmail()
+        {
+            //      Given
+            var user = await UserCreatedAndAlternativeEmailSkipped.CreateUserAndSkipAlternativeEmailAsync();
+            //      When
+            LoginUser.UserLogin(user);
+            //      Then
+            UserIsAtMarketingPreferencesPage.IsAt();
         }
 
         [Test][Retry(3)]
