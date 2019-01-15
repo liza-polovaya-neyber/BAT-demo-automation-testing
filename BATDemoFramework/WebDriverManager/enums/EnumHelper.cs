@@ -1,5 +1,5 @@
 ﻿using System;
-using BATDemoFramework.NeyberPages.ProfilePages;
+using BATDemoFramework.NeyberPages.Profile;
 
 namespace BATDemoFramework.WebDriverManager.enums
 {

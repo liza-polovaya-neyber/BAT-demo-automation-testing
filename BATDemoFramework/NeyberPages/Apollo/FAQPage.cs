@@ -1,7 +1,7 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
 
-namespace BATDemoFramework.Pages.ApolloPages
+namespace BATDemoFramework.Pages.Apollo
 {
     public class FAQPage
     {

@@ -18,14 +18,3 @@ namespace BATDemoFramework.Models
         public bool HermesUser { get; set; }
     }
 }
-
-/*
-  "AccessToken": "2a18e703b5d9748a53774dc0275e3cf8",
-  "ExpiresIn": 7200,
-  "TokenType": "Bearer",
-  "Roles": null,
-  "RefreshToken": null,
-  "UserName": null,
-  "ProfileId": null,
-  "HermesUser": false
-*/

@@ -1,28 +1,19 @@
 using System;
-using System.Collections.Generic;
-using System.Configuration;
 using System.Globalization;
-using System.IO;
-using System.Net;
-using System.Net.Http;
-using System.Net.Http.Headers;
-using System.Text;
 using System.Threading.Tasks;
 using BATDemoFramework.Constants;
-using BATDemoFramework.EmailService;
-using BATDemoFramework.Helpers;
+using BATDemoFramework.EmailServices;
 using BATDemoFramework.Models;
-using Newtonsoft.Json;
+using BATDemoFramework.Services;
 
 namespace BATDemoFramework.Generators
 {
     public class UserGenerator
     {
-        private static readonly HttpClient client = new HttpClient();
-        private static readonly RestClient restClient = new RestClient();
+        private readonly UserService userService = new UserService();
+        private readonly EmailService emailService = new EmailService();
         public static User LastGeneratedUser { get; set; }
         public static SSOUser LastSSOGeneratedUser { get; set; }
-        public static UserLoginModel LastQuickGeneratedUser { get; set; }
 
         public User GetNewUser()
         {
@@ -108,16 +99,13 @@ namespace BATDemoFramework.Generators
                 TermsAndPrivacyPolicyAccepted = true
             };
 
-            string userCreationUrl = ConfigurationManager.AppSettings["UserCreation.Url"];
-            await restClient.ExecuteAsync<string>(userCreationUrl, "POST", user);
+            await userService.CreateDefaultUserAsync(user);
 
-            /*var json = JsonConvert.SerializeObject(user);
-            var content = new StringContent(json, Encoding.UTF8, "application/json");
-            var response = await client.PostAsync(userCreationUrl, content);*/
+            return user;
+        }
 
-
-            var emailService = new EmailService.EmailService();
-
+        public async Task VerifyEmail(UserLoginModel user)
+        {
             var messages = await emailService.GetMessagesBySubject(EmailTypes.ConfirmYourEmail, user.Email);
             if (messages.Count == 0)
             {
@@ -126,12 +114,9 @@ namespace BATDemoFramework.Generators
             var urlToken = emailService.GetUrlTokenFromMessage(messages[0]);
 
             Browser.GoToUrl(urlToken);
-
-            LastQuickGeneratedUser = user;
-            return user;
         }
 
-        public async Task<String> CreateAutoLoginAsync(string userName, string password)
+        public async Task<String> CreateAutoLogin(string userName, string password)
         {
             var user = new AutoLoginModel
             {
@@ -142,36 +127,29 @@ namespace BATDemoFramework.Generators
                 Scope = "openid profile heracles atlas mercury finwell"
             };
 
-            string loginUrl = ConfigurationManager.AppSettings["Login.Url"];
+            var response = await userService.CreateAutoLoginAsync(user);
 
-
-            var response = await restClient.ExecuteAsync<Dictionary<string, string>>(loginUrl, "POST", user);
-
-            return response["AccessToken"];
+            return response;
         }
 
         public void UpdateAuthenticationHeader(string accessToken)
         {
-            restClient.UpdateAuthenticationHeader(accessToken);
+            userService.UpdateAuthenticationHeader(accessToken);
         }
 
         public async Task SetTenant()
         {
-            string setClientIdUrl = ConfigurationManager.AppSettings["SetClientId.Url"];
-
-            await restClient.ExecuteAsyncNoResponseExpected(setClientIdUrl, "PATCH", new {clientId = UserDefaultValues.ClientId});
+            await userService.SetTenantAsync(new {clientId = UserDefaultValues.ClientId});
         }
 
         public async Task SkipSecondaryEmail()
         {
-            string skipSecondaryEmailUrl = ConfigurationManager.AppSettings["SkipSecondaryEmail.Url"];
-
-            await restClient.ExecuteAsyncNoResponseExpected(skipSecondaryEmailUrl, "PATCH");
+            await userService.SkipSecondaryEmailtAsync();
         }
 
         public async Task SetMarketingPreferences()
         {
-            var user = new MarketingPreferenceModel
+            var marketingPreferences = new MarketingPreferenceModel
             {
                 Email = false,
                 Post = false,
@@ -179,50 +157,40 @@ namespace BATDemoFramework.Generators
                 Telephone = false
             };
 
-            string setMarketingPreferencesUrl = ConfigurationManager.AppSettings["SetMarketingPreferences.Url"];
-
-            await restClient.ExecuteAsyncNoResponseExpected(setMarketingPreferencesUrl, "PATCH", user);
+            await userService.SetMarketingPreferencesAsync(marketingPreferences);
         }
 
         public async Task<string> SetConsent()
         {
-            var user = new ConsentModel()
+            var consent = new ConsentModel()
             {
                 Consent = true,
                 IsTopup = false
             };
 
-            string setConsentUrl = ConfigurationManager.AppSettings["SetAcceptConsent.Url"];
+            var response = await userService.SetConsentAsync(consent);
 
-            var response = await restClient.ExecuteAsync<Dictionary<string, string>>(setConsentUrl, "POST", user);
-
-            return response["LoanApplicationId"];
+            return response;
         }
 
         public async Task SetTotalIncome(string loanApplicationId)
         {
-            var user = new TotalIncomeModel()
+            var totalIncome = new TotalIncomeModel()
             {
                 TotalIncome = UserDefaultValues.TotalIncome
             };
 
-            string setTotalIncome = ConfigurationManager.AppSettings["FMR.Url"];
-            setTotalIncome = setTotalIncome + loanApplicationId + "/totalIncome";
-
-            await restClient.ExecuteAsyncNoResponseExpected(setTotalIncome, "PATCH", user);
+            await userService.SetTotalIncomeAsync(totalIncome, loanApplicationId);
         }
 
         public async Task SetSufficentIncome(string loanApplicationId)
         {
-            string setSufficentIncome = ConfigurationManager.AppSettings["FMR.Url"];
-            setSufficentIncome = setSufficentIncome + loanApplicationId + "/fmrStatus/Sufficient%20Income";
-
-            await restClient.ExecuteAsyncNoResponseExpected(setSufficentIncome, "PATCH");
+            await userService.SetSufficentIncomeAsync(loanApplicationId);
         }
 
         public async Task SetAddress(string loanApplicationId)
         {
-            var user = new AddressModel
+            var address = new AddressModel
             {
                 FlatNumber = UserDefaultValues.FlatNumber,
                 HouseName = UserDefaultValues.HouseName,
@@ -237,18 +205,12 @@ namespace BATDemoFramework.Generators
                 MovedInMonth = UserDefaultValues.MovedInMonth,
                 MovedInYear = UserDefaultValues.MovedInYear
             };
-
-            string setAddress = ConfigurationManager.AppSettings["FMR.Url"];
-            setAddress = setAddress + loanApplicationId + "/address";
-
-            await restClient.ExecuteAsyncNoResponseExpected(setAddress, "POST", user);
+            await userService.SetAddressAsync(address, loanApplicationId);
         }
 
         public async Task TriggerCreditCheck()
         {
-            string triggerCreditCheckUrl = ConfigurationManager.AppSettings["TriggerCreditCheck.Url"];
-
-            await restClient.ExecuteAsyncNoResponseExpected(triggerCreditCheckUrl, "POST");
+            await userService.TriggerCreditCheckAsync();
         }
     }
 }

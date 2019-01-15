@@ -6,7 +6,7 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
 using OpenQA.Selenium.Support.UI;
 
-namespace BATDemoFramework.NeyberPages.ProfilePages
+namespace BATDemoFramework.NeyberPages.Profile
 {
     public class AboutMePage
     {

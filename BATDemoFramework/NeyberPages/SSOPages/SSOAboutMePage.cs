@@ -1,6 +1,6 @@
 ﻿using System;
 using BATDemoFramework.Generators;
-using BATDemoFramework.NeyberPages.ProfilePages;
+using BATDemoFramework.NeyberPages.Profile;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
 using OpenQA.Selenium.Support.UI;

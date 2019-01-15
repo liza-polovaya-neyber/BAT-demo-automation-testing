@@ -1,5 +1,5 @@
 ﻿using BATDemoFramework;
-using BATDemoFramework.EmailService;
+using BATDemoFramework.EmailServices;
 using BATDemoFramework.Generators;
 using NUnit.Framework;
 using System;
@@ -9,7 +9,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using BATDemoFramework.NeyberPages;
-using BATDemoFramework.NeyberPages.ProfilePages;
+using BATDemoFramework.NeyberPages.Profile;
 using BATDemoFramework.Pages;
 
 namespace BATDemoTests.TestCases

@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BATDemoFramework.EmailService
+namespace BATDemoFramework.EmailServices
 {
     public class NeyberUrls
     {

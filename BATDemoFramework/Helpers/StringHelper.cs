@@ -1,4 +1,4 @@
-﻿using BATDemoFramework.EmailService;
+﻿using BATDemoFramework.EmailServices;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 

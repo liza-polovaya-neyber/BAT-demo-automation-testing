@@ -1,7 +1,7 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
 
-namespace BATDemoFramework.Pages.ProfilePages
+namespace BATDemoFramework.Pages.Profile
 {
     public class EmployerSearchPage
     {

@@ -11,7 +11,7 @@ namespace BATDemoFramework
         [OneTimeSetUp]
         public void SetUpBeforeTestClass()// This method fire at the start of the TestFixture
         {
-            Browser.Initialize();
+            //Browser.Initialize();
             //UserGenerator.Initialize();
         }
 

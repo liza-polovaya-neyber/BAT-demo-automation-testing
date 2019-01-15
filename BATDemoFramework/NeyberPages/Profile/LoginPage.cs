@@ -5,7 +5,7 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
 using System;
 
-namespace BATDemoFramework.NeyberPages.ProfilePages
+namespace BATDemoFramework.NeyberPages.Profile
 {
     public class LoginPage
     {
@@ -95,7 +95,7 @@ namespace BATDemoFramework.NeyberPages.ProfilePages
 
         public void LogInQuickUser(UserLoginModel user)
         {
-            System.Threading.Thread.Sleep(4000);
+            System.Threading.Thread.Sleep(3200);
             emailAddressField.Click();
             emailAddressField.SendKeys(user.Email);
             passwordField.Click();

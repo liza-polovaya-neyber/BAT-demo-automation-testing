@@ -9,7 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using BATDemoFramework.Generators;
 using BATDemoFramework.NeyberPages;
-using BATDemoFramework.NeyberPages.ProfilePages;
+using BATDemoFramework.NeyberPages.Profile;
 using BATDemoFramework.Pages;
 
 namespace BATDemoTests.TestCases

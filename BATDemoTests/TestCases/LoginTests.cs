@@ -9,7 +9,7 @@ using BATDemoFramework.NeyberPages;
 using BATDemoFramework.Steps.Given;
 using BATDemoFramework.Steps.When;
 using BATDemoFramework.Steps.Then;
-using BATDemoFramework.NeyberPages.ProfilePages;
+using BATDemoFramework.NeyberPages.Profile;
 
 namespace BATDemoTests
 {
@@ -17,6 +17,9 @@ namespace BATDemoTests
    public class LoginTests : TestBase
     {
         private IWebElement element;
+        private UserCreator userCreator = new UserCreator();
+        private LoginUser loginUser = new LoginUser();
+        private UserIsAt userIsAt = new UserIsAt();
         WebDriverWait wait;
 
         //public LoginTests(string profile, string environment) : base(profile, environment){}
@@ -25,56 +28,55 @@ namespace BATDemoTests
         public async Task CanCreateUserAndLogin()
         {
             //      Given
-            var user = await UserCreated.CreateUserAsync();
+            var user = await userCreator.CreateUserAsync();
             //      When
-            LoginUser.UserLogin(user);
+            loginUser.UserLogin(user);
             //      Then
-            UserIsAtEmployerPage.IsAt();
+            userIsAt.IsAtEmployerPage();
         }
 
         [Test][Retry(3)]
         public async Task CanCreateUserAndPassInitialProfileJourney()
         {
             //      Given
-            var user = await UserCreatedAndMarketingPreferencesSet.CreateUserAndSetMarketingPreferencesAsync();
+            var user = await userCreator.CreateUserAndSetMarketingPreferencesAsync();
             //      When
-            LoginUser.UserLogin(user);
+            loginUser.UserLogin(user);
             //      Then
-            UserIsAtHomePage.IsAt();
+            userIsAt.IsAtHomePage();
         }
 
-        [Test]
-        [Retry(3)]
+        [Test][Retry(3)]
         public async Task CanCreateUserPassFmrAndLogin()
         {
             //      Given
-            var user = await UserCreatedAndPassedFmr.CreateUserAndPassFmrAsync();
+            var user = await userCreator.CreateUserAndPassFmrAsync();
             //      When
-            LoginUser.UserLogin(user);
+            loginUser.UserLogin(user);
             //      Then
-            UserIsAtHomePage.IsAt();
+            userIsAt.IsAtHomePage();
         }
 
         [Test][Retry(3)]
         public async Task CanCreateUserAndSelectEmployer()
         {
             //      Given
-            var user = await UserCreatedAndSelectedEmployer.CreateUserAndSelectEmployerAsync();
+            var user = await userCreator.CreateUserAndSelectEmployerAsync();
             //      When
-            LoginUser.UserLogin(user);
+            loginUser.UserLogin(user);
             //      Then
-            UserIsAtAlternativeEmailPage.IsAt();
+            userIsAt.IsAtAlternativeEmailPage();
         }
 
         [Test][Retry(3)]
         public async Task CanCreateUserAndSkipAlternativeEmail()
         {
             //      Given
-            var user = await UserCreatedAndAlternativeEmailSkipped.CreateUserAndSkipAlternativeEmailAsync();
+            var user = await userCreator.CreateUserAndSkipAlternativeEmailAsync();
             //      When
-            LoginUser.UserLogin(user);
+            loginUser.UserLogin(user);
             //      Then
-            UserIsAtMarketingPreferencesPage.IsAt();
+            userIsAt.IsAtMarketingPage();
         }
 
         [Test][Retry(3)]

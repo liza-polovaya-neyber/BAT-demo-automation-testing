@@ -1,7 +1,7 @@
-﻿using BATDemoFramework.NeyberPages.ProfilePages;
+﻿using BATDemoFramework.NeyberPages.Profile;
 using BATDemoFramework.NeyberPages.SSOPages;
-using BATDemoFramework.Pages.ApolloPages;
-using BATDemoFramework.Pages.ProfilePages;
+using BATDemoFramework.Pages.Apollo;
+using BATDemoFramework.Pages.Profile;
 using OpenQA.Selenium.Support.PageObjects;
 
 namespace BATDemoFramework.NeyberPages

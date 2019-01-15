@@ -1,4 +1,4 @@
-﻿namespace BATDemoFramework.EmailService
+﻿namespace BATDemoFramework.EmailServices
 {
     public class EmailTypes
     {

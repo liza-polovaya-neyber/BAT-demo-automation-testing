@@ -17,7 +17,7 @@ using BATDemoFramework.GmailService;
 using BATDemoFramework.Helpers;
 using Google.Apis.Util;
 
-namespace BATDemoFramework.EmailService
+namespace BATDemoFramework.EmailServices
 {
     public class EmailService : IEmailService
     {

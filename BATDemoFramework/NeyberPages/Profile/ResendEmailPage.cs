@@ -2,7 +2,7 @@
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
 
-namespace BATDemoFramework.NeyberPages.ProfilePages
+namespace BATDemoFramework.NeyberPages.Profile
 {
     public class ResendEmailPage
     {

@@ -1,5 +1,5 @@
 ﻿using BATDemoFramework;
-using BATDemoFramework.EmailService;
+using BATDemoFramework.EmailServices;
 using BATDemoFramework.Generators;
 using BATDemoFramework.Models;
 using System;

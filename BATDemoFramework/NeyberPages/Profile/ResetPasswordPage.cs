@@ -1,13 +1,6 @@
-﻿using System;
-using BATDemoFramework.TestDataAccess;
-using OpenQA.Selenium;
+﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
 using BATDemoFramework.Generators;
-using System.Threading;
-using System.Collections.Generic;
-using Google.Apis.Gmail.v1.Data;
-using System.Threading.Tasks;
-using BATDemoFramework.EmailService;
 
 namespace BATDemoFramework
 {
