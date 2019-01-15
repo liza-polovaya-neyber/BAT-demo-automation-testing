@@ -6,19 +6,23 @@ namespace BATDemoFramework.Steps.Given
 {
     public class UserCreator
     {
-        public async Task<UserLoginModel> CreateUserAsync()
+        private UserGenerator userGen = new UserGenerator();
+
+        private async Task<UserLoginModel> CreateAndVerifyUserAsync()
         {
-            var userGen = new UserGenerator();
             var user = await userGen.CreateDefaultUser();
             await userGen.VerifyEmail(user);
             return user;
         }
 
+        public Task<UserLoginModel> CreateUserAsync()
+        {
+            return CreateAndVerifyUserAsync();
+        }
+
         public async Task<UserLoginModel> CreateUserAndSelectEmployerAsync()
         {
-            var userGen = new UserGenerator();
-            var user = await userGen.CreateDefaultUser();
-            await userGen.VerifyEmail(user);
+            var user = await CreateAndVerifyUserAsync();
             var accessToken = await userGen.CreateAutoLogin(user.Email, user.Password);
             userGen.UpdateAuthenticationHeader(accessToken);
             await userGen.SetTenant();
@@ -27,9 +31,7 @@ namespace BATDemoFramework.Steps.Given
 
         public async Task<UserLoginModel> CreateUserAndSkipAlternativeEmailAsync()
         {
-            var userGen = new UserGenerator();
-            var user = await userGen.CreateDefaultUser();
-            await userGen.VerifyEmail(user);
+            var user = await CreateAndVerifyUserAsync();
             var accessToken = await userGen.CreateAutoLogin(user.Email, user.Password);
             userGen.UpdateAuthenticationHeader(accessToken);
             await userGen.SetTenant();
@@ -39,9 +41,7 @@ namespace BATDemoFramework.Steps.Given
 
         public async Task<UserLoginModel> CreateUserAndSetMarketingPreferencesAsync()
         {
-            var userGen = new UserGenerator();
-            var user = await userGen.CreateDefaultUser();
-            await userGen.VerifyEmail(user);
+            var user = await CreateAndVerifyUserAsync();
             var accessToken = await userGen.CreateAutoLogin(user.Email, user.Password);
             userGen.UpdateAuthenticationHeader(accessToken);
             await userGen.SetTenant();
@@ -52,9 +52,7 @@ namespace BATDemoFramework.Steps.Given
 
         public async Task<UserLoginModel> CreateUserAndPassFmrAsync()
         {
-            var userGen = new UserGenerator();
-            var user = await userGen.CreateDefaultUser();
-            await userGen.VerifyEmail(user);
+            var user = await CreateAndVerifyUserAsync();
             var accessToken = await userGen.CreateAutoLogin(user.Email, user.Password);
             userGen.UpdateAuthenticationHeader(accessToken);
             await userGen.SetTenant();
