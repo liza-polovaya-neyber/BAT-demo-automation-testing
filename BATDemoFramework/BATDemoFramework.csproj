@@ -66,6 +66,9 @@
     <Reference Include="nunit.framework, Version=3.9.0.0, Culture=neutral, PublicKeyToken=2638cd05610744eb, processorArchitecture=MSIL">
       <HintPath>..\packages\NUnit.3.9.0\lib\net45\nunit.framework.dll</HintPath>
     </Reference>
+    <Reference Include="RestSharp, Version=105.2.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\RestSharp.105.2.3\lib\net45\RestSharp.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
@@ -88,6 +91,7 @@
     <Compile Include="Base\TestBaseForNewTabWindow.cs" />
     <Compile Include="BrowserStackTest\BrowserStackNUnitTest.cs" />
     <Compile Include="Configurations\TestConfigurationManager.cs" />
+    <Compile Include="Constants\UserDefaultValues.cs" />
     <Compile Include="EmailService\EmailTypes.cs" />
     <Compile Include="EmailService\NeyberUrls.cs" />
     <Compile Include="Extensions.cs">
@@ -97,33 +101,46 @@
     <Compile Include="EmailService\EmailService.cs" />
     <Compile Include="EmailService\IEmailService.cs" />
     <Compile Include="Generators\GuidGenerator.cs" />
+    <Compile Include="Models\AddressModel.cs" />
+    <Compile Include="Models\ConsentModel.cs" />
+    <Compile Include="Models\TotalIncomeModel.cs" />
+    <Compile Include="NeyberPages\Profile\ConsentPage.cs" />
+    <Compile Include="Services\RestService.cs" />
+    <Compile Include="Services\UserService.cs" />
+    <Compile Include="Steps\Then\UserIsAt.cs" />
+    <Compile Include="Steps\When\LoginUser.cs" />
+    <Compile Include="Steps\Given\UserCreator.cs" />
     <Compile Include="Helpers\StringHelper.cs" />
+    <Compile Include="Models\AccessModel.cs" />
+    <Compile Include="Models\AutoLoginModel.cs" />
+    <Compile Include="Models\MarketingPreferenceModel.cs" />
     <Compile Include="Models\SSOUser.cs" />
-    <Compile Include="Pages\ApolloPages\ApolloPMASPage.cs" />
-    <Compile Include="Pages\ApolloPages\EligibilityCriteriaPage.cs" />
-    <Compile Include="Pages\ApolloPages\FAQPage.cs" />
-    <Compile Include="Pages\ApolloPages\GetInTouchPage.cs" />
-    <Compile Include="Pages\ProfilePages\AlternativeEmailPage.cs" />
-    <Compile Include="Pages\ProfilePages\ChangePasswordPage.cs" />
-    <Compile Include="Pages\ProfilePages\ComplaintsPolicyPage.cs" />
-    <Compile Include="Pages\ProfilePages\CookiePolicyPage.cs" />
-    <Compile Include="Pages\ProfilePages\EmployerSearchPage.cs" />
-    <Compile Include="Pages\ProfilePages\EmployerVerificationPage.cs" />
-    <Compile Include="Pages\ProfilePages\ExpiredLinkPage.cs" />
-    <Compile Include="Pages\ProfilePages\HomePage.cs" />
+    <Compile Include="Models\UserLoginModel.cs" />
+    <Compile Include="NeyberPages\Apollo\ApolloPMASPage.cs" />
+    <Compile Include="NeyberPages\Apollo\EligibilityCriteriaPage.cs" />
+    <Compile Include="NeyberPages\Apollo\FAQPage.cs" />
+    <Compile Include="NeyberPages\Apollo\GetInTouchPage.cs" />
+    <Compile Include="NeyberPages\Profile\AlternativeEmailPage.cs" />
+    <Compile Include="NeyberPages\Profile\ChangePasswordPage.cs" />
+    <Compile Include="NeyberPages\Profile\ComplaintsPolicyPage.cs" />
+    <Compile Include="NeyberPages\Profile\CookiePolicyPage.cs" />
+    <Compile Include="NeyberPages\Profile\EmployerSearchPage.cs" />
+    <Compile Include="NeyberPages\Profile\EmployerVerificationPage.cs" />
+    <Compile Include="NeyberPages\Profile\ExpiredLinkPage.cs" />
+    <Compile Include="NeyberPages\Profile\HomePage.cs" />
     <Compile Include="Models\User.cs" />
-    <Compile Include="Pages\ProfilePages\MarketingPage.cs" />
-    <Compile Include="Pages\ProfilePages\NotVerifiedEmailPage.cs" />
-    <Compile Include="Pages\ProfilePages\OurTermsPage.cs" />
-    <Compile Include="Pages\ProfilePages\PrivacyPolicyPage.cs" />
-    <Compile Include="Pages\ProfilePages\ResendEmailPage.cs" />
-    <Compile Include="Pages\ProfilePages\VerificationEmailPage.cs" />
-    <Compile Include="Pages\ProfilePages\WorkEmailPage.cs" />
-    <Compile Include="Pages\ProfilePages\SSOLoginRequiredPage.cs" />
-    <Compile Include="Pages\SSOPages\SSOIneligibleStatePage.cs" />
-    <Compile Include="Pages\SSOPages\SSOAboutMePage.cs" />
-    <Compile Include="Pages\SSOPages\SSOAccountConfirmPage.cs" />
-    <Compile Include="Pages\StubIDPPage.cs" />
+    <Compile Include="NeyberPages\Profile\MarketingPage.cs" />
+    <Compile Include="NeyberPages\Profile\NotVerifiedEmailPage.cs" />
+    <Compile Include="NeyberPages\Profile\OurTermsPage.cs" />
+    <Compile Include="NeyberPages\Profile\PrivacyPolicyPage.cs" />
+    <Compile Include="NeyberPages\Profile\ResendEmailPage.cs" />
+    <Compile Include="NeyberPages\Profile\VerificationEmailPage.cs" />
+    <Compile Include="NeyberPages\Profile\WorkEmailPage.cs" />
+    <Compile Include="NeyberPages\Profile\SSOLoginRequiredPage.cs" />
+    <Compile Include="NeyberPages\SSOPages\SSOIneligibleStatePage.cs" />
+    <Compile Include="NeyberPages\SSOPages\SSOAboutMePage.cs" />
+    <Compile Include="NeyberPages\SSOPages\SSOAccountConfirmPage.cs" />
+    <Compile Include="NeyberPages\StubIDPPage.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="TestDataAccess\CsvDataAccess.cs" />
     <Compile Include="TestDataAccess\UserData.cs" />
@@ -139,15 +156,15 @@
     <Compile Include="WebDriverManager\factory\BuildServerTestBrowser.cs" />
     <Compile Include="WebDriverManager\factory\LocalTestBrowser.cs" />
     <Compile Include="WebDriverManager\factory\CloudTestBrowser.cs" />
-    <Compile Include="Pages\ProfilePages\ResetPasswordPage.cs" />
+    <Compile Include="NeyberPages\Profile\ResetPasswordPage.cs" />
     <Compile Include="BrowserManager\Browser.cs" />
-    <Compile Include="Pages\ProfilePages\JoinPage.cs" />
-    <Compile Include="Pages\ProfilePages\LoginPage.cs" />
-    <Compile Include="Pages\Pages.cs" />
+    <Compile Include="NeyberPages\Profile\JoinPage.cs" />
+    <Compile Include="NeyberPages\Profile\LoginPage.cs" />
+    <Compile Include="NeyberPages\Pages.cs" />
     <Compile Include="Generators\UserGenerator.cs" />
     <Compile Include="Generators\PasswordGenerator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Pages\ProfilePages\AboutMePage.cs" />
+    <Compile Include="NeyberPages\Profile\AboutMePage.cs" />
     <Compile Include="Base\TestBase.cs" />
   </ItemGroup>
   <ItemGroup>

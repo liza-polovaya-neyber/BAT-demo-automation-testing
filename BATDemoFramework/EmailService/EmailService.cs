@@ -13,12 +13,11 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Web;
 using BATDemoFramework.GmailService;
 using BATDemoFramework.Helpers;
 using Google.Apis.Util;
 
-namespace BATDemoFramework.EmailService
+namespace BATDemoFramework.EmailServices
 {
     public class EmailService : IEmailService
     {

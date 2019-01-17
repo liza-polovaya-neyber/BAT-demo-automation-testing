@@ -19,6 +19,7 @@ namespace BATDemoFramework
         public static readonly string JoinPage = profileUrl + "/join";
         public static readonly string LoginPage = profileUrl + "/login";
         public static readonly string HomePage = profileUrl + "/home";
+        public static readonly string ConsentPage = profileUrl + "/fmr/consent";
         public static readonly string ResetPassword = profileUrl + "/reset-password";
         public static readonly string AboutMePage = profileUrl + "/join/about-me";
         public static readonly string VerificationEmail = profileUrl + "/mail/sent";

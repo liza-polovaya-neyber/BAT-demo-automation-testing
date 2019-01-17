@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using BATDemoFramework.NeyberPages.Profile;
 
 namespace BATDemoFramework.WebDriverManager.enums
 {
