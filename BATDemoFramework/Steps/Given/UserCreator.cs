@@ -15,6 +15,13 @@ namespace BATDemoFramework.Steps.Given
             return user;
         }
 
+        public async Task<UserLoginModel> CreateUserWithTenantAsync()
+        {
+            var user = await userGen.CreateUserWithTenant();
+            await userGen.VerifyEmail(user);
+            return user;
+        }
+
         public Task<UserLoginModel> CreateUserAsync()
         {
             return CreateAndVerifyUserAsync();

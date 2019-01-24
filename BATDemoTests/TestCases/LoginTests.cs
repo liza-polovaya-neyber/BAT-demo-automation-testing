@@ -10,16 +10,25 @@ using BATDemoFramework.Steps.Given;
 using BATDemoFramework.Steps.When;
 using BATDemoFramework.Steps.Then;
 using BATDemoFramework.NeyberPages.Profile;
+using Unity;
+using Unity.Injection;
+using Unity.Lifetime;
+using BATDemoSalesForce.Services;
+using BATDemoSalesForce.Services.SalesForceAuthentication;
+using BATDemoSalesForce.Repos;
+using BATDemoSalesForce.Services.RestClient;
+using BATDemoTests.Validators;
 
 namespace BATDemoTests
 {
     [TestFixture /*("single", "ie")*/]
-   public class LoginTests : TestBase
+    public class LoginTests : TestBase
     {
         private IWebElement element;
         private UserCreator userCreator = new UserCreator();
         private LoginUser loginUser = new LoginUser();
         private UserIsAt userIsAt = new UserIsAt();
+        private Container container = new Container();
         WebDriverWait wait;
 
         //public LoginTests(string profile, string environment) : base(profile, environment){}
