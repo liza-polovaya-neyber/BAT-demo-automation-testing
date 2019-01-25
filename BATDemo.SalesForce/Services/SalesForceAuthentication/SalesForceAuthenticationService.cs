@@ -12,7 +12,7 @@ using BATDemoSalesForce.Services.SalesForceAuthentication;
 namespace BATDemoSalesForce.Services.SalesForceAuthentication
 {
     public class SalesForceAuthenticationService : ISalesForceAuthenticationService
-    {
+    { 
         private readonly IConfigurationService configurationService;
         private string instanceUrl;
         private string apiVersion;

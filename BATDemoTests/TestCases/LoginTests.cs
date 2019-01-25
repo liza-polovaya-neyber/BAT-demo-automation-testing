@@ -28,7 +28,6 @@ namespace BATDemoTests
         private UserCreator userCreator = new UserCreator();
         private LoginUser loginUser = new LoginUser();
         private UserIsAt userIsAt = new UserIsAt();
-        private Container container = new Container();
         WebDriverWait wait;
 
         //public LoginTests(string profile, string environment) : base(profile, environment){}

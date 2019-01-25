@@ -13,7 +13,7 @@ using Unity.Lifetime;
 
 namespace BATDemoSalesForce.Repos
 {
-    public class Container
+    public class ContainerConfig
     {
         public static UnityContainer Create()
         {

@@ -11,7 +11,7 @@ namespace BATDemoFramework
     public class TestBase
     {
         private static IUnityContainer _unityContainer = null;
-        private static IUnityContainer UnityContainer => _unityContainer ?? (_unityContainer = Container.Create());
+        private static IUnityContainer UnityContainer => _unityContainer ?? (_unityContainer = ContainerConfig.Create());
 
         protected T GetService<T>()
         {
