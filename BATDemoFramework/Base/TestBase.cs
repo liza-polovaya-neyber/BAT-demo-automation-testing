@@ -1,6 +1,8 @@
 ﻿using BATDemoFramework.Generators;
+using BATDemoSalesForce.Repos;
 using OpenQA.Selenium.Chrome;
 using NUnit.Framework;
+using Unity;
 
 namespace BATDemoFramework
 {
@@ -8,6 +10,14 @@ namespace BATDemoFramework
 
     public class TestBase
     {
+        private static IUnityContainer _unityContainer = null;
+        private static IUnityContainer UnityContainer => _unityContainer ?? (_unityContainer = ContainerConfig.Create());
+
+        protected T GetService<T>()
+        {
+            return UnityContainer.Resolve<T>();
+        }
+
         [OneTimeSetUp]
         public void SetUpBeforeTestClass() // This method fire at the start of the TestFixture
         {

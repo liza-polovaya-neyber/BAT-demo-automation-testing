@@ -13,7 +13,7 @@ namespace BATDemoFramework.Services
 {
     public class UserService
     {
-        private readonly RestService restService = new RestService();
+        private readonly UserRestService restService = new UserRestService();
         private readonly string ProfileUrl = ConfigurationManager.AppSettings["ProfileUrl"];
         private const string UserCreationUrl = "api/v2/profile";
         private const string LoginUrl = "api/v2/account/login";

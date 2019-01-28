@@ -38,7 +38,7 @@ namespace BATDemoFramework.Generators
                 Surname = "Randomlastname",
                 DOB = "04/01/1980",
                 CompanyName = "British Transport Police",
-                JoiningDate = GetJoiningDate(isJoiningDateValid), //can be less than 6 months
+                JoiningDate = "04/04/2016",
                 Email = EmailAddressGenerator.GenerateEmailAddress(),
                 Salary = "50000",
                 EmployeeId = PasswordGenerator.GeneratePassword(),
@@ -85,6 +85,30 @@ namespace BATDemoFramework.Generators
         {
             var user = new UserLoginModel
             {
+                Title = UserDefaultValues.Title,
+                Surname = UserDefaultValues.Surname,
+                FirstName = UserDefaultValues.FirstName,
+                DoB = UserDefaultValues.DateOfBirthAt21,
+                Email = EmailAddressGenerator.GenerateEmailAddress(),
+                MobilePhone = UserDefaultValues.MobilePhone,
+                Password = PasswordGenerator.GeneratePassword(),
+                Feedback = UserDefaultValues.Feedback,
+                AffinityTermsAndPrivacyPolicyAccepted = false,
+                AgreedPoliceMutualMarketing = false,
+                OptOutEmailPolicyAccepted = false,
+                TermsAndPrivacyPolicyAccepted = true
+            };
+
+            await userService.CreateDefaultUserAsync(user);
+
+            return user;
+        }
+
+        public async Task<UserLoginModel> CreateUserWithTenant()
+        {
+            var user = new UserLoginModel
+            {
+                TenantName = UserDefaultValues.ClientId,
                 Title = UserDefaultValues.Title,
                 Surname = UserDefaultValues.Surname,
                 FirstName = UserDefaultValues.FirstName,

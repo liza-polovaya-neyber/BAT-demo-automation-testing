@@ -9,11 +9,11 @@ using System.Threading.Tasks;
 
 namespace Neyber.Atlas.Services.Services
 {
-    public class RestService
+    public class UserRestService
     {
         private readonly IRestClient client;
 
-        public RestService()
+        public UserRestService()
         {
             this.client = new RestClient();
         }
