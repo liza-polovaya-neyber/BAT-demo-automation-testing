@@ -95,7 +95,7 @@ namespace BATDemoFramework.NeyberPages.Profile
 
         public void LogInQuickUser(UserLoginModel user)
         {
-            System.Threading.Thread.Sleep(3200);
+            System.Threading.Thread.Sleep(5000);
             emailAddressField.Click();
             emailAddressField.SendKeys(user.Email);
             passwordField.Click();

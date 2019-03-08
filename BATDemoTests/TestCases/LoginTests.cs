@@ -40,6 +40,17 @@ namespace BATDemoTests
             //      When
             loginUser.UserLogin(user);
             //      Then
+            userIsAt.IsAtAdditionalDetailsPage();
+        }
+
+        [Test][Retry(3)]
+        public async Task CanCreateUserAndSetAdditionalDetails()
+        {
+            //      Given
+            var user = await userCreator.CreateUserAndSetAdditionalDetailsAsync();
+            //      When
+            loginUser.UserLogin(user);
+            //      Then
             userIsAt.IsAtEmployerPage();
         }
 
@@ -47,7 +58,7 @@ namespace BATDemoTests
         public async Task CanCreateUserAndPassInitialProfileJourney()
         {
             //      Given
-            var user = await userCreator.CreateUserAndSetMarketingPreferencesAsync();
+            var user = await userCreator.CreateUserAndPassInitialProfileJourneyAsync();
             //      When
             loginUser.UserLogin(user);
             //      Then
@@ -63,28 +74,6 @@ namespace BATDemoTests
             loginUser.UserLogin(user);
             //      Then
             userIsAt.IsAtHomePage();
-        }
-
-        [Test][Retry(3)]
-        public async Task CanCreateUserAndSelectEmployer()
-        {
-            //      Given
-            var user = await userCreator.CreateUserAndSelectEmployerAsync();
-            //      When
-            loginUser.UserLogin(user);
-            //      Then
-            userIsAt.IsAtAlternativeEmailPage();
-        }
-
-        [Test][Retry(3)]
-        public async Task CanCreateUserAndSkipAlternativeEmail()
-        {
-            //      Given
-            var user = await userCreator.CreateUserAndSkipAlternativeEmailAsync();
-            //      When
-            loginUser.UserLogin(user);
-            //      Then
-            userIsAt.IsAtMarketingPage();
         }
 
         [Test][Retry(3)]
