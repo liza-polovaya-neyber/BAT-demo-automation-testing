@@ -14,14 +14,9 @@ namespace BATDemoFramework.Steps.Then
             Assert.IsTrue(NeyberPages.Pages.EmployerSearch.WaitUntilUrlIsLoaded(), "Valid user is not on employer page");
         }
 
-        public void IsAtAlternativeEmailPage()
+        public void IsAtAdditionalDetailsPage()
         {
-            Assert.IsTrue(NeyberPages.Pages.AlternativeEmail.WaitUntilAlternativeUrlIsLoaded(), "Valid user is not on alternative email page");
-        }
-
-        public void IsAtMarketingPage()
-        {
-            Assert.IsTrue(NeyberPages.Pages.Marketing.WaitUntilMarketingUrlIsLoaded(), "Valid user is not on marketing page");
+            Assert.IsTrue(NeyberPages.Pages.AdditionalDetails.WaitUntilUrlIsLoaded(), "Valid user is not on additional details page");
         }
     }
 }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BATDemoFramework.Models
 {
-    class MarketingPreferenceModel
+    public class MarketingPreferenceModel
     {
         public bool Email { get; set; }
         public bool Post { get; set; }

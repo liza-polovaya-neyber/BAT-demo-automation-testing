@@ -17,10 +17,13 @@ namespace BATDemoFramework.Services
         private readonly string ProfileUrl = ConfigurationManager.AppSettings["ProfileUrl"];
         private const string UserCreationUrl = "api/v2/profile";
         private const string LoginUrl = "api/v2/account/login";
+        private const string SetAdditionalDetailsUrl = "api/v2/profile/additionalDetails";
         private const string SetClientIdUrl = "api/v2/profile/organisationDetails";
         private const string SkipSecondaryEmailUrl = "api/v2/profile/skipSecondaryEmail";
         private const string SetMarketingPreferencesUrl = "api/v2/profile/marketingPreferences";
         private const string SetConsentUrl = "api/v2/loanApplications/createFMRApplication";
+        private const string SetDateOfBirthUrl = "api/v2/profile/dateOfBirth";
+        private const string SetSufficentDateOfBirthUrl = "api/v2/loanApplications/{0}/fmrStatus/Age%20Sufficient";
         private const string SetTotalIncomeUrl = "api/v2/loanApplications/{0}/totalIncome";
         private const string SetSufficentIncomeUrl = "api/v2/loanApplications/{0}/fmrStatus/Sufficient%20Income";
         private const string SetAddressUrl = "api/v2/loanApplications/{0}/address";
@@ -50,6 +53,15 @@ namespace BATDemoFramework.Services
         public void UpdateAuthenticationHeader(string accessToken)
         {
             restService.AddDefaultHeader("Authorization", $"Bearer {accessToken}");
+        }
+
+        public async Task SetAdditionalDetailsAsync(object additionalDetails)
+        {
+            var response = await restService.ExecuteAsync(SetAdditionalDetailsUrl, Method.POST, additionalDetails);
+            if (response.StatusCode != HttpStatusCode.OK)
+            {
+                throw new Exception("Unable to set additional details");
+            }
         }
 
         public async Task SetTenantAsync(object clientId)
@@ -83,6 +95,25 @@ namespace BATDemoFramework.Services
         {
             var response = await restService.ExecuteAsync<Dictionary<string, string>>(SetConsentUrl, Method.POST, consent);
             return response["LoanApplicationId"];
+        }
+
+        public async Task SetDateOfBirthAsync(object dateOfBirth)
+        {
+            var response = await restService.ExecuteAsync(SetDateOfBirthUrl, Method.PATCH, dateOfBirth);
+            if (response.StatusCode != HttpStatusCode.OK)
+            {
+                throw new Exception("Unable to set date of birth");
+            }
+        }
+
+        public async Task SetSufficentDateOfBirthAsync(string loanApplicationId)
+        {
+            var setSufficentDateOfBirthUrl = string.Format(SetSufficentDateOfBirthUrl, loanApplicationId);
+            var response = await restService.ExecuteAsync(setSufficentDateOfBirthUrl, Method.PATCH);
+            if (response.StatusCode != HttpStatusCode.OK)
+            {
+                throw new Exception("Unable to set sufficient date of birth");
+            }
         }
 
         public async Task SetTotalIncomeAsync(object totalIncome, string loanApplicationId)

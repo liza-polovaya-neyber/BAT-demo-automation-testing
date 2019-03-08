@@ -153,9 +153,15 @@
     <Compile Include="EmailService\EmailService.cs" />
     <Compile Include="EmailService\IEmailService.cs" />
     <Compile Include="Generators\GuidGenerator.cs" />
+    <Compile Include="Models\AdditionalDetailsModel.cs" />
     <Compile Include="Models\AddressModel.cs" />
     <Compile Include="Models\ConsentModel.cs" />
+    <Compile Include="Models\CustomerFeedbackModel.cs" />
+    <Compile Include="Models\DateOfBirthModel.cs" />
+    <Compile Include="Models\SecondaryEmailModel.cs" />
     <Compile Include="Models\TotalIncomeModel.cs" />
+    <Compile Include="Models\UpdateAdditionalDetailsModel.cs" />
+    <Compile Include="NeyberPages\Profile\AdditionalDetailsPage.cs" />
     <Compile Include="NeyberPages\Profile\ConsentPage.cs" />
     <Compile Include="Services\UserRestService.cs" />
     <Compile Include="Services\UserService.cs" />

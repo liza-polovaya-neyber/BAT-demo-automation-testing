@@ -85,10 +85,8 @@ namespace BATDemoFramework.Generators
         {
             var user = new UserLoginModel
             {
-                Title = UserDefaultValues.Title,
                 Surname = UserDefaultValues.Surname,
                 FirstName = UserDefaultValues.FirstName,
-                DoB = UserDefaultValues.DateOfBirthAt21,
                 Email = EmailAddressGenerator.GenerateEmailAddress(),
                 MobilePhone = UserDefaultValues.MobilePhone,
                 Password = PasswordGenerator.GeneratePassword(),
@@ -109,10 +107,8 @@ namespace BATDemoFramework.Generators
             var user = new UserLoginModel
             {
                 TenantName = UserDefaultValues.ClientId,
-                Title = UserDefaultValues.Title,
                 Surname = UserDefaultValues.Surname,
                 FirstName = UserDefaultValues.FirstName,
-                DoB = UserDefaultValues.DateOfBirthAt21,
                 Email = EmailAddressGenerator.GenerateEmailAddress(),
                 MobilePhone = UserDefaultValues.MobilePhone,
                 Password = PasswordGenerator.GeneratePassword(),
@@ -161,6 +157,31 @@ namespace BATDemoFramework.Generators
             userService.UpdateAuthenticationHeader(accessToken);
         }
 
+        public async Task SetAdditionalDetails()
+        {
+            var additionalDetails = new AdditionalDetailsModel()
+            {
+                UpdateMarketingPreferences = new MarketingPreferenceModel()
+                {
+                    Email = false,
+                    Post = false,
+                    Sms = false,
+                    Telephone = false
+                },
+
+                UpdateSecondaryEmail = new SecondaryEmailModel()
+                {
+                    Email = ""
+                },
+
+                UpdateCustomerFeedback = new CustomerFeedbackModel()
+                {
+                    HowHeardAboutUs = ""
+                }
+            };
+            await userService.SetAdditionalDetailsAsync(additionalDetails);
+        }
+
         public async Task SetTenant()
         {
             await userService.SetTenantAsync(new {clientId = UserDefaultValues.ClientId});
@@ -195,6 +216,21 @@ namespace BATDemoFramework.Generators
             var response = await userService.SetConsentAsync(consent);
 
             return response;
+        }
+
+        public async Task SetDateOfBirth()
+        {
+            var dateOfBirth = new DateOfBirthModel()
+            {
+                DateOfBirth = UserDefaultValues.DateOfBirth
+            };
+
+            await userService.SetDateOfBirthAsync(dateOfBirth);
+        }
+
+        public async Task SetSufficentDateOfBirth(string loanApplicationId)
+        {
+            await userService.SetSufficentDateOfBirthAsync(loanApplicationId);
         }
 
         public async Task SetTotalIncome(string loanApplicationId)

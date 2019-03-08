@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using BATDemoFramework.Constants;
 using BATDemoFramework.Generators;
 using BATDemoFramework.Models;
 using BATDemoSalesForce.Repos;
@@ -22,11 +23,10 @@ namespace BATDemoTests.Validators
         public async Task AssertCreatedProfileState(UserLoginModel user)
         {
             var profile = await profileRepository.GetByEmailAsync(user.Email);
-            Assert.AreEqual(user.Title, profile.Title);
             Assert.AreEqual(user.FirstName, profile.FirstName);
             Assert.AreEqual(user.Surname, profile.LastName);
             Assert.AreEqual(user.Email, profile.Email);
-            Assert.AreEqual(user.DoB, profile.Birthdate);
+            Assert.AreEqual(UserDefaultValues.DateOfBirth, profile.Birthdate);
             Assert.AreEqual(user.MobilePhone, profile.MobilePhone);
             Assert.AreEqual(user.TenantName, profile.ClientId);
         }
