@@ -161,13 +161,7 @@ namespace BATDemoFramework.Generators
         {
             var additionalDetails = new AdditionalDetailsModel()
             {
-                UpdateMarketingPreferences = new MarketingPreferenceModel()
-                {
-                    Email = false,
-                    Post = false,
-                    Sms = false,
-                    Telephone = false
-                },
+                UpdateMarketingPreferences = new MarketingPreferenceModel(),
 
                 UpdateSecondaryEmail = new SecondaryEmailModel()
                 {

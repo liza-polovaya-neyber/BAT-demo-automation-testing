@@ -160,7 +160,6 @@
     <Compile Include="Models\DateOfBirthModel.cs" />
     <Compile Include="Models\SecondaryEmailModel.cs" />
     <Compile Include="Models\TotalIncomeModel.cs" />
-    <Compile Include="Models\UpdateAdditionalDetailsModel.cs" />
     <Compile Include="NeyberPages\Profile\AdditionalDetailsPage.cs" />
     <Compile Include="NeyberPages\Profile\ConsentPage.cs" />
     <Compile Include="Services\UserRestService.cs" />
