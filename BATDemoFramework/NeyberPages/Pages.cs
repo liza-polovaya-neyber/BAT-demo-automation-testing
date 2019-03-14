@@ -1,7 +1,6 @@
 ﻿using BATDemoFramework.NeyberPages.Profile;
 using BATDemoFramework.NeyberPages.SSOPages;
 using BATDemoFramework.Pages.Apollo;
-using BATDemoFramework.Pages.Profile;
 using OpenQA.Selenium.Support.PageObjects;
 
 namespace BATDemoFramework.NeyberPages
@@ -60,14 +59,15 @@ namespace BATDemoFramework.NeyberPages
         {
             get { return GetPage<ExpiredLinkPage>(); }
         }
-        public static EmployerSearchPage EmployerSearch
-        {
-            get { return GetPage<EmployerSearchPage>(); }
-        }
 
         public static AdditionalDetailsPage AdditionalDetails
         {
             get { return GetPage<AdditionalDetailsPage>(); }
+        }
+
+        public static EmployerSearchPage EmployerSearch
+        {
+            get { return GetPage<EmployerSearchPage>(); }
         }
 
         public static WorkEmailPage WorkEmail

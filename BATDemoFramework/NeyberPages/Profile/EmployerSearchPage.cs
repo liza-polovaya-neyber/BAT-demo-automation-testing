@@ -1,7 +1,7 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
 
-namespace BATDemoFramework.Pages.Profile
+namespace BATDemoFramework.NeyberPages.Profile
 {
     public class EmployerSearchPage
     {
@@ -159,7 +159,7 @@ namespace BATDemoFramework.Pages.Profile
         public bool WaitUntilUrlIsLoaded()
         {
             Browser.WaitUntilUrlIsLoaded(Urls.EmployerSearch, 60);
-            return NeyberPages.Pages.EmployerSearch.IsAtUrl();
+            return Pages.EmployerSearch.IsAtUrl();
         }
 
         public bool WaitUntilSecurityBlockIsLoaded()

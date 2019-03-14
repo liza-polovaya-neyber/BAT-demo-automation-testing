@@ -29,7 +29,7 @@ namespace BATDemoTests.TestCases
             await Preconditions.HaveNewUserPassedProfileJourney();
 
             Browser.GoToUrl(Urls.Marketing);
-            Pages.Home.WaitUntilHomeUrlIsLoaded();
+            Pages.Home.WaitUntilUrlIsLoaded();
 
             Assert.IsTrue(Pages.Home.IsAtUrl(), "User can go back to Marketing page");
         }

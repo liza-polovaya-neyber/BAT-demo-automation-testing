@@ -27,33 +27,22 @@ namespace BATDemoFramework.Steps.Given
             return CreateAndVerifyUserAsync();
         }
 
-        public async Task<UserLoginModel> CreateUserAndSelectEmployerAsync()
+        public async Task<UserLoginModel> CreateUserAndSetAdditionalDetailsAsync()
         {
             var user = await CreateAndVerifyUserAsync();
             var accessToken = await userGen.CreateAutoLogin(user.Email, user.Password);
             userGen.UpdateAuthenticationHeader(accessToken);
-            await userGen.SetTenant();
+            await userGen.SetAdditionalDetails();
             return user;
         }
 
-        public async Task<UserLoginModel> CreateUserAndSkipAlternativeEmailAsync()
+        public async Task<UserLoginModel> CreateUserAndPassInitialProfileJourneyAsync()
         {
             var user = await CreateAndVerifyUserAsync();
             var accessToken = await userGen.CreateAutoLogin(user.Email, user.Password);
             userGen.UpdateAuthenticationHeader(accessToken);
+            await userGen.SetAdditionalDetails();
             await userGen.SetTenant();
-            await userGen.SkipSecondaryEmail();
-            return user;
-        }
-
-        public async Task<UserLoginModel> CreateUserAndSetMarketingPreferencesAsync()
-        {
-            var user = await CreateAndVerifyUserAsync();
-            var accessToken = await userGen.CreateAutoLogin(user.Email, user.Password);
-            userGen.UpdateAuthenticationHeader(accessToken);
-            await userGen.SetTenant();
-            await userGen.SkipSecondaryEmail();
-            await userGen.SetMarketingPreferences();
             return user;
         }
 
@@ -62,10 +51,11 @@ namespace BATDemoFramework.Steps.Given
             var user = await CreateAndVerifyUserAsync();
             var accessToken = await userGen.CreateAutoLogin(user.Email, user.Password);
             userGen.UpdateAuthenticationHeader(accessToken);
+            await userGen.SetAdditionalDetails();
             await userGen.SetTenant();
-            await userGen.SkipSecondaryEmail();
-            await userGen.SetMarketingPreferences();
             string loanApplicationId = await userGen.SetConsent();
+            await userGen.SetDateOfBirth();
+            await userGen.SetSufficentDateOfBirth(loanApplicationId);
             await userGen.SetTotalIncome(loanApplicationId);
             await userGen.SetSufficentIncome(loanApplicationId);
             await userGen.SetAddress(loanApplicationId);
