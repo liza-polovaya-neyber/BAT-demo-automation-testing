@@ -153,10 +153,13 @@
     <Compile Include="EmailService\EmailService.cs" />
     <Compile Include="EmailService\IEmailService.cs" />
     <Compile Include="Generators\GuidGenerator.cs" />
+    <Compile Include="Generators\ReferralCodeGenerator.cs" />
     <Compile Include="Models\AddressModel.cs" />
     <Compile Include="Models\ConsentModel.cs" />
     <Compile Include="Models\TotalIncomeModel.cs" />
+    <Compile Include="NeyberPages\Profile\AdditionalDetailsPage.cs" />
     <Compile Include="NeyberPages\Profile\ConsentPage.cs" />
+    <Compile Include="NeyberPages\SSOPages\SSOAdditionalDetailsPage.cs" />
     <Compile Include="Services\UserRestService.cs" />
     <Compile Include="Services\UserService.cs" />
     <Compile Include="Steps\Then\UserIsAt.cs" />
@@ -172,7 +175,6 @@
     <Compile Include="NeyberPages\Apollo\EligibilityCriteriaPage.cs" />
     <Compile Include="NeyberPages\Apollo\FAQPage.cs" />
     <Compile Include="NeyberPages\Apollo\GetInTouchPage.cs" />
-    <Compile Include="NeyberPages\Profile\AlternativeEmailPage.cs" />
     <Compile Include="NeyberPages\Profile\ChangePasswordPage.cs" />
     <Compile Include="NeyberPages\Profile\ComplaintsPolicyPage.cs" />
     <Compile Include="NeyberPages\Profile\CookiePolicyPage.cs" />
@@ -181,7 +183,6 @@
     <Compile Include="NeyberPages\Profile\ExpiredLinkPage.cs" />
     <Compile Include="NeyberPages\Profile\HomePage.cs" />
     <Compile Include="Models\User.cs" />
-    <Compile Include="NeyberPages\Profile\MarketingPage.cs" />
     <Compile Include="NeyberPages\Profile\NotVerifiedEmailPage.cs" />
     <Compile Include="NeyberPages\Profile\OurTermsPage.cs" />
     <Compile Include="NeyberPages\Profile\PrivacyPolicyPage.cs" />

@@ -9,7 +9,7 @@
 
         public bool WaitUntilUrlIsLoaded()
         {
-            var ssoLoginRequiredPage = Browser.WaitUntilUrlIsLoaded(Urls.SSOLoginRequired, 10);
+            Browser.WaitUntilUrlIsLoaded(Urls.SSOLoginRequired, 10);
             return Pages.SSOLoginRequired.IsAtUrl();
         }
     }

@@ -122,7 +122,7 @@ namespace BATDemoTests
 
             Pages.Login.GoTo();
             Pages.Login.LogIn(user);
-            Pages.Home.WaitUntilHomeUrlIsLoaded();
+            Pages.Home.WaitUntilUrlIsLoaded();
 
 
             Assert.IsTrue(Pages.Home.IsAtUrl(), "Valid user is not on Hpage");     

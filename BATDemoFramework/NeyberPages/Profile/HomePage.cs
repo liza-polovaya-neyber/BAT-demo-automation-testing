@@ -34,7 +34,7 @@ namespace BATDemoFramework.NeyberPages.Profile
             return Browser.Url.Contains(Urls.HomePage);
         }
 
-        public bool WaitUntilHomeUrlIsLoaded()
+        public bool WaitUntilUrlIsLoaded()
         {
             var homePage = Browser.WaitUntilUrlIsLoaded(Urls.HomePage, 45);
             return Pages.Home.IsAtUrl();

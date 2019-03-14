@@ -65,9 +65,9 @@ namespace BATDemoFramework.NeyberPages
             get { return GetPage<EmployerSearchPage>(); }
         }
 
-        public static AlternativeEmailPage AlternativeEmail
+        public static AdditionalDetailsPage AdditionalDetails
         {
-            get { return GetPage<AlternativeEmailPage>(); }
+            get { return GetPage<AdditionalDetailsPage>(); }
         }
 
         public static WorkEmailPage WorkEmail
@@ -83,11 +83,6 @@ namespace BATDemoFramework.NeyberPages
         public static ConsentPage Consent
         {
             get { return GetPage<ConsentPage>(); }
-        }
-
-        public static MarketingPage Marketing
-        {
-            get { return GetPage<MarketingPage>(); }
         }
 
         public static HomePage Home
@@ -148,6 +143,11 @@ namespace BATDemoFramework.NeyberPages
         public static SSOAccountConfirmPage SSOAccountConfirm
         {
             get { return GetPage<SSOAccountConfirmPage>(); }
+        }
+
+        public static SSOAdditionalDetailsPage SSOAdditionalDetails
+        {
+            get { return GetPage<SSOAdditionalDetailsPage>(); }
         }
 
         public static SSOIneligibleStatePage SSOIneligibleState

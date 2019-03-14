@@ -4,6 +4,7 @@ using BATDemoFramework.NeyberPages.Profile;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
 using OpenQA.Selenium.Support.UI;
+using static BATDemoFramework.NeyberPages.Profile.AboutMePage;
 
 namespace BATDemoFramework.NeyberPages.SSOPages
 {
@@ -12,14 +13,11 @@ namespace BATDemoFramework.NeyberPages.SSOPages
         [FindsBy(How = How.Name, Using = "title")]
         private IWebElement titleDD;
 
-        [FindsBy(How = How.Name, Using = "email")]
-        private IWebElement emailField;
-
-        [FindsBy(How = How.Name, Using = "verify_email")]
-        private IWebElement emailVerifyField;
-
         [FindsBy(How = How.Name, Using = "mobile_number")]
         private IWebElement mobileNumberField;
+
+        [FindsBy(How = How.Name, Using = "mobile_number")]
+        private IWebElement referralCodeField;
 
         [FindsBy(How = How.XPath, Using = "//input[@type='password']")]
         private IWebElement passwordField;
@@ -60,19 +58,14 @@ namespace BATDemoFramework.NeyberPages.SSOPages
             RegisterBase(newUser, shouldSelectTitle: false);
         }
 
-        public void RegisterUserButDontEnterAlternativeEmail(User newUser)
-        {
-            RegisterBase(newUser, shouldEnterAlternativeEmail: false);
-        }
-
-        public void RegisterWithDifferentAlternativeEmails(User newUser)
-        {
-            RegisterBase(newUser, areAlternativeEmailsEqual: false);
-        }
-
         public void RegisterUserButDontEnterMobileNumber(User newUser)
         {
             RegisterBase(newUser, shouldEnterMobileNumber: false);
+        }
+
+        public void RegisterUserWithEnteredReferralCode(User newUser)
+        {
+            RegisterBase(newUser, shouldEnterReferralCode: true);
         }
 
         public void RegisterUserWithAllFieldsFilledIn(User newUser)
@@ -82,8 +75,7 @@ namespace BATDemoFramework.NeyberPages.SSOPages
 
         private void RegisterBase(User newUser,
             bool shouldSelectTitle = true,
-            bool shouldEnterAlternativeEmail = true,
-            bool areAlternativeEmailsEqual = true,
+            bool shouldEnterReferralCode = false,
             bool shouldEnterMobileNumber = true)
         {
 
@@ -92,27 +84,20 @@ namespace BATDemoFramework.NeyberPages.SSOPages
                 SelectTitle(TitleType.Mr);
             }
 
-            if (!areAlternativeEmailsEqual)
-            {
-                emailField.SendKeys(newUser.EmailAddress);
-                emailVerifyField.SendKeys("hello@co.uk");
-            }
-            emailField.SendKeys(newUser.EmailAddress);
-            emailVerifyField.SendKeys(newUser.EmailAddress);
-
-            if (!shouldEnterAlternativeEmail)
-            {
-                emailField.Clear();
-                emailVerifyField.Clear();
-            }
-
             mobileNumberField.EnterText("07523698547");
+
             if (!shouldEnterMobileNumber)
             {
                 mobileNumberField.Clear();
             }
 
+            if (shouldEnterReferralCode)
+            {
+                referralCodeField.SendKeys(ReferralCodeGenerator.GenerateReferralCode(15));
+            }
+
             passwordField.SendKeys(newUser.Password);
+
             policyTickbox.Click();
         }
 
@@ -135,20 +120,19 @@ namespace BATDemoFramework.NeyberPages.SSOPages
             mobileNumberField.SendKeys(number);
         }
 
-        public void PutCursorOnEmailInput()
-        {
-            emailField.Click();
-        }
-
         public void EnterPassword(string password)
         {
             passwordField.SendKeys(password);
         }
 
-        public void EnterAlternativeEmail(string email)
+        public void EnterReferralCode(string referralCode)
         {
-            emailField.SendKeys(email);
-            emailVerifyField.SendKeys(email);
+
+        }
+
+        public void PutCursorOnReferralCodeField()
+        {
+            referralCodeField.Click();
         }
     }
 }

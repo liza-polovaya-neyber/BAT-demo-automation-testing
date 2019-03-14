@@ -28,6 +28,7 @@ namespace BATDemoFramework
         public static readonly string ExpiredLink = profileUrl + "/verification-expired";
         public static readonly string EmployerSearch = profileUrl + "/join/search";
         public static readonly string AlternativeEmail = profileUrl + "/join/alternative-email";
+        public static readonly string AdditionalDetails = profileUrl + "/join/additional-details";
         public static readonly string WorkEmail = profileUrl + "/join/work-email";
         public static readonly string EmployerVerification = profileUrl + "/join/employer-verification";
         public static readonly string Marketing = profileUrl + "/join/marketing";

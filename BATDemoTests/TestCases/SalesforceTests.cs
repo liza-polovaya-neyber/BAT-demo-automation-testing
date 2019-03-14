@@ -38,8 +38,8 @@ namespace BATDemoTests.TestCases
             Pages.SSOAccountConfirm.ClickToContinue();
             Pages.SSOAboutMe.RegisterUserWithAllFieldsFilledIn(newUser);
             Pages.SSOAboutMe.PressSubmitButton();
-            Pages.Marketing.WaitUntilMarketingUrlIsLoaded();
-            Pages.Marketing.LogoutOption();
+            Pages.SSOAdditionalDetails.WaitUntilUrlIsLoaded();
+            Pages.SSOAdditionalDetails.Logout();
             var profileValidator = this.GetService<ProfileValidator>();
             await profileValidator.AssertCreatedProfileStateSSO(user, newUser);
         }

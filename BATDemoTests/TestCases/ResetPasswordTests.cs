@@ -168,13 +168,10 @@ namespace BATDemoTests
             var user = new UserGenerator().GetNewUser();
             await Preconditions.HaveNewUserCreatedAndVerifiedEmail();
 
+            Pages.AdditionalDetails.EnterEmail(user.EmailAddress);
+            Pages.AdditionalDetails.ClickOnSubmitBtn();
             Pages.EmployerSearch.WaitUntilUrlIsLoaded();
-            Pages.EmployerSearch.SelectEnteredEmployer("Bupa");
-            Pages.AlternativeEmail.WaitUntilAlternativeUrlIsLoaded();
-            Pages.AlternativeEmail.EnterEmail(user.EmailAddress);
-            Pages.AlternativeEmail.ClickOnSubmitBtn();
-            Pages.Marketing.WaitUntilMarketingUrlIsLoaded();
-            Pages.Marketing.Logout();
+            Pages.EmployerSearch.Logout();
 
             var emailService = new EmailService();
             var messages = await emailService.GetMessagesBySubject(EmailTypes.ConfirmYourEmail, user.EmailAddress);

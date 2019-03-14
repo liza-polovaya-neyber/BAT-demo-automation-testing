@@ -133,40 +133,11 @@ namespace BATDemoTests.TestCases
             var urlToken = emailService.GetUrlTokenFromMessage(messages[0]);
 
             Browser.GoToUrl(urlToken);
-            Pages.AlternativeEmail.WaitUntilAlternativeUrlIsLoaded();
-            Pages.AlternativeEmail.ClickOnSkipLink();
-            Pages.Marketing.WaitUntilMarketingUrlIsLoaded();
-            Pages.Marketing.ChoosePostOption();
-            Pages.Marketing.ChoosePhoneOption();
-            Pages.Marketing.ClickOnSubmitBtn();
-            Pages.Home.WaitUntilHomeUrlIsLoaded();
+            Pages.AdditionalDetails.WaitUntilUrlIsLoaded();
+            Pages.AdditionalDetails.ClickOnSubmitBtn();
+            Pages.Home.WaitUntilUrlIsLoaded();
 
             Assert.True(Pages.Home.IsAtUrl(), "User was not able to get to Profile dashboard page");
-        }
-
-        [Test]
-        [Retry(3)]
-        public async Task CanSkipEmployerSearchPage()
-        {
-            var user = new UserGenerator().GetNewUser();
-
-            Pages.ApolloPMAS.GoToUrl();
-            Pages.ApolloPMAS.WaitUntilCookiesBannerIsVisible();
-            Pages.ApolloPMAS.AcceptCookiesOnBanner();
-            Pages.ApolloPMAS.ClickOnTopJoinNowBtn();
-            Pages.AboutMe.RegisterNewUser(user);
-            Pages.VerificationEmail.WaitUntilVerificationEmailPageTitleIsShown();
-
-            var emailService = new EmailService();
-
-            var messages = await emailService.GetMessagesBySubject(EmailTypes.ConfirmYourEmail, user.EmailAddress);
-            var urlToken = emailService.GetUrlTokenFromMessage(messages[0]);
-
-            Browser.GoToUrl(urlToken);
-            Pages.AlternativeEmail.WaitUntilAlternativeUrlIsLoaded();
-
-
-            Assert.True(Pages.AlternativeEmail.IsAtUrl(), "User was not able to get to Alternative email page");
         }
 
     }

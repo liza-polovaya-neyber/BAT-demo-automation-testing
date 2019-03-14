@@ -18,20 +18,20 @@ namespace BATDemoTests.TestCases
     class EmployerSearchTests : TestBase
     {
         [Test][Retry(3)]
-        public async Task CanSelectAnEmployer()
+        public async Task CanSelectEmployer()
         {
-            await Preconditions.HaveNewUserCreatedAndVerifiedEmail();
+            await Preconditions.HaveNewUserCreatedAndSkippedAdditionalDetails();
 
             Pages.EmployerSearch.SelectEnteredEmployer("Bupa");
-            Pages.AlternativeEmail.WaitUntilAlternativeUrlIsLoaded();
+            Pages.Home.WaitUntilUrlIsLoaded();
 
-            Assert.IsTrue(Pages.AlternativeEmail.IsAtUrl(), "User is not on an alternative email page");
+            Assert.IsTrue(Pages.Home.IsAtUrl(), "User is not on the Home page");
         }
 
         [Test][Retry(3)]
         public async Task CanGetValidationError()
         {
-            await Preconditions.HaveNewUserCreatedAndVerifiedEmail();
+            await Preconditions.HaveNewUserCreatedAndSkippedAdditionalDetails();
 
             Pages.EmployerSearch.EnterTextIntoSearchbox("r");
             Pages.EmployerSearch.ClickOnSearchBtn();
@@ -43,7 +43,7 @@ namespace BATDemoTests.TestCases
         [Test][Retry(3)]
         public async Task EmployerNotFound()
         {
-            await Preconditions.HaveNewUserCreatedAndVerifiedEmail();
+            await Preconditions.HaveNewUserCreatedAndSkippedAdditionalDetails();
 
             Pages.EmployerSearch.EnterTextIntoSearchbox("qwerty");
             Pages.EmployerSearch.ClickOnSearchBtn();
@@ -55,7 +55,7 @@ namespace BATDemoTests.TestCases
         [Test][Retry(3)]
         public async Task CanBeFoundMoreThan10Employers()
         {
-            await Preconditions.HaveNewUserCreatedAndVerifiedEmail();
+            await Preconditions.HaveNewUserCreatedAndSkippedAdditionalDetails();
 
             Pages.EmployerSearch.EnterTextIntoSearchbox("re");
             Pages.EmployerSearch.ClickOnSearchBtn();
@@ -66,7 +66,7 @@ namespace BATDemoTests.TestCases
         [Test][Retry(3)]
         public async Task CanEnterPhoneNumberWhenEmployerNotFound()
         {
-            await Preconditions.HaveNewUserCreatedAndVerifiedEmail();
+            await Preconditions.HaveNewUserCreatedAndSkippedAdditionalDetails();
 
             Pages.EmployerSearch.EnterTextIntoSearchbox("qwerty");
             Pages.EmployerSearch.ClickOnSearchBtn();
@@ -80,7 +80,7 @@ namespace BATDemoTests.TestCases
         [Test][Retry(3)]
         public async Task CanRefineSearch()
         {
-            await Preconditions.HaveNewUserCreatedAndVerifiedEmail();
+            await Preconditions.HaveNewUserCreatedAndSkippedAdditionalDetails();
 
             Pages.EmployerSearch.EnterTextIntoSearchbox("Bupa");
             Pages.EmployerSearch.ClickOnSearchBtn();
@@ -100,6 +100,8 @@ namespace BATDemoTests.TestCases
                var user = new UserGenerator().GetNewUser();
                await Preconditions.NewUserCreatedAndVerifiedEmail(user);
 
+                Pages.AdditionalDetails.ClickOnSubmitBtn();
+                Pages.EmployerSearch.WaitUntilUrlIsLoaded();
                 Pages.EmployerSearch.Logout();
                 Pages.Login.LogIn(user);
                 Pages.EmployerSearch.WaitUntilUrlIsLoaded();
@@ -110,11 +112,11 @@ namespace BATDemoTests.TestCases
         [Test][Retry(3)]
         public async Task CanNotSkipEmployerPage()
         {
-            await Preconditions.HaveNewUserCreatedAndVerifiedEmail();
+            await Preconditions.HaveNewUserCreatedAndSkippedAdditionalDetails();
 
-            Browser.GoToUrl(Urls.AlternativeEmail);
+            Browser.GoToUrl(Urls.AdditionalDetails);
 
-            Assert.IsTrue(Pages.EmployerSearch.IsAtUrl(), "User was able to skip the employer search page and go to Alternative email page");
+            Assert.IsTrue(Pages.EmployerSearch.IsAtUrl(), "User was able to skip the employer search page and go to Additional details page");
         }
  
     }

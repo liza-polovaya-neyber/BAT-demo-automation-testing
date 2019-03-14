@@ -45,9 +45,9 @@ namespace BATDemoTests.TestCases
             Pages.SSOAccountConfirm.ClickToContinue();
             Pages.SSOAboutMe.RegisterUserWithAllFieldsFilledIn(newUser);
             Pages.SSOAboutMe.PressSubmitButton();
-            Pages.Marketing.WaitUntilMarketingUrlIsLoaded();
+            Pages.SSOAdditionalDetails.WaitUntilUrlIsLoaded();
 
-            Assert.True(Pages.Marketing.IsAtUrl(), "User wasn't able to get to Marketing page");
+            Assert.True(Pages.SSOAdditionalDetails.IsAtUrl(), "User wasn't able to get to the Additional details page");
         }
 
         [Test][Retry(3)]
@@ -62,43 +62,32 @@ namespace BATDemoTests.TestCases
             Pages.SSOAccountConfirm.ClickToContinue();
             Pages.SSOAboutMe.RegisterUserWithAllFieldsFilledIn(newUser);
             Pages.SSOAboutMe.PressSubmitButton();
-            Pages.Marketing.WaitUntilMarketingUrlIsLoaded();
-            Pages.Marketing.LogoutOption();
+            Pages.SSOAdditionalDetails.WaitUntilUrlIsLoaded();
+            Pages.SSOAdditionalDetails.Logout();
             Pages.Login.LogInBySSOUserPrimaryEmail(user, newUser);
-            Pages.Marketing.WaitUntilMarketingUrlIsLoaded();
-            Pages.Marketing.ChooseEmailOption();
-            Pages.Marketing.ChoosePhoneOption();
-            Pages.Marketing.ChoosePostOption();
-            Pages.Marketing.ClickOnSubmitBtn();
-            Pages.Home.WaitUntilHomeUrlIsLoaded();
+            Pages.SSOAdditionalDetails.WaitUntilUrlIsLoaded();
+            Pages.SSOAdditionalDetails.ChooseEmailOption();
+            Pages.SSOAdditionalDetails.ChoosePhoneOption();
+            Pages.SSOAdditionalDetails.ChoosePostOption();
+            Pages.SSOAdditionalDetails.ClickOnSubmitBtn();
+            Pages.Home.WaitUntilUrlIsLoaded();
 
             Assert.True(Pages.Home.IsAtUrl(), "User wasn't able to get to Home page after logging back in");
         }
 
+
         [Test][Retry(3)]
-        public void CanNotEnterDifferentAlternativeEmails()
+        public void CanSkipAlternateEmailField()
         {
             Preconditions.NewSSOUserCreated();
             var newUser = new UserGenerator().GetNewUser();
 
             Pages.SSOAccountConfirm.ClickToContinue();
-            Pages.SSOAboutMe.RegisterWithDifferentAlternativeEmails(newUser);
-
-            Assert.AreEqual(Pages.SSOAboutMe.GetErrorPasswordText(), "The email addresses do not match");
-        }
-
-        [Test][Retry(3)]
-        public void CanSkipAlternativeEmailFields()
-        {
-            Preconditions.NewSSOUserCreated();
-            var newUser = new UserGenerator().GetNewUser();
-
-            Pages.SSOAccountConfirm.ClickToContinue();
-            Pages.SSOAboutMe.RegisterUserButDontEnterAlternativeEmail(newUser);
+            Pages.SSOAboutMe.RegisterUserWithAllFieldsFilledIn(newUser);
             Pages.SSOAboutMe.PressSubmitButton();
-            Pages.Marketing.WaitUntilMarketingUrlIsLoaded();
+            Pages.SSOAdditionalDetails.ClickOnSubmitBtn();
 
-            Assert.True(Pages.Marketing.IsAtUrl(), "User wasn't able to get to Marketing page without filling in the alternative email");
+            Assert.True(Pages.Home.IsAtUrl(), "User wasn't able to get to Home page without filling in the alternate email");
         }
 
         [Test][Retry(3)]
@@ -110,9 +99,9 @@ namespace BATDemoTests.TestCases
             Pages.SSOAccountConfirm.ClickToContinue();
             Pages.SSOAboutMe.RegisterUserButDontEnterMobileNumber(newUser);
             Pages.SSOAboutMe.PressSubmitButton();
-            Pages.Marketing.WaitUntilMarketingUrlIsLoaded();
+            Pages.SSOAdditionalDetails.WaitUntilUrlIsLoaded();
 
-            Assert.True(Pages.Marketing.IsAtUrl(), "User wasn't able to get to Marketing page without filling in the alternative email");
+            Assert.True(Pages.SSOAdditionalDetails.IsAtUrl(), "User wasn't able to get to Marketing page without filling in the alternative email");
         }
 
         [Test][Retry(3)]
@@ -137,7 +126,7 @@ namespace BATDemoTests.TestCases
 
             Pages.SSOAccountConfirm.ClickToContinue();
             Pages.SSOAboutMe.EnterMobileNumber(a);
-            Pages.SSOAboutMe.PutCursorOnEmailInput();
+            Pages.SSOAboutMe.PutCursorOnReferralCodeField();
 
             Assert.AreEqual(Pages.SSOAboutMe.GetErrorPasswordText(), b);
         }
@@ -151,7 +140,7 @@ namespace BATDemoTests.TestCases
 
             Pages.SSOAccountConfirm.ClickToContinue();
             Pages.SSOAboutMe.EnterPassword(a);
-            Pages.SSOAboutMe.PutCursorOnEmailInput();
+            Pages.SSOAboutMe.PutCursorOnReferralCodeField();
 
             Assert.AreEqual(Pages.SSOAboutMe.GetErrorPasswordText(), b);
         }
@@ -165,8 +154,10 @@ namespace BATDemoTests.TestCases
             Pages.SSOAccountConfirm.ClickToContinue();
             Pages.SSOAboutMe.RegisterUserWithAllFieldsFilledIn(newUser);
             Pages.SSOAboutMe.PressSubmitButton();
-            Pages.Marketing.WaitUntilMarketingUrlIsLoaded();
-            Pages.Marketing.LogoutOption();
+            Pages.SSOAdditionalDetails.WaitUntilUrlIsLoaded();
+            Pages.SSOAdditionalDetails.EnterEmail(newUser.EmailAddress);
+            Pages.SSOAdditionalDetails.ClickOnSubmitBtn();
+            Pages.SSOAdditionalDetails.Logout();
             Pages.Login.LogInBySSOUserAlternativeEmail(newUser);
             Pages.Login.WaitUntilErrorBlockIsShown();
 
@@ -175,7 +166,7 @@ namespace BATDemoTests.TestCases
 
 
         [Test][Retry(3)]
-        public async Task CanLoginByVerifiedAlternativeEmail()
+        public async Task CanLoginByVerifiedAlternateEmail()
         {
             Preconditions.NewSSOUserCreated();
             var newUser = new UserGenerator().GetNewUser();
@@ -183,8 +174,10 @@ namespace BATDemoTests.TestCases
             Pages.SSOAccountConfirm.ClickToContinue();
             Pages.SSOAboutMe.RegisterUserWithAllFieldsFilledIn(newUser);
             Pages.SSOAboutMe.PressSubmitButton();
-            Pages.Marketing.WaitUntilMarketingUrlIsLoaded();
-            Pages.Marketing.LogoutOption();
+            Pages.SSOAdditionalDetails.WaitUntilUrlIsLoaded();
+            Pages.SSOAdditionalDetails.EnterEmail(newUser.EmailAddress);
+            Pages.SSOAdditionalDetails.ClickOnSubmitBtn();
+            Pages.SSOAdditionalDetails.Logout();
 
             var emailService = new EmailService();
 
@@ -194,24 +187,28 @@ namespace BATDemoTests.TestCases
 
             Pages.Login.WaitUntilLoginUrlIsLoaded();
             Pages.Login.LogInBySSOUserAlternativeEmail(newUser);
-            Pages.Marketing.WaitUntilMarketingUrlIsLoaded();
+            Pages.Home.WaitUntilUrlIsLoaded();
 
-            Assert.IsTrue(Pages.Marketing.IsAtUrl(), "User wasn't able to login by verified alternative email address");
+            Assert.IsTrue(Pages.Home.IsAtUrl(), "User wasn't able to login by verified alternate email address");
         }
 
         [Test][Retry(3)]
         public void CanNotEnterSSOPrimaryEmailAsAlternative()
         {
             var user = UserGenerator.GetNewSSOUser();
+            var newUser = new UserGenerator().GetNewUser();
 
             Pages.StubIDP.GoTo();
             Pages.StubIDP.EnterSSOUserDetailsAndSubmit(user);
             Pages.SSOAccountConfirm.WaitUntilUrlIsLoaded();
             Pages.SSOAccountConfirm.ClickToContinue();
 
-            Pages.SSOAboutMe.EnterAlternativeEmail(user.Email);
+            Pages.SSOAboutMe.RegisterUserWithAllFieldsFilledIn(newUser);
+            Pages.SSOAboutMe.PressSubmitButton();
 
-            Assert.AreEqual(Pages.SSOAboutMe.GetErrorPasswordText(), "This email has already been given by your provider. Please use an alternative.");
+            Pages.SSOAdditionalDetails.EnterEmail(user.Email);
+
+            Assert.AreEqual(Pages.AdditionalDetails.GetErrorMessage(), "You've already registered with this email. Please provide an alternative");
 
         }
     }

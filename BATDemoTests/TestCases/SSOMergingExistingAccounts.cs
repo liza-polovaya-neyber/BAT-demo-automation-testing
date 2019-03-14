@@ -36,15 +36,15 @@ namespace BATDemoTests.TestCases
             Pages.SSOAccountConfirm.ClickToContinue();
 
             //3. try to set up a new SSO user
-            Pages.SSOAboutMe.RegisterUserButDontEnterAlternativeEmail(newUser);
+            Pages.SSOAboutMe.RegisterUserWithAllFieldsFilledIn(newUser);
             Pages.SSOAboutMe.PressSubmitButton();
             Pages.SSOAccountConfirm.WaitUntilUrlIsLoaded();
 
             //4. login by profile user with non-verified email
             Pages.SSOAccountConfirm.LogInBySSOUser(newUser);
-            Pages.AlternativeEmail.WaitUntilAlternativeUrlIsLoaded();
+            Pages.SSOAdditionalDetails.WaitUntilUrlIsLoaded();
 
-            Assert.IsTrue(Pages.AlternativeEmail.IsAtUrl(), "Profile user with non-verified email wasn't able to login as a new SSO user");
+            Assert.IsTrue(Pages.SSOAdditionalDetails.IsAtUrl(), "Profile user with non-verified email wasn't able to login as a new SSO user");
         }
 
         [Test][Retry(3)]
@@ -74,9 +74,9 @@ namespace BATDemoTests.TestCases
 
             //3. login by new SSO user to existing account
             Pages.SSOAccountConfirm.LogInBySSOUser(newUser);
-            Pages.AlternativeEmail.WaitUntilAlternativeUrlIsLoaded();
+            Pages.SSOAdditionalDetails.WaitUntilUrlIsLoaded();
 
-            Assert.IsTrue(Pages.AlternativeEmail.IsAtUrl(), "User wasn't able to login via SSO platform");
+            Assert.IsTrue(Pages.SSOAdditionalDetails.IsAtUrl(), "User wasn't able to login via SSO platform");
         }
 
         [Test][Retry(3)]
@@ -108,9 +108,9 @@ namespace BATDemoTests.TestCases
 
             //3. login by new SSO user to existing account
             Pages.SSOAccountConfirm.LogInBySSOUser(newUser);
-            Pages.AlternativeEmail.WaitUntilAlternativeUrlIsLoaded();
+            Pages.SSOAdditionalDetails.WaitUntilUrlIsLoaded();
 
-            Assert.IsTrue(Pages.AlternativeEmail.IsAtUrl(), "User wasn't able to login via SSO platform");
+            Assert.IsTrue(Pages.SSOAdditionalDetails.IsAtUrl(), "User wasn't able to login via SSO platform");
         }
 
         [Test][Retry(3)]
@@ -149,7 +149,7 @@ namespace BATDemoTests.TestCases
             Pages.SSOAccountConfirm.WaitUntilUrlIsLoaded();
             Pages.SSOAccountConfirm.LogInByProfileUser(newUser);
 
-            Assert.IsTrue(Pages.AlternativeEmail.IsAtUrl(), "User wasn't able to login by the user that was created on /join");
+            Assert.IsTrue(Pages.SSOAdditionalDetails.IsAtUrl(), "User wasn't able to login by the user that was created on /join");
             //to specify whether this is a bug (now user's not able to login with SSO email, but OK with /join email)
 
         }

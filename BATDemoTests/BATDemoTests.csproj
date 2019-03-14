@@ -112,13 +112,12 @@
   <ItemGroup>
     <Compile Include="Preconditions\Preconditions.cs" />
     <Compile Include="TestCases\AboutMeTests.cs" />
-    <Compile Include="TestCases\AlternativeEmailTests.cs" />
+    <Compile Include="TestCases\AdditionalDetailsTests.cs" />
     <Compile Include="TestCases\ChangePassword.cs" />
     <Compile Include="TestCases\EmployerSearchTests.cs" />
     <Compile Include="TestCases\ExpiredLinkTests.cs" />
     <Compile Include="TestCases\HelpLinksTests.cs" />
     <Compile Include="TestCases\LoginTests.cs" />
-    <Compile Include="TestCases\MarketingPreferencesTests.cs" />
     <Compile Include="TestCases\PMASTests.cs" />
     <Compile Include="TestCases\ProfileDashboardTests.cs" />
     <Compile Include="TestCases\ResetPasswordTests.cs" />

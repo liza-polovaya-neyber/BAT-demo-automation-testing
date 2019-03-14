@@ -12,8 +12,6 @@ namespace BATDemoFramework.NeyberPages.Profile
     {
         IWebDriver webDriver;
 
-        [FindsBy(How = How.Name, Using = "title")]
-        private IWebElement titleDD;
 
         [FindsBy(How = How.Name, Using = "first_name")]
         private IWebElement firstNameTextField;
@@ -21,41 +19,20 @@ namespace BATDemoFramework.NeyberPages.Profile
         [FindsBy(How = How.Name, Using = "last_name")]
         private IWebElement lastNameTextField;
 
-        [FindsBy(How = How.Name, Using = "day")]
-        private IWebElement dayOfBirthDD;
-
-        [FindsBy(How = How.Name, Using = "month")]
-        private IWebElement monthOfBirthDD;
-
-        [FindsBy(How = How.Name, Using = "year")]
-        private IWebElement yearOfBirthDD;
-
-        [FindsBy(How = How.Name, Using = "mobile_number")]
-        private IWebElement mobileNumberField;
-
         [FindsBy(How = How.Name, Using = "email")]
         private IWebElement emailAddressField;
-
-        [FindsBy(How = How.Name, Using = "verify_email")]
-        private IWebElement confirmEmailAddressField;
 
         [FindsBy(How = How.XPath, Using = "//input[@type='password']")]
         private IWebElement passwordField;
 
-        [FindsBy(How = How.Name, Using = "customerFeedback")]
-        private IWebElement howYouHeardAboutUsDD;
+        [FindsBy(How = How.Name, Using = "referral_code']")]
+        private IWebElement referralCodeField;
 
         [FindsBy(How = How.XPath, Using = "//div[7]/button/span")]
         private IWebElement submitBtn;
 
         [FindsBy(How = How.Id, Using = "terms_accepted")]
         private IWebElement checkboxTermsAccepted;
-
-        [FindsBy(How = How.Id, Using = "opt_out_email")]
-        private IWebElement checkboxOptOutEmail;
-
-        [FindsBy(How = How.ClassName, Using = "form-layout__back")]
-        private IWebElement backLink;
 
         [FindsBy(How = How.LinkText, Using = "Login")]
         private IWebElement loginLink;
@@ -69,12 +46,6 @@ namespace BATDemoFramework.NeyberPages.Profile
         [FindsBy(How = How.ClassName, Using = "logo")]
         private IWebElement logoNeyber;
 
-        [FindsBy(How = How.CssSelector, Using = "p.control__error")]
-        private IWebElement errorEmailsDontMatch;
-
-        [FindsBy(How = How.XPath, Using = "//div[2]/div/p")]
-        private IWebElement errorWrongPhoneNo;
-
         [FindsBy(How = How.XPath, Using = "//div[4]/div/div/p")]
         private IWebElement errorWrongPassword;
 
@@ -83,71 +54,15 @@ namespace BATDemoFramework.NeyberPages.Profile
             Browser.GoTo("join/about-me");
         }
 
-        public void ClickOnBackLink()
-        {
-            backLink.Click();
-        }
-
         public void ClickOnLoginLink()
         {
             loginLink.Click();
         }
 
-        public void SelectTitle(TitleType type)
-        {
-            var selectElement = new SelectElement(titleDD);
-            try
-            {
-                //selectElement.SelectByText(type.ToString());
-                selectElement.SelectByValue(type.ToString());
-            }
-            catch (Exception ex)
-            {
-                var ee = 55;
-            }
-            
-            //selectElement.SelectByIndex(type.GetTypeCode());
-        } 
-        
-
-        public void SelectDayOfBirth(int index)
-        {
-            var selectElement = new SelectElement(dayOfBirthDD);
-            selectElement.SelectByIndex(index);
-        }
-
-        public void SelectMonthOfBirth(int monthCount)
-        {
-            var selectElement = new SelectElement(monthOfBirthDD);
-            selectElement.SelectByIndex(monthCount);
-        }
-
-        public void SelectYearOfBirth(int year)
-        {
-            var selectElement = new SelectElement(yearOfBirthDD);
-            selectElement.SelectByValue(year.ToString());
-        }
-
-        public void SelectHowYouHeardAboutUs(string option)
-        {
-            var selectElement = new SelectElement(howYouHeardAboutUsDD);
-            selectElement.SelectByValue(option);
-        }
-
-        public int GetFeedbackOptionsNumber()
-        {
-            var selectElement = new SelectElement(howYouHeardAboutUsDD);
-            return selectElement.Options.Count;
-        }
 
         public void CheckboxTermsAcceptedChecked()
         {
             checkboxTermsAccepted.Click();
-        }
-
-        public void CheckboxOptOutEmailsChecked() //checkbox has been disabled for non-pmas users
-        {
-            checkboxOptOutEmail.Click();
         }
 
         public bool SubmitBtnIsDisabled()
@@ -179,27 +94,15 @@ namespace BATDemoFramework.NeyberPages.Profile
 
         public void RegisterUserButDontTickCheckbox()
         {
-            RegisterBase(null, null, false, true, false,true, true);
+            RegisterBase(null, null, true, false, false);
         }
 
-
-        public void RegisterUserWithNotEqualEmails()
-        {
-            RegisterBase(areEmailsEqual: false);
-        }
-
-        public void RegisterUserWithNonSelectedTitle()
-        {
-            RegisterBase(shouldSelectTitle: false);
-        }
 
         private void RegisterBase(User user = null, 
             string csvKey = "", 
             bool shouldClickSubmitButton = true,        
             bool shouldGenerateNewUser = true, 
-            bool shouldTickCheckbox = true, 
-            bool shouldSelectTitle = true, 
-            bool areEmailsEqual = true)
+            bool shouldTickCheckbox = true)
         {
             var newUser = new User();
 
@@ -226,30 +129,10 @@ namespace BATDemoFramework.NeyberPages.Profile
                 newUser = userGenerator.GetNewUser();              
             }
 
-            if (shouldSelectTitle)
-            {
-                SelectTitle(TitleType.Mr);
-                firstNameTextField.Click();
-            }
-
             firstNameTextField.SendKeys(newUser.FirstName);
             lastNameTextField.SendKeys(newUser.LastName);
-            SelectDayOfBirth(12);
-            SelectMonthOfBirth(7);
-            SelectYearOfBirth(1990);
-            EnterMobileNumber("07523698547");
-
-            if (!areEmailsEqual)
-            {
-                emailAddressField.SendKeys(newUser.EmailAddress);
-                confirmEmailAddressField.SendKeys("hello@co.uk");
-            }
-
             emailAddressField.SendKeys(newUser.EmailAddress);
-            confirmEmailAddressField.SendKeys(newUser.EmailAddress);
             passwordField.SendKeys(newUser.Password);
-            SelectHowYouHeardAboutUs("Google search");
-
    
             if (shouldTickCheckbox)
             {
@@ -262,47 +145,11 @@ namespace BATDemoFramework.NeyberPages.Profile
             }
 
         }
-        public void EnterMobileNumber(string number)
-        {
-            mobileNumberField.Click();
-            mobileNumberField.SendKeys(number);
-        }
-
+        
         public void EnterPassword(string password)
         {
             passwordField.Click();
             passwordField.SendKeys(password);
-        }
-
-        public TitleType GetTitleText()
-        {
-            return EnumHelper.GetTitleType(titleDD.GetAttribute("value")); 
-        }
-
-        public string GetDayOfBirth()
-        {
-            return dayOfBirthDD.GetAttribute("value");
-        }
-
-        public string GetMonthOfBirth()
-        {
-            return monthOfBirthDD.GetAttribute("value");
-        }
-        
-
-        public string GetYearOfBirth()
-        {
-            return yearOfBirthDD.GetAttribute("value");
-        }
-
-        public string GetEmailsMismatchError()
-        {
-            return errorEmailsDontMatch.Text;
-        }
-
-        public string GetErrorPhoneNoText()
-        {
-            return errorWrongPhoneNo.Text;
         }
 
         public string GetErrorPasswordText()
@@ -340,17 +187,17 @@ namespace BATDemoFramework.NeyberPages.Profile
             var aboutMePage = Browser.WaitUntilUrlIsLoaded(Urls.AboutMePage, 20);
             return Pages.AboutMe.IsAtUrl();
         }
-    }
 
         public enum TitleType
-       {  
-        Title,
-        Mr,
-        Ms,
-        Mrs,
-        Miss,
-        Dr,
-        Prof
+        {
+            Title,
+            Mr,
+            Ms,
+            Mrs,
+            Miss,
+            Dr,
+            Prof
+        }
     }
 
 }

@@ -31,7 +31,7 @@ namespace BATDemoFramework.NeyberPages.Profile
 
         public bool WaitUntilWorkEmailUrlIsLoaded()
         {
-            var workEmailPage = Browser.WaitUntilUrlIsLoaded(Urls.WorkEmail, 10);
+            Browser.WaitUntilUrlIsLoaded(Urls.WorkEmail, 10);
             return Pages.WorkEmail.IsAtUrl();
         }
 
